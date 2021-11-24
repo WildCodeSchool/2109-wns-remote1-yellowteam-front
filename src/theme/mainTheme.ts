@@ -31,6 +31,8 @@ const mainTheme = extendTheme({
     superLightGrey: '#EBECF0',
     teal: '#009A96',
     lightTeal: '#A4DFDC',
+    darkRed: '#B63F46',
+    lightRed: '#FFF0F0'
   },
 })
 
