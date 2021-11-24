@@ -1,10 +1,11 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, Box } from '@chakra-ui/react'
 import mainTheme from './theme/mainTheme'
-import Card from './components/card'
+import Card from './components/Card'
 import Placeholder from './static/svg/Placeholder'
 import TasksListUser from './pages/TasksListUser'
+import Tag from './components/Tags'
 
 function App(): JSX.Element {
   return (
@@ -13,7 +14,17 @@ function App(): JSX.Element {
         <Routes>
           <Route path="/" element={<TasksListUser />} />
         </Routes>
-        <Card title="je suis un titre" photo={<Placeholder />} tag="" />
+        <Card
+          title="je suis un titre"
+          photo={<Placeholder />}
+          tag={
+            <Tag
+              tagColor={mainTheme.colors.lightRed}
+              text="bug"
+              textColor={mainTheme.colors.darkRed}
+            />
+          }
+        />
       </Router>
     </ChakraProvider>
   )
