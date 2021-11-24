@@ -17,7 +17,7 @@ const Card = ({ photo, tag, title }: ICard): JSX.Element => (
     padding="14px 9px 14px 9px"
   >
     <Text textStyle="h2">{title}</Text>
-    <Box>{photo}</Box>
+    <Box m="12px 4px">{photo}</Box>
     <Box>{tag}</Box>
   </Box>
 )
