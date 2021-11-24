@@ -1,10 +1,11 @@
 import React from 'react'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, Text } from '@chakra-ui/react'
+import mainTheme from './theme/mainTheme'
 
 function App(): JSX.Element {
   return (
-    <ChakraProvider>
-      <div className="App">hello world</div>
+    <ChakraProvider theme={mainTheme}>
+      <Text textStyle="h1">hello world</Text>
     </ChakraProvider>
   )
 }
