@@ -1,26 +1,33 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import theme from "definitions/chakra/theme";
-import "styles/global.css";
-import { initializeApollo } from "services/graphql";
-import { ApolloProvider } from "@apollo/client";
-import { Provider } from "react-redux";
-import store from "redux/store";
-
-import Home from "pages";
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { ChakraProvider, Box } from '@chakra-ui/react'
+import mainTheme from './theme/mainTheme'
+import Card from './components/Card'
+import Placeholder from './static/svg/Placeholder'
+import TasksListUser from './pages/TasksListUser'
+import Tag from './components/Tags'
 
 function App(): JSX.Element {
-  const apolloClient = initializeApollo();
   return (
-    <ChakraProvider theme={theme}>
-      <ApolloProvider client={apolloClient}>
-        <Provider store={store}>
-          <div className="App">
-            <Home />
-          </div>
-        </Provider>
-      </ApolloProvider>
+    <ChakraProvider theme={mainTheme}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<TasksListUser />} />
+        </Routes>
+        <Card
+          title="je suis un titre"
+          photo={<Placeholder />}
+          tag={
+            <Tag
+              tagColor={mainTheme.colors.lightRed}
+              text="bug"
+              textColor={mainTheme.colors.darkRed}
+            />
+          }
+        />
+      </Router>
     </ChakraProvider>
-  );
+  )
 }
 
-export default App;
+export default App
