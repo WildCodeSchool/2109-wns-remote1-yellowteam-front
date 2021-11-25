@@ -32,7 +32,11 @@ const mainTheme = extendTheme({
     teal: '#009A96',
     lightTeal: '#A4DFDC',
     darkRed: '#B63F46',
-    lightRed: '#FFF0F0'
+    lightRed: '#FFF0F0',
+    darkGreen: '#1D9446',
+    lightGreen: '#EBF5ED',
+    darkBrown: '#B47539', 
+    lightBrown: '#FCECE4'
   },
 })
 
