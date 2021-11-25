@@ -15,6 +15,8 @@ const UserNavBar = (): JSX.Element => (
     flexDirection="column"
     alignItems="center"
     justifyContent="space-evenly"
+    position="fixed"
+    z-index="1"
   >
     <TasksIcon color={mainTheme.colors.deactivatedGrey} />
     <UserIcon color={mainTheme.colors.deactivatedGrey} />
