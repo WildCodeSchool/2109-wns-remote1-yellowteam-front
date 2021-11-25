@@ -1,0 +1,38 @@
+# Write your query or mutation here
+query GetUserTasksList($id: String) {
+  user(where: { id: $id }) {
+    id
+    first_name
+    last_name
+    projects {
+      id
+      title
+      description
+      status_project
+      users {
+        first_name
+        last_name
+      }
+      tasks {
+        title
+        description
+        status_task
+        start_date
+        end_date
+        total_time_spent
+        files {
+          name
+          path
+          type
+        }
+        comments {
+          content
+          user {
+            first_name
+            last_name
+          }
+        }
+      }
+    }
+  }
+}
