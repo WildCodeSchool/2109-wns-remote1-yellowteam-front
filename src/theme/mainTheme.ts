@@ -15,8 +15,14 @@ const mainTheme = extendTheme({
       color: '#38383A',
       fontFamily: 'Avenir',
     },
+    numberTicket: {
+      fontFamily:"Avenir",
+      fontSize: "13px", 
+      color:'#9FA1A5',
+      fontWeight:"800"
+    },
     body: {
-      fontSize: '13',
+      fontSize: ['14', '16'],
       color: '#38383A',
       fontFamily: 'Avenir',
       fontWeight: '300',
