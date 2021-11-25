@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "init",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,29 +21,20 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.29.3",
-    "@typescript-eslint/parser": "^4.29.3",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-airbnb-typescript": "^14.0.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-jest": "^24.4.0",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.4.1",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.3.2"
+    "typescript": "^4.2.4",
+    "web-vitals": "^1.1.1",
+    "react-redux": "^7.2.4",
+    "@reduxjs/toolkit": "^1.6.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "lint": "eslint --ext .ts,.tsx --fix src/",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .ts,.tsx --fix src/",
+    "apollo:download-schema": "apollo client:download-schema schema.graphql",
+    "apollo:generate-types": "rm -rf __generated__ && apollo client:codegen --target typescript --outputFlat",
+    "apollo:sync": "npm run apollo:download-schema && npm run apollo:generate-types",
     "prettify": "prettier --write src/",
     "fmt-lint": "yarn run prettify && yarn run lint"
   },
@@ -64,5 +55,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nock": "^13.0.11",
+    "apollo": "^2.32.1",
+    "@types/react-redux": "^7.1.16",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^14.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.3.2"
   }
 }
