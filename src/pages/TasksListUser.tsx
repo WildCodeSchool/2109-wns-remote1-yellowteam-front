@@ -1,11 +1,17 @@
 import React from 'react'
-import { Box } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import UserNavBar from '../components/UserNavBar'
+import Header from '../components/Header'
 
-const TasksListUser = (): JSX.Element => (
-  <Box>
+interface ITasksListUser {
+  userName: string
+}
+
+const TasksListUser = ({ userName }: ITasksListUser): JSX.Element => (
+  <Flex>
     <UserNavBar />
-  </Box>
+    <Header userName={userName} />
+  </Flex>
 )
 
 export default TasksListUser

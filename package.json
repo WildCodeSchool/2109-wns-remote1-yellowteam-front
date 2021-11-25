@@ -27,7 +27,7 @@
     "@reduxjs/toolkit": "^1.6.0"
   },
   "scripts": {
-    "dev": "react-scripts start",
+    "start": "react-scripts start",
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "build": "react-scripts build",
     "test": "react-scripts test",
