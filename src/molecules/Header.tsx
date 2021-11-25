@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Text, Input } from '@chakra-ui/react'
+import { Flex, Text, Input } from '@chakra-ui/react'
 
 interface IHeader {
   userName: string

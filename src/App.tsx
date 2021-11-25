@@ -9,7 +9,7 @@ function App(): JSX.Element {
     <ChakraProvider theme={mainTheme}>
       <Router>
         <Routes>
-          <Route path="/" element={<TasksListUser userName="Lily" />} />
+          <Route path="/" element={<TasksListUser />} />
         </Routes>
       </Router>
     </ChakraProvider>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Text, Box } from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
 import mainTheme from '../theme/mainTheme'
 
 interface IBacklogTicketsStatus {
