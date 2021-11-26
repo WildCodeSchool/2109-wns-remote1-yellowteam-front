@@ -6,22 +6,22 @@ import {
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 
-const createApolloClient = new ApolloClient({
+export const client = new ApolloClient({
   ssrMode: typeof window === 'undefined',
-  uri: 'https://api.spacex.land/graphql/',
+  uri: 'http://localhost:5000/graphql',
   cache: new InMemoryCache(),
 });
 
 export default function initializeApollo(): ApolloClient<NormalizedCacheObject> {
   // For SSG and SSR always create a new Apollo Client
   if (typeof window === 'undefined') {
-    return createApolloClient;
+    return client;
   }
 
   // Create the Apollo Client once in the client
   if (!apolloClient) {
-    apolloClient = createApolloClient;
+    apolloClient = client;
   }
 
-  return apolloClient;
+  return client;
 }
