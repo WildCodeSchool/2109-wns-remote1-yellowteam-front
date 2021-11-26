@@ -432,7 +432,6 @@ export enum CommentScalarFieldEnum {
   ProjectId = 'project_id',
   TaskId = 'task_id',
   UpdatedAt = 'updated_at',
-  UserId = 'userId',
   UserId = 'user_id'
 }
 
