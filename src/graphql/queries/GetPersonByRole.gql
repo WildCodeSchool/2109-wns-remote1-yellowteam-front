@@ -1,0 +1,5 @@
+query GetPersonByRole($role: UserWhereInput) {
+  users(where: $role) {
+    ...User
+  }
+}

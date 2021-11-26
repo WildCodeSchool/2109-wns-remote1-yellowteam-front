@@ -1,0 +1,17 @@
+query GetProjectDescription($id: String) {
+  project(where: { id: $id }) {
+    id
+    title
+    description
+    users {
+      first_name
+      last_name
+      avatar
+    }
+    status_project
+    total_time_spent
+    start_date
+    end_date
+    due_date
+  }
+}

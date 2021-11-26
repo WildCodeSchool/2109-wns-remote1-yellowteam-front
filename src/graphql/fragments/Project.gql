@@ -1,0 +1,10 @@
+fragment Project on Project {
+  id
+  title
+  status_project
+  due_date
+  users {
+    first_name
+    last_name
+  }
+}

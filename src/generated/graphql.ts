@@ -1,9 +1,5 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable @typescript-eslint/no-shadow */
-
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-
 export type Maybe<T> = T;
 export type InputMaybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -24,6 +20,13 @@ export type Scalars = {
 export type AffectedRowsOutput = {
   __typename?: 'AffectedRowsOutput';
   count: Scalars['Int'];
+};
+
+export type AggregateComment = {
+  __typename?: 'AggregateComment';
+  _count: Maybe<CommentCountAggregate>;
+  _max: Maybe<CommentMaxAggregate>;
+  _min: Maybe<CommentMinAggregate>;
 };
 
 export type AggregateFile = {
@@ -58,13 +61,6 @@ export type AggregateProject = {
   _sum: Maybe<ProjectSumAggregate>;
 };
 
-export type AggregateProject_Comment = {
-  __typename?: 'AggregateProject_Comment';
-  _count: Maybe<Project_CommentCountAggregate>;
-  _max: Maybe<Project_CommentMaxAggregate>;
-  _min: Maybe<Project_CommentMinAggregate>;
-};
-
 export type AggregateTask = {
   __typename?: 'AggregateTask';
   _avg: Maybe<TaskAvgAggregate>;
@@ -72,13 +68,6 @@ export type AggregateTask = {
   _max: Maybe<TaskMaxAggregate>;
   _min: Maybe<TaskMinAggregate>;
   _sum: Maybe<TaskSumAggregate>;
-};
-
-export type AggregateTask_Comment = {
-  __typename?: 'AggregateTask_Comment';
-  _count: Maybe<Task_CommentCountAggregate>;
-  _max: Maybe<Task_CommentMaxAggregate>;
-  _min: Maybe<Task_CommentMinAggregate>;
 };
 
 export type AggregateUser = {
@@ -103,6 +92,585 @@ export type BoolWithAggregatesFilter = {
   _min?: InputMaybe<NestedBoolFilter>;
   equals?: InputMaybe<Scalars['Boolean']>;
   not?: InputMaybe<NestedBoolWithAggregatesFilter>;
+};
+
+export type Comment = {
+  __typename?: 'Comment';
+  content: Scalars['String'];
+  created_at: Scalars['DateTime'];
+  id: Scalars['String'];
+  is_disabled: Scalars['Boolean'];
+  project: Maybe<Project>;
+  project_id: Maybe<Scalars['String']>;
+  task: Maybe<Task>;
+  task_id: Maybe<Scalars['String']>;
+  updated_at: Scalars['DateTime'];
+  userId: Maybe<Scalars['String']>;
+  user_id: Maybe<Scalars['String']>;
+  user_project_comments: Maybe<User>;
+  user_task_comments: Maybe<User>;
+};
+
+export type CommentCountAggregate = {
+  __typename?: 'CommentCountAggregate';
+  _all: Scalars['Int'];
+  content: Scalars['Int'];
+  created_at: Scalars['Int'];
+  id: Scalars['Int'];
+  is_disabled: Scalars['Int'];
+  project_id: Scalars['Int'];
+  task_id: Scalars['Int'];
+  updated_at: Scalars['Int'];
+  userId: Scalars['Int'];
+  user_id: Scalars['Int'];
+};
+
+export type CommentCountOrderByAggregateInput = {
+  content?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  is_disabled?: InputMaybe<SortOrder>;
+  project_id?: InputMaybe<SortOrder>;
+  task_id?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type CommentCreateInput = {
+  content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  is_disabled: Scalars['Boolean'];
+  project?: InputMaybe<ProjectCreateNestedOneWithoutCommentsInput>;
+  task?: InputMaybe<TaskCreateNestedOneWithoutCommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+  user_project_comments?: InputMaybe<UserCreateNestedOneWithoutProject_CommentsInput>;
+  user_task_comments?: InputMaybe<UserCreateNestedOneWithoutTask_CommentsInput>;
+};
+
+export type CommentCreateManyInput = {
+  content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  is_disabled: Scalars['Boolean'];
+  project_id?: InputMaybe<Scalars['String']>;
+  task_id?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+  userId?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+export type CommentCreateManyProjectInput = {
+  content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  is_disabled: Scalars['Boolean'];
+  task_id?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+  userId?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+export type CommentCreateManyProjectInputEnvelope = {
+  data: Array<CommentCreateManyProjectInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CommentCreateManyTaskInput = {
+  content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  is_disabled: Scalars['Boolean'];
+  project_id?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+  userId?: InputMaybe<Scalars['String']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+export type CommentCreateManyTaskInputEnvelope = {
+  data: Array<CommentCreateManyTaskInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CommentCreateManyUser_Project_CommentsInput = {
+  content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  is_disabled: Scalars['Boolean'];
+  project_id?: InputMaybe<Scalars['String']>;
+  task_id?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+export type CommentCreateManyUser_Project_CommentsInputEnvelope = {
+  data: Array<CommentCreateManyUser_Project_CommentsInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CommentCreateManyUser_Task_CommentsInput = {
+  content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  is_disabled: Scalars['Boolean'];
+  project_id?: InputMaybe<Scalars['String']>;
+  task_id?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+  userId?: InputMaybe<Scalars['String']>;
+};
+
+export type CommentCreateManyUser_Task_CommentsInputEnvelope = {
+  data: Array<CommentCreateManyUser_Task_CommentsInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CommentCreateNestedManyWithoutProjectInput = {
+  connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutProjectInput>>;
+  create?: InputMaybe<Array<CommentCreateWithoutProjectInput>>;
+  createMany?: InputMaybe<CommentCreateManyProjectInputEnvelope>;
+};
+
+export type CommentCreateNestedManyWithoutTaskInput = {
+  connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutTaskInput>>;
+  create?: InputMaybe<Array<CommentCreateWithoutTaskInput>>;
+  createMany?: InputMaybe<CommentCreateManyTaskInputEnvelope>;
+};
+
+export type CommentCreateNestedManyWithoutUser_Project_CommentsInput = {
+  connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutUser_Project_CommentsInput>>;
+  create?: InputMaybe<Array<CommentCreateWithoutUser_Project_CommentsInput>>;
+  createMany?: InputMaybe<CommentCreateManyUser_Project_CommentsInputEnvelope>;
+};
+
+export type CommentCreateNestedManyWithoutUser_Task_CommentsInput = {
+  connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutUser_Task_CommentsInput>>;
+  create?: InputMaybe<Array<CommentCreateWithoutUser_Task_CommentsInput>>;
+  createMany?: InputMaybe<CommentCreateManyUser_Task_CommentsInputEnvelope>;
+};
+
+export type CommentCreateOrConnectWithoutProjectInput = {
+  create: CommentCreateWithoutProjectInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentCreateOrConnectWithoutTaskInput = {
+  create: CommentCreateWithoutTaskInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentCreateOrConnectWithoutUser_Project_CommentsInput = {
+  create: CommentCreateWithoutUser_Project_CommentsInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentCreateOrConnectWithoutUser_Task_CommentsInput = {
+  create: CommentCreateWithoutUser_Task_CommentsInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentCreateWithoutProjectInput = {
+  content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  is_disabled: Scalars['Boolean'];
+  task?: InputMaybe<TaskCreateNestedOneWithoutCommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+  user_project_comments?: InputMaybe<UserCreateNestedOneWithoutProject_CommentsInput>;
+  user_task_comments?: InputMaybe<UserCreateNestedOneWithoutTask_CommentsInput>;
+};
+
+export type CommentCreateWithoutTaskInput = {
+  content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  is_disabled: Scalars['Boolean'];
+  project?: InputMaybe<ProjectCreateNestedOneWithoutCommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+  user_project_comments?: InputMaybe<UserCreateNestedOneWithoutProject_CommentsInput>;
+  user_task_comments?: InputMaybe<UserCreateNestedOneWithoutTask_CommentsInput>;
+};
+
+export type CommentCreateWithoutUser_Project_CommentsInput = {
+  content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  is_disabled: Scalars['Boolean'];
+  project?: InputMaybe<ProjectCreateNestedOneWithoutCommentsInput>;
+  task?: InputMaybe<TaskCreateNestedOneWithoutCommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+  user_task_comments?: InputMaybe<UserCreateNestedOneWithoutTask_CommentsInput>;
+};
+
+export type CommentCreateWithoutUser_Task_CommentsInput = {
+  content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  is_disabled: Scalars['Boolean'];
+  project?: InputMaybe<ProjectCreateNestedOneWithoutCommentsInput>;
+  task?: InputMaybe<TaskCreateNestedOneWithoutCommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+  user_project_comments?: InputMaybe<UserCreateNestedOneWithoutProject_CommentsInput>;
+};
+
+export type CommentGroupBy = {
+  __typename?: 'CommentGroupBy';
+  _count: Maybe<CommentCountAggregate>;
+  _max: Maybe<CommentMaxAggregate>;
+  _min: Maybe<CommentMinAggregate>;
+  content: Scalars['String'];
+  created_at: Scalars['DateTime'];
+  id: Scalars['String'];
+  is_disabled: Scalars['Boolean'];
+  project_id: Maybe<Scalars['String']>;
+  task_id: Maybe<Scalars['String']>;
+  updated_at: Scalars['DateTime'];
+  userId: Maybe<Scalars['String']>;
+  user_id: Maybe<Scalars['String']>;
+};
+
+export type CommentListRelationFilter = {
+  every?: InputMaybe<CommentWhereInput>;
+  none?: InputMaybe<CommentWhereInput>;
+  some?: InputMaybe<CommentWhereInput>;
+};
+
+export type CommentMaxAggregate = {
+  __typename?: 'CommentMaxAggregate';
+  content: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['DateTime']>;
+  id: Maybe<Scalars['String']>;
+  is_disabled: Maybe<Scalars['Boolean']>;
+  project_id: Maybe<Scalars['String']>;
+  task_id: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['DateTime']>;
+  userId: Maybe<Scalars['String']>;
+  user_id: Maybe<Scalars['String']>;
+};
+
+export type CommentMaxOrderByAggregateInput = {
+  content?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  is_disabled?: InputMaybe<SortOrder>;
+  project_id?: InputMaybe<SortOrder>;
+  task_id?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type CommentMinAggregate = {
+  __typename?: 'CommentMinAggregate';
+  content: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['DateTime']>;
+  id: Maybe<Scalars['String']>;
+  is_disabled: Maybe<Scalars['Boolean']>;
+  project_id: Maybe<Scalars['String']>;
+  task_id: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['DateTime']>;
+  userId: Maybe<Scalars['String']>;
+  user_id: Maybe<Scalars['String']>;
+};
+
+export type CommentMinOrderByAggregateInput = {
+  content?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  is_disabled?: InputMaybe<SortOrder>;
+  project_id?: InputMaybe<SortOrder>;
+  task_id?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type CommentOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type CommentOrderByWithAggregationInput = {
+  _count?: InputMaybe<CommentCountOrderByAggregateInput>;
+  _max?: InputMaybe<CommentMaxOrderByAggregateInput>;
+  _min?: InputMaybe<CommentMinOrderByAggregateInput>;
+  content?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  is_disabled?: InputMaybe<SortOrder>;
+  project_id?: InputMaybe<SortOrder>;
+  task_id?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+};
+
+export type CommentOrderByWithRelationInput = {
+  content?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
+  is_disabled?: InputMaybe<SortOrder>;
+  project?: InputMaybe<ProjectOrderByWithRelationInput>;
+  project_id?: InputMaybe<SortOrder>;
+  task?: InputMaybe<TaskOrderByWithRelationInput>;
+  task_id?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
+  userId?: InputMaybe<SortOrder>;
+  user_id?: InputMaybe<SortOrder>;
+  user_project_comments?: InputMaybe<UserOrderByWithRelationInput>;
+  user_task_comments?: InputMaybe<UserOrderByWithRelationInput>;
+};
+
+export enum CommentScalarFieldEnum {
+  Content = 'content',
+  CreatedAt = 'created_at',
+  Id = 'id',
+  IsDisabled = 'is_disabled',
+  ProjectId = 'project_id',
+  TaskId = 'task_id',
+  UpdatedAt = 'updated_at',
+  UserId = 'userId',
+  UserId = 'user_id'
+}
+
+export type CommentScalarWhereInput = {
+  AND?: InputMaybe<Array<CommentScalarWhereInput>>;
+  NOT?: InputMaybe<Array<CommentScalarWhereInput>>;
+  OR?: InputMaybe<Array<CommentScalarWhereInput>>;
+  content?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  is_disabled?: InputMaybe<BoolFilter>;
+  project_id?: InputMaybe<StringNullableFilter>;
+  task_id?: InputMaybe<StringNullableFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
+  userId?: InputMaybe<StringNullableFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
+};
+
+export type CommentScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<CommentScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<CommentScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<CommentScalarWhereWithAggregatesInput>>;
+  content?: InputMaybe<StringWithAggregatesFilter>;
+  created_at?: InputMaybe<DateTimeWithAggregatesFilter>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+  is_disabled?: InputMaybe<BoolWithAggregatesFilter>;
+  project_id?: InputMaybe<StringNullableWithAggregatesFilter>;
+  task_id?: InputMaybe<StringNullableWithAggregatesFilter>;
+  updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
+  userId?: InputMaybe<StringNullableWithAggregatesFilter>;
+  user_id?: InputMaybe<StringNullableWithAggregatesFilter>;
+};
+
+export type CommentUpdateInput = {
+  content?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  project?: InputMaybe<ProjectUpdateOneWithoutCommentsInput>;
+  task?: InputMaybe<TaskUpdateOneWithoutCommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user_project_comments?: InputMaybe<UserUpdateOneWithoutProject_CommentsInput>;
+  user_task_comments?: InputMaybe<UserUpdateOneWithoutTask_CommentsInput>;
+};
+
+export type CommentUpdateManyMutationInput = {
+  content?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CommentUpdateManyWithWhereWithoutProjectInput = {
+  data: CommentUpdateManyMutationInput;
+  where: CommentScalarWhereInput;
+};
+
+export type CommentUpdateManyWithWhereWithoutTaskInput = {
+  data: CommentUpdateManyMutationInput;
+  where: CommentScalarWhereInput;
+};
+
+export type CommentUpdateManyWithWhereWithoutUser_Project_CommentsInput = {
+  data: CommentUpdateManyMutationInput;
+  where: CommentScalarWhereInput;
+};
+
+export type CommentUpdateManyWithWhereWithoutUser_Task_CommentsInput = {
+  data: CommentUpdateManyMutationInput;
+  where: CommentScalarWhereInput;
+};
+
+export type CommentUpdateManyWithoutProjectInput = {
+  connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutProjectInput>>;
+  create?: InputMaybe<Array<CommentCreateWithoutProjectInput>>;
+  createMany?: InputMaybe<CommentCreateManyProjectInputEnvelope>;
+  delete?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CommentScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  set?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  update?: InputMaybe<Array<CommentUpdateWithWhereUniqueWithoutProjectInput>>;
+  updateMany?: InputMaybe<Array<CommentUpdateManyWithWhereWithoutProjectInput>>;
+  upsert?: InputMaybe<Array<CommentUpsertWithWhereUniqueWithoutProjectInput>>;
+};
+
+export type CommentUpdateManyWithoutTaskInput = {
+  connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutTaskInput>>;
+  create?: InputMaybe<Array<CommentCreateWithoutTaskInput>>;
+  createMany?: InputMaybe<CommentCreateManyTaskInputEnvelope>;
+  delete?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CommentScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  set?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  update?: InputMaybe<Array<CommentUpdateWithWhereUniqueWithoutTaskInput>>;
+  updateMany?: InputMaybe<Array<CommentUpdateManyWithWhereWithoutTaskInput>>;
+  upsert?: InputMaybe<Array<CommentUpsertWithWhereUniqueWithoutTaskInput>>;
+};
+
+export type CommentUpdateManyWithoutUser_Project_CommentsInput = {
+  connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutUser_Project_CommentsInput>>;
+  create?: InputMaybe<Array<CommentCreateWithoutUser_Project_CommentsInput>>;
+  createMany?: InputMaybe<CommentCreateManyUser_Project_CommentsInputEnvelope>;
+  delete?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CommentScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  set?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  update?: InputMaybe<Array<CommentUpdateWithWhereUniqueWithoutUser_Project_CommentsInput>>;
+  updateMany?: InputMaybe<Array<CommentUpdateManyWithWhereWithoutUser_Project_CommentsInput>>;
+  upsert?: InputMaybe<Array<CommentUpsertWithWhereUniqueWithoutUser_Project_CommentsInput>>;
+};
+
+export type CommentUpdateManyWithoutUser_Task_CommentsInput = {
+  connect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CommentCreateOrConnectWithoutUser_Task_CommentsInput>>;
+  create?: InputMaybe<Array<CommentCreateWithoutUser_Task_CommentsInput>>;
+  createMany?: InputMaybe<CommentCreateManyUser_Task_CommentsInputEnvelope>;
+  delete?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CommentScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  set?: InputMaybe<Array<CommentWhereUniqueInput>>;
+  update?: InputMaybe<Array<CommentUpdateWithWhereUniqueWithoutUser_Task_CommentsInput>>;
+  updateMany?: InputMaybe<Array<CommentUpdateManyWithWhereWithoutUser_Task_CommentsInput>>;
+  upsert?: InputMaybe<Array<CommentUpsertWithWhereUniqueWithoutUser_Task_CommentsInput>>;
+};
+
+export type CommentUpdateWithWhereUniqueWithoutProjectInput = {
+  data: CommentUpdateWithoutProjectInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentUpdateWithWhereUniqueWithoutTaskInput = {
+  data: CommentUpdateWithoutTaskInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentUpdateWithWhereUniqueWithoutUser_Project_CommentsInput = {
+  data: CommentUpdateWithoutUser_Project_CommentsInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentUpdateWithWhereUniqueWithoutUser_Task_CommentsInput = {
+  data: CommentUpdateWithoutUser_Task_CommentsInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentUpdateWithoutProjectInput = {
+  content?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  task?: InputMaybe<TaskUpdateOneWithoutCommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user_project_comments?: InputMaybe<UserUpdateOneWithoutProject_CommentsInput>;
+  user_task_comments?: InputMaybe<UserUpdateOneWithoutTask_CommentsInput>;
+};
+
+export type CommentUpdateWithoutTaskInput = {
+  content?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  project?: InputMaybe<ProjectUpdateOneWithoutCommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user_project_comments?: InputMaybe<UserUpdateOneWithoutProject_CommentsInput>;
+  user_task_comments?: InputMaybe<UserUpdateOneWithoutTask_CommentsInput>;
+};
+
+export type CommentUpdateWithoutUser_Project_CommentsInput = {
+  content?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  project?: InputMaybe<ProjectUpdateOneWithoutCommentsInput>;
+  task?: InputMaybe<TaskUpdateOneWithoutCommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user_task_comments?: InputMaybe<UserUpdateOneWithoutTask_CommentsInput>;
+};
+
+export type CommentUpdateWithoutUser_Task_CommentsInput = {
+  content?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  project?: InputMaybe<ProjectUpdateOneWithoutCommentsInput>;
+  task?: InputMaybe<TaskUpdateOneWithoutCommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  user_project_comments?: InputMaybe<UserUpdateOneWithoutProject_CommentsInput>;
+};
+
+export type CommentUpsertWithWhereUniqueWithoutProjectInput = {
+  create: CommentCreateWithoutProjectInput;
+  update: CommentUpdateWithoutProjectInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentUpsertWithWhereUniqueWithoutTaskInput = {
+  create: CommentCreateWithoutTaskInput;
+  update: CommentUpdateWithoutTaskInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentUpsertWithWhereUniqueWithoutUser_Project_CommentsInput = {
+  create: CommentCreateWithoutUser_Project_CommentsInput;
+  update: CommentUpdateWithoutUser_Project_CommentsInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentUpsertWithWhereUniqueWithoutUser_Task_CommentsInput = {
+  create: CommentCreateWithoutUser_Task_CommentsInput;
+  update: CommentUpdateWithoutUser_Task_CommentsInput;
+  where: CommentWhereUniqueInput;
+};
+
+export type CommentWhereInput = {
+  AND?: InputMaybe<Array<CommentWhereInput>>;
+  NOT?: InputMaybe<Array<CommentWhereInput>>;
+  OR?: InputMaybe<Array<CommentWhereInput>>;
+  content?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  is_disabled?: InputMaybe<BoolFilter>;
+  project?: InputMaybe<ProjectRelationFilter>;
+  project_id?: InputMaybe<StringNullableFilter>;
+  task?: InputMaybe<TaskRelationFilter>;
+  task_id?: InputMaybe<StringNullableFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
+  userId?: InputMaybe<StringNullableFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
+  user_project_comments?: InputMaybe<UserRelationFilter>;
+  user_task_comments?: InputMaybe<UserRelationFilter>;
+};
+
+export type CommentWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -228,6 +796,7 @@ export type EnumType_NotificationWithAggregatesFilter = {
 
 export type File = {
   __typename?: 'File';
+  created_at: Scalars['DateTime'];
   id: Scalars['String'];
   is_disabled: Scalars['Boolean'];
   name: Scalars['String'];
@@ -235,9 +804,10 @@ export type File = {
   project: Project;
   projectId: Scalars['String'];
   size: Scalars['Int'];
-  task: Task;
-  taskId: Scalars['String'];
+  task: Maybe<Task>;
+  taskId: Maybe<Scalars['String']>;
   type: Scalars['String'];
+  updated_at: Scalars['DateTime'];
   user: User;
   userId: Scalars['String'];
 };
@@ -254,6 +824,7 @@ export type FileAvgOrderByAggregateInput = {
 export type FileCountAggregate = {
   __typename?: 'FileCountAggregate';
   _all: Scalars['Int'];
+  created_at: Scalars['Int'];
   id: Scalars['Int'];
   is_disabled: Scalars['Int'];
   name: Scalars['Int'];
@@ -262,10 +833,12 @@ export type FileCountAggregate = {
   size: Scalars['Int'];
   taskId: Scalars['Int'];
   type: Scalars['Int'];
+  updated_at: Scalars['Int'];
   userId: Scalars['Int'];
 };
 
 export type FileCountOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -274,41 +847,48 @@ export type FileCountOrderByAggregateInput = {
   size?: InputMaybe<SortOrder>;
   taskId?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type FileCreateInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   name: Scalars['String'];
   path: Scalars['String'];
   project: ProjectCreateNestedOneWithoutFilesInput;
   size: Scalars['Int'];
-  task: TaskCreateNestedOneWithoutFilesInput;
+  task?: InputMaybe<TaskCreateNestedOneWithoutFilesInput>;
   type: Scalars['String'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   user: UserCreateNestedOneWithoutFilesInput;
 };
 
 export type FileCreateManyInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   name: Scalars['String'];
   path: Scalars['String'];
   projectId: Scalars['String'];
   size: Scalars['Int'];
-  taskId: Scalars['String'];
+  taskId?: InputMaybe<Scalars['String']>;
   type: Scalars['String'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   userId: Scalars['String'];
 };
 
 export type FileCreateManyProjectInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   name: Scalars['String'];
   path: Scalars['String'];
   size: Scalars['Int'];
-  taskId: Scalars['String'];
+  taskId?: InputMaybe<Scalars['String']>;
   type: Scalars['String'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   userId: Scalars['String'];
 };
 
@@ -318,6 +898,7 @@ export type FileCreateManyProjectInputEnvelope = {
 };
 
 export type FileCreateManyTaskInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   name: Scalars['String'];
@@ -325,6 +906,7 @@ export type FileCreateManyTaskInput = {
   projectId: Scalars['String'];
   size: Scalars['Int'];
   type: Scalars['String'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   userId: Scalars['String'];
 };
 
@@ -334,14 +916,16 @@ export type FileCreateManyTaskInputEnvelope = {
 };
 
 export type FileCreateManyUserInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   name: Scalars['String'];
   path: Scalars['String'];
   projectId: Scalars['String'];
   size: Scalars['Int'];
-  taskId: Scalars['String'];
+  taskId?: InputMaybe<Scalars['String']>;
   type: Scalars['String'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type FileCreateManyUserInputEnvelope = {
@@ -386,17 +970,20 @@ export type FileCreateOrConnectWithoutUserInput = {
 };
 
 export type FileCreateWithoutProjectInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   name: Scalars['String'];
   path: Scalars['String'];
   size: Scalars['Int'];
-  task: TaskCreateNestedOneWithoutFilesInput;
+  task?: InputMaybe<TaskCreateNestedOneWithoutFilesInput>;
   type: Scalars['String'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   user: UserCreateNestedOneWithoutFilesInput;
 };
 
 export type FileCreateWithoutTaskInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   name: Scalars['String'];
@@ -404,18 +991,21 @@ export type FileCreateWithoutTaskInput = {
   project: ProjectCreateNestedOneWithoutFilesInput;
   size: Scalars['Int'];
   type: Scalars['String'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   user: UserCreateNestedOneWithoutFilesInput;
 };
 
 export type FileCreateWithoutUserInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   name: Scalars['String'];
   path: Scalars['String'];
   project: ProjectCreateNestedOneWithoutFilesInput;
   size: Scalars['Int'];
-  task: TaskCreateNestedOneWithoutFilesInput;
+  task?: InputMaybe<TaskCreateNestedOneWithoutFilesInput>;
   type: Scalars['String'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type FileGroupBy = {
@@ -425,14 +1015,16 @@ export type FileGroupBy = {
   _max: Maybe<FileMaxAggregate>;
   _min: Maybe<FileMinAggregate>;
   _sum: Maybe<FileSumAggregate>;
+  created_at: Scalars['DateTime'];
   id: Scalars['String'];
   is_disabled: Scalars['Boolean'];
   name: Scalars['String'];
   path: Scalars['String'];
   projectId: Scalars['String'];
   size: Scalars['Int'];
-  taskId: Scalars['String'];
+  taskId: Maybe<Scalars['String']>;
   type: Scalars['String'];
+  updated_at: Scalars['DateTime'];
   userId: Scalars['String'];
 };
 
@@ -444,6 +1036,7 @@ export type FileListRelationFilter = {
 
 export type FileMaxAggregate = {
   __typename?: 'FileMaxAggregate';
+  created_at: Maybe<Scalars['DateTime']>;
   id: Maybe<Scalars['String']>;
   is_disabled: Maybe<Scalars['Boolean']>;
   name: Maybe<Scalars['String']>;
@@ -452,10 +1045,12 @@ export type FileMaxAggregate = {
   size: Maybe<Scalars['Int']>;
   taskId: Maybe<Scalars['String']>;
   type: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['DateTime']>;
   userId: Maybe<Scalars['String']>;
 };
 
 export type FileMaxOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -464,11 +1059,13 @@ export type FileMaxOrderByAggregateInput = {
   size?: InputMaybe<SortOrder>;
   taskId?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type FileMinAggregate = {
   __typename?: 'FileMinAggregate';
+  created_at: Maybe<Scalars['DateTime']>;
   id: Maybe<Scalars['String']>;
   is_disabled: Maybe<Scalars['Boolean']>;
   name: Maybe<Scalars['String']>;
@@ -477,10 +1074,12 @@ export type FileMinAggregate = {
   size: Maybe<Scalars['Int']>;
   taskId: Maybe<Scalars['String']>;
   type: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['DateTime']>;
   userId: Maybe<Scalars['String']>;
 };
 
 export type FileMinOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -489,6 +1088,7 @@ export type FileMinOrderByAggregateInput = {
   size?: InputMaybe<SortOrder>;
   taskId?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
@@ -502,6 +1102,7 @@ export type FileOrderByWithAggregationInput = {
   _max?: InputMaybe<FileMaxOrderByAggregateInput>;
   _min?: InputMaybe<FileMinOrderByAggregateInput>;
   _sum?: InputMaybe<FileSumOrderByAggregateInput>;
+  created_at?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -510,10 +1111,12 @@ export type FileOrderByWithAggregationInput = {
   size?: InputMaybe<SortOrder>;
   taskId?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type FileOrderByWithRelationInput = {
+  created_at?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
@@ -524,11 +1127,13 @@ export type FileOrderByWithRelationInput = {
   task?: InputMaybe<TaskOrderByWithRelationInput>;
   taskId?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export enum FileScalarFieldEnum {
+  CreatedAt = 'created_at',
   Id = 'id',
   IsDisabled = 'is_disabled',
   Name = 'name',
@@ -537,6 +1142,7 @@ export enum FileScalarFieldEnum {
   Size = 'size',
   TaskId = 'taskId',
   Type = 'type',
+  UpdatedAt = 'updated_at',
   UserId = 'userId'
 }
 
@@ -544,14 +1150,16 @@ export type FileScalarWhereInput = {
   AND?: InputMaybe<Array<FileScalarWhereInput>>;
   NOT?: InputMaybe<Array<FileScalarWhereInput>>;
   OR?: InputMaybe<Array<FileScalarWhereInput>>;
+  created_at?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   is_disabled?: InputMaybe<BoolFilter>;
   name?: InputMaybe<StringFilter>;
   path?: InputMaybe<StringFilter>;
   projectId?: InputMaybe<StringFilter>;
   size?: InputMaybe<IntFilter>;
-  taskId?: InputMaybe<StringFilter>;
+  taskId?: InputMaybe<StringNullableFilter>;
   type?: InputMaybe<StringFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
   userId?: InputMaybe<StringFilter>;
 };
 
@@ -559,14 +1167,16 @@ export type FileScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<FileScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<FileScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<FileScalarWhereWithAggregatesInput>>;
+  created_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   is_disabled?: InputMaybe<BoolWithAggregatesFilter>;
   name?: InputMaybe<StringWithAggregatesFilter>;
   path?: InputMaybe<StringWithAggregatesFilter>;
   projectId?: InputMaybe<StringWithAggregatesFilter>;
   size?: InputMaybe<IntWithAggregatesFilter>;
-  taskId?: InputMaybe<StringWithAggregatesFilter>;
+  taskId?: InputMaybe<StringNullableWithAggregatesFilter>;
   type?: InputMaybe<StringWithAggregatesFilter>;
+  updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   userId?: InputMaybe<StringWithAggregatesFilter>;
 };
 
@@ -580,24 +1190,28 @@ export type FileSumOrderByAggregateInput = {
 };
 
 export type FileUpdateInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   path?: InputMaybe<StringFieldUpdateOperationsInput>;
   project?: InputMaybe<ProjectUpdateOneRequiredWithoutFilesInput>;
   size?: InputMaybe<IntFieldUpdateOperationsInput>;
-  task?: InputMaybe<TaskUpdateOneRequiredWithoutFilesInput>;
+  task?: InputMaybe<TaskUpdateOneWithoutFilesInput>;
   type?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutFilesInput>;
 };
 
 export type FileUpdateManyMutationInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   path?: InputMaybe<StringFieldUpdateOperationsInput>;
   size?: InputMaybe<IntFieldUpdateOperationsInput>;
   type?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type FileUpdateManyWithWhereWithoutProjectInput = {
@@ -673,17 +1287,20 @@ export type FileUpdateWithWhereUniqueWithoutUserInput = {
 };
 
 export type FileUpdateWithoutProjectInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   path?: InputMaybe<StringFieldUpdateOperationsInput>;
   size?: InputMaybe<IntFieldUpdateOperationsInput>;
-  task?: InputMaybe<TaskUpdateOneRequiredWithoutFilesInput>;
+  task?: InputMaybe<TaskUpdateOneWithoutFilesInput>;
   type?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutFilesInput>;
 };
 
 export type FileUpdateWithoutTaskInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -691,18 +1308,21 @@ export type FileUpdateWithoutTaskInput = {
   project?: InputMaybe<ProjectUpdateOneRequiredWithoutFilesInput>;
   size?: InputMaybe<IntFieldUpdateOperationsInput>;
   type?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutFilesInput>;
 };
 
 export type FileUpdateWithoutUserInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   path?: InputMaybe<StringFieldUpdateOperationsInput>;
   project?: InputMaybe<ProjectUpdateOneRequiredWithoutFilesInput>;
   size?: InputMaybe<IntFieldUpdateOperationsInput>;
-  task?: InputMaybe<TaskUpdateOneRequiredWithoutFilesInput>;
+  task?: InputMaybe<TaskUpdateOneWithoutFilesInput>;
   type?: InputMaybe<StringFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type FileUpsertWithWhereUniqueWithoutProjectInput = {
@@ -727,6 +1347,7 @@ export type FileWhereInput = {
   AND?: InputMaybe<Array<FileWhereInput>>;
   NOT?: InputMaybe<Array<FileWhereInput>>;
   OR?: InputMaybe<Array<FileWhereInput>>;
+  created_at?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   is_disabled?: InputMaybe<BoolFilter>;
   name?: InputMaybe<StringFilter>;
@@ -735,8 +1356,9 @@ export type FileWhereInput = {
   projectId?: InputMaybe<StringFilter>;
   size?: InputMaybe<IntFilter>;
   task?: InputMaybe<TaskRelationFilter>;
-  taskId?: InputMaybe<StringFilter>;
+  taskId?: InputMaybe<StringNullableFilter>;
   type?: InputMaybe<StringFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
 };
@@ -782,11 +1404,13 @@ export type IntWithAggregatesFilter = {
 
 export type Invitation = {
   __typename?: 'Invitation';
+  created_at: Scalars['DateTime'];
   email: Scalars['String'];
   id: Scalars['String'];
   project: Project;
   projectId: Scalars['String'];
   status: Status_Invitation;
+  updated_at: Scalars['DateTime'];
   user: User;
   userId: Scalars['String'];
 };
@@ -794,41 +1418,51 @@ export type Invitation = {
 export type InvitationCountAggregate = {
   __typename?: 'InvitationCountAggregate';
   _all: Scalars['Int'];
+  created_at: Scalars['Int'];
   email: Scalars['Int'];
   id: Scalars['Int'];
   projectId: Scalars['Int'];
   status: Scalars['Int'];
+  updated_at: Scalars['Int'];
   userId: Scalars['Int'];
 };
 
 export type InvitationCountOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   projectId?: InputMaybe<SortOrder>;
   status?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type InvitationCreateInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
   project: ProjectCreateNestedOneWithoutInvitationsInput;
   status: Status_Invitation;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   user: UserCreateNestedOneWithoutInvitationsInput;
 };
 
 export type InvitationCreateManyInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
   projectId: Scalars['String'];
   status: Status_Invitation;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   userId: Scalars['String'];
 };
 
 export type InvitationCreateManyProjectInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
   status: Status_Invitation;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   userId: Scalars['String'];
 };
 
@@ -838,10 +1472,12 @@ export type InvitationCreateManyProjectInputEnvelope = {
 };
 
 export type InvitationCreateManyUserInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
   projectId: Scalars['String'];
   status: Status_Invitation;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type InvitationCreateManyUserInputEnvelope = {
@@ -874,17 +1510,21 @@ export type InvitationCreateOrConnectWithoutUserInput = {
 };
 
 export type InvitationCreateWithoutProjectInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
   status: Status_Invitation;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   user: UserCreateNestedOneWithoutInvitationsInput;
 };
 
 export type InvitationCreateWithoutUserInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
   project: ProjectCreateNestedOneWithoutInvitationsInput;
   status: Status_Invitation;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type InvitationGroupBy = {
@@ -892,10 +1532,12 @@ export type InvitationGroupBy = {
   _count: Maybe<InvitationCountAggregate>;
   _max: Maybe<InvitationMaxAggregate>;
   _min: Maybe<InvitationMinAggregate>;
+  created_at: Scalars['DateTime'];
   email: Scalars['String'];
   id: Scalars['String'];
   projectId: Scalars['String'];
   status: Status_Invitation;
+  updated_at: Scalars['DateTime'];
   userId: Scalars['String'];
 };
 
@@ -907,35 +1549,43 @@ export type InvitationListRelationFilter = {
 
 export type InvitationMaxAggregate = {
   __typename?: 'InvitationMaxAggregate';
+  created_at: Maybe<Scalars['DateTime']>;
   email: Maybe<Scalars['String']>;
   id: Maybe<Scalars['String']>;
   projectId: Maybe<Scalars['String']>;
   status: Maybe<Status_Invitation>;
+  updated_at: Maybe<Scalars['DateTime']>;
   userId: Maybe<Scalars['String']>;
 };
 
 export type InvitationMaxOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   projectId?: InputMaybe<SortOrder>;
   status?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type InvitationMinAggregate = {
   __typename?: 'InvitationMinAggregate';
+  created_at: Maybe<Scalars['DateTime']>;
   email: Maybe<Scalars['String']>;
   id: Maybe<Scalars['String']>;
   projectId: Maybe<Scalars['String']>;
   status: Maybe<Status_Invitation>;
+  updated_at: Maybe<Scalars['DateTime']>;
   userId: Maybe<Scalars['String']>;
 };
 
 export type InvitationMinOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   projectId?: InputMaybe<SortOrder>;
   status?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
@@ -947,28 +1597,34 @@ export type InvitationOrderByWithAggregationInput = {
   _count?: InputMaybe<InvitationCountOrderByAggregateInput>;
   _max?: InputMaybe<InvitationMaxOrderByAggregateInput>;
   _min?: InputMaybe<InvitationMinOrderByAggregateInput>;
+  created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   projectId?: InputMaybe<SortOrder>;
   status?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type InvitationOrderByWithRelationInput = {
+  created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   project?: InputMaybe<ProjectOrderByWithRelationInput>;
   projectId?: InputMaybe<SortOrder>;
   status?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export enum InvitationScalarFieldEnum {
+  CreatedAt = 'created_at',
   Email = 'email',
   Id = 'id',
   ProjectId = 'projectId',
   Status = 'status',
+  UpdatedAt = 'updated_at',
   UserId = 'userId'
 }
 
@@ -976,10 +1632,12 @@ export type InvitationScalarWhereInput = {
   AND?: InputMaybe<Array<InvitationScalarWhereInput>>;
   NOT?: InputMaybe<Array<InvitationScalarWhereInput>>;
   OR?: InputMaybe<Array<InvitationScalarWhereInput>>;
+  created_at?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   projectId?: InputMaybe<StringFilter>;
   status?: InputMaybe<EnumStatus_InvitationFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
   userId?: InputMaybe<StringFilter>;
 };
 
@@ -987,25 +1645,31 @@ export type InvitationScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<InvitationScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<InvitationScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<InvitationScalarWhereWithAggregatesInput>>;
+  created_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   email?: InputMaybe<StringWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   projectId?: InputMaybe<StringWithAggregatesFilter>;
   status?: InputMaybe<EnumStatus_InvitationWithAggregatesFilter>;
+  updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   userId?: InputMaybe<StringWithAggregatesFilter>;
 };
 
 export type InvitationUpdateInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   project?: InputMaybe<ProjectUpdateOneRequiredWithoutInvitationsInput>;
   status?: InputMaybe<EnumStatus_InvitationFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutInvitationsInput>;
 };
 
 export type InvitationUpdateManyMutationInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumStatus_InvitationFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type InvitationUpdateManyWithWhereWithoutProjectInput = {
@@ -1057,17 +1721,21 @@ export type InvitationUpdateWithWhereUniqueWithoutUserInput = {
 };
 
 export type InvitationUpdateWithoutProjectInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumStatus_InvitationFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutInvitationsInput>;
 };
 
 export type InvitationUpdateWithoutUserInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   project?: InputMaybe<ProjectUpdateOneRequiredWithoutInvitationsInput>;
   status?: InputMaybe<EnumStatus_InvitationFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type InvitationUpsertWithWhereUniqueWithoutProjectInput = {
@@ -1086,11 +1754,13 @@ export type InvitationWhereInput = {
   AND?: InputMaybe<Array<InvitationWhereInput>>;
   NOT?: InputMaybe<Array<InvitationWhereInput>>;
   OR?: InputMaybe<Array<InvitationWhereInput>>;
+  created_at?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
   project?: InputMaybe<ProjectRelationFilter>;
   projectId?: InputMaybe<StringFilter>;
   status?: InputMaybe<EnumStatus_InvitationFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
 };
@@ -1101,62 +1771,60 @@ export type InvitationWhereUniqueInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createComment: Comment;
   createFile: File;
   createInvitation: Invitation;
+  createManyComment: AffectedRowsOutput;
   createManyFile: AffectedRowsOutput;
   createManyInvitation: AffectedRowsOutput;
   createManyNotification: AffectedRowsOutput;
   createManyProject: AffectedRowsOutput;
-  createManyProject_Comment: AffectedRowsOutput;
   createManyTask: AffectedRowsOutput;
-  createManyTask_Comment: AffectedRowsOutput;
   createManyUser: AffectedRowsOutput;
   createNotification: Notification;
   createProject: Project;
-  createProject_Comment: Project_Comment;
   createTask: Task;
-  createTask_Comment: Task_Comment;
   createUser: User;
+  deleteComment: Maybe<Comment>;
   deleteFile: Maybe<File>;
   deleteInvitation: Maybe<Invitation>;
+  deleteManyComment: AffectedRowsOutput;
   deleteManyFile: AffectedRowsOutput;
   deleteManyInvitation: AffectedRowsOutput;
   deleteManyNotification: AffectedRowsOutput;
   deleteManyProject: AffectedRowsOutput;
-  deleteManyProject_Comment: AffectedRowsOutput;
   deleteManyTask: AffectedRowsOutput;
-  deleteManyTask_Comment: AffectedRowsOutput;
   deleteManyUser: AffectedRowsOutput;
   deleteNotification: Maybe<Notification>;
   deleteProject: Maybe<Project>;
-  deleteProject_Comment: Maybe<Project_Comment>;
   deleteTask: Maybe<Task>;
-  deleteTask_Comment: Maybe<Task_Comment>;
   deleteUser: Maybe<User>;
+  updateComment: Maybe<Comment>;
   updateFile: Maybe<File>;
   updateInvitation: Maybe<Invitation>;
+  updateManyComment: AffectedRowsOutput;
   updateManyFile: AffectedRowsOutput;
   updateManyInvitation: AffectedRowsOutput;
   updateManyNotification: AffectedRowsOutput;
   updateManyProject: AffectedRowsOutput;
-  updateManyProject_Comment: AffectedRowsOutput;
   updateManyTask: AffectedRowsOutput;
-  updateManyTask_Comment: AffectedRowsOutput;
   updateManyUser: AffectedRowsOutput;
   updateNotification: Maybe<Notification>;
   updateProject: Maybe<Project>;
-  updateProject_Comment: Maybe<Project_Comment>;
   updateTask: Maybe<Task>;
-  updateTask_Comment: Maybe<Task_Comment>;
   updateUser: Maybe<User>;
+  upsertComment: Comment;
   upsertFile: File;
   upsertInvitation: Invitation;
   upsertNotification: Notification;
   upsertProject: Project;
-  upsertProject_Comment: Project_Comment;
   upsertTask: Task;
-  upsertTask_Comment: Task_Comment;
   upsertUser: User;
+};
+
+
+export type MutationCreateCommentArgs = {
+  data: CommentCreateInput;
 };
 
 
@@ -1167,6 +1835,12 @@ export type MutationCreateFileArgs = {
 
 export type MutationCreateInvitationArgs = {
   data: InvitationCreateInput;
+};
+
+
+export type MutationCreateManyCommentArgs = {
+  data: Array<CommentCreateManyInput>;
+  skipDuplicates: InputMaybe<Scalars['Boolean']>;
 };
 
 
@@ -1194,20 +1868,8 @@ export type MutationCreateManyProjectArgs = {
 };
 
 
-export type MutationCreateManyProject_CommentArgs = {
-  data: Array<Project_CommentCreateManyInput>;
-  skipDuplicates: InputMaybe<Scalars['Boolean']>;
-};
-
-
 export type MutationCreateManyTaskArgs = {
   data: Array<TaskCreateManyInput>;
-  skipDuplicates: InputMaybe<Scalars['Boolean']>;
-};
-
-
-export type MutationCreateManyTask_CommentArgs = {
-  data: Array<Task_CommentCreateManyInput>;
   skipDuplicates: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -1228,23 +1890,18 @@ export type MutationCreateProjectArgs = {
 };
 
 
-export type MutationCreateProject_CommentArgs = {
-  data: Project_CommentCreateInput;
-};
-
-
 export type MutationCreateTaskArgs = {
   data: TaskCreateInput;
 };
 
 
-export type MutationCreateTask_CommentArgs = {
-  data: Task_CommentCreateInput;
+export type MutationCreateUserArgs = {
+  data: UserCreateInput;
 };
 
 
-export type MutationCreateUserArgs = {
-  data: UserCreateInput;
+export type MutationDeleteCommentArgs = {
+  where: CommentWhereUniqueInput;
 };
 
 
@@ -1255,6 +1912,11 @@ export type MutationDeleteFileArgs = {
 
 export type MutationDeleteInvitationArgs = {
   where: InvitationWhereUniqueInput;
+};
+
+
+export type MutationDeleteManyCommentArgs = {
+  where: InputMaybe<CommentWhereInput>;
 };
 
 
@@ -1278,18 +1940,8 @@ export type MutationDeleteManyProjectArgs = {
 };
 
 
-export type MutationDeleteManyProject_CommentArgs = {
-  where: InputMaybe<Project_CommentWhereInput>;
-};
-
-
 export type MutationDeleteManyTaskArgs = {
   where: InputMaybe<TaskWhereInput>;
-};
-
-
-export type MutationDeleteManyTask_CommentArgs = {
-  where: InputMaybe<Task_CommentWhereInput>;
 };
 
 
@@ -1308,23 +1960,19 @@ export type MutationDeleteProjectArgs = {
 };
 
 
-export type MutationDeleteProject_CommentArgs = {
-  where: Project_CommentWhereUniqueInput;
-};
-
-
 export type MutationDeleteTaskArgs = {
   where: TaskWhereUniqueInput;
 };
 
 
-export type MutationDeleteTask_CommentArgs = {
-  where: Task_CommentWhereUniqueInput;
+export type MutationDeleteUserArgs = {
+  where: UserWhereUniqueInput;
 };
 
 
-export type MutationDeleteUserArgs = {
-  where: UserWhereUniqueInput;
+export type MutationUpdateCommentArgs = {
+  data: CommentUpdateInput;
+  where: CommentWhereUniqueInput;
 };
 
 
@@ -1337,6 +1985,12 @@ export type MutationUpdateFileArgs = {
 export type MutationUpdateInvitationArgs = {
   data: InvitationUpdateInput;
   where: InvitationWhereUniqueInput;
+};
+
+
+export type MutationUpdateManyCommentArgs = {
+  data: CommentUpdateManyMutationInput;
+  where: InputMaybe<CommentWhereInput>;
 };
 
 
@@ -1364,21 +2018,9 @@ export type MutationUpdateManyProjectArgs = {
 };
 
 
-export type MutationUpdateManyProject_CommentArgs = {
-  data: Project_CommentUpdateManyMutationInput;
-  where: InputMaybe<Project_CommentWhereInput>;
-};
-
-
 export type MutationUpdateManyTaskArgs = {
   data: TaskUpdateManyMutationInput;
   where: InputMaybe<TaskWhereInput>;
-};
-
-
-export type MutationUpdateManyTask_CommentArgs = {
-  data: Task_CommentUpdateManyMutationInput;
-  where: InputMaybe<Task_CommentWhereInput>;
 };
 
 
@@ -1400,27 +2042,22 @@ export type MutationUpdateProjectArgs = {
 };
 
 
-export type MutationUpdateProject_CommentArgs = {
-  data: Project_CommentUpdateInput;
-  where: Project_CommentWhereUniqueInput;
-};
-
-
 export type MutationUpdateTaskArgs = {
   data: TaskUpdateInput;
   where: TaskWhereUniqueInput;
 };
 
 
-export type MutationUpdateTask_CommentArgs = {
-  data: Task_CommentUpdateInput;
-  where: Task_CommentWhereUniqueInput;
-};
-
-
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
+};
+
+
+export type MutationUpsertCommentArgs = {
+  create: CommentCreateInput;
+  update: CommentUpdateInput;
+  where: CommentWhereUniqueInput;
 };
 
 
@@ -1452,24 +2089,10 @@ export type MutationUpsertProjectArgs = {
 };
 
 
-export type MutationUpsertProject_CommentArgs = {
-  create: Project_CommentCreateInput;
-  update: Project_CommentUpdateInput;
-  where: Project_CommentWhereUniqueInput;
-};
-
-
 export type MutationUpsertTaskArgs = {
   create: TaskCreateInput;
   update: TaskUpdateInput;
   where: TaskWhereUniqueInput;
-};
-
-
-export type MutationUpsertTask_CommentArgs = {
-  create: Task_CommentCreateInput;
-  update: Task_CommentUpdateInput;
-  where: Task_CommentWhereUniqueInput;
 };
 
 
@@ -1607,6 +2230,17 @@ export type NestedIntFilter = {
   notIn?: InputMaybe<Array<Scalars['Int']>>;
 };
 
+export type NestedIntNullableFilter = {
+  equals?: InputMaybe<Scalars['Int']>;
+  gt?: InputMaybe<Scalars['Int']>;
+  gte?: InputMaybe<Scalars['Int']>;
+  in?: InputMaybe<Array<Scalars['Int']>>;
+  lt?: InputMaybe<Scalars['Int']>;
+  lte?: InputMaybe<Scalars['Int']>;
+  not?: InputMaybe<NestedIntNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars['Int']>>;
+};
+
 export type NestedIntWithAggregatesFilter = {
   _avg?: InputMaybe<NestedFloatFilter>;
   _count?: InputMaybe<NestedIntFilter>;
@@ -1637,6 +2271,37 @@ export type NestedStringFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type NestedStringNullableFilter = {
+  contains?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  equals?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<Scalars['String']>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
+  not?: InputMaybe<NestedStringNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars['String']>>;
+  startsWith?: InputMaybe<Scalars['String']>;
+};
+
+export type NestedStringNullableWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntNullableFilter>;
+  _max?: InputMaybe<NestedStringNullableFilter>;
+  _min?: InputMaybe<NestedStringNullableFilter>;
+  contains?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  equals?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<Scalars['String']>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
+  not?: InputMaybe<NestedStringNullableWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<Scalars['String']>>;
+  startsWith?: InputMaybe<Scalars['String']>;
+};
+
 export type NestedStringWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntFilter>;
   _max?: InputMaybe<NestedStringFilter>;
@@ -1657,6 +2322,7 @@ export type NestedStringWithAggregatesFilter = {
 export type Notification = {
   __typename?: 'Notification';
   content: Scalars['String'];
+  created_at: Scalars['DateTime'];
   id: Scalars['String'];
   is_disabled: Scalars['Boolean'];
   reference_id: Scalars['String'];
@@ -1664,6 +2330,7 @@ export type Notification = {
   status: Status_Notification;
   title: Scalars['String'];
   type: Type_Notification;
+  updated_at: Scalars['DateTime'];
   user: User;
   userId: Scalars['String'];
 };
@@ -1672,6 +2339,7 @@ export type NotificationCountAggregate = {
   __typename?: 'NotificationCountAggregate';
   _all: Scalars['Int'];
   content: Scalars['Int'];
+  created_at: Scalars['Int'];
   id: Scalars['Int'];
   is_disabled: Scalars['Int'];
   reference_id: Scalars['Int'];
@@ -1679,11 +2347,13 @@ export type NotificationCountAggregate = {
   status: Scalars['Int'];
   title: Scalars['Int'];
   type: Scalars['Int'];
+  updated_at: Scalars['Int'];
   userId: Scalars['Int'];
 };
 
 export type NotificationCountOrderByAggregateInput = {
   content?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   reference_id?: InputMaybe<SortOrder>;
@@ -1691,11 +2361,13 @@ export type NotificationCountOrderByAggregateInput = {
   status?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type NotificationCreateInput = {
   content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   reference_id: Scalars['String'];
@@ -1703,11 +2375,13 @@ export type NotificationCreateInput = {
   status: Status_Notification;
   title: Scalars['String'];
   type: Type_Notification;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   user: UserCreateNestedOneWithoutNotificationsInput;
 };
 
 export type NotificationCreateManyInput = {
   content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   reference_id: Scalars['String'];
@@ -1715,11 +2389,13 @@ export type NotificationCreateManyInput = {
   status: Status_Notification;
   title: Scalars['String'];
   type: Type_Notification;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   userId: Scalars['String'];
 };
 
 export type NotificationCreateManyUserInput = {
   content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   reference_id: Scalars['String'];
@@ -1727,6 +2403,7 @@ export type NotificationCreateManyUserInput = {
   status: Status_Notification;
   title: Scalars['String'];
   type: Type_Notification;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type NotificationCreateManyUserInputEnvelope = {
@@ -1748,6 +2425,7 @@ export type NotificationCreateOrConnectWithoutUserInput = {
 
 export type NotificationCreateWithoutUserInput = {
   content: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
   is_disabled: Scalars['Boolean'];
   reference_id: Scalars['String'];
@@ -1755,6 +2433,7 @@ export type NotificationCreateWithoutUserInput = {
   status: Status_Notification;
   title: Scalars['String'];
   type: Type_Notification;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type NotificationGroupBy = {
@@ -1763,6 +2442,7 @@ export type NotificationGroupBy = {
   _max: Maybe<NotificationMaxAggregate>;
   _min: Maybe<NotificationMinAggregate>;
   content: Scalars['String'];
+  created_at: Scalars['DateTime'];
   id: Scalars['String'];
   is_disabled: Scalars['Boolean'];
   reference_id: Scalars['String'];
@@ -1770,6 +2450,7 @@ export type NotificationGroupBy = {
   status: Status_Notification;
   title: Scalars['String'];
   type: Type_Notification;
+  updated_at: Scalars['DateTime'];
   userId: Scalars['String'];
 };
 
@@ -1782,6 +2463,7 @@ export type NotificationListRelationFilter = {
 export type NotificationMaxAggregate = {
   __typename?: 'NotificationMaxAggregate';
   content: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['DateTime']>;
   id: Maybe<Scalars['String']>;
   is_disabled: Maybe<Scalars['Boolean']>;
   reference_id: Maybe<Scalars['String']>;
@@ -1789,11 +2471,13 @@ export type NotificationMaxAggregate = {
   status: Maybe<Status_Notification>;
   title: Maybe<Scalars['String']>;
   type: Maybe<Type_Notification>;
+  updated_at: Maybe<Scalars['DateTime']>;
   userId: Maybe<Scalars['String']>;
 };
 
 export type NotificationMaxOrderByAggregateInput = {
   content?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   reference_id?: InputMaybe<SortOrder>;
@@ -1801,12 +2485,14 @@ export type NotificationMaxOrderByAggregateInput = {
   status?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type NotificationMinAggregate = {
   __typename?: 'NotificationMinAggregate';
   content: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['DateTime']>;
   id: Maybe<Scalars['String']>;
   is_disabled: Maybe<Scalars['Boolean']>;
   reference_id: Maybe<Scalars['String']>;
@@ -1814,11 +2500,13 @@ export type NotificationMinAggregate = {
   status: Maybe<Status_Notification>;
   title: Maybe<Scalars['String']>;
   type: Maybe<Type_Notification>;
+  updated_at: Maybe<Scalars['DateTime']>;
   userId: Maybe<Scalars['String']>;
 };
 
 export type NotificationMinOrderByAggregateInput = {
   content?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   reference_id?: InputMaybe<SortOrder>;
@@ -1826,6 +2514,7 @@ export type NotificationMinOrderByAggregateInput = {
   status?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
@@ -1838,6 +2527,7 @@ export type NotificationOrderByWithAggregationInput = {
   _max?: InputMaybe<NotificationMaxOrderByAggregateInput>;
   _min?: InputMaybe<NotificationMinOrderByAggregateInput>;
   content?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   reference_id?: InputMaybe<SortOrder>;
@@ -1845,11 +2535,13 @@ export type NotificationOrderByWithAggregationInput = {
   status?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type NotificationOrderByWithRelationInput = {
   content?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   reference_id?: InputMaybe<SortOrder>;
@@ -1857,12 +2549,14 @@ export type NotificationOrderByWithRelationInput = {
   status?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   type?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export enum NotificationScalarFieldEnum {
   Content = 'content',
+  CreatedAt = 'created_at',
   Id = 'id',
   IsDisabled = 'is_disabled',
   ReferenceId = 'reference_id',
@@ -1870,6 +2564,7 @@ export enum NotificationScalarFieldEnum {
   Status = 'status',
   Title = 'title',
   Type = 'type',
+  UpdatedAt = 'updated_at',
   UserId = 'userId'
 }
 
@@ -1878,6 +2573,7 @@ export type NotificationScalarWhereInput = {
   NOT?: InputMaybe<Array<NotificationScalarWhereInput>>;
   OR?: InputMaybe<Array<NotificationScalarWhereInput>>;
   content?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   is_disabled?: InputMaybe<BoolFilter>;
   reference_id?: InputMaybe<StringFilter>;
@@ -1885,6 +2581,7 @@ export type NotificationScalarWhereInput = {
   status?: InputMaybe<EnumStatus_NotificationFilter>;
   title?: InputMaybe<StringFilter>;
   type?: InputMaybe<EnumType_NotificationFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
   userId?: InputMaybe<StringFilter>;
 };
 
@@ -1893,6 +2590,7 @@ export type NotificationScalarWhereWithAggregatesInput = {
   NOT?: InputMaybe<Array<NotificationScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<NotificationScalarWhereWithAggregatesInput>>;
   content?: InputMaybe<StringWithAggregatesFilter>;
+  created_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   is_disabled?: InputMaybe<BoolWithAggregatesFilter>;
   reference_id?: InputMaybe<StringWithAggregatesFilter>;
@@ -1900,11 +2598,13 @@ export type NotificationScalarWhereWithAggregatesInput = {
   status?: InputMaybe<EnumStatus_NotificationWithAggregatesFilter>;
   title?: InputMaybe<StringWithAggregatesFilter>;
   type?: InputMaybe<EnumType_NotificationWithAggregatesFilter>;
+  updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   userId?: InputMaybe<StringWithAggregatesFilter>;
 };
 
 export type NotificationUpdateInput = {
   content?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
   reference_id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1912,11 +2612,13 @@ export type NotificationUpdateInput = {
   status?: InputMaybe<EnumStatus_NotificationFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   type?: InputMaybe<EnumType_NotificationFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutNotificationsInput>;
 };
 
 export type NotificationUpdateManyMutationInput = {
   content?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
   reference_id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1924,6 +2626,7 @@ export type NotificationUpdateManyMutationInput = {
   status?: InputMaybe<EnumStatus_NotificationFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   type?: InputMaybe<EnumType_NotificationFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type NotificationUpdateManyWithWhereWithoutUserInput = {
@@ -1952,6 +2655,7 @@ export type NotificationUpdateWithWhereUniqueWithoutUserInput = {
 
 export type NotificationUpdateWithoutUserInput = {
   content?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
   reference_id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -1959,6 +2663,7 @@ export type NotificationUpdateWithoutUserInput = {
   status?: InputMaybe<EnumStatus_NotificationFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   type?: InputMaybe<EnumType_NotificationFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
@@ -1972,6 +2677,7 @@ export type NotificationWhereInput = {
   NOT?: InputMaybe<Array<NotificationWhereInput>>;
   OR?: InputMaybe<Array<NotificationWhereInput>>;
   content?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   is_disabled?: InputMaybe<BoolFilter>;
   reference_id?: InputMaybe<StringFilter>;
@@ -1979,6 +2685,7 @@ export type NotificationWhereInput = {
   status?: InputMaybe<EnumStatus_NotificationFilter>;
   title?: InputMaybe<StringFilter>;
   type?: InputMaybe<EnumType_NotificationFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
 };
@@ -1990,7 +2697,8 @@ export type NotificationWhereUniqueInput = {
 export type Project = {
   __typename?: 'Project';
   _count: ProjectCount;
-  comments: Array<Project_Comment>;
+  comments: Array<Comment>;
+  created_at: Scalars['DateTime'];
   description: Scalars['String'];
   due_date: Scalars['DateTime'];
   end_date: Scalars['DateTime'];
@@ -2005,17 +2713,18 @@ export type Project = {
   tasks: Array<Task>;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at: Scalars['DateTime'];
   users: Array<User>;
 };
 
 
 export type ProjectCommentsArgs = {
-  cursor: InputMaybe<Project_CommentWhereUniqueInput>;
-  distinct: InputMaybe<Array<Project_CommentScalarFieldEnum>>;
-  orderBy: InputMaybe<Array<Project_CommentOrderByWithRelationInput>>;
+  cursor: InputMaybe<CommentWhereUniqueInput>;
+  distinct: InputMaybe<Array<CommentScalarFieldEnum>>;
+  orderBy: InputMaybe<Array<CommentOrderByWithRelationInput>>;
   skip: InputMaybe<Scalars['Int']>;
   take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Project_CommentWhereInput>;
+  where: InputMaybe<CommentWhereInput>;
 };
 
 
@@ -2079,6 +2788,7 @@ export type ProjectCount = {
 export type ProjectCountAggregate = {
   __typename?: 'ProjectCountAggregate';
   _all: Scalars['Int'];
+  created_at: Scalars['Int'];
   description: Scalars['Int'];
   due_date: Scalars['Int'];
   end_date: Scalars['Int'];
@@ -2090,9 +2800,11 @@ export type ProjectCountAggregate = {
   status_project: Scalars['Int'];
   title: Scalars['Int'];
   total_time_spent: Scalars['Int'];
+  updated_at: Scalars['Int'];
 };
 
 export type ProjectCountOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   due_date?: InputMaybe<SortOrder>;
   end_date?: InputMaybe<SortOrder>;
@@ -2104,10 +2816,12 @@ export type ProjectCountOrderByAggregateInput = {
   status_project?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   total_time_spent?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
 };
 
 export type ProjectCreateInput = {
-  comments?: InputMaybe<Project_CommentCreateNestedManyWithoutProjectInput>;
+  comments?: InputMaybe<CommentCreateNestedManyWithoutProjectInput>;
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   due_date: Scalars['DateTime'];
   end_date: Scalars['DateTime'];
@@ -2122,10 +2836,12 @@ export type ProjectCreateInput = {
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
 
 export type ProjectCreateManyInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   due_date: Scalars['DateTime'];
   end_date: Scalars['DateTime'];
@@ -2137,6 +2853,7 @@ export type ProjectCreateManyInput = {
   status_project: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type ProjectCreateNestedManyWithoutUsersInput = {
@@ -2195,6 +2912,7 @@ export type ProjectCreateOrConnectWithoutUsersInput = {
 };
 
 export type ProjectCreateWithoutCommentsInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   due_date: Scalars['DateTime'];
   end_date: Scalars['DateTime'];
@@ -2209,11 +2927,13 @@ export type ProjectCreateWithoutCommentsInput = {
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
 
 export type ProjectCreateWithoutFilesInput = {
-  comments?: InputMaybe<Project_CommentCreateNestedManyWithoutProjectInput>;
+  comments?: InputMaybe<CommentCreateNestedManyWithoutProjectInput>;
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   due_date: Scalars['DateTime'];
   end_date: Scalars['DateTime'];
@@ -2227,11 +2947,13 @@ export type ProjectCreateWithoutFilesInput = {
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
 
 export type ProjectCreateWithoutInvitationsInput = {
-  comments?: InputMaybe<Project_CommentCreateNestedManyWithoutProjectInput>;
+  comments?: InputMaybe<CommentCreateNestedManyWithoutProjectInput>;
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   due_date: Scalars['DateTime'];
   end_date: Scalars['DateTime'];
@@ -2245,11 +2967,13 @@ export type ProjectCreateWithoutInvitationsInput = {
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
 
 export type ProjectCreateWithoutTasksInput = {
-  comments?: InputMaybe<Project_CommentCreateNestedManyWithoutProjectInput>;
+  comments?: InputMaybe<CommentCreateNestedManyWithoutProjectInput>;
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   due_date: Scalars['DateTime'];
   end_date: Scalars['DateTime'];
@@ -2263,11 +2987,13 @@ export type ProjectCreateWithoutTasksInput = {
   status_project: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
 
 export type ProjectCreateWithoutUsersInput = {
-  comments?: InputMaybe<Project_CommentCreateNestedManyWithoutProjectInput>;
+  comments?: InputMaybe<CommentCreateNestedManyWithoutProjectInput>;
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   due_date: Scalars['DateTime'];
   end_date: Scalars['DateTime'];
@@ -2282,6 +3008,7 @@ export type ProjectCreateWithoutUsersInput = {
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type ProjectGroupBy = {
@@ -2291,6 +3018,7 @@ export type ProjectGroupBy = {
   _max: Maybe<ProjectMaxAggregate>;
   _min: Maybe<ProjectMinAggregate>;
   _sum: Maybe<ProjectSumAggregate>;
+  created_at: Scalars['DateTime'];
   description: Scalars['String'];
   due_date: Scalars['DateTime'];
   end_date: Scalars['DateTime'];
@@ -2302,6 +3030,7 @@ export type ProjectGroupBy = {
   status_project: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at: Scalars['DateTime'];
 };
 
 export type ProjectListRelationFilter = {
@@ -2312,6 +3041,7 @@ export type ProjectListRelationFilter = {
 
 export type ProjectMaxAggregate = {
   __typename?: 'ProjectMaxAggregate';
+  created_at: Maybe<Scalars['DateTime']>;
   description: Maybe<Scalars['String']>;
   due_date: Maybe<Scalars['DateTime']>;
   end_date: Maybe<Scalars['DateTime']>;
@@ -2323,9 +3053,11 @@ export type ProjectMaxAggregate = {
   status_project: Maybe<Status>;
   title: Maybe<Scalars['String']>;
   total_time_spent: Maybe<Scalars['Int']>;
+  updated_at: Maybe<Scalars['DateTime']>;
 };
 
 export type ProjectMaxOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   due_date?: InputMaybe<SortOrder>;
   end_date?: InputMaybe<SortOrder>;
@@ -2337,10 +3069,12 @@ export type ProjectMaxOrderByAggregateInput = {
   status_project?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   total_time_spent?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
 };
 
 export type ProjectMinAggregate = {
   __typename?: 'ProjectMinAggregate';
+  created_at: Maybe<Scalars['DateTime']>;
   description: Maybe<Scalars['String']>;
   due_date: Maybe<Scalars['DateTime']>;
   end_date: Maybe<Scalars['DateTime']>;
@@ -2352,9 +3086,11 @@ export type ProjectMinAggregate = {
   status_project: Maybe<Status>;
   title: Maybe<Scalars['String']>;
   total_time_spent: Maybe<Scalars['Int']>;
+  updated_at: Maybe<Scalars['DateTime']>;
 };
 
 export type ProjectMinOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   due_date?: InputMaybe<SortOrder>;
   end_date?: InputMaybe<SortOrder>;
@@ -2366,6 +3102,7 @@ export type ProjectMinOrderByAggregateInput = {
   status_project?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   total_time_spent?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
 };
 
 export type ProjectOrderByRelationAggregateInput = {
@@ -2378,6 +3115,7 @@ export type ProjectOrderByWithAggregationInput = {
   _max?: InputMaybe<ProjectMaxOrderByAggregateInput>;
   _min?: InputMaybe<ProjectMinOrderByAggregateInput>;
   _sum?: InputMaybe<ProjectSumOrderByAggregateInput>;
+  created_at?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   due_date?: InputMaybe<SortOrder>;
   end_date?: InputMaybe<SortOrder>;
@@ -2389,10 +3127,12 @@ export type ProjectOrderByWithAggregationInput = {
   status_project?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   total_time_spent?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
 };
 
 export type ProjectOrderByWithRelationInput = {
-  comments?: InputMaybe<Project_CommentOrderByRelationAggregateInput>;
+  comments?: InputMaybe<CommentOrderByRelationAggregateInput>;
+  created_at?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   due_date?: InputMaybe<SortOrder>;
   end_date?: InputMaybe<SortOrder>;
@@ -2407,6 +3147,7 @@ export type ProjectOrderByWithRelationInput = {
   tasks?: InputMaybe<TaskOrderByRelationAggregateInput>;
   title?: InputMaybe<SortOrder>;
   total_time_spent?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   users?: InputMaybe<UserOrderByRelationAggregateInput>;
 };
 
@@ -2416,6 +3157,7 @@ export type ProjectRelationFilter = {
 };
 
 export enum ProjectScalarFieldEnum {
+  CreatedAt = 'created_at',
   Description = 'description',
   DueDate = 'due_date',
   EndDate = 'end_date',
@@ -2426,13 +3168,15 @@ export enum ProjectScalarFieldEnum {
   StartDate = 'start_date',
   StatusProject = 'status_project',
   Title = 'title',
-  TotalTimeSpent = 'total_time_spent'
+  TotalTimeSpent = 'total_time_spent',
+  UpdatedAt = 'updated_at'
 }
 
 export type ProjectScalarWhereInput = {
   AND?: InputMaybe<Array<ProjectScalarWhereInput>>;
   NOT?: InputMaybe<Array<ProjectScalarWhereInput>>;
   OR?: InputMaybe<Array<ProjectScalarWhereInput>>;
+  created_at?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   due_date?: InputMaybe<DateTimeFilter>;
   end_date?: InputMaybe<DateTimeFilter>;
@@ -2444,12 +3188,14 @@ export type ProjectScalarWhereInput = {
   status_project?: InputMaybe<EnumStatusFilter>;
   title?: InputMaybe<StringFilter>;
   total_time_spent?: InputMaybe<IntFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
 };
 
 export type ProjectScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<ProjectScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<ProjectScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<ProjectScalarWhereWithAggregatesInput>>;
+  created_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   description?: InputMaybe<StringWithAggregatesFilter>;
   due_date?: InputMaybe<DateTimeWithAggregatesFilter>;
   end_date?: InputMaybe<DateTimeWithAggregatesFilter>;
@@ -2461,6 +3207,7 @@ export type ProjectScalarWhereWithAggregatesInput = {
   status_project?: InputMaybe<EnumStatusWithAggregatesFilter>;
   title?: InputMaybe<StringWithAggregatesFilter>;
   total_time_spent?: InputMaybe<IntWithAggregatesFilter>;
+  updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
 };
 
 export type ProjectSumAggregate = {
@@ -2473,7 +3220,8 @@ export type ProjectSumOrderByAggregateInput = {
 };
 
 export type ProjectUpdateInput = {
-  comments?: InputMaybe<Project_CommentUpdateManyWithoutProjectInput>;
+  comments?: InputMaybe<CommentUpdateManyWithoutProjectInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   due_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2488,10 +3236,12 @@ export type ProjectUpdateInput = {
   tasks?: InputMaybe<TaskUpdateManyWithoutProjectInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   users?: InputMaybe<UserUpdateManyWithoutProjectsInput>;
 };
 
 export type ProjectUpdateManyMutationInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   due_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2503,6 +3253,7 @@ export type ProjectUpdateManyMutationInput = {
   status_project?: InputMaybe<EnumStatusFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type ProjectUpdateManyWithWhereWithoutUsersInput = {
@@ -2521,14 +3272,6 @@ export type ProjectUpdateManyWithoutUsersInput = {
   update?: InputMaybe<Array<ProjectUpdateWithWhereUniqueWithoutUsersInput>>;
   updateMany?: InputMaybe<Array<ProjectUpdateManyWithWhereWithoutUsersInput>>;
   upsert?: InputMaybe<Array<ProjectUpsertWithWhereUniqueWithoutUsersInput>>;
-};
-
-export type ProjectUpdateOneRequiredWithoutCommentsInput = {
-  connect?: InputMaybe<ProjectWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<ProjectCreateOrConnectWithoutCommentsInput>;
-  create?: InputMaybe<ProjectCreateWithoutCommentsInput>;
-  update?: InputMaybe<ProjectUpdateWithoutCommentsInput>;
-  upsert?: InputMaybe<ProjectUpsertWithoutCommentsInput>;
 };
 
 export type ProjectUpdateOneRequiredWithoutFilesInput = {
@@ -2555,12 +3298,23 @@ export type ProjectUpdateOneRequiredWithoutTasksInput = {
   upsert?: InputMaybe<ProjectUpsertWithoutTasksInput>;
 };
 
+export type ProjectUpdateOneWithoutCommentsInput = {
+  connect?: InputMaybe<ProjectWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ProjectCreateOrConnectWithoutCommentsInput>;
+  create?: InputMaybe<ProjectCreateWithoutCommentsInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<ProjectUpdateWithoutCommentsInput>;
+  upsert?: InputMaybe<ProjectUpsertWithoutCommentsInput>;
+};
+
 export type ProjectUpdateWithWhereUniqueWithoutUsersInput = {
   data: ProjectUpdateWithoutUsersInput;
   where: ProjectWhereUniqueInput;
 };
 
 export type ProjectUpdateWithoutCommentsInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   due_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2575,11 +3329,13 @@ export type ProjectUpdateWithoutCommentsInput = {
   tasks?: InputMaybe<TaskUpdateManyWithoutProjectInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   users?: InputMaybe<UserUpdateManyWithoutProjectsInput>;
 };
 
 export type ProjectUpdateWithoutFilesInput = {
-  comments?: InputMaybe<Project_CommentUpdateManyWithoutProjectInput>;
+  comments?: InputMaybe<CommentUpdateManyWithoutProjectInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   due_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2593,11 +3349,13 @@ export type ProjectUpdateWithoutFilesInput = {
   tasks?: InputMaybe<TaskUpdateManyWithoutProjectInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   users?: InputMaybe<UserUpdateManyWithoutProjectsInput>;
 };
 
 export type ProjectUpdateWithoutInvitationsInput = {
-  comments?: InputMaybe<Project_CommentUpdateManyWithoutProjectInput>;
+  comments?: InputMaybe<CommentUpdateManyWithoutProjectInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   due_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2611,11 +3369,13 @@ export type ProjectUpdateWithoutInvitationsInput = {
   tasks?: InputMaybe<TaskUpdateManyWithoutProjectInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   users?: InputMaybe<UserUpdateManyWithoutProjectsInput>;
 };
 
 export type ProjectUpdateWithoutTasksInput = {
-  comments?: InputMaybe<Project_CommentUpdateManyWithoutProjectInput>;
+  comments?: InputMaybe<CommentUpdateManyWithoutProjectInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   due_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2629,11 +3389,13 @@ export type ProjectUpdateWithoutTasksInput = {
   status_project?: InputMaybe<EnumStatusFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   users?: InputMaybe<UserUpdateManyWithoutProjectsInput>;
 };
 
 export type ProjectUpdateWithoutUsersInput = {
-  comments?: InputMaybe<Project_CommentUpdateManyWithoutProjectInput>;
+  comments?: InputMaybe<CommentUpdateManyWithoutProjectInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   due_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2648,6 +3410,7 @@ export type ProjectUpdateWithoutUsersInput = {
   tasks?: InputMaybe<TaskUpdateManyWithoutProjectInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type ProjectUpsertWithWhereUniqueWithoutUsersInput = {
@@ -2680,7 +3443,8 @@ export type ProjectWhereInput = {
   AND?: InputMaybe<Array<ProjectWhereInput>>;
   NOT?: InputMaybe<Array<ProjectWhereInput>>;
   OR?: InputMaybe<Array<ProjectWhereInput>>;
-  comments?: InputMaybe<Project_CommentListRelationFilter>;
+  comments?: InputMaybe<CommentListRelationFilter>;
+  created_at?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   due_date?: InputMaybe<DateTimeFilter>;
   end_date?: InputMaybe<DateTimeFilter>;
@@ -2695,6 +3459,7 @@ export type ProjectWhereInput = {
   tasks?: InputMaybe<TaskListRelationFilter>;
   title?: InputMaybe<StringFilter>;
   total_time_spent?: InputMaybe<IntFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
   users?: InputMaybe<UserListRelationFilter>;
 };
 
@@ -2702,367 +3467,52 @@ export type ProjectWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
-export type Project_Comment = {
-  __typename?: 'Project_Comment';
-  content: Scalars['String'];
-  id: Scalars['String'];
-  is_disabled: Scalars['Boolean'];
-  project: Project;
-  projectId: Scalars['String'];
-  user: User;
-  userId: Scalars['String'];
-};
-
-export type Project_CommentCountAggregate = {
-  __typename?: 'Project_CommentCountAggregate';
-  _all: Scalars['Int'];
-  content: Scalars['Int'];
-  id: Scalars['Int'];
-  is_disabled: Scalars['Int'];
-  projectId: Scalars['Int'];
-  userId: Scalars['Int'];
-};
-
-export type Project_CommentCountOrderByAggregateInput = {
-  content?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  is_disabled?: InputMaybe<SortOrder>;
-  projectId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrder>;
-};
-
-export type Project_CommentCreateInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  project: ProjectCreateNestedOneWithoutCommentsInput;
-  user: UserCreateNestedOneWithoutProject_CommentsInput;
-};
-
-export type Project_CommentCreateManyInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  projectId: Scalars['String'];
-  userId: Scalars['String'];
-};
-
-export type Project_CommentCreateManyProjectInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  userId: Scalars['String'];
-};
-
-export type Project_CommentCreateManyProjectInputEnvelope = {
-  data: Array<Project_CommentCreateManyProjectInput>;
-  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
-};
-
-export type Project_CommentCreateManyUserInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  projectId: Scalars['String'];
-};
-
-export type Project_CommentCreateManyUserInputEnvelope = {
-  data: Array<Project_CommentCreateManyUserInput>;
-  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
-};
-
-export type Project_CommentCreateNestedManyWithoutProjectInput = {
-  connect?: InputMaybe<Array<Project_CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<Project_CommentCreateOrConnectWithoutProjectInput>>;
-  create?: InputMaybe<Array<Project_CommentCreateWithoutProjectInput>>;
-  createMany?: InputMaybe<Project_CommentCreateManyProjectInputEnvelope>;
-};
-
-export type Project_CommentCreateNestedManyWithoutUserInput = {
-  connect?: InputMaybe<Array<Project_CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<Project_CommentCreateOrConnectWithoutUserInput>>;
-  create?: InputMaybe<Array<Project_CommentCreateWithoutUserInput>>;
-  createMany?: InputMaybe<Project_CommentCreateManyUserInputEnvelope>;
-};
-
-export type Project_CommentCreateOrConnectWithoutProjectInput = {
-  create: Project_CommentCreateWithoutProjectInput;
-  where: Project_CommentWhereUniqueInput;
-};
-
-export type Project_CommentCreateOrConnectWithoutUserInput = {
-  create: Project_CommentCreateWithoutUserInput;
-  where: Project_CommentWhereUniqueInput;
-};
-
-export type Project_CommentCreateWithoutProjectInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  user: UserCreateNestedOneWithoutProject_CommentsInput;
-};
-
-export type Project_CommentCreateWithoutUserInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  project: ProjectCreateNestedOneWithoutCommentsInput;
-};
-
-export type Project_CommentGroupBy = {
-  __typename?: 'Project_CommentGroupBy';
-  _count: Maybe<Project_CommentCountAggregate>;
-  _max: Maybe<Project_CommentMaxAggregate>;
-  _min: Maybe<Project_CommentMinAggregate>;
-  content: Scalars['String'];
-  id: Scalars['String'];
-  is_disabled: Scalars['Boolean'];
-  projectId: Scalars['String'];
-  userId: Scalars['String'];
-};
-
-export type Project_CommentListRelationFilter = {
-  every?: InputMaybe<Project_CommentWhereInput>;
-  none?: InputMaybe<Project_CommentWhereInput>;
-  some?: InputMaybe<Project_CommentWhereInput>;
-};
-
-export type Project_CommentMaxAggregate = {
-  __typename?: 'Project_CommentMaxAggregate';
-  content: Maybe<Scalars['String']>;
-  id: Maybe<Scalars['String']>;
-  is_disabled: Maybe<Scalars['Boolean']>;
-  projectId: Maybe<Scalars['String']>;
-  userId: Maybe<Scalars['String']>;
-};
-
-export type Project_CommentMaxOrderByAggregateInput = {
-  content?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  is_disabled?: InputMaybe<SortOrder>;
-  projectId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrder>;
-};
-
-export type Project_CommentMinAggregate = {
-  __typename?: 'Project_CommentMinAggregate';
-  content: Maybe<Scalars['String']>;
-  id: Maybe<Scalars['String']>;
-  is_disabled: Maybe<Scalars['Boolean']>;
-  projectId: Maybe<Scalars['String']>;
-  userId: Maybe<Scalars['String']>;
-};
-
-export type Project_CommentMinOrderByAggregateInput = {
-  content?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  is_disabled?: InputMaybe<SortOrder>;
-  projectId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrder>;
-};
-
-export type Project_CommentOrderByRelationAggregateInput = {
-  _count?: InputMaybe<SortOrder>;
-};
-
-export type Project_CommentOrderByWithAggregationInput = {
-  _count?: InputMaybe<Project_CommentCountOrderByAggregateInput>;
-  _max?: InputMaybe<Project_CommentMaxOrderByAggregateInput>;
-  _min?: InputMaybe<Project_CommentMinOrderByAggregateInput>;
-  content?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  is_disabled?: InputMaybe<SortOrder>;
-  projectId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrder>;
-};
-
-export type Project_CommentOrderByWithRelationInput = {
-  content?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  is_disabled?: InputMaybe<SortOrder>;
-  project?: InputMaybe<ProjectOrderByWithRelationInput>;
-  projectId?: InputMaybe<SortOrder>;
-  user?: InputMaybe<UserOrderByWithRelationInput>;
-  userId?: InputMaybe<SortOrder>;
-};
-
-export enum Project_CommentScalarFieldEnum {
-  Content = 'content',
-  Id = 'id',
-  IsDisabled = 'is_disabled',
-  ProjectId = 'projectId',
-  UserId = 'userId'
-}
-
-export type Project_CommentScalarWhereInput = {
-  AND?: InputMaybe<Array<Project_CommentScalarWhereInput>>;
-  NOT?: InputMaybe<Array<Project_CommentScalarWhereInput>>;
-  OR?: InputMaybe<Array<Project_CommentScalarWhereInput>>;
-  content?: InputMaybe<StringFilter>;
-  id?: InputMaybe<StringFilter>;
-  is_disabled?: InputMaybe<BoolFilter>;
-  projectId?: InputMaybe<StringFilter>;
-  userId?: InputMaybe<StringFilter>;
-};
-
-export type Project_CommentScalarWhereWithAggregatesInput = {
-  AND?: InputMaybe<Array<Project_CommentScalarWhereWithAggregatesInput>>;
-  NOT?: InputMaybe<Array<Project_CommentScalarWhereWithAggregatesInput>>;
-  OR?: InputMaybe<Array<Project_CommentScalarWhereWithAggregatesInput>>;
-  content?: InputMaybe<StringWithAggregatesFilter>;
-  id?: InputMaybe<StringWithAggregatesFilter>;
-  is_disabled?: InputMaybe<BoolWithAggregatesFilter>;
-  projectId?: InputMaybe<StringWithAggregatesFilter>;
-  userId?: InputMaybe<StringWithAggregatesFilter>;
-};
-
-export type Project_CommentUpdateInput = {
-  content?: InputMaybe<StringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  project?: InputMaybe<ProjectUpdateOneRequiredWithoutCommentsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutProject_CommentsInput>;
-};
-
-export type Project_CommentUpdateManyMutationInput = {
-  content?: InputMaybe<StringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
-};
-
-export type Project_CommentUpdateManyWithWhereWithoutProjectInput = {
-  data: Project_CommentUpdateManyMutationInput;
-  where: Project_CommentScalarWhereInput;
-};
-
-export type Project_CommentUpdateManyWithWhereWithoutUserInput = {
-  data: Project_CommentUpdateManyMutationInput;
-  where: Project_CommentScalarWhereInput;
-};
-
-export type Project_CommentUpdateManyWithoutProjectInput = {
-  connect?: InputMaybe<Array<Project_CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<Project_CommentCreateOrConnectWithoutProjectInput>>;
-  create?: InputMaybe<Array<Project_CommentCreateWithoutProjectInput>>;
-  createMany?: InputMaybe<Project_CommentCreateManyProjectInputEnvelope>;
-  delete?: InputMaybe<Array<Project_CommentWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<Project_CommentScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<Project_CommentWhereUniqueInput>>;
-  set?: InputMaybe<Array<Project_CommentWhereUniqueInput>>;
-  update?: InputMaybe<Array<Project_CommentUpdateWithWhereUniqueWithoutProjectInput>>;
-  updateMany?: InputMaybe<Array<Project_CommentUpdateManyWithWhereWithoutProjectInput>>;
-  upsert?: InputMaybe<Array<Project_CommentUpsertWithWhereUniqueWithoutProjectInput>>;
-};
-
-export type Project_CommentUpdateManyWithoutUserInput = {
-  connect?: InputMaybe<Array<Project_CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<Project_CommentCreateOrConnectWithoutUserInput>>;
-  create?: InputMaybe<Array<Project_CommentCreateWithoutUserInput>>;
-  createMany?: InputMaybe<Project_CommentCreateManyUserInputEnvelope>;
-  delete?: InputMaybe<Array<Project_CommentWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<Project_CommentScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<Project_CommentWhereUniqueInput>>;
-  set?: InputMaybe<Array<Project_CommentWhereUniqueInput>>;
-  update?: InputMaybe<Array<Project_CommentUpdateWithWhereUniqueWithoutUserInput>>;
-  updateMany?: InputMaybe<Array<Project_CommentUpdateManyWithWhereWithoutUserInput>>;
-  upsert?: InputMaybe<Array<Project_CommentUpsertWithWhereUniqueWithoutUserInput>>;
-};
-
-export type Project_CommentUpdateWithWhereUniqueWithoutProjectInput = {
-  data: Project_CommentUpdateWithoutProjectInput;
-  where: Project_CommentWhereUniqueInput;
-};
-
-export type Project_CommentUpdateWithWhereUniqueWithoutUserInput = {
-  data: Project_CommentUpdateWithoutUserInput;
-  where: Project_CommentWhereUniqueInput;
-};
-
-export type Project_CommentUpdateWithoutProjectInput = {
-  content?: InputMaybe<StringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutProject_CommentsInput>;
-};
-
-export type Project_CommentUpdateWithoutUserInput = {
-  content?: InputMaybe<StringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  project?: InputMaybe<ProjectUpdateOneRequiredWithoutCommentsInput>;
-};
-
-export type Project_CommentUpsertWithWhereUniqueWithoutProjectInput = {
-  create: Project_CommentCreateWithoutProjectInput;
-  update: Project_CommentUpdateWithoutProjectInput;
-  where: Project_CommentWhereUniqueInput;
-};
-
-export type Project_CommentUpsertWithWhereUniqueWithoutUserInput = {
-  create: Project_CommentCreateWithoutUserInput;
-  update: Project_CommentUpdateWithoutUserInput;
-  where: Project_CommentWhereUniqueInput;
-};
-
-export type Project_CommentWhereInput = {
-  AND?: InputMaybe<Array<Project_CommentWhereInput>>;
-  NOT?: InputMaybe<Array<Project_CommentWhereInput>>;
-  OR?: InputMaybe<Array<Project_CommentWhereInput>>;
-  content?: InputMaybe<StringFilter>;
-  id?: InputMaybe<StringFilter>;
-  is_disabled?: InputMaybe<BoolFilter>;
-  project?: InputMaybe<ProjectRelationFilter>;
-  projectId?: InputMaybe<StringFilter>;
-  user?: InputMaybe<UserRelationFilter>;
-  userId?: InputMaybe<StringFilter>;
-};
-
-export type Project_CommentWhereUniqueInput = {
-  id?: InputMaybe<Scalars['String']>;
-};
-
 export type Query = {
   __typename?: 'Query';
+  aggregateComment: AggregateComment;
   aggregateFile: AggregateFile;
   aggregateInvitation: AggregateInvitation;
   aggregateNotification: AggregateNotification;
   aggregateProject: AggregateProject;
-  aggregateProject_Comment: AggregateProject_Comment;
   aggregateTask: AggregateTask;
-  aggregateTask_Comment: AggregateTask_Comment;
   aggregateUser: AggregateUser;
+  comment: Maybe<Comment>;
+  comments: Array<Comment>;
   file: Maybe<File>;
   files: Array<File>;
+  findFirstComment: Maybe<Comment>;
   findFirstFile: Maybe<File>;
   findFirstInvitation: Maybe<Invitation>;
   findFirstNotification: Maybe<Notification>;
   findFirstProject: Maybe<Project>;
-  findFirstProject_Comment: Maybe<Project_Comment>;
   findFirstTask: Maybe<Task>;
-  findFirstTask_Comment: Maybe<Task_Comment>;
   findFirstUser: Maybe<User>;
+  groupByComment: Array<CommentGroupBy>;
   groupByFile: Array<FileGroupBy>;
   groupByInvitation: Array<InvitationGroupBy>;
   groupByNotification: Array<NotificationGroupBy>;
   groupByProject: Array<ProjectGroupBy>;
-  groupByProject_Comment: Array<Project_CommentGroupBy>;
   groupByTask: Array<TaskGroupBy>;
-  groupByTask_Comment: Array<Task_CommentGroupBy>;
   groupByUser: Array<UserGroupBy>;
   invitation: Maybe<Invitation>;
   invitations: Array<Invitation>;
   notification: Maybe<Notification>;
   notifications: Array<Notification>;
   project: Maybe<Project>;
-  project_Comment: Maybe<Project_Comment>;
-  project_Comments: Array<Project_Comment>;
   projects: Array<Project>;
   task: Maybe<Task>;
-  task_Comment: Maybe<Task_Comment>;
-  task_Comments: Array<Task_Comment>;
   tasks: Array<Task>;
   user: Maybe<User>;
   users: Array<User>;
+};
+
+
+export type QueryAggregateCommentArgs = {
+  cursor: InputMaybe<CommentWhereUniqueInput>;
+  orderBy: InputMaybe<Array<CommentOrderByWithRelationInput>>;
+  skip: InputMaybe<Scalars['Int']>;
+  take: InputMaybe<Scalars['Int']>;
+  where: InputMaybe<CommentWhereInput>;
 };
 
 
@@ -3102,15 +3552,6 @@ export type QueryAggregateProjectArgs = {
 };
 
 
-export type QueryAggregateProject_CommentArgs = {
-  cursor: InputMaybe<Project_CommentWhereUniqueInput>;
-  orderBy: InputMaybe<Array<Project_CommentOrderByWithRelationInput>>;
-  skip: InputMaybe<Scalars['Int']>;
-  take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Project_CommentWhereInput>;
-};
-
-
 export type QueryAggregateTaskArgs = {
   cursor: InputMaybe<TaskWhereUniqueInput>;
   orderBy: InputMaybe<Array<TaskOrderByWithRelationInput>>;
@@ -3120,21 +3561,27 @@ export type QueryAggregateTaskArgs = {
 };
 
 
-export type QueryAggregateTask_CommentArgs = {
-  cursor: InputMaybe<Task_CommentWhereUniqueInput>;
-  orderBy: InputMaybe<Array<Task_CommentOrderByWithRelationInput>>;
-  skip: InputMaybe<Scalars['Int']>;
-  take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Task_CommentWhereInput>;
-};
-
-
 export type QueryAggregateUserArgs = {
   cursor: InputMaybe<UserWhereUniqueInput>;
   orderBy: InputMaybe<Array<UserOrderByWithRelationInput>>;
   skip: InputMaybe<Scalars['Int']>;
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<UserWhereInput>;
+};
+
+
+export type QueryCommentArgs = {
+  where: CommentWhereUniqueInput;
+};
+
+
+export type QueryCommentsArgs = {
+  cursor: InputMaybe<CommentWhereUniqueInput>;
+  distinct: InputMaybe<Array<CommentScalarFieldEnum>>;
+  orderBy: InputMaybe<Array<CommentOrderByWithRelationInput>>;
+  skip: InputMaybe<Scalars['Int']>;
+  take: InputMaybe<Scalars['Int']>;
+  where: InputMaybe<CommentWhereInput>;
 };
 
 
@@ -3150,6 +3597,16 @@ export type QueryFilesArgs = {
   skip: InputMaybe<Scalars['Int']>;
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<FileWhereInput>;
+};
+
+
+export type QueryFindFirstCommentArgs = {
+  cursor: InputMaybe<CommentWhereUniqueInput>;
+  distinct: InputMaybe<Array<CommentScalarFieldEnum>>;
+  orderBy: InputMaybe<Array<CommentOrderByWithRelationInput>>;
+  skip: InputMaybe<Scalars['Int']>;
+  take: InputMaybe<Scalars['Int']>;
+  where: InputMaybe<CommentWhereInput>;
 };
 
 
@@ -3193,16 +3650,6 @@ export type QueryFindFirstProjectArgs = {
 };
 
 
-export type QueryFindFirstProject_CommentArgs = {
-  cursor: InputMaybe<Project_CommentWhereUniqueInput>;
-  distinct: InputMaybe<Array<Project_CommentScalarFieldEnum>>;
-  orderBy: InputMaybe<Array<Project_CommentOrderByWithRelationInput>>;
-  skip: InputMaybe<Scalars['Int']>;
-  take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Project_CommentWhereInput>;
-};
-
-
 export type QueryFindFirstTaskArgs = {
   cursor: InputMaybe<TaskWhereUniqueInput>;
   distinct: InputMaybe<Array<TaskScalarFieldEnum>>;
@@ -3213,16 +3660,6 @@ export type QueryFindFirstTaskArgs = {
 };
 
 
-export type QueryFindFirstTask_CommentArgs = {
-  cursor: InputMaybe<Task_CommentWhereUniqueInput>;
-  distinct: InputMaybe<Array<Task_CommentScalarFieldEnum>>;
-  orderBy: InputMaybe<Array<Task_CommentOrderByWithRelationInput>>;
-  skip: InputMaybe<Scalars['Int']>;
-  take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Task_CommentWhereInput>;
-};
-
-
 export type QueryFindFirstUserArgs = {
   cursor: InputMaybe<UserWhereUniqueInput>;
   distinct: InputMaybe<Array<UserScalarFieldEnum>>;
@@ -3230,6 +3667,16 @@ export type QueryFindFirstUserArgs = {
   skip: InputMaybe<Scalars['Int']>;
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<UserWhereInput>;
+};
+
+
+export type QueryGroupByCommentArgs = {
+  by: Array<CommentScalarFieldEnum>;
+  having: InputMaybe<CommentScalarWhereWithAggregatesInput>;
+  orderBy: InputMaybe<Array<CommentOrderByWithAggregationInput>>;
+  skip: InputMaybe<Scalars['Int']>;
+  take: InputMaybe<Scalars['Int']>;
+  where: InputMaybe<CommentWhereInput>;
 };
 
 
@@ -3273,16 +3720,6 @@ export type QueryGroupByProjectArgs = {
 };
 
 
-export type QueryGroupByProject_CommentArgs = {
-  by: Array<Project_CommentScalarFieldEnum>;
-  having: InputMaybe<Project_CommentScalarWhereWithAggregatesInput>;
-  orderBy: InputMaybe<Array<Project_CommentOrderByWithAggregationInput>>;
-  skip: InputMaybe<Scalars['Int']>;
-  take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Project_CommentWhereInput>;
-};
-
-
 export type QueryGroupByTaskArgs = {
   by: Array<TaskScalarFieldEnum>;
   having: InputMaybe<TaskScalarWhereWithAggregatesInput>;
@@ -3290,16 +3727,6 @@ export type QueryGroupByTaskArgs = {
   skip: InputMaybe<Scalars['Int']>;
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<TaskWhereInput>;
-};
-
-
-export type QueryGroupByTask_CommentArgs = {
-  by: Array<Task_CommentScalarFieldEnum>;
-  having: InputMaybe<Task_CommentScalarWhereWithAggregatesInput>;
-  orderBy: InputMaybe<Array<Task_CommentOrderByWithAggregationInput>>;
-  skip: InputMaybe<Scalars['Int']>;
-  take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Task_CommentWhereInput>;
 };
 
 
@@ -3348,21 +3775,6 @@ export type QueryProjectArgs = {
 };
 
 
-export type QueryProject_CommentArgs = {
-  where: Project_CommentWhereUniqueInput;
-};
-
-
-export type QueryProject_CommentsArgs = {
-  cursor: InputMaybe<Project_CommentWhereUniqueInput>;
-  distinct: InputMaybe<Array<Project_CommentScalarFieldEnum>>;
-  orderBy: InputMaybe<Array<Project_CommentOrderByWithRelationInput>>;
-  skip: InputMaybe<Scalars['Int']>;
-  take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Project_CommentWhereInput>;
-};
-
-
 export type QueryProjectsArgs = {
   cursor: InputMaybe<ProjectWhereUniqueInput>;
   distinct: InputMaybe<Array<ProjectScalarFieldEnum>>;
@@ -3375,21 +3787,6 @@ export type QueryProjectsArgs = {
 
 export type QueryTaskArgs = {
   where: TaskWhereUniqueInput;
-};
-
-
-export type QueryTask_CommentArgs = {
-  where: Task_CommentWhereUniqueInput;
-};
-
-
-export type QueryTask_CommentsArgs = {
-  cursor: InputMaybe<Task_CommentWhereUniqueInput>;
-  distinct: InputMaybe<Array<Task_CommentScalarFieldEnum>>;
-  orderBy: InputMaybe<Array<Task_CommentOrderByWithRelationInput>>;
-  skip: InputMaybe<Scalars['Int']>;
-  take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Task_CommentWhereInput>;
 };
 
 
@@ -3470,6 +3867,39 @@ export type StringFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type StringNullableFilter = {
+  contains?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  equals?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<Scalars['String']>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
+  mode?: InputMaybe<QueryMode>;
+  not?: InputMaybe<NestedStringNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars['String']>>;
+  startsWith?: InputMaybe<Scalars['String']>;
+};
+
+export type StringNullableWithAggregatesFilter = {
+  _count?: InputMaybe<NestedIntNullableFilter>;
+  _max?: InputMaybe<NestedStringNullableFilter>;
+  _min?: InputMaybe<NestedStringNullableFilter>;
+  contains?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  equals?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<Scalars['String']>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
+  mode?: InputMaybe<QueryMode>;
+  not?: InputMaybe<NestedStringNullableWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<Scalars['String']>>;
+  startsWith?: InputMaybe<Scalars['String']>;
+};
+
 export type StringWithAggregatesFilter = {
   _count?: InputMaybe<NestedIntFilter>;
   _max?: InputMaybe<NestedStringFilter>;
@@ -3491,7 +3921,8 @@ export type StringWithAggregatesFilter = {
 export type Task = {
   __typename?: 'Task';
   _count: TaskCount;
-  comments: Array<Task_Comment>;
+  comments: Array<Comment>;
+  created_at: Scalars['DateTime'];
   description: Scalars['String'];
   end_date: Scalars['DateTime'];
   files: Array<File>;
@@ -3504,18 +3935,19 @@ export type Task = {
   status_task: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at: Scalars['DateTime'];
   user: User;
   userId: Scalars['String'];
 };
 
 
 export type TaskCommentsArgs = {
-  cursor: InputMaybe<Task_CommentWhereUniqueInput>;
-  distinct: InputMaybe<Array<Task_CommentScalarFieldEnum>>;
-  orderBy: InputMaybe<Array<Task_CommentOrderByWithRelationInput>>;
+  cursor: InputMaybe<CommentWhereUniqueInput>;
+  distinct: InputMaybe<Array<CommentScalarFieldEnum>>;
+  orderBy: InputMaybe<Array<CommentOrderByWithRelationInput>>;
   skip: InputMaybe<Scalars['Int']>;
   take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Task_CommentWhereInput>;
+  where: InputMaybe<CommentWhereInput>;
 };
 
 
@@ -3546,6 +3978,7 @@ export type TaskCount = {
 export type TaskCountAggregate = {
   __typename?: 'TaskCountAggregate';
   _all: Scalars['Int'];
+  created_at: Scalars['Int'];
   description: Scalars['Int'];
   end_date: Scalars['Int'];
   id: Scalars['Int'];
@@ -3556,10 +3989,12 @@ export type TaskCountAggregate = {
   status_task: Scalars['Int'];
   title: Scalars['Int'];
   total_time_spent: Scalars['Int'];
+  updated_at: Scalars['Int'];
   userId: Scalars['Int'];
 };
 
 export type TaskCountOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   end_date?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -3570,11 +4005,13 @@ export type TaskCountOrderByAggregateInput = {
   status_task?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   total_time_spent?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type TaskCreateInput = {
-  comments?: InputMaybe<Task_CommentCreateNestedManyWithoutTaskInput>;
+  comments?: InputMaybe<CommentCreateNestedManyWithoutTaskInput>;
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   end_date: Scalars['DateTime'];
   files?: InputMaybe<FileCreateNestedManyWithoutTaskInput>;
@@ -3586,10 +4023,12 @@ export type TaskCreateInput = {
   status_task: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   user: UserCreateNestedOneWithoutTaskInput;
 };
 
 export type TaskCreateManyInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   end_date: Scalars['DateTime'];
   id?: InputMaybe<Scalars['String']>;
@@ -3600,10 +4039,12 @@ export type TaskCreateManyInput = {
   status_task: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   userId: Scalars['String'];
 };
 
 export type TaskCreateManyProjectInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   end_date: Scalars['DateTime'];
   id?: InputMaybe<Scalars['String']>;
@@ -3613,6 +4054,7 @@ export type TaskCreateManyProjectInput = {
   status_task: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   userId: Scalars['String'];
 };
 
@@ -3622,6 +4064,7 @@ export type TaskCreateManyProjectInputEnvelope = {
 };
 
 export type TaskCreateManyUserInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   end_date: Scalars['DateTime'];
   id?: InputMaybe<Scalars['String']>;
@@ -3632,6 +4075,7 @@ export type TaskCreateManyUserInput = {
   status_task: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type TaskCreateManyUserInputEnvelope = {
@@ -3686,6 +4130,7 @@ export type TaskCreateOrConnectWithoutUserInput = {
 };
 
 export type TaskCreateWithoutCommentsInput = {
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   end_date: Scalars['DateTime'];
   files?: InputMaybe<FileCreateNestedManyWithoutTaskInput>;
@@ -3697,11 +4142,13 @@ export type TaskCreateWithoutCommentsInput = {
   status_task: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   user: UserCreateNestedOneWithoutTaskInput;
 };
 
 export type TaskCreateWithoutFilesInput = {
-  comments?: InputMaybe<Task_CommentCreateNestedManyWithoutTaskInput>;
+  comments?: InputMaybe<CommentCreateNestedManyWithoutTaskInput>;
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   end_date: Scalars['DateTime'];
   id?: InputMaybe<Scalars['String']>;
@@ -3712,11 +4159,13 @@ export type TaskCreateWithoutFilesInput = {
   status_task: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   user: UserCreateNestedOneWithoutTaskInput;
 };
 
 export type TaskCreateWithoutProjectInput = {
-  comments?: InputMaybe<Task_CommentCreateNestedManyWithoutTaskInput>;
+  comments?: InputMaybe<CommentCreateNestedManyWithoutTaskInput>;
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   end_date: Scalars['DateTime'];
   files?: InputMaybe<FileCreateNestedManyWithoutTaskInput>;
@@ -3727,11 +4176,13 @@ export type TaskCreateWithoutProjectInput = {
   status_task: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
   user: UserCreateNestedOneWithoutTaskInput;
 };
 
 export type TaskCreateWithoutUserInput = {
-  comments?: InputMaybe<Task_CommentCreateNestedManyWithoutTaskInput>;
+  comments?: InputMaybe<CommentCreateNestedManyWithoutTaskInput>;
+  created_at?: InputMaybe<Scalars['DateTime']>;
   description: Scalars['String'];
   end_date: Scalars['DateTime'];
   files?: InputMaybe<FileCreateNestedManyWithoutTaskInput>;
@@ -3743,6 +4194,7 @@ export type TaskCreateWithoutUserInput = {
   status_task: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type TaskGroupBy = {
@@ -3752,6 +4204,7 @@ export type TaskGroupBy = {
   _max: Maybe<TaskMaxAggregate>;
   _min: Maybe<TaskMinAggregate>;
   _sum: Maybe<TaskSumAggregate>;
+  created_at: Scalars['DateTime'];
   description: Scalars['String'];
   end_date: Scalars['DateTime'];
   id: Scalars['String'];
@@ -3762,6 +4215,7 @@ export type TaskGroupBy = {
   status_task: Status;
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
+  updated_at: Scalars['DateTime'];
   userId: Scalars['String'];
 };
 
@@ -3773,6 +4227,7 @@ export type TaskListRelationFilter = {
 
 export type TaskMaxAggregate = {
   __typename?: 'TaskMaxAggregate';
+  created_at: Maybe<Scalars['DateTime']>;
   description: Maybe<Scalars['String']>;
   end_date: Maybe<Scalars['DateTime']>;
   id: Maybe<Scalars['String']>;
@@ -3783,10 +4238,12 @@ export type TaskMaxAggregate = {
   status_task: Maybe<Status>;
   title: Maybe<Scalars['String']>;
   total_time_spent: Maybe<Scalars['Int']>;
+  updated_at: Maybe<Scalars['DateTime']>;
   userId: Maybe<Scalars['String']>;
 };
 
 export type TaskMaxOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   end_date?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -3797,11 +4254,13 @@ export type TaskMaxOrderByAggregateInput = {
   status_task?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   total_time_spent?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type TaskMinAggregate = {
   __typename?: 'TaskMinAggregate';
+  created_at: Maybe<Scalars['DateTime']>;
   description: Maybe<Scalars['String']>;
   end_date: Maybe<Scalars['DateTime']>;
   id: Maybe<Scalars['String']>;
@@ -3812,10 +4271,12 @@ export type TaskMinAggregate = {
   status_task: Maybe<Status>;
   title: Maybe<Scalars['String']>;
   total_time_spent: Maybe<Scalars['Int']>;
+  updated_at: Maybe<Scalars['DateTime']>;
   userId: Maybe<Scalars['String']>;
 };
 
 export type TaskMinOrderByAggregateInput = {
+  created_at?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   end_date?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -3826,6 +4287,7 @@ export type TaskMinOrderByAggregateInput = {
   status_task?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   total_time_spent?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
@@ -3839,6 +4301,7 @@ export type TaskOrderByWithAggregationInput = {
   _max?: InputMaybe<TaskMaxOrderByAggregateInput>;
   _min?: InputMaybe<TaskMinOrderByAggregateInput>;
   _sum?: InputMaybe<TaskSumOrderByAggregateInput>;
+  created_at?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   end_date?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -3849,11 +4312,13 @@ export type TaskOrderByWithAggregationInput = {
   status_task?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   total_time_spent?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type TaskOrderByWithRelationInput = {
-  comments?: InputMaybe<Task_CommentOrderByRelationAggregateInput>;
+  comments?: InputMaybe<CommentOrderByRelationAggregateInput>;
+  created_at?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   end_date?: InputMaybe<SortOrder>;
   files?: InputMaybe<FileOrderByRelationAggregateInput>;
@@ -3866,6 +4331,7 @@ export type TaskOrderByWithRelationInput = {
   status_task?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   total_time_spent?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
   userId?: InputMaybe<SortOrder>;
 };
@@ -3876,6 +4342,7 @@ export type TaskRelationFilter = {
 };
 
 export enum TaskScalarFieldEnum {
+  CreatedAt = 'created_at',
   Description = 'description',
   EndDate = 'end_date',
   Id = 'id',
@@ -3886,6 +4353,7 @@ export enum TaskScalarFieldEnum {
   StatusTask = 'status_task',
   Title = 'title',
   TotalTimeSpent = 'total_time_spent',
+  UpdatedAt = 'updated_at',
   UserId = 'userId'
 }
 
@@ -3893,6 +4361,7 @@ export type TaskScalarWhereInput = {
   AND?: InputMaybe<Array<TaskScalarWhereInput>>;
   NOT?: InputMaybe<Array<TaskScalarWhereInput>>;
   OR?: InputMaybe<Array<TaskScalarWhereInput>>;
+  created_at?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   end_date?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
@@ -3903,6 +4372,7 @@ export type TaskScalarWhereInput = {
   status_task?: InputMaybe<EnumStatusFilter>;
   title?: InputMaybe<StringFilter>;
   total_time_spent?: InputMaybe<IntFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
   userId?: InputMaybe<StringFilter>;
 };
 
@@ -3910,6 +4380,7 @@ export type TaskScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<TaskScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<TaskScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<TaskScalarWhereWithAggregatesInput>>;
+  created_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   description?: InputMaybe<StringWithAggregatesFilter>;
   end_date?: InputMaybe<DateTimeWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
@@ -3920,6 +4391,7 @@ export type TaskScalarWhereWithAggregatesInput = {
   status_task?: InputMaybe<EnumStatusWithAggregatesFilter>;
   title?: InputMaybe<StringWithAggregatesFilter>;
   total_time_spent?: InputMaybe<IntWithAggregatesFilter>;
+  updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   userId?: InputMaybe<StringWithAggregatesFilter>;
 };
 
@@ -3933,7 +4405,8 @@ export type TaskSumOrderByAggregateInput = {
 };
 
 export type TaskUpdateInput = {
-  comments?: InputMaybe<Task_CommentUpdateManyWithoutTaskInput>;
+  comments?: InputMaybe<CommentUpdateManyWithoutTaskInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutTaskInput>;
@@ -3945,10 +4418,12 @@ export type TaskUpdateInput = {
   status_task?: InputMaybe<EnumStatusFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutTaskInput>;
 };
 
 export type TaskUpdateManyMutationInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -3958,6 +4433,7 @@ export type TaskUpdateManyMutationInput = {
   status_task?: InputMaybe<EnumStatusFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type TaskUpdateManyWithWhereWithoutProjectInput = {
@@ -3998,18 +4474,22 @@ export type TaskUpdateManyWithoutUserInput = {
   upsert?: InputMaybe<Array<TaskUpsertWithWhereUniqueWithoutUserInput>>;
 };
 
-export type TaskUpdateOneRequiredWithoutCommentsInput = {
+export type TaskUpdateOneWithoutCommentsInput = {
   connect?: InputMaybe<TaskWhereUniqueInput>;
   connectOrCreate?: InputMaybe<TaskCreateOrConnectWithoutCommentsInput>;
   create?: InputMaybe<TaskCreateWithoutCommentsInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
   update?: InputMaybe<TaskUpdateWithoutCommentsInput>;
   upsert?: InputMaybe<TaskUpsertWithoutCommentsInput>;
 };
 
-export type TaskUpdateOneRequiredWithoutFilesInput = {
+export type TaskUpdateOneWithoutFilesInput = {
   connect?: InputMaybe<TaskWhereUniqueInput>;
   connectOrCreate?: InputMaybe<TaskCreateOrConnectWithoutFilesInput>;
   create?: InputMaybe<TaskCreateWithoutFilesInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
   update?: InputMaybe<TaskUpdateWithoutFilesInput>;
   upsert?: InputMaybe<TaskUpsertWithoutFilesInput>;
 };
@@ -4025,6 +4505,7 @@ export type TaskUpdateWithWhereUniqueWithoutUserInput = {
 };
 
 export type TaskUpdateWithoutCommentsInput = {
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutTaskInput>;
@@ -4036,11 +4517,13 @@ export type TaskUpdateWithoutCommentsInput = {
   status_task?: InputMaybe<EnumStatusFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutTaskInput>;
 };
 
 export type TaskUpdateWithoutFilesInput = {
-  comments?: InputMaybe<Task_CommentUpdateManyWithoutTaskInput>;
+  comments?: InputMaybe<CommentUpdateManyWithoutTaskInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -4051,11 +4534,13 @@ export type TaskUpdateWithoutFilesInput = {
   status_task?: InputMaybe<EnumStatusFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutTaskInput>;
 };
 
 export type TaskUpdateWithoutProjectInput = {
-  comments?: InputMaybe<Task_CommentUpdateManyWithoutTaskInput>;
+  comments?: InputMaybe<CommentUpdateManyWithoutTaskInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutTaskInput>;
@@ -4066,11 +4551,13 @@ export type TaskUpdateWithoutProjectInput = {
   status_task?: InputMaybe<EnumStatusFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutTaskInput>;
 };
 
 export type TaskUpdateWithoutUserInput = {
-  comments?: InputMaybe<Task_CommentUpdateManyWithoutTaskInput>;
+  comments?: InputMaybe<CommentUpdateManyWithoutTaskInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   end_date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutTaskInput>;
@@ -4082,6 +4569,7 @@ export type TaskUpdateWithoutUserInput = {
   status_task?: InputMaybe<EnumStatusFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type TaskUpsertWithWhereUniqueWithoutProjectInput = {
@@ -4110,7 +4598,8 @@ export type TaskWhereInput = {
   AND?: InputMaybe<Array<TaskWhereInput>>;
   NOT?: InputMaybe<Array<TaskWhereInput>>;
   OR?: InputMaybe<Array<TaskWhereInput>>;
-  comments?: InputMaybe<Task_CommentListRelationFilter>;
+  comments?: InputMaybe<CommentListRelationFilter>;
+  created_at?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringFilter>;
   end_date?: InputMaybe<DateTimeFilter>;
   files?: InputMaybe<FileListRelationFilter>;
@@ -4123,330 +4612,12 @@ export type TaskWhereInput = {
   status_task?: InputMaybe<EnumStatusFilter>;
   title?: InputMaybe<StringFilter>;
   total_time_spent?: InputMaybe<IntFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
 };
 
 export type TaskWhereUniqueInput = {
-  id?: InputMaybe<Scalars['String']>;
-};
-
-export type Task_Comment = {
-  __typename?: 'Task_Comment';
-  content: Scalars['String'];
-  id: Scalars['String'];
-  is_disabled: Scalars['Boolean'];
-  task: Task;
-  taskId: Scalars['String'];
-  user: User;
-  userId: Scalars['String'];
-};
-
-export type Task_CommentCountAggregate = {
-  __typename?: 'Task_CommentCountAggregate';
-  _all: Scalars['Int'];
-  content: Scalars['Int'];
-  id: Scalars['Int'];
-  is_disabled: Scalars['Int'];
-  taskId: Scalars['Int'];
-  userId: Scalars['Int'];
-};
-
-export type Task_CommentCountOrderByAggregateInput = {
-  content?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  is_disabled?: InputMaybe<SortOrder>;
-  taskId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrder>;
-};
-
-export type Task_CommentCreateInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  task: TaskCreateNestedOneWithoutCommentsInput;
-  user: UserCreateNestedOneWithoutTask_CommentsInput;
-};
-
-export type Task_CommentCreateManyInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  taskId: Scalars['String'];
-  userId: Scalars['String'];
-};
-
-export type Task_CommentCreateManyTaskInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  userId: Scalars['String'];
-};
-
-export type Task_CommentCreateManyTaskInputEnvelope = {
-  data: Array<Task_CommentCreateManyTaskInput>;
-  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
-};
-
-export type Task_CommentCreateManyUserInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  taskId: Scalars['String'];
-};
-
-export type Task_CommentCreateManyUserInputEnvelope = {
-  data: Array<Task_CommentCreateManyUserInput>;
-  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
-};
-
-export type Task_CommentCreateNestedManyWithoutTaskInput = {
-  connect?: InputMaybe<Array<Task_CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<Task_CommentCreateOrConnectWithoutTaskInput>>;
-  create?: InputMaybe<Array<Task_CommentCreateWithoutTaskInput>>;
-  createMany?: InputMaybe<Task_CommentCreateManyTaskInputEnvelope>;
-};
-
-export type Task_CommentCreateNestedManyWithoutUserInput = {
-  connect?: InputMaybe<Array<Task_CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<Task_CommentCreateOrConnectWithoutUserInput>>;
-  create?: InputMaybe<Array<Task_CommentCreateWithoutUserInput>>;
-  createMany?: InputMaybe<Task_CommentCreateManyUserInputEnvelope>;
-};
-
-export type Task_CommentCreateOrConnectWithoutTaskInput = {
-  create: Task_CommentCreateWithoutTaskInput;
-  where: Task_CommentWhereUniqueInput;
-};
-
-export type Task_CommentCreateOrConnectWithoutUserInput = {
-  create: Task_CommentCreateWithoutUserInput;
-  where: Task_CommentWhereUniqueInput;
-};
-
-export type Task_CommentCreateWithoutTaskInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  user: UserCreateNestedOneWithoutTask_CommentsInput;
-};
-
-export type Task_CommentCreateWithoutUserInput = {
-  content: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  is_disabled: Scalars['Boolean'];
-  task: TaskCreateNestedOneWithoutCommentsInput;
-};
-
-export type Task_CommentGroupBy = {
-  __typename?: 'Task_CommentGroupBy';
-  _count: Maybe<Task_CommentCountAggregate>;
-  _max: Maybe<Task_CommentMaxAggregate>;
-  _min: Maybe<Task_CommentMinAggregate>;
-  content: Scalars['String'];
-  id: Scalars['String'];
-  is_disabled: Scalars['Boolean'];
-  taskId: Scalars['String'];
-  userId: Scalars['String'];
-};
-
-export type Task_CommentListRelationFilter = {
-  every?: InputMaybe<Task_CommentWhereInput>;
-  none?: InputMaybe<Task_CommentWhereInput>;
-  some?: InputMaybe<Task_CommentWhereInput>;
-};
-
-export type Task_CommentMaxAggregate = {
-  __typename?: 'Task_CommentMaxAggregate';
-  content: Maybe<Scalars['String']>;
-  id: Maybe<Scalars['String']>;
-  is_disabled: Maybe<Scalars['Boolean']>;
-  taskId: Maybe<Scalars['String']>;
-  userId: Maybe<Scalars['String']>;
-};
-
-export type Task_CommentMaxOrderByAggregateInput = {
-  content?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  is_disabled?: InputMaybe<SortOrder>;
-  taskId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrder>;
-};
-
-export type Task_CommentMinAggregate = {
-  __typename?: 'Task_CommentMinAggregate';
-  content: Maybe<Scalars['String']>;
-  id: Maybe<Scalars['String']>;
-  is_disabled: Maybe<Scalars['Boolean']>;
-  taskId: Maybe<Scalars['String']>;
-  userId: Maybe<Scalars['String']>;
-};
-
-export type Task_CommentMinOrderByAggregateInput = {
-  content?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  is_disabled?: InputMaybe<SortOrder>;
-  taskId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrder>;
-};
-
-export type Task_CommentOrderByRelationAggregateInput = {
-  _count?: InputMaybe<SortOrder>;
-};
-
-export type Task_CommentOrderByWithAggregationInput = {
-  _count?: InputMaybe<Task_CommentCountOrderByAggregateInput>;
-  _max?: InputMaybe<Task_CommentMaxOrderByAggregateInput>;
-  _min?: InputMaybe<Task_CommentMinOrderByAggregateInput>;
-  content?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  is_disabled?: InputMaybe<SortOrder>;
-  taskId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrder>;
-};
-
-export type Task_CommentOrderByWithRelationInput = {
-  content?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  is_disabled?: InputMaybe<SortOrder>;
-  task?: InputMaybe<TaskOrderByWithRelationInput>;
-  taskId?: InputMaybe<SortOrder>;
-  user?: InputMaybe<UserOrderByWithRelationInput>;
-  userId?: InputMaybe<SortOrder>;
-};
-
-export enum Task_CommentScalarFieldEnum {
-  Content = 'content',
-  Id = 'id',
-  IsDisabled = 'is_disabled',
-  TaskId = 'taskId',
-  UserId = 'userId'
-}
-
-export type Task_CommentScalarWhereInput = {
-  AND?: InputMaybe<Array<Task_CommentScalarWhereInput>>;
-  NOT?: InputMaybe<Array<Task_CommentScalarWhereInput>>;
-  OR?: InputMaybe<Array<Task_CommentScalarWhereInput>>;
-  content?: InputMaybe<StringFilter>;
-  id?: InputMaybe<StringFilter>;
-  is_disabled?: InputMaybe<BoolFilter>;
-  taskId?: InputMaybe<StringFilter>;
-  userId?: InputMaybe<StringFilter>;
-};
-
-export type Task_CommentScalarWhereWithAggregatesInput = {
-  AND?: InputMaybe<Array<Task_CommentScalarWhereWithAggregatesInput>>;
-  NOT?: InputMaybe<Array<Task_CommentScalarWhereWithAggregatesInput>>;
-  OR?: InputMaybe<Array<Task_CommentScalarWhereWithAggregatesInput>>;
-  content?: InputMaybe<StringWithAggregatesFilter>;
-  id?: InputMaybe<StringWithAggregatesFilter>;
-  is_disabled?: InputMaybe<BoolWithAggregatesFilter>;
-  taskId?: InputMaybe<StringWithAggregatesFilter>;
-  userId?: InputMaybe<StringWithAggregatesFilter>;
-};
-
-export type Task_CommentUpdateInput = {
-  content?: InputMaybe<StringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  task?: InputMaybe<TaskUpdateOneRequiredWithoutCommentsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutTask_CommentsInput>;
-};
-
-export type Task_CommentUpdateManyMutationInput = {
-  content?: InputMaybe<StringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
-};
-
-export type Task_CommentUpdateManyWithWhereWithoutTaskInput = {
-  data: Task_CommentUpdateManyMutationInput;
-  where: Task_CommentScalarWhereInput;
-};
-
-export type Task_CommentUpdateManyWithWhereWithoutUserInput = {
-  data: Task_CommentUpdateManyMutationInput;
-  where: Task_CommentScalarWhereInput;
-};
-
-export type Task_CommentUpdateManyWithoutTaskInput = {
-  connect?: InputMaybe<Array<Task_CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<Task_CommentCreateOrConnectWithoutTaskInput>>;
-  create?: InputMaybe<Array<Task_CommentCreateWithoutTaskInput>>;
-  createMany?: InputMaybe<Task_CommentCreateManyTaskInputEnvelope>;
-  delete?: InputMaybe<Array<Task_CommentWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<Task_CommentScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<Task_CommentWhereUniqueInput>>;
-  set?: InputMaybe<Array<Task_CommentWhereUniqueInput>>;
-  update?: InputMaybe<Array<Task_CommentUpdateWithWhereUniqueWithoutTaskInput>>;
-  updateMany?: InputMaybe<Array<Task_CommentUpdateManyWithWhereWithoutTaskInput>>;
-  upsert?: InputMaybe<Array<Task_CommentUpsertWithWhereUniqueWithoutTaskInput>>;
-};
-
-export type Task_CommentUpdateManyWithoutUserInput = {
-  connect?: InputMaybe<Array<Task_CommentWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<Task_CommentCreateOrConnectWithoutUserInput>>;
-  create?: InputMaybe<Array<Task_CommentCreateWithoutUserInput>>;
-  createMany?: InputMaybe<Task_CommentCreateManyUserInputEnvelope>;
-  delete?: InputMaybe<Array<Task_CommentWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<Task_CommentScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<Task_CommentWhereUniqueInput>>;
-  set?: InputMaybe<Array<Task_CommentWhereUniqueInput>>;
-  update?: InputMaybe<Array<Task_CommentUpdateWithWhereUniqueWithoutUserInput>>;
-  updateMany?: InputMaybe<Array<Task_CommentUpdateManyWithWhereWithoutUserInput>>;
-  upsert?: InputMaybe<Array<Task_CommentUpsertWithWhereUniqueWithoutUserInput>>;
-};
-
-export type Task_CommentUpdateWithWhereUniqueWithoutTaskInput = {
-  data: Task_CommentUpdateWithoutTaskInput;
-  where: Task_CommentWhereUniqueInput;
-};
-
-export type Task_CommentUpdateWithWhereUniqueWithoutUserInput = {
-  data: Task_CommentUpdateWithoutUserInput;
-  where: Task_CommentWhereUniqueInput;
-};
-
-export type Task_CommentUpdateWithoutTaskInput = {
-  content?: InputMaybe<StringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutTask_CommentsInput>;
-};
-
-export type Task_CommentUpdateWithoutUserInput = {
-  content?: InputMaybe<StringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  task?: InputMaybe<TaskUpdateOneRequiredWithoutCommentsInput>;
-};
-
-export type Task_CommentUpsertWithWhereUniqueWithoutTaskInput = {
-  create: Task_CommentCreateWithoutTaskInput;
-  update: Task_CommentUpdateWithoutTaskInput;
-  where: Task_CommentWhereUniqueInput;
-};
-
-export type Task_CommentUpsertWithWhereUniqueWithoutUserInput = {
-  create: Task_CommentCreateWithoutUserInput;
-  update: Task_CommentUpdateWithoutUserInput;
-  where: Task_CommentWhereUniqueInput;
-};
-
-export type Task_CommentWhereInput = {
-  AND?: InputMaybe<Array<Task_CommentWhereInput>>;
-  NOT?: InputMaybe<Array<Task_CommentWhereInput>>;
-  OR?: InputMaybe<Array<Task_CommentWhereInput>>;
-  content?: InputMaybe<StringFilter>;
-  id?: InputMaybe<StringFilter>;
-  is_disabled?: InputMaybe<BoolFilter>;
-  task?: InputMaybe<TaskRelationFilter>;
-  taskId?: InputMaybe<StringFilter>;
-  user?: InputMaybe<UserRelationFilter>;
-  userId?: InputMaybe<StringFilter>;
-};
-
-export type Task_CommentWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
@@ -4458,6 +4629,8 @@ export enum Type_Notification {
 export type User = {
   __typename?: 'User';
   _count: UserCount;
+  avatar: Scalars['String'];
+  created_at: Scalars['DateTime'];
   email: Scalars['String'];
   files: Array<File>;
   first_name: Scalars['String'];
@@ -4467,11 +4640,12 @@ export type User = {
   last_name: Scalars['String'];
   notifications: Array<Notification>;
   password: Scalars['String'];
-  project_comments: Array<Project_Comment>;
+  project_comments: Array<Comment>;
   projects: Array<Project>;
   role: Array<Role>;
   task: Array<Task>;
-  task_comments: Array<Task_Comment>;
+  task_comments: Array<Comment>;
+  updated_at: Scalars['DateTime'];
 };
 
 
@@ -4506,12 +4680,12 @@ export type UserNotificationsArgs = {
 
 
 export type UserProject_CommentsArgs = {
-  cursor: InputMaybe<Project_CommentWhereUniqueInput>;
-  distinct: InputMaybe<Array<Project_CommentScalarFieldEnum>>;
-  orderBy: InputMaybe<Array<Project_CommentOrderByWithRelationInput>>;
+  cursor: InputMaybe<CommentWhereUniqueInput>;
+  distinct: InputMaybe<Array<CommentScalarFieldEnum>>;
+  orderBy: InputMaybe<Array<CommentOrderByWithRelationInput>>;
   skip: InputMaybe<Scalars['Int']>;
   take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Project_CommentWhereInput>;
+  where: InputMaybe<CommentWhereInput>;
 };
 
 
@@ -4536,12 +4710,12 @@ export type UserTaskArgs = {
 
 
 export type UserTask_CommentsArgs = {
-  cursor: InputMaybe<Task_CommentWhereUniqueInput>;
-  distinct: InputMaybe<Array<Task_CommentScalarFieldEnum>>;
-  orderBy: InputMaybe<Array<Task_CommentOrderByWithRelationInput>>;
+  cursor: InputMaybe<CommentWhereUniqueInput>;
+  distinct: InputMaybe<Array<CommentScalarFieldEnum>>;
+  orderBy: InputMaybe<Array<CommentOrderByWithRelationInput>>;
   skip: InputMaybe<Scalars['Int']>;
   take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<Task_CommentWhereInput>;
+  where: InputMaybe<CommentWhereInput>;
 };
 
 export type UserCount = {
@@ -4558,6 +4732,8 @@ export type UserCount = {
 export type UserCountAggregate = {
   __typename?: 'UserCountAggregate';
   _all: Scalars['Int'];
+  avatar: Scalars['Int'];
+  created_at: Scalars['Int'];
   email: Scalars['Int'];
   first_name: Scalars['Int'];
   id: Scalars['Int'];
@@ -4565,9 +4741,12 @@ export type UserCountAggregate = {
   last_name: Scalars['Int'];
   password: Scalars['Int'];
   role: Scalars['Int'];
+  updated_at: Scalars['Int'];
 };
 
 export type UserCountOrderByAggregateInput = {
+  avatar?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -4575,9 +4754,12 @@ export type UserCountOrderByAggregateInput = {
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
 };
 
 export type UserCreateInput = {
+  avatar: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
   first_name: Scalars['String'];
@@ -4587,14 +4769,17 @@ export type UserCreateInput = {
   last_name: Scalars['String'];
   notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
   password: Scalars['String'];
-  project_comments?: InputMaybe<Project_CommentCreateNestedManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
   task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentCreateNestedManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserCreateManyInput = {
+  avatar: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   first_name: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
@@ -4602,6 +4787,7 @@ export type UserCreateManyInput = {
   last_name: Scalars['String'];
   password: Scalars['String'];
   role?: InputMaybe<UserCreateManyroleInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserCreateManyroleInput = {
@@ -4686,6 +4872,8 @@ export type UserCreateOrConnectWithoutTask_CommentsInput = {
 };
 
 export type UserCreateWithoutFilesInput = {
+  avatar: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   first_name: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
@@ -4694,14 +4882,17 @@ export type UserCreateWithoutFilesInput = {
   last_name: Scalars['String'];
   notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
   password: Scalars['String'];
-  project_comments?: InputMaybe<Project_CommentCreateNestedManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
   task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentCreateNestedManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserCreateWithoutInvitationsInput = {
+  avatar: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
   first_name: Scalars['String'];
@@ -4710,14 +4901,17 @@ export type UserCreateWithoutInvitationsInput = {
   last_name: Scalars['String'];
   notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
   password: Scalars['String'];
-  project_comments?: InputMaybe<Project_CommentCreateNestedManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
   task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentCreateNestedManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserCreateWithoutNotificationsInput = {
+  avatar: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
   first_name: Scalars['String'];
@@ -4726,14 +4920,17 @@ export type UserCreateWithoutNotificationsInput = {
   is_disabled: Scalars['Boolean'];
   last_name: Scalars['String'];
   password: Scalars['String'];
-  project_comments?: InputMaybe<Project_CommentCreateNestedManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
   task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentCreateNestedManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserCreateWithoutProject_CommentsInput = {
+  avatar: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
   first_name: Scalars['String'];
@@ -4746,10 +4943,13 @@ export type UserCreateWithoutProject_CommentsInput = {
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
   task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentCreateNestedManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserCreateWithoutProjectsInput = {
+  avatar: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
   first_name: Scalars['String'];
@@ -4759,13 +4959,16 @@ export type UserCreateWithoutProjectsInput = {
   last_name: Scalars['String'];
   notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
   password: Scalars['String'];
-  project_comments?: InputMaybe<Project_CommentCreateNestedManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   role?: InputMaybe<UserCreateroleInput>;
   task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentCreateNestedManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserCreateWithoutTaskInput = {
+  avatar: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
   first_name: Scalars['String'];
@@ -4775,13 +4978,16 @@ export type UserCreateWithoutTaskInput = {
   last_name: Scalars['String'];
   notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
   password: Scalars['String'];
-  project_comments?: InputMaybe<Project_CommentCreateNestedManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
-  task_comments?: InputMaybe<Task_CommentCreateNestedManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserCreateWithoutTask_CommentsInput = {
+  avatar: Scalars['String'];
+  created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
   first_name: Scalars['String'];
@@ -4791,10 +4997,11 @@ export type UserCreateWithoutTask_CommentsInput = {
   last_name: Scalars['String'];
   notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
   password: Scalars['String'];
-  project_comments?: InputMaybe<Project_CommentCreateNestedManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
   task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type UserCreateroleInput = {
@@ -4806,6 +5013,8 @@ export type UserGroupBy = {
   _count: Maybe<UserCountAggregate>;
   _max: Maybe<UserMaxAggregate>;
   _min: Maybe<UserMinAggregate>;
+  avatar: Scalars['String'];
+  created_at: Scalars['DateTime'];
   email: Scalars['String'];
   first_name: Scalars['String'];
   id: Scalars['String'];
@@ -4813,6 +5022,7 @@ export type UserGroupBy = {
   last_name: Scalars['String'];
   password: Scalars['String'];
   role: Maybe<Array<Role>>;
+  updated_at: Scalars['DateTime'];
 };
 
 export type UserListRelationFilter = {
@@ -4823,40 +5033,52 @@ export type UserListRelationFilter = {
 
 export type UserMaxAggregate = {
   __typename?: 'UserMaxAggregate';
+  avatar: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['DateTime']>;
   email: Maybe<Scalars['String']>;
   first_name: Maybe<Scalars['String']>;
   id: Maybe<Scalars['String']>;
   is_disabled: Maybe<Scalars['Boolean']>;
   last_name: Maybe<Scalars['String']>;
   password: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['DateTime']>;
 };
 
 export type UserMaxOrderByAggregateInput = {
+  avatar?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
 };
 
 export type UserMinAggregate = {
   __typename?: 'UserMinAggregate';
+  avatar: Maybe<Scalars['String']>;
+  created_at: Maybe<Scalars['DateTime']>;
   email: Maybe<Scalars['String']>;
   first_name: Maybe<Scalars['String']>;
   id: Maybe<Scalars['String']>;
   is_disabled: Maybe<Scalars['Boolean']>;
   last_name: Maybe<Scalars['String']>;
   password: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['DateTime']>;
 };
 
 export type UserMinOrderByAggregateInput = {
+  avatar?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   is_disabled?: InputMaybe<SortOrder>;
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
 };
 
 export type UserOrderByRelationAggregateInput = {
@@ -4867,6 +5089,8 @@ export type UserOrderByWithAggregationInput = {
   _count?: InputMaybe<UserCountOrderByAggregateInput>;
   _max?: InputMaybe<UserMaxOrderByAggregateInput>;
   _min?: InputMaybe<UserMinOrderByAggregateInput>;
+  avatar?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
@@ -4874,9 +5098,12 @@ export type UserOrderByWithAggregationInput = {
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
+  updated_at?: InputMaybe<SortOrder>;
 };
 
 export type UserOrderByWithRelationInput = {
+  avatar?: InputMaybe<SortOrder>;
+  created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   files?: InputMaybe<FileOrderByRelationAggregateInput>;
   first_name?: InputMaybe<SortOrder>;
@@ -4886,11 +5113,12 @@ export type UserOrderByWithRelationInput = {
   last_name?: InputMaybe<SortOrder>;
   notifications?: InputMaybe<NotificationOrderByRelationAggregateInput>;
   password?: InputMaybe<SortOrder>;
-  project_comments?: InputMaybe<Project_CommentOrderByRelationAggregateInput>;
+  project_comments?: InputMaybe<CommentOrderByRelationAggregateInput>;
   projects?: InputMaybe<ProjectOrderByRelationAggregateInput>;
   role?: InputMaybe<SortOrder>;
   task?: InputMaybe<TaskOrderByRelationAggregateInput>;
-  task_comments?: InputMaybe<Task_CommentOrderByRelationAggregateInput>;
+  task_comments?: InputMaybe<CommentOrderByRelationAggregateInput>;
+  updated_at?: InputMaybe<SortOrder>;
 };
 
 export type UserRelationFilter = {
@@ -4899,19 +5127,24 @@ export type UserRelationFilter = {
 };
 
 export enum UserScalarFieldEnum {
+  Avatar = 'avatar',
+  CreatedAt = 'created_at',
   Email = 'email',
   FirstName = 'first_name',
   Id = 'id',
   IsDisabled = 'is_disabled',
   LastName = 'last_name',
   Password = 'password',
-  Role = 'role'
+  Role = 'role',
+  UpdatedAt = 'updated_at'
 }
 
 export type UserScalarWhereInput = {
   AND?: InputMaybe<Array<UserScalarWhereInput>>;
   NOT?: InputMaybe<Array<UserScalarWhereInput>>;
   OR?: InputMaybe<Array<UserScalarWhereInput>>;
+  avatar?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   first_name?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
@@ -4919,12 +5152,15 @@ export type UserScalarWhereInput = {
   last_name?: InputMaybe<StringFilter>;
   password?: InputMaybe<StringFilter>;
   role?: InputMaybe<EnumRoleNullableListFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
 };
 
 export type UserScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
+  avatar?: InputMaybe<StringWithAggregatesFilter>;
+  created_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   email?: InputMaybe<StringWithAggregatesFilter>;
   first_name?: InputMaybe<StringWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
@@ -4932,9 +5168,12 @@ export type UserScalarWhereWithAggregatesInput = {
   last_name?: InputMaybe<StringWithAggregatesFilter>;
   password?: InputMaybe<StringWithAggregatesFilter>;
   role?: InputMaybe<EnumRoleNullableListFilter>;
+  updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
 };
 
 export type UserUpdateInput = {
+  avatar?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -4944,14 +5183,17 @@ export type UserUpdateInput = {
   last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
-  project_comments?: InputMaybe<Project_CommentUpdateManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentUpdateManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateManyMutationInput = {
+  avatar?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -4959,6 +5201,7 @@ export type UserUpdateManyMutationInput = {
   last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
   role?: InputMaybe<UserUpdateroleInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateManyWithWhereWithoutProjectsInput = {
@@ -5003,14 +5246,6 @@ export type UserUpdateOneRequiredWithoutNotificationsInput = {
   upsert?: InputMaybe<UserUpsertWithoutNotificationsInput>;
 };
 
-export type UserUpdateOneRequiredWithoutProject_CommentsInput = {
-  connect?: InputMaybe<UserWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutProject_CommentsInput>;
-  create?: InputMaybe<UserCreateWithoutProject_CommentsInput>;
-  update?: InputMaybe<UserUpdateWithoutProject_CommentsInput>;
-  upsert?: InputMaybe<UserUpsertWithoutProject_CommentsInput>;
-};
-
 export type UserUpdateOneRequiredWithoutTaskInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutTaskInput>;
@@ -5019,10 +5254,22 @@ export type UserUpdateOneRequiredWithoutTaskInput = {
   upsert?: InputMaybe<UserUpsertWithoutTaskInput>;
 };
 
-export type UserUpdateOneRequiredWithoutTask_CommentsInput = {
+export type UserUpdateOneWithoutProject_CommentsInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutProject_CommentsInput>;
+  create?: InputMaybe<UserCreateWithoutProject_CommentsInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<UserUpdateWithoutProject_CommentsInput>;
+  upsert?: InputMaybe<UserUpsertWithoutProject_CommentsInput>;
+};
+
+export type UserUpdateOneWithoutTask_CommentsInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutTask_CommentsInput>;
   create?: InputMaybe<UserCreateWithoutTask_CommentsInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
   update?: InputMaybe<UserUpdateWithoutTask_CommentsInput>;
   upsert?: InputMaybe<UserUpsertWithoutTask_CommentsInput>;
 };
@@ -5033,6 +5280,8 @@ export type UserUpdateWithWhereUniqueWithoutProjectsInput = {
 };
 
 export type UserUpdateWithoutFilesInput = {
+  avatar?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5041,14 +5290,17 @@ export type UserUpdateWithoutFilesInput = {
   last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
-  project_comments?: InputMaybe<Project_CommentUpdateManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentUpdateManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutInvitationsInput = {
+  avatar?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5057,14 +5309,17 @@ export type UserUpdateWithoutInvitationsInput = {
   last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
-  project_comments?: InputMaybe<Project_CommentUpdateManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentUpdateManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutNotificationsInput = {
+  avatar?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5073,14 +5328,17 @@ export type UserUpdateWithoutNotificationsInput = {
   is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
   last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
-  project_comments?: InputMaybe<Project_CommentUpdateManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentUpdateManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutProject_CommentsInput = {
+  avatar?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5093,10 +5351,13 @@ export type UserUpdateWithoutProject_CommentsInput = {
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentUpdateManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutProjectsInput = {
+  avatar?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5106,13 +5367,16 @@ export type UserUpdateWithoutProjectsInput = {
   last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
-  project_comments?: InputMaybe<Project_CommentUpdateManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
-  task_comments?: InputMaybe<Task_CommentUpdateManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutTaskInput = {
+  avatar?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5122,13 +5386,16 @@ export type UserUpdateWithoutTaskInput = {
   last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
-  project_comments?: InputMaybe<Project_CommentUpdateManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
-  task_comments?: InputMaybe<Task_CommentUpdateManyWithoutUserInput>;
+  task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutTask_CommentsInput = {
+  avatar?: InputMaybe<StringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5138,10 +5405,11 @@ export type UserUpdateWithoutTask_CommentsInput = {
   last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
-  project_comments?: InputMaybe<Project_CommentUpdateManyWithoutUserInput>;
+  project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateroleInput = {
@@ -5189,6 +5457,8 @@ export type UserWhereInput = {
   AND?: InputMaybe<Array<UserWhereInput>>;
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
+  avatar?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   files?: InputMaybe<FileListRelationFilter>;
   first_name?: InputMaybe<StringFilter>;
@@ -5198,11 +5468,12 @@ export type UserWhereInput = {
   last_name?: InputMaybe<StringFilter>;
   notifications?: InputMaybe<NotificationListRelationFilter>;
   password?: InputMaybe<StringFilter>;
-  project_comments?: InputMaybe<Project_CommentListRelationFilter>;
+  project_comments?: InputMaybe<CommentListRelationFilter>;
   projects?: InputMaybe<ProjectListRelationFilter>;
   role?: InputMaybe<EnumRoleNullableListFilter>;
   task?: InputMaybe<TaskListRelationFilter>;
-  task_comments?: InputMaybe<Task_CommentListRelationFilter>;
+  task_comments?: InputMaybe<CommentListRelationFilter>;
+  updated_at?: InputMaybe<DateTimeFilter>;
 };
 
 export type UserWhereUniqueInput = {
@@ -5210,14 +5481,320 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
+export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, users: Array<{ __typename?: 'User', first_name: string, last_name: string }> };
+
+export type UserFragment = { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, password: string, avatar: string, role: Array<Role> };
+
+export type GetAllProjectsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, users: Array<{ __typename?: 'User', first_name: string, last_name: string }> }> };
+
+export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, email: string, password: string, avatar: string, role: Array<Role> }> };
+
+export type GetManagerProjectsListQueryVariables = Exact<{
+  id: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetManagerProjectsListQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, last_name: string, projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, users: Array<{ __typename?: 'User', first_name: string, last_name: string }> }> } };
+
+export type GetPersonByRoleQueryVariables = Exact<{
+  role: InputMaybe<UserWhereInput>;
+}>;
+
+
+export type GetPersonByRoleQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, email: string, password: string, avatar: string, role: Array<Role> }> };
+
+export type GetProjectDescriptionQueryVariables = Exact<{
+  id: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetProjectDescriptionQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, description: string, status_project: Status, total_time_spent: number, start_date: any, end_date: any, due_date: any, users: Array<{ __typename?: 'User', first_name: string, last_name: string, avatar: string }> } };
+
+export type GetTaskDescriptionQueryVariables = Exact<{
+  id: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetTaskDescriptionQuery = { __typename?: 'Query', task: { __typename?: 'Task', id: string, title: string, description: string, total_time_spent: number, start_date: any, end_date: any, created_at: any, updated_at: any, user: { __typename?: 'User', avatar: string }, files: Array<{ __typename?: 'File', name: string, path: string }>, comments: Array<{ __typename?: 'Comment', content: string }> } };
+
 export type GetUserTasksListQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetUserTasksListQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, last_name: string, projects: Array<{ __typename?: 'Project', id: string, title: string, description: string, status_project: Status, users: Array<{ __typename?: 'User', first_name: string, last_name: string }>, tasks: Array<{ __typename?: 'Task', title: string, description: string, status_task: Status, start_date: any, end_date: any, total_time_spent: number, files: Array<{ __typename?: 'File', name: string, path: string, type: string }>, comments: Array<{ __typename?: 'Task_Comment', content: string, user: { __typename?: 'User', first_name: string, last_name: string } }> }> }> } };
+export type GetUserTasksListQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, last_name: string, projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', avatar: string, first_name: string } }> }> } };
 
+export const ProjectFragmentDoc = gql`
+    fragment Project on Project {
+  id
+  title
+  status_project
+  due_date
+  users {
+    first_name
+    last_name
+  }
+}
+    `;
+export const UserFragmentDoc = gql`
+    fragment User on User {
+  id
+  first_name
+  last_name
+  email
+  password
+  avatar
+  role
+}
+    `;
+export const GetAllProjectsDocument = gql`
+    query GetAllProjects {
+  projects {
+    ...Project
+  }
+}
+    ${ProjectFragmentDoc}`;
 
+/**
+ * __useGetAllProjectsQuery__
+ *
+ * To run a query within a React component, call `useGetAllProjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllProjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllProjectsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllProjectsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllProjectsQuery, GetAllProjectsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllProjectsQuery, GetAllProjectsQueryVariables>(GetAllProjectsDocument, options);
+      }
+export function useGetAllProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllProjectsQuery, GetAllProjectsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllProjectsQuery, GetAllProjectsQueryVariables>(GetAllProjectsDocument, options);
+        }
+export type GetAllProjectsQueryHookResult = ReturnType<typeof useGetAllProjectsQuery>;
+export type GetAllProjectsLazyQueryHookResult = ReturnType<typeof useGetAllProjectsLazyQuery>;
+export type GetAllProjectsQueryResult = Apollo.QueryResult<GetAllProjectsQuery, GetAllProjectsQueryVariables>;
+export const GetAllUsersDocument = gql`
+    query GetAllUsers {
+  users {
+    ...User
+  }
+}
+    ${UserFragmentDoc}`;
+
+/**
+ * __useGetAllUsersQuery__
+ *
+ * To run a query within a React component, call `useGetAllUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllUsersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllUsersQuery(baseOptions?: Apollo.QueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, options);
+      }
+export function useGetAllUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllUsersQuery, GetAllUsersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllUsersQuery, GetAllUsersQueryVariables>(GetAllUsersDocument, options);
+        }
+export type GetAllUsersQueryHookResult = ReturnType<typeof useGetAllUsersQuery>;
+export type GetAllUsersLazyQueryHookResult = ReturnType<typeof useGetAllUsersLazyQuery>;
+export type GetAllUsersQueryResult = Apollo.QueryResult<GetAllUsersQuery, GetAllUsersQueryVariables>;
+export const GetManagerProjectsListDocument = gql`
+    query GetManagerProjectsList($id: String) {
+  user(where: {id: $id}) {
+    id
+    first_name
+    last_name
+    projects {
+      ...Project
+    }
+  }
+}
+    ${ProjectFragmentDoc}`;
+
+/**
+ * __useGetManagerProjectsListQuery__
+ *
+ * To run a query within a React component, call `useGetManagerProjectsListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetManagerProjectsListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetManagerProjectsListQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetManagerProjectsListQuery(baseOptions?: Apollo.QueryHookOptions<GetManagerProjectsListQuery, GetManagerProjectsListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetManagerProjectsListQuery, GetManagerProjectsListQueryVariables>(GetManagerProjectsListDocument, options);
+      }
+export function useGetManagerProjectsListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetManagerProjectsListQuery, GetManagerProjectsListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetManagerProjectsListQuery, GetManagerProjectsListQueryVariables>(GetManagerProjectsListDocument, options);
+        }
+export type GetManagerProjectsListQueryHookResult = ReturnType<typeof useGetManagerProjectsListQuery>;
+export type GetManagerProjectsListLazyQueryHookResult = ReturnType<typeof useGetManagerProjectsListLazyQuery>;
+export type GetManagerProjectsListQueryResult = Apollo.QueryResult<GetManagerProjectsListQuery, GetManagerProjectsListQueryVariables>;
+export const GetPersonByRoleDocument = gql`
+    query GetPersonByRole($role: UserWhereInput) {
+  users(where: $role) {
+    ...User
+  }
+}
+    ${UserFragmentDoc}`;
+
+/**
+ * __useGetPersonByRoleQuery__
+ *
+ * To run a query within a React component, call `useGetPersonByRoleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPersonByRoleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPersonByRoleQuery({
+ *   variables: {
+ *      role: // value for 'role'
+ *   },
+ * });
+ */
+export function useGetPersonByRoleQuery(baseOptions?: Apollo.QueryHookOptions<GetPersonByRoleQuery, GetPersonByRoleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPersonByRoleQuery, GetPersonByRoleQueryVariables>(GetPersonByRoleDocument, options);
+      }
+export function useGetPersonByRoleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPersonByRoleQuery, GetPersonByRoleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPersonByRoleQuery, GetPersonByRoleQueryVariables>(GetPersonByRoleDocument, options);
+        }
+export type GetPersonByRoleQueryHookResult = ReturnType<typeof useGetPersonByRoleQuery>;
+export type GetPersonByRoleLazyQueryHookResult = ReturnType<typeof useGetPersonByRoleLazyQuery>;
+export type GetPersonByRoleQueryResult = Apollo.QueryResult<GetPersonByRoleQuery, GetPersonByRoleQueryVariables>;
+export const GetProjectDescriptionDocument = gql`
+    query GetProjectDescription($id: String) {
+  project(where: {id: $id}) {
+    id
+    title
+    description
+    users {
+      first_name
+      last_name
+      avatar
+    }
+    status_project
+    total_time_spent
+    start_date
+    end_date
+    due_date
+  }
+}
+    `;
+
+/**
+ * __useGetProjectDescriptionQuery__
+ *
+ * To run a query within a React component, call `useGetProjectDescriptionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProjectDescriptionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProjectDescriptionQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetProjectDescriptionQuery(baseOptions?: Apollo.QueryHookOptions<GetProjectDescriptionQuery, GetProjectDescriptionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProjectDescriptionQuery, GetProjectDescriptionQueryVariables>(GetProjectDescriptionDocument, options);
+      }
+export function useGetProjectDescriptionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProjectDescriptionQuery, GetProjectDescriptionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProjectDescriptionQuery, GetProjectDescriptionQueryVariables>(GetProjectDescriptionDocument, options);
+        }
+export type GetProjectDescriptionQueryHookResult = ReturnType<typeof useGetProjectDescriptionQuery>;
+export type GetProjectDescriptionLazyQueryHookResult = ReturnType<typeof useGetProjectDescriptionLazyQuery>;
+export type GetProjectDescriptionQueryResult = Apollo.QueryResult<GetProjectDescriptionQuery, GetProjectDescriptionQueryVariables>;
+export const GetTaskDescriptionDocument = gql`
+    query GetTaskDescription($id: String) {
+  task(where: {id: $id}) {
+    id
+    title
+    description
+    total_time_spent
+    start_date
+    end_date
+    created_at
+    updated_at
+    user {
+      avatar
+    }
+    files {
+      name
+      path
+    }
+    comments {
+      content
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetTaskDescriptionQuery__
+ *
+ * To run a query within a React component, call `useGetTaskDescriptionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTaskDescriptionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTaskDescriptionQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetTaskDescriptionQuery(baseOptions?: Apollo.QueryHookOptions<GetTaskDescriptionQuery, GetTaskDescriptionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTaskDescriptionQuery, GetTaskDescriptionQueryVariables>(GetTaskDescriptionDocument, options);
+      }
+export function useGetTaskDescriptionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTaskDescriptionQuery, GetTaskDescriptionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTaskDescriptionQuery, GetTaskDescriptionQueryVariables>(GetTaskDescriptionDocument, options);
+        }
+export type GetTaskDescriptionQueryHookResult = ReturnType<typeof useGetTaskDescriptionQuery>;
+export type GetTaskDescriptionLazyQueryHookResult = ReturnType<typeof useGetTaskDescriptionLazyQuery>;
+export type GetTaskDescriptionQueryResult = Apollo.QueryResult<GetTaskDescriptionQuery, GetTaskDescriptionQueryVariables>;
 export const GetUserTasksListDocument = gql`
     query GetUserTasksList($id: String) {
   user(where: {id: $id}) {
@@ -5227,30 +5804,14 @@ export const GetUserTasksListDocument = gql`
     projects {
       id
       title
-      description
       status_project
-      users {
-        first_name
-        last_name
-      }
       tasks {
+        id
         title
-        description
         status_task
-        start_date
-        end_date
-        total_time_spent
-        files {
-          name
-          path
-          type
-        }
-        comments {
-          content
-          user {
-            first_name
-            last_name
-          }
+        user {
+          avatar
+          first_name
         }
       }
     }
