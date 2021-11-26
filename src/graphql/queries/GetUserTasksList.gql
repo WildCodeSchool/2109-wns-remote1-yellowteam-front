@@ -12,6 +12,7 @@ query GetUserTasksList($id: String) {
         title
         status_task
         user {
+          id
           avatar
           first_name
         }
