@@ -17,16 +17,16 @@ const UserNavBar = (): JSX.Element => (
     position="fixed"
     z-index="1"
   >
-    <Box as="button">
+    <Box as="button" data-testid="tasks-button">
       <TasksIcon color={mainTheme.colors.deactivatedGrey} />
     </Box>
-    <Box as="button">
+    <Box as="button" data-testid="user-icon-button">
       <UserIcon color={mainTheme.colors.deactivatedGrey} />
     </Box>
-    <Box as="button">
+    <Box as="button" data-testid="notifications-button">
       <BellIcon color={mainTheme.colors.deactivatedGrey} />
     </Box>
-    <Box as="button">
+    <Box as="button" data-testid="sign-out-button">
       <SignOutIcon color={mainTheme.colors.deactivatedGrey} />
     </Box>
     <Switch />
