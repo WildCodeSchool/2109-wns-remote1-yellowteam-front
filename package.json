@@ -41,7 +41,7 @@
     "apollo:sync": "npm run apollo:download-schema && npm run apollo:generate-types",
     "prettify": "prettier --write src/",
     "fmt-lint": "yarn run prettify && yarn run lint",
-    "generate": "graphql-codegen --config codegen.yml"
+    "generate": "graphql-codegen -r dotenv/config --config codegen.yml"
   },
   "eslintConfig": {
     "extends": [
