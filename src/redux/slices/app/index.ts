@@ -9,7 +9,7 @@ interface IAppState {
 const initialState: IAppState = {
   user: {
     email: '',
-    id: '',
+    id: '035ed1d3-fa2c-4f36-b81e-ad8895239cbf',
     roles: [],
   },
   isAuth: false,
