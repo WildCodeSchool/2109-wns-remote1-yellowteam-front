@@ -12,6 +12,9 @@ module.exports = {
     "<rootDir>/cypress/",
     "<rootDir>/webdriverio/",
   ],
+  transform: {
+    "^.+\\.(t|j)sx?$": "ts-jest",
+  },
   moduleNameMapper: {
     ...pathsToModuleNameMapper(paths, { prefix: "<rootDir>/" }),
     "\\.(scss|sass|css)$": "identity-obj-proxy",
