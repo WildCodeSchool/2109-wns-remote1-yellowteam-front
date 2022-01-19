@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-const Placeholder = (): JSX.Element => (
+const PlaceholderIcon = (): JSX.Element => (
   <svg
     width="32"
     height="32"
@@ -19,4 +19,4 @@ const Placeholder = (): JSX.Element => (
   </svg>
 )
 
-export default Placeholder
+export default PlaceholderIcon

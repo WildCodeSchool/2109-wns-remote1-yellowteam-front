@@ -3,8 +3,8 @@ import { Flex, Text } from '@chakra-ui/react'
 
 interface ITag {
   text: string
-  textColor: string
-  tagColor: string
+  textColor: 'darkRed' | 'darkGreen' | 'darkBrown'
+  tagColor: 'lightRed' | 'lightGreen' | 'lightBrown'
 }
 
 const Tag = ({ text, textColor, tagColor }: ITag): JSX.Element => (
@@ -17,6 +17,7 @@ const Tag = ({ text, textColor, tagColor }: ITag): JSX.Element => (
     alignItems="center"
   >
     <Text
+      padding="5px"
       fontSize={['8px', '12px']}
       fontFamily="Avenir"
       fontWeight="600"
