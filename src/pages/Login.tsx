@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { gql, useMutation } from '@apollo/client'
 import { Button, Flex, FormControl, Input } from '@chakra-ui/react'
 import { useMutateLoginMutation } from 'generated/graphql'
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
