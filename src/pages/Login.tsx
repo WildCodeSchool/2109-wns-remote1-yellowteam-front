@@ -4,7 +4,7 @@ import { useMutateLoginMutation } from 'generated/graphql'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-interface FormState {
+interface FormData {
   email: string
   password: string
 }
@@ -16,7 +16,7 @@ export default function Login(): JSX.Element {
   })
   const { handleSubmit, register } = useForm()
 
-  const onSubmit = async (data: FormState): Promise<void> => {
+  const onSubmit = async (data: FormData): Promise<void> => {
     login({
       variables: { data: { email: data.email, password: data.password } },
     })
