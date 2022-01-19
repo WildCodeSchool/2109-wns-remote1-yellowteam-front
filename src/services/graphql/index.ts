@@ -8,7 +8,7 @@ let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 
 export const client = new ApolloClient({
   ssrMode: typeof window === 'undefined',
-  uri: 'http://localhost:5000/graphql',
+  uri: process.env.REACT_APP_SERVER_URL,
   cache: new InMemoryCache(),
 });
 
