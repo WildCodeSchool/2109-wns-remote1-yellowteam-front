@@ -33,7 +33,7 @@
     "start": "react-scripts start",
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "build": "react-scripts build",
-    "test": "react-scripts test --watch",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "apollo:download-schema": "apollo client:download-schema schema.graphql",
     "apollo:generate-types": "rm -rf __generated__ && apollo client:codegen --target typescript --outputFlat",
