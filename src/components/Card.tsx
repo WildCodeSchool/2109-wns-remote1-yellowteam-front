@@ -1,21 +1,28 @@
 import React, { ReactElement } from 'react'
 import { Box, Text, Flex } from '@chakra-ui/react'
+import PlaceholderIcon from '../static/svg/PlaceholderIcon'
 
+/* eslint-disable react/require-default-props */
 interface ICard {
   title: string
-  photo: ReactElement
+  photo?: ReactElement
   tag: ReactElement
 }
 
-const Card = ({ photo, tag, title }: ICard): JSX.Element => (
+const Card = ({
+  photo = <PlaceholderIcon />,
+  tag,
+  title,
+}: ICard): ReactElement => (
   <Box
     backgroundColor="#FFFFFF"
     width="218px"
     minHeight="78px"
     borderRadius="10"
     padding="9px 14px 9px 14px"
+    marginBottom="10px"
   >
-    <Text textStyle="h2">{title}</Text>
+    <Text textStyle="titleTicket">{title}</Text>
     <Flex
       alignItems="center"
       justifyContent="space-between"

@@ -1,0 +1,21 @@
+query GetTasksUserFilteredByStatus(
+  $filterUser: UserWhereInput
+  $filterTask: TaskWhereInput
+  $filterProject: ProjectWhereInput
+) {
+  users(where: $filterUser) {
+    first_name
+    projects(where: $filterProject) {
+      title
+      tasks(where: $filterTask) {
+        id
+        title
+        status_task
+        user {
+          avatar
+          first_name
+        }
+      }
+    }
+  }
+}

@@ -15,8 +15,20 @@ const mainTheme = extendTheme({
       color: '#38383A',
       fontFamily: 'Avenir',
     },
+    titleTicket: {
+      fontSize: ['16', '18'],
+      fontWeight: '800',
+      color: '#38383A',
+      fontFamily: 'Avenir',
+    },
+    numberTicket: {
+      fontFamily:"Avenir",
+      fontSize: "13px", 
+      color:'#9FA1A5',
+      fontWeight:"800"
+    },
     body: {
-      fontSize: '13',
+      fontSize: ['14', '16'],
       color: '#38383A',
       fontFamily: 'Avenir',
       fontWeight: '300',
@@ -32,7 +44,11 @@ const mainTheme = extendTheme({
     teal: '#009A96',
     lightTeal: '#A4DFDC',
     darkRed: '#B63F46',
-    lightRed: '#FFF0F0'
+    lightRed: '#FFF0F0',
+    darkGreen: '#1D9446',
+    lightGreen: '#EBF5ED',
+    darkBrown: '#B47539', 
+    lightBrown: '#FCECE4'
   },
 })
 

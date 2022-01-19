@@ -4,13 +4,15 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.5.5",
+    "@babel/preset-typescript": "^7.16.7",
     "@chakra-ui/react": "^1.7.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@reduxjs/toolkit": "^1.6.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@testing-library/dom": "^8.11.2",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
@@ -19,7 +21,9 @@
     "framer-motion": "^4",
     "graphql": "^16.0.1",
     "react": "^17.0.2",
+    "react-apollo-hooks": "^0.5.0",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.24.1",
     "react-redux": "^7.2.4",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
@@ -27,7 +31,7 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "dev": "react-scripts start",
+    "start": "react-scripts start",
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -36,7 +40,8 @@
     "apollo:generate-types": "rm -rf __generated__ && apollo client:codegen --target typescript --outputFlat",
     "apollo:sync": "npm run apollo:download-schema && npm run apollo:generate-types",
     "prettify": "prettier --write src/",
-    "fmt-lint": "yarn run prettify && yarn run lint"
+    "fmt-lint": "yarn run prettify && yarn run lint",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": [
@@ -57,11 +62,16 @@
     ]
   },
   "devDependencies": {
-    "nock": "^13.0.11",
-    "apollo": "^2.32.1",
+    "@graphql-codegen/cli": "^2.3.0",
+    "@graphql-codegen/import-types-preset": "^2.1.8",
+    "@graphql-codegen/introspection": "^2.1.0",
+    "@graphql-codegen/typescript": "^2.4.1",
+    "@graphql-codegen/typescript-operations": "^2.2.1",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.2",
     "@types/react-redux": "^7.1.16",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
+    "apollo": "^2.32.1",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-typescript": "^14.0.0",
     "eslint-config-prettier": "^8.3.0",
@@ -72,6 +82,7 @@
     "eslint-plugin-prettier": "^3.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "nock": "^13.0.11",
     "prettier": "^2.3.2"
   },
   "lint-staged": {

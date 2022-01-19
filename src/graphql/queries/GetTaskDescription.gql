@@ -1,0 +1,22 @@
+query GetTaskDescription($id: String) {
+  task(where: { id: $id }) {
+    id
+    title
+    description
+    total_time_spent
+    start_date
+    end_date
+    created_at
+    updated_at
+    user {
+      avatar
+    }
+    files {
+      name
+      path
+    }
+    comments {
+      content
+    }
+  }
+}
