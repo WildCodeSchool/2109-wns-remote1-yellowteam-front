@@ -12,12 +12,14 @@ import Header from '../molecules/Header'
 import BoardContent from '../components/BoardContent'
 import UserBoardHeader from '../molecules/UserBoardHeader'
 
-const USER_ID = '396d350c-4837-4fc9-ae5e-dec555080f92'
+const USER_ID = '01fefc76-84f3-4a7d-a776-b6769d68375b'
 
 const TasksListUser = (): ReactElement => {
   const { data, loading } = useGetUserTasksListQuery({
     variables: { id: USER_ID },
   })
+
+  console.log('data', data)
 
   const [selectedTitle, setSelectedTitle] = useState<string | undefined>(
     data?.user.projects[0].title

@@ -6,8 +6,9 @@ import App from './App'
 import { client } from './services/graphql'
 
 render(
-  <ApolloProvider client={client}>
+  <React.StrictMode>
     <App />
-  </ApolloProvider>,
+  </React.StrictMode>,
+
   document.getElementById('root')
 )
