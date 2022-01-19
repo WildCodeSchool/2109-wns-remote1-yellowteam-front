@@ -1,8 +1,8 @@
 module.exports = {
   client: {
     service: {
-      name: "SpaceX",
-      url: "https://api.spacex.land/graphql/",
+      name: "YTask",
+      url: process.env.REACT_APP_SERVER_URL,
     },
   },
 };
