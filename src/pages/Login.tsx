@@ -1,17 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { gql, useMutation } from '@apollo/client'
 import { Button, Flex, FormControl, Input } from '@chakra-ui/react'
+import { useMutateLoginMutation } from 'generated/graphql'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-
-const LOGIN = gql`
-  mutation Login($data: LoginInput!) {
-    login(data: $data) {
-      email
-    }
-  }
-`
 
 interface FormState {
   email: string
@@ -20,7 +13,7 @@ interface FormState {
 
 export default function Login(): JSX.Element {
   const navigate = useNavigate()
-  const [login] = useMutation(LOGIN, {
+  const [login] = useMutateLoginMutation({
     onCompleted: () => navigate('/'),
   })
   const { handleSubmit, register } = useForm()

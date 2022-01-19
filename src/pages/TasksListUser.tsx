@@ -19,8 +19,6 @@ const TasksListUser = (): ReactElement => {
     variables: { id: USER_ID },
   })
 
-  console.log('data', data)
-
   const [selectedTitle, setSelectedTitle] = useState<string | undefined>(
     data?.user.projects[0].title
   )
