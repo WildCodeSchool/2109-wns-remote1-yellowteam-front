@@ -7,6 +7,7 @@ interface IAppStateHook {
   isAuth: boolean
   user: IUser
   dispatchLogin: (userPayload: IUser) => void
+  dispatchLogout: () => void
   logout: () => void
 }
 
@@ -17,9 +18,12 @@ const useAppState = (): IAppStateHook => {
 
   const dispatchLogin = (userPayload: IUser) => dispatch(login(userPayload))
 
+  const dispatchLogout = () => dispatch(logout())
+
   return {
     isAuth,
     dispatchLogin,
+    dispatchLogout,
     logout,
     user,
   }

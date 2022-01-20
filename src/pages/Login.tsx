@@ -1,18 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Button, Flex, FormControl, Input } from '@chakra-ui/react'
-import { FieldValue, FieldValues, useForm } from 'react-hook-form'
+import { useEffect } from 'react'
+import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
-import { useMutateLoginMutation } from '../generated/graphql'
-
-interface FormData {
-  email: string
-  password: string
-}
+import {
+  useMutateLoginMutation,
+  useMutateMeMutation,
+} from '../generated/graphql'
 
 export default function Login(): JSX.Element {
   const navigate = useNavigate()
-  const { dispatchLogin } = useAppState()
+  const { dispatchLogin, dispatchLogout } = useAppState()
   const [login] = useMutateLoginMutation({
     onCompleted: (data) => {
       dispatchLogin({
@@ -23,6 +22,24 @@ export default function Login(): JSX.Element {
       navigate('/')
     },
   })
+
+  const [me] = useMutateMeMutation({
+    onCompleted: (data) => {
+      dispatchLogin({
+        email: data.me.email,
+        id: data.me.id,
+        roles: data.me.role,
+      })
+      navigate('/')
+    },
+    onError: () => {
+      dispatchLogout()
+    },
+  })
+
+  useEffect(() => {
+    me()
+  }, [])
 
   const { handleSubmit, register } = useForm()
 

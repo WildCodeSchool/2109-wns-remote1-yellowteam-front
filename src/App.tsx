@@ -1,32 +1,35 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { ChakraProvider } from '@chakra-ui/react'
 import { ApolloProvider } from '@apollo/client'
-import { Provider } from 'react-redux'
+import Layout from './components/Layout'
 import Login from './pages/Login'
 import mainTheme from './theme/mainTheme'
 import apolloClient from './services/graphql'
 import TasksListUser from './pages/TasksListUser'
-import store from './redux/store'
+import useAppState from './hooks/useAppState'
 
 const client = apolloClient()
 
 function App(): JSX.Element {
+  const { isAuth } = useAppState()
+
   return (
-    <Provider store={store}>
-      <ApolloProvider client={client}>
-        <ChakraProvider theme={mainTheme}>
-          <Router>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-            </Routes>
-            <Routes>
-              <Route path="/" element={<TasksListUser />} />
-            </Routes>
-          </Router>
-        </ChakraProvider>
-      </ApolloProvider>
-    </Provider>
+    <ApolloProvider client={client}>
+      <ChakraProvider theme={mainTheme}>
+        <Layout>
+          {isAuth ? (
+            <>
+              <Routes>
+                <Route path="/" element={<TasksListUser />} />
+              </Routes>
+            </>
+          ) : (
+            <Login />
+          )}
+        </Layout>
+      </ChakraProvider>
+    </ApolloProvider>
   )
 }
 
