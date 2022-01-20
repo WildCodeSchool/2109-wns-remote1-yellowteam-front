@@ -1807,6 +1807,7 @@ export type Mutation = {
   deleteTask: Maybe<Task>;
   deleteUser: Maybe<User>;
   login: User;
+  me: User;
   register: User;
   updateComment: Maybe<Comment>;
   updateFile: Maybe<File>;
@@ -5910,7 +5911,12 @@ export type MutateLoginMutationVariables = Exact<{
 }>;
 
 
-export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', email: string } };
+export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', email: string, id: string, role: Array<Role> } };
+
+export type MutateMeMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', email: string, id: string, role: Array<Role> } };
 
 export type GetAllProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5993,6 +5999,8 @@ export const MutateLoginDocument = gql`
     mutation MutateLogin($data: LoginInput!) {
   login(data: $data) {
     email
+    id
+    role
   }
 }
     `;
@@ -6022,6 +6030,40 @@ export function useMutateLoginMutation(baseOptions?: Apollo.MutationHookOptions<
 export type MutateLoginMutationHookResult = ReturnType<typeof useMutateLoginMutation>;
 export type MutateLoginMutationResult = Apollo.MutationResult<MutateLoginMutation>;
 export type MutateLoginMutationOptions = Apollo.BaseMutationOptions<MutateLoginMutation, MutateLoginMutationVariables>;
+export const MutateMeDocument = gql`
+    mutation MutateMe {
+  me {
+    email
+    id
+    role
+  }
+}
+    `;
+export type MutateMeMutationFn = Apollo.MutationFunction<MutateMeMutation, MutateMeMutationVariables>;
+
+/**
+ * __useMutateMeMutation__
+ *
+ * To run a mutation, you first call `useMutateMeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useMutateMeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [mutateMeMutation, { data, loading, error }] = useMutateMeMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMutateMeMutation(baseOptions?: Apollo.MutationHookOptions<MutateMeMutation, MutateMeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<MutateMeMutation, MutateMeMutationVariables>(MutateMeDocument, options);
+      }
+export type MutateMeMutationHookResult = ReturnType<typeof useMutateMeMutation>;
+export type MutateMeMutationResult = Apollo.MutationResult<MutateMeMutation>;
+export type MutateMeMutationOptions = Apollo.BaseMutationOptions<MutateMeMutation, MutateMeMutationVariables>;
 export const GetAllProjectsDocument = gql`
     query GetAllProjects {
   projects {

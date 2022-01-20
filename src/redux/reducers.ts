@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
-import counter from 'redux/slices/counter';
+import app from './slices/app'
 
-const rootReducer = combineReducers({ counter });
+const rootReducer = combineReducers({ app })
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof rootReducer>
 
-export default rootReducer;
+export default rootReducer

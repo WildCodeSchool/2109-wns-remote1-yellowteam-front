@@ -1,8 +1,8 @@
-import { useMutation } from '@apollo/client'
 import { Box } from '@chakra-ui/react'
-import { useMutateLoginMutation } from 'generated/graphql'
 import { ReactNode, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useAppState from 'src/hooks/useAppState'
+import { useMutateMeMutation } from '../../generated/graphql'
 
 interface IProps {
   children: ReactNode
@@ -10,11 +10,19 @@ interface IProps {
 
 export default function Layout({ children }: IProps): JSX.Element {
   const navigate = useNavigate()
+  const { dispatchLogin, dispatchLogout } = useAppState()
 
-  const [login] = useMutateLoginMutation({
-    onCompleted: (data) => {},
+  const [login] = useMutateMeMutation({
+    onCompleted: (data) => {
+      dispatchLogin({
+        email: data.me.email,
+        id: data.me.id,
+        roles: data.me.role,
+      })
+      navigate('/')
+    },
     onError: () => {
-      navigate('/login')
+      dispatchLogout()
     },
   })
 
