@@ -1,8 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 
-import React, { useState, ReactElement } from 'react'
+import React, { useState, ReactElement, useEffect } from 'react'
 import useAppState from 'src/hooks/useAppState'
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, useToast } from '@chakra-ui/react'
+import { io } from 'socket.io-client'
 import {
   useGetTasksUserFilteredByStatusQuery,
   Status,
@@ -13,7 +14,20 @@ import Header from '../molecules/Header'
 import BoardContent from '../components/BoardContent'
 import UserBoardHeader from '../molecules/UserBoardHeader'
 
+const socket = io('http://localhost:5000', {
+  reconnectionDelayMax: 10000,
+
+  withCredentials: true,
+  extraHeaders: {
+    'Access-Control-Allow-Origin': 'http://localhost:3000',
+    'Access-Control-Allow-Credentials': 'true',
+  },
+  transports: ['websocket'],
+})
+
 const TasksListUser = (): ReactElement => {
+  const toast = useToast()
+
   const { user } = useAppState()
   const { data, loading } = useGetUserTasksListQuery({
     variables: { id: user.id },
@@ -22,6 +36,31 @@ const TasksListUser = (): ReactElement => {
   const [selectedTitle, setSelectedTitle] = useState<string | undefined>(() =>
     data?.user.projects.length ? data?.user.projects[0].title : undefined
   )
+
+  useEffect(() => {
+    socket.emit('connection', { test: 'test', user: 'test' }, () =>
+      console.log('super ca passe')
+    )
+
+    socket.on('notification', (message: any) => {
+      toast({ title: message.message })
+    })
+
+    return () => {
+      socket.emit('disconnection')
+      socket.off()
+    }
+  }, [])
+
+  const emmitNotification = (message: string) =>
+    socket.emit(
+      'task-complete',
+      {
+        message,
+        status: 'TASK COMPLETE',
+      },
+      () => console.log('message sent')
+    )
 
   const { data: dataTicketsNotStarted, loading: loadingTasksNotStarted } =
     useGetTasksUserFilteredByStatusQuery({
