@@ -5,7 +5,7 @@ export type InputMaybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -5910,7 +5910,7 @@ export type MutateLoginMutationVariables = Exact<{
 }>;
 
 
-export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', email: string } };
+export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', email: string, id: string, role: Array<Role> } };
 
 export type GetAllProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5993,6 +5993,8 @@ export const MutateLoginDocument = gql`
     mutation MutateLogin($data: LoginInput!) {
   login(data: $data) {
     email
+    id
+    role
   }
 }
     `;

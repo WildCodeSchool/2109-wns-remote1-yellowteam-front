@@ -7,11 +7,13 @@ import Login from 'pages/Login'
 import mainTheme from './theme/mainTheme'
 import apolloClient from './services/graphql'
 import TasksListUser from './pages/TasksListUser'
+import store from './redux/store'
 
 const client = apolloClient()
 
 function App(): JSX.Element {
   return (
+
     <ApolloProvider client={client}>
       <ChakraProvider theme={mainTheme}>
         <Layout>
