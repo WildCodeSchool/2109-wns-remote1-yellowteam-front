@@ -5910,7 +5910,7 @@ export type MutateLoginMutationVariables = Exact<{
 }>;
 
 
-export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', email: string } };
+export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', email: string, id: string, role: Array<Role> } };
 
 export type GetAllProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5993,6 +5993,8 @@ export const MutateLoginDocument = gql`
     mutation MutateLogin($data: LoginInput!) {
   login(data: $data) {
     email
+    id
+    role
   }
 }
     `;

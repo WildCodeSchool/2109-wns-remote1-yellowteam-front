@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 
 import React, { useState, ReactElement } from 'react'
+import useAppState from 'src/hooks/useAppState'
 import { Box, Text } from '@chakra-ui/react'
 import {
   useGetTasksUserFilteredByStatusQuery,
@@ -12,22 +13,21 @@ import Header from '../molecules/Header'
 import BoardContent from '../components/BoardContent'
 import UserBoardHeader from '../molecules/UserBoardHeader'
 
-const USER_ID = '01fefc76-84f3-4a7d-a776-b6769d68375b'
-
 const TasksListUser = (): ReactElement => {
+  const { user } = useAppState()
   const { data, loading } = useGetUserTasksListQuery({
-    variables: { id: USER_ID },
+    variables: { id: user.id },
   })
 
-  const [selectedTitle, setSelectedTitle] = useState<string | undefined>(
-    data?.user.projects[0].title
+  const [selectedTitle, setSelectedTitle] = useState<string | undefined>(() =>
+    data?.user.projects.length ? data?.user.projects[0].title : undefined
   )
 
   const { data: dataTicketsNotStarted, loading: loadingTasksNotStarted } =
     useGetTasksUserFilteredByStatusQuery({
       variables: {
         filterTask: { status_task: { equals: Status.NotStarted } },
-        filterUser: { id: { equals: USER_ID } },
+        filterUser: { id: { equals: user.id } },
         filterProject: { title: { equals: selectedTitle } },
       },
     })
@@ -36,7 +36,7 @@ const TasksListUser = (): ReactElement => {
     useGetTasksUserFilteredByStatusQuery({
       variables: {
         filterTask: { status_task: { equals: Status.InProgress } },
-        filterUser: { id: { equals: USER_ID } },
+        filterUser: { id: { equals: user.id } },
         filterProject: { title: { equals: selectedTitle } },
       },
     })
@@ -45,7 +45,7 @@ const TasksListUser = (): ReactElement => {
     useGetTasksUserFilteredByStatusQuery({
       variables: {
         filterTask: { status_task: { equals: Status.Fihished } },
-        filterUser: { id: { equals: USER_ID } },
+        filterUser: { id: { equals: user.id } },
         filterProject: { title: { equals: selectedTitle } },
       },
     })
