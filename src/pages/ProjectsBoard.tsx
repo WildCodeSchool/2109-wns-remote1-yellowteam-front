@@ -37,7 +37,7 @@ const ProjectsBoard = (): ReactElement => {
   >(projectsData?.projects.length ? projectsData.projects[0].title : undefined)
 
   useEffect(() => {
-    setSelectedProjectTitle(projectsData?.projects[0].title)
+    setSelectedProjectTitle(projectsData?.projects[0]?.title)
   }, [projectsData])
 
   useEffect(() => {
