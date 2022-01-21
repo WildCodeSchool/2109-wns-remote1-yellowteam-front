@@ -6,8 +6,8 @@ import Layout from './components/Layout'
 import Login from './pages/Login'
 import mainTheme from './theme/mainTheme'
 import apolloClient from './services/graphql'
-import TasksListUser from './pages/TasksListUser'
 import useAppState from './hooks/useAppState'
+import ProjectsBoard from './pages/ProjectsBoard'
 
 const client = apolloClient()
 
@@ -21,7 +21,7 @@ function App(): JSX.Element {
           {isAuth ? (
             <>
               <Routes>
-                <Route path="/" element={<TasksListUser />} />
+                <Route path="/" element={<ProjectsBoard />} />
               </Routes>
             </>
           ) : (

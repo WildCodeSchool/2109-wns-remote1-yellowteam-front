@@ -1,0 +1,5 @@
+query GetUserProjects($userId: String) {
+  projects(where: { users: { some: { id: { equals: $userId } } } }) {
+    ...Project
+  }
+}

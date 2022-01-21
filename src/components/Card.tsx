@@ -17,7 +17,7 @@ const Card = ({
   <Box
     backgroundColor="#FFFFFF"
     width="218px"
-    minHeight="78px"
+    // minHeight="78px"
     borderRadius="10"
     padding="9px 14px 9px 14px"
     marginBottom="10px"

@@ -1,8 +1,8 @@
 export interface Task {
     id: string
-    status_task: 'IN_PROGRESS' | 'NOT_STARTED' | 'FIHISHED'
+    status_task?: 'IN_PROGRESS' | 'NOT_STARTED' | 'FIHISHED'
     title: string
-    user: {
+    user?: {
         avatar: string
         first_name: string
         }
