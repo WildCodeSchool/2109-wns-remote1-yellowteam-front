@@ -1,19 +1,22 @@
 import {
   ApolloClient,
+  createHttpLink,
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null
 
+const link = createHttpLink({
+  uri: process.env.REACT_APP_SERVER_URL,
+  credentials: 'include',
+})
+
 export const client = new ApolloClient({
   ssrMode: typeof window === 'undefined',
   uri: process.env.REACT_APP_SERVER_URL,
   cache: new InMemoryCache(),
-  credentials: 'include',
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-  },
+  link,
 })
 
 export default function initializeApollo(): ApolloClient<NormalizedCacheObject> {
