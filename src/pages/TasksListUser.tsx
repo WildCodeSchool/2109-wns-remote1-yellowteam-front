@@ -3,6 +3,8 @@
 import React, { useState, ReactElement } from 'react'
 import useAppState from 'src/hooks/useAppState'
 import { Box, Text } from '@chakra-ui/react'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import {
   useGetTasksUserFilteredByStatusQuery,
   Status,
@@ -76,11 +78,13 @@ const TasksListUser = (): ReactElement => {
           titleList={data.user.projects.map((p) => p.title)}
           setSelectedTitleCallBack={(title) => setSelectedTitle(title)}
         />
-        <BoardContent
-          tasksNotStarted={dataTicketsNotStarted.users[0].projects}
-          tasksInProgress={dataTicketsInProgress.users[0].projects}
-          finishedTasks={dataFinishedTickets.users[0].projects}
-        />
+        <DndProvider backend={HTML5Backend}>
+          <BoardContent
+            tasksNotStarted={dataTicketsNotStarted.users[0].projects}
+            tasksInProgress={dataTicketsInProgress.users[0].projects}
+            finishedTasks={dataFinishedTickets.users[0].projects}
+          />
+        </DndProvider>
       </Box>
     </Box>
   )
