@@ -1,55 +1,74 @@
-/* eslint-disable react/no-array-index-key */
-
 import React, { ReactElement } from 'react'
 import { Box, Flex } from '@chakra-ui/react'
-import { useDrag } from 'react-dnd'
-import CardTypes from 'src/types/Card'
+import {
+  Status,
+  useGetTasksUserFilteredByStatusQuery,
+} from 'src/generated/graphql'
 import BoardTicketsStatus from '../molecules/BoardTicketsStatus'
 import Card from './Card'
 import Tag from '../molecules/Tags'
-import { ProjectsList } from '../types/ProjectsList'
 
 interface IBoardContent {
-  tasksNotStarted: ProjectsList[]
-  tasksInProgress: ProjectsList[]
-  finishedTasks: ProjectsList[]
+  selectedProjectTitle: string | undefined
+  user: IUser
 }
 
 const BoardContent = ({
-  tasksNotStarted,
-  tasksInProgress,
-  finishedTasks,
+  selectedProjectTitle,
+  user,
 }: IBoardContent): ReactElement => {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: CardTypes.CARD,
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  }))
+  const { data: dataTicketsNotStarted, loading: loadingTasksNotStarted } =
+    useGetTasksUserFilteredByStatusQuery({
+      variables: {
+        filterTask: { status_task: { equals: Status.NotStarted } },
+        filterUser: { id: { equals: user.id } },
+        filterProject: { title: { equals: selectedProjectTitle } },
+      },
+    })
+
+  const { data: dataTicketsInProgress, loading: loadingTasksInProgress } =
+    useGetTasksUserFilteredByStatusQuery({
+      variables: {
+        filterTask: { status_task: { equals: Status.InProgress } },
+        filterUser: { id: { equals: user.id } },
+        filterProject: { title: { equals: selectedProjectTitle } },
+      },
+    })
+
+  const { data: dataFinishedTickets, loading: loadingTasksFinished } =
+    useGetTasksUserFilteredByStatusQuery({
+      variables: {
+        filterTask: { status_task: { equals: Status.Fihished } },
+        filterUser: { id: { equals: user.id } },
+        filterProject: { title: { equals: selectedProjectTitle } },
+      },
+    })
 
   return (
     <Flex justifyContent="space-between" margin="48px 172px 10px 72px">
       <Flex flexDirection="column">
         <BoardTicketsStatus
           title="Queue"
-          numberOfTickets={tasksNotStarted[0]?.tasks.length}
+          numberOfTickets={
+            dataTicketsNotStarted
+              ? dataTicketsNotStarted.users[0].projects[0]?.tasks.length
+              : 0
+          }
         />
-        {tasksNotStarted[0]?.tasks.length
-          ? tasksNotStarted.map((p, index) =>
+        {dataTicketsNotStarted?.users[0].projects[0]?.tasks.length
+          ? dataTicketsNotStarted.users[0].projects.map((p) =>
               p.tasks.map((t) => (
-                <Box ref={drag}>
-                  <Card
-                    key={index}
-                    tag={
-                      <Tag
-                        textColor="darkGreen"
-                        tagColor="lightGreen"
-                        text="feature"
-                      />
-                    }
-                    title={`${t.title.substring(0, 20)}...`}
-                  />
-                </Box>
+                <Card
+                  key={t.id}
+                  tag={
+                    <Tag
+                      textColor="darkGreen"
+                      tagColor="lightGreen"
+                      text="feature"
+                    />
+                  }
+                  title={`${t.title.substring(0, 20)}...`}
+                />
               ))
             )
           : null}
@@ -57,13 +76,17 @@ const BoardContent = ({
       <Flex flexDirection="column">
         <BoardTicketsStatus
           title="In Progress"
-          numberOfTickets={tasksInProgress[0]?.tasks.length}
+          numberOfTickets={
+            dataTicketsInProgress
+              ? dataTicketsInProgress.users[0].projects[0]?.tasks.length
+              : 0
+          }
         />
-        {tasksInProgress[0]?.tasks.length
-          ? tasksInProgress.map((p, index) =>
+        {dataTicketsInProgress?.users[0].projects[0]?.tasks.length
+          ? dataTicketsInProgress.users[0].projects.map((p) =>
               p.tasks.map((t) => (
                 <Card
-                  key={index}
+                  key={t.id}
                   tag={
                     <Tag
                       textColor="darkGreen"
@@ -80,13 +103,17 @@ const BoardContent = ({
       <Flex flexDirection="column">
         <BoardTicketsStatus
           title="Done"
-          numberOfTickets={finishedTasks[0]?.tasks.length}
+          numberOfTickets={
+            dataFinishedTickets
+              ? dataFinishedTickets.users[0].projects[0]?.tasks.length
+              : 0
+          }
         />
-        {finishedTasks[0]?.tasks.length
-          ? finishedTasks.map((p, index) =>
+        {dataFinishedTickets?.users[0].projects[0]?.tasks.length
+          ? dataFinishedTickets.users[0].projects.map((p) =>
               p.tasks.map((t) => (
                 <Card
-                  key={index}
+                  key={t.id}
                   tag={
                     <Tag
                       textColor="darkGreen"

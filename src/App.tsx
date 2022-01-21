@@ -17,7 +17,7 @@ function App(): JSX.Element {
   return (
     <ApolloProvider client={client}>
       <ChakraProvider theme={mainTheme}>
-        <Layout>
+        <Layout connected={isAuth}>
           {isAuth ? (
             <>
               <Routes>

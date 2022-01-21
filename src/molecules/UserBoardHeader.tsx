@@ -1,5 +1,3 @@
-/* eslint-disable react/no-array-index-key */
-
 import React, { ReactElement } from 'react'
 import { Flex, Text, Box, Select, Checkbox } from '@chakra-ui/react'
 
@@ -35,8 +33,8 @@ const UserBoardHeader = ({
       value={selectedTitle}
       onChange={(event) => setSelectedTitleCallBack(event.target.value)}
     >
-      {titleList.map((title, index) => (
-        <option key={index} value={title}>
+      {titleList.map((title) => (
+        <option key={title} value={title}>
           {`Projet ${title}`}
         </option>
       ))}
