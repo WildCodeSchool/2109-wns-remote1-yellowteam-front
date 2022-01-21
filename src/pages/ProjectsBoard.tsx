@@ -7,7 +7,7 @@ import {
   useGetUserProjectsQuery,
 } from '../generated/graphql'
 import Header from '../molecules/Header'
-import TasksBoard from '../components/BoardContent'
+import TasksBoard from '../components/TasksBoard'
 import UserBoardHeader from '../molecules/UserBoardHeader'
 
 const useProjects = () => {
