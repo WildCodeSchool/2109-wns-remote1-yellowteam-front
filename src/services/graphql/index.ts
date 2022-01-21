@@ -11,6 +11,9 @@ export const client = new ApolloClient({
   uri: process.env.REACT_APP_SERVER_URL,
   cache: new InMemoryCache(),
   credentials: 'include',
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
 })
 
 export default function initializeApollo(): ApolloClient<NormalizedCacheObject> {

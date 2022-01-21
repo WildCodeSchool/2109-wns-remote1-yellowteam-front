@@ -12,7 +12,7 @@ export default function Layout({ children }: IProps): JSX.Element {
   const navigate = useNavigate()
   const { dispatchLogin, dispatchLogout } = useAppState()
 
-  const [login] = useMutateMeMutation({
+  const [me] = useMutateMeMutation({
     onCompleted: (data) => {
       dispatchLogin({
         email: data.me.email,
@@ -27,7 +27,7 @@ export default function Layout({ children }: IProps): JSX.Element {
   })
 
   useEffect(() => {
-    login()
+    me()
   }, [])
 
   return (
