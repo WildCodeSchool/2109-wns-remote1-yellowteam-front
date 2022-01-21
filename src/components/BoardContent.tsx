@@ -67,7 +67,7 @@ const BoardContent = ({
                       text="feature"
                     />
                   }
-                  title={`${t.title.substring(0, 20)}...`}
+                  title={t.title}
                 />
               ))
             )
@@ -94,7 +94,7 @@ const BoardContent = ({
                       text="feature"
                     />
                   }
-                  title={`${t.title.substring(0)}...`}
+                  title={t.title}
                 />
               ))
             )
@@ -121,7 +121,7 @@ const BoardContent = ({
                       text="feature"
                     />
                   }
-                  title={`${t.title.substring(0)}...`}
+                  title={t.title}
                 />
               ))
             )
