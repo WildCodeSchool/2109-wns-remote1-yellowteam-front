@@ -1,0 +1,5 @@
+query GetProject($id: String) {
+  project(where: { id: $id }) {
+    ...Project
+  }
+}

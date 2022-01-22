@@ -1,5 +1,0 @@
-query GetUserProject($projectId: String) {
-  project(where: { id: $projectId }) {
-    ...Project
-  }
-}

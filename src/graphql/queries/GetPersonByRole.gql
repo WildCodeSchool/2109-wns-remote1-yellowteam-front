@@ -1,5 +1,0 @@
-query GetPersonByRole($filter: UserWhereInput) {
-  users(where: $filter) {
-    ...User
-  }
-}
