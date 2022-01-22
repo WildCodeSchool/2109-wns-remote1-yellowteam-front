@@ -5904,19 +5904,19 @@ export type UserWhereUniqueInput = {
 
 export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', first_name: string, last_name: string }> };
 
-export type UserFragment = { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, password: string, avatar: string, role: Array<Role> };
+export type UserFragment = { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> };
 
 export type MutateLoginMutationVariables = Exact<{
   data: LoginInput;
 }>;
 
 
-export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', email: string, id: string, role: Array<Role> } };
+export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type MutateMeMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', email: string, id: string, role: Array<Role> } };
+export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type GetProjectQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
@@ -5930,7 +5930,7 @@ export type GetUserInfosQueryVariables = Exact<{
 }>;
 
 
-export type GetUserInfosQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, password: string, avatar: string, role: Array<Role> } };
+export type GetUserInfosQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type GetUserProjectsQueryVariables = Exact<{
   userId: InputMaybe<Scalars['String']>;
@@ -5967,7 +5967,6 @@ export const UserFragmentDoc = gql`
   first_name
   last_name
   email
-  password
   avatar
   role
 }
@@ -5975,12 +5974,10 @@ export const UserFragmentDoc = gql`
 export const MutateLoginDocument = gql`
     mutation MutateLogin($data: LoginInput!) {
   login(data: $data) {
-    email
-    id
-    role
+    ...User
   }
 }
-    `;
+    ${UserFragmentDoc}`;
 export type MutateLoginMutationFn = Apollo.MutationFunction<MutateLoginMutation, MutateLoginMutationVariables>;
 
 /**
@@ -6010,12 +6007,10 @@ export type MutateLoginMutationOptions = Apollo.BaseMutationOptions<MutateLoginM
 export const MutateMeDocument = gql`
     mutation MutateMe {
   me {
-    email
-    id
-    role
+    ...User
   }
 }
-    `;
+    ${UserFragmentDoc}`;
 export type MutateMeMutationFn = Apollo.MutationFunction<MutateMeMutation, MutateMeMutationVariables>;
 
 /**

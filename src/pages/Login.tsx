@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
+import { useCookies } from 'react-cookie'
 import {
   useMutateLoginMutation,
   useMutateMeMutation,
@@ -11,25 +12,20 @@ import {
 
 export default function Login(): JSX.Element {
   const navigate = useNavigate()
+  const [cookies, setCookies] = useCookies()
+
   const { dispatchLogin, dispatchLogout } = useAppState()
   const [login] = useMutateLoginMutation({
     onCompleted: (data) => {
-      dispatchLogin({
-        email: data.login.email,
-        id: data.login.id,
-        roles: data.login.role,
-      })
+      dispatchLogin(data.login)
+      setCookies('isLoggedIn', true)
       navigate('/')
     },
   })
 
   const [me] = useMutateMeMutation({
     onCompleted: (data) => {
-      dispatchLogin({
-        email: data.me.email,
-        id: data.me.id,
-        roles: data.me.role,
-      })
+      dispatchLogin(data.me)
       navigate('/')
     },
     onError: () => {

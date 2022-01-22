@@ -1,6 +1,5 @@
 import { Box } from '@chakra-ui/react'
 import { ReactNode, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import { useMutateMeMutation } from '../../generated/graphql'
 import UserNavBar from '../UserNavBar'
@@ -11,17 +10,11 @@ interface IProps {
 }
 
 export default function Layout({ children, connected }: IProps): JSX.Element {
-  const navigate = useNavigate()
   const { dispatchLogin, dispatchLogout } = useAppState()
 
   const [me] = useMutateMeMutation({
     onCompleted: (data) => {
-      dispatchLogin({
-        email: data.me.email,
-        id: data.me.id,
-        roles: data.me.role,
-      })
-      navigate('/')
+      dispatchLogin(data.me)
     },
     onError: () => {
       dispatchLogout()

@@ -1,7 +1,5 @@
 mutation MutateLogin($data: LoginInput!) {
   login(data: $data) {
-    email
-    id
-    role
+    ...User
   }
 }

@@ -1,85 +1,51 @@
-import React, { useState, ReactElement, useEffect } from 'react'
+import { Box } from '@chakra-ui/react'
+import React, { ReactElement, useEffect, useMemo, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
-import { Box, Text } from '@chakra-ui/react'
-import { Project } from 'src/types/Project'
-import {
-  useGetUserInfosQuery,
-  useGetUserProjectsQuery,
-} from '../generated/graphql'
-import Header from '../molecules/Header'
 import TasksBoard from '../components/TasksBoard'
+import { useGetUserProjectsQuery } from '../generated/graphql'
+import Header from '../molecules/Header'
 import UserBoardHeader from '../molecules/UserBoardHeader'
 
 const useProjects = () => {
-  const { user } = useAppState()
-  const { data: userInfos } = useGetUserInfosQuery({
-    variables: { id: user.id },
-  })
-  const { data: projectsData, loading } = useGetUserProjectsQuery({
-    variables: { userId: user.id },
+  const { userId } = useAppState()
+  const { data, loading, error } = useGetUserProjectsQuery({
+    variables: { userId },
+    skip: !userId,
   })
 
   return {
-    projectsData,
+    projects: data?.projects,
     loading,
-    userInfos,
-    user,
+    error,
   }
 }
 
 const ProjectsBoard = (): ReactElement => {
-  const { projectsData, userInfos } = useProjects()
-  const [selectedProject, setSelectedProject] = useState<Project | undefined>(
-    projectsData?.projects.length ? projectsData.projects[0] : undefined
-  )
-  const [selectedProjectTitle, setSelectedProjectTitle] = useState<
-    string | undefined
-  >(projectsData?.projects.length ? projectsData.projects[0].title : undefined)
+  const navigate = useNavigate()
+
+  const { user } = useAppState()
+
+  const { projects } = useProjects()
+
+  const { projectId } = useParams()
 
   useEffect(() => {
-    setSelectedProjectTitle(projectsData?.projects[0]?.title)
-  }, [projectsData])
+    if (!projectId && projects && projects?.length > 0)
+      navigate(`/${projects[0].id}`)
+  }, [projectId, projects])
 
-  useEffect(() => {
-    setSelectedProject(
-      projectsData?.projects.filter(
-        (project) => project.title === selectedProjectTitle
-      )[0]
-    )
-  }, [selectedProjectTitle])
-
-  if (!projectsData || !userInfos)
-    return (
-      <Box marginLeft="69px" height="100%">
-        <Header userName="" />
-        <UserBoardHeader
-          selectedTitle=""
-          titleList={['']}
-          setSelectedTitleCallBack={() => ['']}
-        />
-        <Text>No data to show</Text>
-      </Box>
-    )
+  const setProjectId = (newId: string) => navigate(`/${newId}`)
 
   return (
     <Box marginLeft="69px" height="100%">
-      <Header userName={userInfos.user.first_name} />
+      <Header userName={user?.first_name ?? ''} />
       <UserBoardHeader
-        selectedTitle={selectedProjectTitle}
-        titleList={projectsData.projects.map((p) => p.title)}
-        setSelectedTitleCallBack={(title) => setSelectedProjectTitle(title)}
+        selectedProjectId={projectId}
+        setSelectedProjectId={setProjectId}
+        projects={projects}
       />
-      <TasksBoard
-        tasksFinished={selectedProject?.tasks.filter(
-          (task) => task.status_task === 'FIHISHED'
-        )}
-        tasksInProgress={selectedProject?.tasks.filter(
-          (task) => task.status_task === 'IN_PROGRESS'
-        )}
-        tasksNotStarted={selectedProject?.tasks.filter(
-          (task) => task.status_task === 'NOT_STARTED'
-        )}
-      />
+      <TasksBoard projectId={projectId} />
     </Box>
   )
 }
