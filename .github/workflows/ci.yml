@@ -11,14 +11,6 @@ on:
       - dev
 
 jobs:
-  tests:
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-      - name: run tests
-        run: yarn && yarn test
-
   ci:
     runs-on: ${{ matrix.os }}
     strategy:
