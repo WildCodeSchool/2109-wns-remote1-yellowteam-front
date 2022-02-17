@@ -39,7 +39,7 @@ const Card = ({
         <Box>{tag}</Box>
         <Box m="12px 4px">{photo}</Box>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="6xl">
         <CardDetails title={title} tag={tag} photo={photo} />
       </Modal>
     </Box>
