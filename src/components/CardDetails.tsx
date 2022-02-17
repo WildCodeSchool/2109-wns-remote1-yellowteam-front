@@ -18,7 +18,7 @@ import {
 import PlaceholderIcon from 'src/static/svg/PlaceholderIcon'
 import { ICard } from 'src/types/ICard'
 
-const Card = ({
+const CardDetails = ({
   title,
   tag,
   photo = <PlaceholderIcon />,
@@ -94,4 +94,4 @@ const Card = ({
   </Box>
 )
 
-export default Card
+export default CardDetails
