@@ -15,8 +15,8 @@ import {
   CircularProgress,
   CircularProgressLabel,
 } from '@chakra-ui/react'
-import { ICard } from 'src/types/ICard'
 import PlaceholderIcon from 'src/static/svg/PlaceholderIcon'
+import { ICard } from 'src/types/ICard'
 
 const Card = ({
   title,
