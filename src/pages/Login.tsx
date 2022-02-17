@@ -1,26 +1,51 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { gql, useMutation } from '@apollo/client'
 import { Button, Flex, FormControl, Input } from '@chakra-ui/react'
-import { useMutateLoginMutation } from 'generated/graphql'
 import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-
-interface FormState {
-  email: string
-  password: string
-}
+import useAppState from 'src/hooks/useAppState'
+import {
+  useMutateLoginMutation,
+  useMutateMeMutation,
+} from '../generated/graphql'
 
 export default function Login(): JSX.Element {
   const navigate = useNavigate()
+  const { dispatchLogin, dispatchLogout } = useAppState()
   const [login] = useMutateLoginMutation({
-    onCompleted: () => navigate('/'),
+    onCompleted: (data) => {
+      dispatchLogin({
+        email: data.login.email,
+        id: data.login.id,
+        roles: data.login.role,
+      })
+      navigate('/')
+    },
   })
+
+  const [me] = useMutateMeMutation({
+    onCompleted: (data) => {
+      dispatchLogin({
+        email: data.me.email,
+        id: data.me.id,
+        roles: data.me.role,
+      })
+      navigate('/')
+    },
+    onError: () => {
+      dispatchLogout()
+    },
+  })
+
+  useEffect(() => {
+    me()
+  }, [])
+
   const { handleSubmit, register } = useForm()
 
-  const onSubmit = async (data: FormState): Promise<void> => {
+  const onSubmit = async ({ email, password }: FieldValues): Promise<void> => {
     login({
-      variables: { data: { email: data.email, password: data.password } },
+      variables: { data: { email, password } },
     })
   }
 
@@ -30,14 +55,14 @@ export default function Login(): JSX.Element {
       justify="center"
       alignItems="center"
       w="full"
-      h="full"
+      h="100vh"
     >
       <FormControl
         shadow="xl"
         p={10}
         rounded="md"
         bgColor="gray.400"
-        w="50%"
+        w={['90%', '80%', '60%', '40%']}
         direction="column"
       >
         <Input
