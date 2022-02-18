@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Button, Flex, FormControl, Input } from '@chakra-ui/react'
+import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
@@ -29,39 +29,51 @@ export default function Login(): JSX.Element {
   }
 
   return (
-    <Flex
-      direction="column"
-      justify="center"
-      alignItems="center"
-      w="full"
-      h="100vh"
-    >
-      <FormControl
-        shadow="xl"
-        p={10}
-        rounded="md"
-        bgColor="gray.400"
-        w={['90%', '80%', '60%', '40%']}
+    <Flex direction="row" alignItems="center">
+      <Flex background="#F69826" w="100%" h="100vh" alignItems="center">
+        <Text
+          textAlign="center"
+          textStyle="titleLogin"
+          color="#ffffff"
+          padding={121}
+        >
+          Welcome to Y-Task Manager
+        </Text>
+      </Flex>
+      <Flex
         direction="column"
+        justifyContent="center"
+        alignItems="center"
+        w="full"
+        h="100vh"
       >
-        <Input
-          bgColor="white"
-          borderColor="black"
-          my={1}
-          type="text"
-          {...register('email')}
-        />
-        <Input
-          bgColor="white"
-          borderColor="black"
-          my={1}
-          type="password"
-          {...register('password')}
-        />
-      </FormControl>
-      <Button my={3} colorScheme="red" onClick={handleSubmit(onSubmit)}>
-        SUBMIT
-      </Button>
+        <Text textStyle="loginText">Login now</Text>
+        <FormControl p={10} w={['90%', '80%', '60%', '50%']}>
+          <Input
+            variant="flushed"
+            placeholder="Email"
+            my={1}
+            type="text"
+            {...register('email')}
+          />
+          <Input
+            variant="flushed"
+            placeholder="Password"
+            my={1}
+            type="password"
+            {...register('password')}
+          />
+        </FormControl>
+        <Button
+          my={3}
+          w={['65%', '55%', '35%', '25%']}
+          backgroundColor="#F69826"
+          color="#ffffff"
+          onClick={handleSubmit(onSubmit)}
+        >
+          SIGN IN
+        </Button>
+      </Flex>
     </Flex>
   )
 }
