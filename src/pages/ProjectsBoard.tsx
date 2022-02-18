@@ -32,10 +32,10 @@ const ProjectsBoard = (): ReactElement => {
 
   useEffect(() => {
     if (!projectId && projects && projects?.length > 0)
-      navigate(`/${projects[0].id}`)
+      navigate(`/board/${projects[0].id}`)
   }, [projectId, projects])
 
-  const setProjectId = (newId: string) => navigate(`/${newId}`)
+  const setProjectId = (newId: string) => navigate(`/board/${newId}`)
 
   return (
     <Box marginLeft="69px" height="100%">

@@ -4,6 +4,7 @@ import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import { useCookies } from 'react-cookie'
+import mainTheme from 'src/theme/mainTheme'
 import { useMutateLoginMutation } from '../generated/graphql'
 
 export default function Login(): JSX.Element {
@@ -16,7 +17,7 @@ export default function Login(): JSX.Element {
     onCompleted: (data) => {
       dispatchLogin(data.login)
       setCookies('isLoggedIn', true)
-      navigate('/')
+      navigate('/board')
     },
   })
 
@@ -30,7 +31,12 @@ export default function Login(): JSX.Element {
 
   return (
     <Flex direction="row" alignItems="center">
-      <Flex background="#F69826" w="100%" h="100vh" alignItems="center">
+      <Flex
+        background={mainTheme.colors.orange}
+        w="100%"
+        h="100vh"
+        alignItems="center"
+      >
         <Text
           textAlign="center"
           textStyle="titleLogin"
@@ -67,7 +73,7 @@ export default function Login(): JSX.Element {
         <Button
           my={3}
           w={['65%', '55%', '35%', '25%']}
-          backgroundColor="#F69826"
+          backgroundColor={mainTheme.colors.orange}
           color="#ffffff"
           onClick={handleSubmit(onSubmit)}
         >
