@@ -3,6 +3,18 @@ import { extendTheme } from '@chakra-ui/react'
 const mainTheme = extendTheme({
   textStyles: {
     // you can also use responsive styles
+    titleLogin: {
+      fontSize: ['42','56', '72'],
+      fontWeight: '800',
+      color: '#38383A',
+      fontFamily: 'Avenir',
+    },
+    loginText: {
+      fontSize: ['26', '32','42'],
+      fontWeight: '800',
+      color: '#38383A',
+      fontFamily: 'Avenir',
+    },
     h1: {
       fontSize: ['32', '36'],
       fontWeight: '800',
