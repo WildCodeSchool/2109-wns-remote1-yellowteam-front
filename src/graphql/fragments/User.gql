@@ -3,7 +3,6 @@ fragment User on User {
   first_name
   last_name
   email
-  password
   avatar
   role
 }

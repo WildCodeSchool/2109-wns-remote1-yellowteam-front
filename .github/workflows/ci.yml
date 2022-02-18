@@ -13,7 +13,6 @@ on:
 jobs:
   ci:
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         os: [ubuntu-latest]

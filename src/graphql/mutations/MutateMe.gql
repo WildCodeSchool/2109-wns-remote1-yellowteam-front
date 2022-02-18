@@ -1,7 +1,5 @@
 mutation MutateMe {
   me {
-    email
-    id
-    role
+    ...User
   }
 }

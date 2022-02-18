@@ -3,6 +3,16 @@ fragment Project on Project {
   title
   status_project
   due_date
+  tasks {
+    id
+    title
+    status_task
+    user {
+      id
+      avatar
+      first_name
+    }
+  }
   users {
     first_name
     last_name

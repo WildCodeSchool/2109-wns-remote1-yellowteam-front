@@ -1,19 +1,18 @@
-/* eslint-disable react/no-array-index-key */
-
 import React, { ReactElement } from 'react'
 import { Flex, Text, Box, Select, Checkbox } from '@chakra-ui/react'
+import { GetUserProjectsQuery } from 'src/generated/graphql'
 
-interface IBackLogHeader {
-  titleList: string[]
-  setSelectedTitleCallBack: (title: string) => void
-  selectedTitle: string | undefined
+interface UserBoardHeaderProps {
+  selectedProjectId: string | undefined
+  setSelectedProjectId: (id: string) => void
+  projects: GetUserProjectsQuery['projects'] | undefined
 }
 
 const UserBoardHeader = ({
-  titleList,
-  setSelectedTitleCallBack,
-  selectedTitle,
-}: IBackLogHeader): ReactElement => (
+  selectedProjectId,
+  setSelectedProjectId,
+  projects,
+}: UserBoardHeaderProps): ReactElement => (
   <Box marginLeft="69px">
     <Flex
       flexDirection="row"
@@ -22,7 +21,7 @@ const UserBoardHeader = ({
       mr="95px"
       justifyContent="space-between"
     >
-      <Text textStyle="h2">{selectedTitle}</Text>
+      <Text textStyle="h2">Your tasks</Text>
       <Checkbox colorScheme="red" fontFamily="Avenir" fontWeight="800">
         Assigned only to me
       </Checkbox>
@@ -32,12 +31,12 @@ const UserBoardHeader = ({
       fontWeight="800"
       width="320px"
       bg="white"
-      value={selectedTitle}
-      onChange={(event) => setSelectedTitleCallBack(event.target.value)}
+      value={selectedProjectId}
+      onChange={(event) => setSelectedProjectId(event.target.value)}
     >
-      {titleList.map((title, index) => (
-        <option key={index} value={title}>
-          {`Projet ${title}`}
+      {projects?.map((p) => (
+        <option key={p.id} value={p.id}>
+          {`Projet ${p.title}`}
         </option>
       ))}
     </Select>

@@ -1,31 +1,24 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { UserFragment } from 'src/generated/graphql'
 
 interface IAppState {
-  user: IUser
+  user: UserFragment | undefined
   isAuth: boolean
 }
 
 const initialState: IAppState = {
-  user: {
-    email: '',
-    id: '',
-    roles: [],
-  },
-  isAuth: false,
+  user: undefined,
+  isAuth: !!document.cookie,
 }
 
 const appSlice = createSlice({
   name: 'appState',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<IUser>) => {
+    login: (state, action: PayloadAction<UserFragment>) => {
       state.isAuth = true
-      state.user = {
-        email: action.payload.email,
-        id: action.payload.id,
-        roles: action.payload.roles,
-      }
+      state.user = action.payload
     },
     logout: () => initialState,
   },
