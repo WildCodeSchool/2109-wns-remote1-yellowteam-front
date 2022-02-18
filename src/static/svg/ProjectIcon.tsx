@@ -4,7 +4,7 @@ interface ISignOut {
   color: string
 }
 
-const PlaceholderIcon = ({ color }: ISignOut): JSX.Element => (
+const ProjectIcon = ({ color }: ISignOut): JSX.Element => (
   <svg
     width="30"
     height="30"
@@ -19,4 +19,4 @@ const PlaceholderIcon = ({ color }: ISignOut): JSX.Element => (
   </svg>
 )
 
-export default PlaceholderIcon
+export default ProjectIcon

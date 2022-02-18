@@ -27,6 +27,17 @@ const mainTheme = extendTheme({
       color: '#38383A',
       fontFamily: 'Avenir',
     },
+    h3: {
+      fontSize: ['16', '18'],
+      fontWeight: '800',
+      color: '#38383A',
+      fontFamily: 'Avenir',
+    },
+    h4: {
+      fontSize: ['16', '18'],
+      color: '#38383A',
+      fontFamily: 'Avenir',
+    },
     titleTicket: {
       fontSize: ['16', '18'],
       fontWeight: '800',

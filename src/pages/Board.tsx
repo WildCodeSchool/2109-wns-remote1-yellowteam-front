@@ -21,7 +21,7 @@ const useProjects = () => {
   }
 }
 
-const ProjectsBoard = (): ReactElement => {
+const Board = (): ReactElement => {
   const navigate = useNavigate()
 
   const { user } = useAppState()
@@ -50,4 +50,4 @@ const ProjectsBoard = (): ReactElement => {
   )
 }
 
-export default ProjectsBoard
+export default Board
