@@ -12,6 +12,7 @@ import {
 
 export default function Login(): JSX.Element {
   const navigate = useNavigate()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookies] = useCookies()
 
   const { dispatchLogin, dispatchLogout } = useAppState()

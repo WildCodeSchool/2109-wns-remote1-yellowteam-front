@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Flex, Text } from '@chakra-ui/react'
 import React, { ReactElement, useMemo } from 'react'
 import { Status, useGetProjectQuery } from 'src/generated/graphql'

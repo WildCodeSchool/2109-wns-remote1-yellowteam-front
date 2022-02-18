@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserFragment } from 'src/generated/graphql'

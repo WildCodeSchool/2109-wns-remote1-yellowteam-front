@@ -1,4 +1,4 @@
-import React, { ReactElement, useMemo } from 'react'
+import React, { ReactElement } from 'react'
 import { Flex, Text, Box, Select, Checkbox } from '@chakra-ui/react'
 import { GetUserProjectsQuery } from 'src/generated/graphql'
 

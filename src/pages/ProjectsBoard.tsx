@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import React, { ReactElement, useEffect, useMemo, useState } from 'react'
+import React, { ReactElement, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import TasksBoard from '../components/TasksBoard'

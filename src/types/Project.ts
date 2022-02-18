@@ -1,4 +1,4 @@
-import { Status } from 'src/generated/graphql';
+import { Status, User } from 'src/generated/graphql';
 
 export  interface Project {
     id: string
@@ -9,7 +9,7 @@ export  interface Project {
         id: string;
         title: string;
         status_task: Status;
-        user: any
+        user: User
     }[];
-    users: any[];
+    users: User[];
 }
