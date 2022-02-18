@@ -20,7 +20,10 @@ const appSlice = createSlice({
       state.isAuth = true
       state.user = action.payload
     },
-    logout: () => initialState,
+    logout: (state) => {
+      state.user= undefined 
+      state.isAuth= false
+    },
   },
 })
 

@@ -1,43 +1,25 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
-import { useEffect } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import { useCookies } from 'react-cookie'
 import mainTheme from 'src/theme/mainTheme'
-import {
-  useMutateLoginMutation,
-  useMutateMeMutation,
-} from '../generated/graphql'
+import { useMutateLoginMutation } from '../generated/graphql'
 
 export default function Login(): JSX.Element {
   const navigate = useNavigate()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookies] = useCookies()
 
-  const { dispatchLogin, dispatchLogout } = useAppState()
+  const { dispatchLogin } = useAppState()
   const [login] = useMutateLoginMutation({
     onCompleted: (data) => {
       dispatchLogin(data.login)
       setCookies('isLoggedIn', true)
-      navigate('/')
+      navigate('/board')
     },
   })
-
-  const [me] = useMutateMeMutation({
-    onCompleted: (data) => {
-      dispatchLogin(data.me)
-      navigate('/')
-    },
-    onError: () => {
-      dispatchLogout()
-    },
-  })
-
-  useEffect(() => {
-    me()
-  }, [])
 
   const { handleSubmit, register } = useForm()
 
