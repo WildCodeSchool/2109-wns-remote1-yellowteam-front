@@ -9,13 +9,17 @@ import mainTheme from './theme/mainTheme'
 import apolloClient from './services/graphql'
 import useAppState from './hooks/useAppState'
 import ProjectsBoard from './pages/ProjectsBoard'
+import Profile from './pages/Profile'
+import Notifications from './pages/Notifications'
 
 const client = apolloClient()
 
 const Routes = () =>
   useRoutes([
-    { path: '/', element: <ProjectsBoard /> },
-    { path: '/:projectId', element: <ProjectsBoard /> },
+    { path: '/board', element: <ProjectsBoard /> },
+    { path: '/board/:projectId', element: <ProjectsBoard /> },
+    { path: '/profile', element: <Profile /> },
+    { path: '/notifications', element: <Notifications /> },
   ])
 
 function App(): JSX.Element {

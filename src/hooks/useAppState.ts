@@ -3,7 +3,6 @@ import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserFragment } from 'src/generated/graphql'
 import { login, logout } from 'src/redux/actions'
-
 import { RootState } from 'src/redux/reducers'
 
 const useAppState = () => {
