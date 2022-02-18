@@ -39,7 +39,12 @@ const Card = ({
         <Box>{tag}</Box>
         <Box m="12px 4px">{photo}</Box>
       </Flex>
-      <Modal isOpen={isOpen} onClose={onClose} size="6xl">
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size="6xl"
+        scrollBehavior="inside"
+      >
         <CardDetails title={title} tag={tag} photo={photo} />
       </Modal>
     </Box>

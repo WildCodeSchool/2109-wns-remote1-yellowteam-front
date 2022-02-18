@@ -16,6 +16,8 @@ import {
   CircularProgressLabel,
   IconButton,
   Select,
+  ButtonGroup,
+  Textarea,
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
 import PlaceholderIcon from 'src/static/svg/PlaceholderIcon'
@@ -33,7 +35,7 @@ const CardDetails = ({
     marginBottom="10px"
   >
     <ModalOverlay />
-    <ModalContent height="90vh" m="50px">
+    <ModalContent maxHeight="90vh" p="25px">
       <ModalHeader>{title}</ModalHeader>
 
       <ModalCloseButton />
@@ -45,16 +47,18 @@ const CardDetails = ({
         </Flex>
 
         {/* Description */}
-        <Flex flexDirection="column">
-          <Text textStyle="titleTicket" mt="12px">
-            Task Description
+        <Flex flexDirection="column" mt="12px">
+          <Flex>
+            <Text textStyle="titleTicket" mt="12px">
+              Task Description
+            </Text>
             <IconButton
               variant="unstyled"
               aria-label=""
               icon={<EditIcon />}
               onClick={() => console.log('test')}
             />
-          </Text>
+          </Flex>
           <Text textStyle="body" mt="12px">
             is simply dummy text of the printing and typesetting industry. Lorem
             Ipsum has been the industrys standard dummy text ever since the
@@ -64,7 +68,7 @@ const CardDetails = ({
         </Flex>
 
         {/* Task progress, details and attachments */}
-        <Flex justifyContent="space-between" mt="12px">
+        <Flex justifyContent="space-between" mt="24px" h="150px">
           {/* task progress */}
           <Flex flexDirection="column">
             <Text textStyle="titleTicket">Task progress</Text>
@@ -75,17 +79,23 @@ const CardDetails = ({
           {/* task details */}
           <Flex flexDirection="column">
             <Text textStyle="titleTicket">Task progress details</Text>
-            <Flex mt="12px" justifyContent="space-between">
-              Initial time spend estime
-              <Select placeholder="Select option" width="150px">
+            <Flex mt="12px" justifyContent="space-between" alignItems="center">
+              <Text textStyle="body" mr="5px">
+                {' '}
+                Initial time spend estime
+              </Text>
+              <Select placeholder="Select option" width="150px" h="25px">
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
               </Select>
             </Flex>
-            <Flex mt="12px" justifyContent="space-between">
-              Total time spent
-              <Select placeholder="Select option" width="150px">
+            <Flex mt="12px" justifyContent="space-between" alignItems="center">
+              <Text textStyle="body" mr="5px">
+                {' '}
+                Total time spent
+              </Text>
+              <Select placeholder="Select option" width="150px" h="25px">
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
@@ -97,26 +107,60 @@ const CardDetails = ({
         </Flex>
 
         {/* Comments */}
-        <Flex>
-          <Flex flexDirection="column" mt="12px">
+        <Flex flexDirection="column" mt="24px">
+          <Flex>
             <Text textStyle="titleTicket">Comments</Text>
-            <Flex>
-              <Box m="12px 4px">{photo}</Box>
-              <Flex flexDirection="column">
-                <Text textStyle="body">Gina Johns - Developper</Text>
-                <Text textStyle="body">12h09 - 01/02/2021</Text>
+          </Flex>
+          <Flex justifyContent="space-between" alignItems="center">
+            {/* List of comments */}
+            <Flex flexDirection="column" mt="12px" width="45%">
+              {/* <Text textStyle="titleTicket">Comments</Text> */}
+              <Flex>
+                <Box m="12px 4px">{photo}</Box>
+                <Flex flexDirection="column" ml="12px">
+                  <Text textStyle="body">Gina Johns - Developper</Text>
+                  <Text textStyle="body">12h09 - 01/02/2021</Text>
+                </Flex>
               </Flex>
+              <Text textStyle="body" mt="12px">
+                is simply dummy text of the printing and typesetting industry.
+                Lorem Ipsum has been the industrys standard dummy text ever
+                since the 1500s, when an unknown printer took a galley of type
+                and scrambled it to make a type specimen book.
+              </Text>
             </Flex>
-            <Text textStyle="body" mt="12px">
-              is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industrys standard dummy text ever since
-              the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book.
-            </Text>
-            {/* <Flex></Flex> */}
+            {/* Add new comment */}
+            <Flex alignItems="center" width="45%" flexDirection="column">
+              <Textarea
+                textStyle="body"
+                mt="12px"
+                placeholder="Add a new comment"
+              />
+              <Button
+                colorScheme="green"
+                size="xs"
+                alignSelf="flex-end"
+                mt="12px"
+              >
+                Save
+              </Button>
+            </Flex>
           </Flex>
         </Flex>
       </ModalBody>
+      {/* Footer Buttons */}
+      <ModalFooter borderTop="1px" borderColor="gray.200" paddingBottom="0">
+        <Button
+          colorScheme="blue"
+          mr={3}
+          onClick={() => console.log('close modal')}
+        >
+          Close
+        </Button>
+        <Button variant="outline" colorScheme="green">
+          Confirm
+        </Button>
+      </ModalFooter>
     </ModalContent>
   </Box>
 )
