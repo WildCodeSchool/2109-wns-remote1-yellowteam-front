@@ -2,6 +2,7 @@ import React from 'react'
 import { Flex, Box, Switch } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
+import ProjectIcon from 'src/static/svg/ProjectIcon'
 import TasksIcon from '../static/svg/TasksIcon'
 import mainTheme from '../theme/mainTheme'
 import UserIcon from '../static/svg/UserIcon'
@@ -34,6 +35,19 @@ const UserNavBar = (): JSX.Element => {
         <TasksIcon
           color={
             location.pathname.includes('board')
+              ? mainTheme.colors.orange
+              : mainTheme.colors.deactivatedGrey
+          }
+        />
+      </Box>
+      <Box
+        as="button"
+        data-testid="projects-button"
+        onClick={() => setTab('projects')}
+      >
+        <ProjectIcon
+          color={
+            location.pathname.includes('projects')
               ? mainTheme.colors.orange
               : mainTheme.colors.deactivatedGrey
           }
