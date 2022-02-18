@@ -1,6 +1,7 @@
 import React from 'react'
 import { Flex, Box, Switch } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import useAppState from 'src/hooks/useAppState'
 import TasksIcon from '../static/svg/TasksIcon'
 import mainTheme from '../theme/mainTheme'
 import UserIcon from '../static/svg/UserIcon'
@@ -9,6 +10,7 @@ import SignOutIcon from '../static/svg/SignOutIcon'
 
 const UserNavBar = (): JSX.Element => {
   const navigate = useNavigate()
+  const { dispatchLogout } = useAppState()
 
   const setTab = (tab: string) => navigate(`/${tab}`)
   const location = useLocation()
@@ -63,7 +65,7 @@ const UserNavBar = (): JSX.Element => {
           }
         />
       </Box>
-      <Box as="button" data-testid="sign-out-button">
+      <Box as="button" data-testid="sign-out-button" onClick={dispatchLogout}>
         <SignOutIcon color={mainTheme.colors.deactivatedGrey} />
       </Box>
       <Switch />
