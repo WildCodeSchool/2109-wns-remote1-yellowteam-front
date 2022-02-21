@@ -8,6 +8,6 @@ interface ICard {
 // Use for component CardDetails with all task informations
 interface ICardDetails extends ICard {
   description?: string
-  user?: IUser
+  user?: IUserTaskComments
   comments?: IComment[]
 }
