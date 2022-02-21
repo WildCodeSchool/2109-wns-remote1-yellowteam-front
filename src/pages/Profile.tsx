@@ -1,4 +1,4 @@
-import { Box, Button, Image, Text } from '@chakra-ui/react'
+import { Box, Button, Image, Tag, Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import useAppState from 'src/hooks/useAppState'
 import mainTheme from 'src/theme/mainTheme'
@@ -6,6 +6,8 @@ import Header from '../molecules/Header'
 
 const Profile = (): ReactElement => {
   const { user } = useAppState()
+
+  console.log('debug', user)
 
   return (
     <>
@@ -46,7 +48,21 @@ const Profile = (): ReactElement => {
             <Text fontWeight="bold" fontSize="20">
               {user?.first_name} {user?.last_name}
             </Text>
-            <Text>{user?.role}</Text>
+            <Box>
+              {user?.role.map((elt) => (
+                <Tag
+                  backgroundColor={mainTheme.colors.orange}
+                  color="white"
+                  fontWeight="bold"
+                  fontSize="12"
+                  width="20"
+                  justifyContent="center"
+                  marginX="1"
+                >
+                  {elt}
+                </Tag>
+              ))}
+            </Box>
           </Box>
         </Box>
       </Box>
