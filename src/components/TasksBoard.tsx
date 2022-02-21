@@ -52,6 +52,7 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
         {tasksNotStarted?.length
           ? tasksNotStarted.map((t) => (
               <Card
+                taskId={t.id}
                 key={t.id}
                 tag={
                   <Tag
@@ -73,6 +74,7 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
         {tasksInProgress?.length
           ? tasksInProgress.map((t) => (
               <Card
+                taskId={t.id}
                 key={t.id}
                 tag={
                   <Tag
@@ -94,6 +96,7 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
         {tasksFinished?.length
           ? tasksFinished.map((t) => (
               <Card
+                taskId={t.id}
                 key={t.id}
                 tag={
                   <Tag

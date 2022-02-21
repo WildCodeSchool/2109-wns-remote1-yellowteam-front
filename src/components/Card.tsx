@@ -4,13 +4,9 @@ import PlaceholderIcon from '../static/svg/PlaceholderIcon'
 import CardDetails from './CardDetails'
 
 /* eslint-disable react/require-default-props */
-interface ICard {
-  title: string
-  photo?: ReactElement
-  tag: ReactElement
-}
 
 const Card = ({
+  taskId,
   photo = <PlaceholderIcon />,
   tag,
   title,
@@ -45,7 +41,7 @@ const Card = ({
         size="6xl"
         scrollBehavior="inside"
       >
-        <CardDetails title={title} tag={tag} photo={photo} />
+        <CardDetails taskId={taskId} />
       </Modal>
     </Box>
   )

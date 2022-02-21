@@ -5918,6 +5918,13 @@ export type MutateMeMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
+export type GetSingleSelfTasksQueryVariables = Exact<{
+  where: TaskWhereUniqueInput;
+}>;
+
+
+export type GetSingleSelfTasksQuery = { __typename?: 'Query', task: { __typename?: 'Task', title: string, description: string, id: string, status_task: Status, total_time_spent: number, start_date: any, end_date: any, created_at: any, user: { __typename?: 'User', avatar: string, id: string }, comments: Array<{ __typename?: 'Comment', id: string, content: string, user_task_comments: { __typename?: 'User', avatar: string, first_name: string, last_name: string, created_at: any } }> } };
+
 export type GetProjectQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
 }>;
@@ -6036,6 +6043,62 @@ export function useMutateMeMutation(baseOptions?: Apollo.MutationHookOptions<Mut
 export type MutateMeMutationHookResult = ReturnType<typeof useMutateMeMutation>;
 export type MutateMeMutationResult = Apollo.MutationResult<MutateMeMutation>;
 export type MutateMeMutationOptions = Apollo.BaseMutationOptions<MutateMeMutation, MutateMeMutationVariables>;
+export const GetSingleSelfTasksDocument = gql`
+    query GetSingleSelfTasks($where: TaskWhereUniqueInput!) {
+  task(where: $where) {
+    title
+    description
+    id
+    status_task
+    total_time_spent
+    start_date
+    end_date
+    created_at
+    user {
+      avatar
+      id
+    }
+    comments {
+      id
+      content
+      user_task_comments {
+        avatar
+        first_name
+        last_name
+        created_at
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetSingleSelfTasksQuery__
+ *
+ * To run a query within a React component, call `useGetSingleSelfTasksQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSingleSelfTasksQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSingleSelfTasksQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetSingleSelfTasksQuery(baseOptions: Apollo.QueryHookOptions<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>(GetSingleSelfTasksDocument, options);
+      }
+export function useGetSingleSelfTasksLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>(GetSingleSelfTasksDocument, options);
+        }
+export type GetSingleSelfTasksQueryHookResult = ReturnType<typeof useGetSingleSelfTasksQuery>;
+export type GetSingleSelfTasksLazyQueryHookResult = ReturnType<typeof useGetSingleSelfTasksLazyQuery>;
+export type GetSingleSelfTasksQueryResult = Apollo.QueryResult<GetSingleSelfTasksQuery, GetSingleSelfTasksQueryVariables>;
 export const GetProjectDocument = gql`
     query GetProject($id: String) {
   project(where: {id: $id}) {
