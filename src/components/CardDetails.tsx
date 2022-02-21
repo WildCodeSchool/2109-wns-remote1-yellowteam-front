@@ -64,27 +64,6 @@ const CardDetails = ({ taskId }: ICard): ReactElement => {
         return val2 - val1
       })
 
-      console.log('sortedArray => ', sortedArray)
-
-      // const compareLuxonDates = (a: DateTime, b: DateTime) =>
-      //   a.toMillis() - b.toMillis()
-
-      // newCommentList.sort(compareLuxonDates)
-
-      // const sortedArray = (a: IComment, b: IComment) => {
-      //   if (a.created_at < b.created_at) {
-      //     return -1
-      //   }
-      //   if (a.created_at > b.created_at) {
-      //     return 1
-      //   }
-      //   return 0
-
-      //   // a.created_at < b.created_at ? -1 : a.created_at > b.created_at ? 1 : 0
-      // }
-
-      // const sortedArray: IComment[] = newCommentList.sort(compareLuxonDates)
-
       const newCard: ICardDetails = {
         taskId,
         comments: sortedArray,
