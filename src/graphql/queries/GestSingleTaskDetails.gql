@@ -15,6 +15,7 @@ query GetSingleSelfTasks($where: TaskWhereUniqueInput!) {
     comments {
       id
       content
+      created_at
       user_task_comments {
         avatar
         first_name

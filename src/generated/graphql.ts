@@ -5923,7 +5923,7 @@ export type GetSingleSelfTasksQueryVariables = Exact<{
 }>;
 
 
-export type GetSingleSelfTasksQuery = { __typename?: 'Query', task: { __typename?: 'Task', title: string, description: string, id: string, status_task: Status, total_time_spent: number, start_date: any, end_date: any, created_at: any, user: { __typename?: 'User', avatar: string, id: string }, comments: Array<{ __typename?: 'Comment', id: string, content: string, user_task_comments: { __typename?: 'User', avatar: string, first_name: string, last_name: string, created_at: any } }> } };
+export type GetSingleSelfTasksQuery = { __typename?: 'Query', task: { __typename?: 'Task', title: string, description: string, id: string, status_task: Status, total_time_spent: number, start_date: any, end_date: any, created_at: any, user: { __typename?: 'User', avatar: string, id: string }, comments: Array<{ __typename?: 'Comment', id: string, content: string, created_at: any, user_task_comments: { __typename?: 'User', avatar: string, first_name: string, last_name: string, created_at: any } }> } };
 
 export type GetProjectQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
@@ -6061,6 +6061,7 @@ export const GetSingleSelfTasksDocument = gql`
     comments {
       id
       content
+      created_at
       user_task_comments {
         avatar
         first_name

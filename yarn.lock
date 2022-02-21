@@ -3996,6 +3996,11 @@
   "resolved" "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.177.tgz"
   "version" "4.14.177"
 
+"@types/luxon@^2.0.9":
+  "integrity" "sha512-ZuzIc7aN+i2ZDMWIiSmMdubR9EMMSTdEzF6R+FckP4p6xdnOYKqknTo/k+xXQvciSXlNGIwA4OPU5X7JIFzYdA=="
+  "resolved" "https://registry.npmjs.org/@types/luxon/-/luxon-2.0.9.tgz"
+  "version" "2.0.9"
+
 "@types/minimatch@*":
   "integrity" "sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ=="
   "resolved" "https://registry.npmjs.org/@types/minimatch/-/minimatch-3.0.5.tgz"

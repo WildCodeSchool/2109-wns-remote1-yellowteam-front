@@ -1,28 +1,26 @@
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useEffect } from 'react'
 import {
   Box,
   Text,
   Flex,
   Button,
-  Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
   CircularProgress,
   CircularProgressLabel,
   IconButton,
   Select,
-  ButtonGroup,
   Textarea,
   Image,
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
 import { useGetSingleSelfTasksQuery } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
+import { DateTime } from 'luxon'
 
 const CardDetails = ({ taskId }: ICard): ReactElement => {
   const { user } = useAppState()
@@ -43,21 +41,13 @@ const CardDetails = ({ taskId }: ICard): ReactElement => {
     }
   }, [data])
 
-  const handleNewCommentChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const inputValue = e.target.value
-    setComment(inputValue)
-  }
-
   // Save comment on local state
   const saveNewComment = () => {
     if (comment) {
       const newComment: IComment = {
         content: comment,
-        id: 'id_test_from_front_new_comment',
+        created_at: DateTime.now().toString(),
         user_task_comments: {
-          created_at: '', // TODO
           ...user,
         },
       }
@@ -68,12 +58,41 @@ const CardDetails = ({ taskId }: ICard): ReactElement => {
       }
       newCommentList.push(newComment)
 
+      const sortedArray: IComment[] = newCommentList.sort((a, b) => {
+        const val1: number = DateTime.fromISO(a.created_at).toMillis()
+        const val2: number = DateTime.fromISO(b.created_at).toMillis()
+        return val2 - val1
+      })
+
+      console.log('sortedArray => ', sortedArray)
+
+      // const compareLuxonDates = (a: DateTime, b: DateTime) =>
+      //   a.toMillis() - b.toMillis()
+
+      // newCommentList.sort(compareLuxonDates)
+
+      // const sortedArray = (a: IComment, b: IComment) => {
+      //   if (a.created_at < b.created_at) {
+      //     return -1
+      //   }
+      //   if (a.created_at > b.created_at) {
+      //     return 1
+      //   }
+      //   return 0
+
+      //   // a.created_at < b.created_at ? -1 : a.created_at > b.created_at ? 1 : 0
+      // }
+
+      // const sortedArray: IComment[] = newCommentList.sort(compareLuxonDates)
+
       const newCard: ICardDetails = {
         taskId,
-        comments: newCommentList,
+        comments: sortedArray,
       }
+
       setCard(newCard)
     }
+    setComment('')
   }
 
   if (card) {
@@ -212,8 +231,9 @@ const CardDetails = ({ taskId }: ICard): ReactElement => {
                     textStyle="body"
                     mt="12px"
                     placeholder="Add a new comment"
+                    value={comment}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                      handleNewCommentChange(e)
+                      setComment(e.target.value)
                     }
                   />
                   <Button
