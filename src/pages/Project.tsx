@@ -1,34 +1,112 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable react/jsx-props-no-spreading */
 import {
   Box,
   Text,
   Flex,
   Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   useDisclosure,
+  useBoolean,
+  Spinner,
 } from '@chakra-ui/react'
-import React, { ReactElement } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useGetUserProjectsQuery } from 'src/generated/graphql'
+import React, { ReactElement, useEffect, useState } from 'react'
+import {
+  ProjectCreateInput,
+  Status,
+  useCreateProjectMutation,
+  useGetUserProjectsQuery,
+} from 'src/generated/graphql'
+import 'react-datepicker/dist/react-datepicker.css'
 import useAppState from 'src/hooks/useAppState'
 import AddIcon from 'src/static/svg/AddIcon'
 import Delete from 'src/static/svg/Delete'
 import Edit from 'src/static/svg/Edit'
 import mainTheme from 'src/theme/mainTheme'
+import CreateProjectModal from 'src/components/Modals/CreateProjectModal'
+import { useForm } from 'react-hook-form'
 import Header from '../molecules/Header'
 
+export type Dates = {
+  startDate: Date | null
+  endDate: Date | null
+  dueDate: Date | null
+}
+
 const Project = (): ReactElement => {
+  const [dates, setDates] = useState<Dates>({
+    startDate: new Date(),
+    endDate: new Date(),
+    dueDate: new Date(),
+  })
+  const [isDisabled, setIsDisabled] = useBoolean()
+  const [isPrivate, setIsPrivate] = useBoolean()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm()
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { user, userId } = useAppState()
-  const { data } = useGetUserProjectsQuery({
+  const {
+    data,
+    refetch,
+    loading: loadingProjects,
+  } = useGetUserProjectsQuery({
     variables: { userId },
     skip: !userId,
   })
+  const [createProject] = useCreateProjectMutation()
+
+  const onSubmit = (data: ProjectCreateInput) => {
+    try {
+      createProject({
+        variables: {
+          data: {
+            title: data.title,
+            description: data.description,
+            users: {
+              connect: [{ id: userId }],
+            },
+            is_disabled: isDisabled,
+            private: isPrivate,
+            start_date: JSON.stringify(
+              dates.startDate
+                ?.toString()
+                .replace('(Central European Standard Time)', '')
+            ),
+            end_date: JSON.stringify(
+              dates.endDate
+                ?.toString()
+                .replace('(Central European Standard Time)', '')
+            ),
+            due_date: JSON.stringify(
+              dates.dueDate
+                ?.toString()
+                .replace('(Central European Standard Time)', '')
+            ),
+            status_project: Status.NotStarted,
+            total_time_spent: 0,
+            owner: {
+              connect: {
+                id: userId,
+              },
+            },
+          },
+        },
+      })
+    } catch (e) {
+      console.log('error creating project', e)
+    }
+    onClose()
+    reset()
+  }
+
+  useEffect(() => {
+    refetch()
+  }, [onSubmit])
 
   if (!data || !data.projects)
     return (
@@ -43,7 +121,9 @@ const Project = (): ReactElement => {
           borderRadius={12}
         >
           <Text textStyle="h2">Your projects</Text>
-          <Text textStyle="h4">No project</Text>
+          <Box textAlign="center">
+            {loadingProjects ? <Spinner /> : 'No Projects'}
+          </Box>
         </Box>
       </Box>
     )
@@ -64,7 +144,11 @@ const Project = (): ReactElement => {
         </Text>
         <Box height="20rem" overflow="auto">
           {data.projects.map((project) => (
-            <Flex alignItems="center" justifyContent="space-between">
+            <Flex
+              key={project.id}
+              alignItems="center"
+              justifyContent="space-between"
+            >
               <Flex>
                 <Text textStyle="h3">{project.title} - </Text>
                 <Text textStyle="h4">
@@ -86,19 +170,18 @@ const Project = (): ReactElement => {
           <Button variant="unstyled" onClick={onOpen}>
             <AddIcon />
           </Button>
-          <Modal onClose={onClose} isOpen={isOpen} scrollBehavior="inside">
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader>New project</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
-                <Text>coucou</Text>
-              </ModalBody>
-              <ModalFooter>
-                <Button onClick={onClose}>Close</Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
+          <CreateProjectModal
+            isOpen={isOpen}
+            onClose={onClose}
+            onSubmit={onSubmit}
+            setDates={setDates}
+            dates={dates}
+            setIsDisabled={setIsDisabled}
+            setIsPrivate={setIsPrivate}
+            register={register}
+            handleSubmit={handleSubmit}
+            errors={errors}
+          />
         </Flex>
       </Box>
     </Box>

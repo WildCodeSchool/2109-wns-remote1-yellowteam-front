@@ -1,5 +1,5 @@
 query GetUserProjects($userId: String) {
-  projects(where: { users: { some: { id: { equals: $userId } } } }) {
+  projects(where: { owner: { is: { id: { equals: $userId } } } }) {
     ...Project
   }
 }
