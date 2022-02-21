@@ -68,7 +68,7 @@ const mainTheme = extendTheme({
       minHeight: '800px',
       margin: '0px 50px 50px 120px',
       borderRadius: '8px',
-      padding: '30px 0px 0px 50px',
+      padding: '30px 30px 30px 50px',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-start',

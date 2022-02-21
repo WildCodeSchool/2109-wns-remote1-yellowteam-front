@@ -1,5 +1,14 @@
-import { Box, Button, Image, Tag, Text } from '@chakra-ui/react'
-import React, { ReactElement } from 'react'
+import {
+  Box,
+  Button,
+  FormControl,
+  Image,
+  Input,
+  Tag,
+  Text,
+} from '@chakra-ui/react'
+
+import React, { ReactElement, useState } from 'react'
 import useAppState from 'src/hooks/useAppState'
 import mainTheme from 'src/theme/mainTheme'
 import Header from '../molecules/Header'
@@ -7,7 +16,11 @@ import Header from '../molecules/Header'
 const Profile = (): ReactElement => {
   const { user } = useAppState()
 
-  console.log('debug', user)
+  const [isHidden, setHidden] = useState<boolean>(true)
+
+  // const [user] = ''
+
+  console.warn('user:', user)
 
   return (
     <>
@@ -19,20 +32,40 @@ const Profile = (): ReactElement => {
           <Text textStyle="h2" display="flex" flexDirection="column">
             Your profile
           </Text>
-          <Button
-            display="flex"
-            flexDirection="column"
-            marginLeft="200px"
-            backgroundColor={mainTheme.colors.orange}
-            color="#ffffff"
-            // eslint-disable-next-line no-alert
-            onClick={() => alert('sdfd')}
-          >
-            Modify
-          </Button>
+          {isHidden ? (
+            <>
+              <Button
+                display="flex"
+                flexDirection="column"
+                marginLeft="200px"
+                backgroundColor={mainTheme.colors.orange}
+                color="#ffffff"
+                onClick={() => setHidden(false)}
+              >
+                Modify
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                display="flex"
+                flexDirection="column"
+                marginLeft="200px"
+                backgroundColor="white"
+                variant="outline"
+                borderWidth="3px"
+                borderColor={mainTheme.colors.orange}
+                _hover={{ bg: mainTheme.colors.orange, color: 'white' }}
+                color={mainTheme.colors.orange}
+                onClick={() => setHidden(true)}
+              >
+                Close
+              </Button>
+            </>
+          )}
         </Box>
 
-        <Box display="flex" flexDirection="row" marginTop="50px">
+        <Box display="flex" flexDirection="row" marginTop={50}>
           <Image
             src={user?.avatar}
             display="flex"
@@ -45,10 +78,15 @@ const Profile = (): ReactElement => {
             justifyContent="center"
             marginLeft="50px"
           >
-            <Text fontWeight="bold" fontSize="20">
+            <Text
+              display="flex"
+              flexDirection="row"
+              fontWeight="bold"
+              fontSize="20"
+            >
               {user?.first_name} {user?.last_name}
             </Text>
-            <Box>
+            <Box display="flex" flexDirection="row">
               {user?.role.map((elt) => (
                 <Tag
                   backgroundColor={mainTheme.colors.orange}
@@ -57,7 +95,7 @@ const Profile = (): ReactElement => {
                   fontSize="12"
                   width="20"
                   justifyContent="center"
-                  marginX="1"
+                  margin="1"
                 >
                   {elt}
                 </Tag>
@@ -65,6 +103,78 @@ const Profile = (): ReactElement => {
             </Box>
           </Box>
         </Box>
+        {!isHidden && (
+          <>
+            <FormControl
+              width="100%"
+              height="100%"
+              marginTop="10"
+              padding="1"
+              justifyContent="space-between"
+            >
+              <Box display="flex" flexDirection="row" marginBottom="50px">
+                <Input
+                  mx="10"
+                  variant="flushed"
+                  placeholder="Firstname"
+                  flexDirection="column"
+                  value={user?.first_name}
+                  {...register('first_name')}
+                />
+                <Input
+                  mx="10"
+                  variant="flushed"
+                  placeholder="Firstname"
+                  flexDirection="column"
+                  value={user?.last_name}
+                />
+                <Input
+                  mx="10"
+                  variant="flushed"
+                  placeholder="image url"
+                  flexDirection="column"
+                  type="url"
+                  // type="image"
+                  value={user?.avatar}
+                />
+              </Box>
+              <Box display="flex" flexDirection="row" marginBottom="50px">
+                <Input
+                  mx="10"
+                  variant="flushed"
+                  flexDirection="column"
+                  placeholder="Firstname"
+                  type="email"
+                  value={user?.email}
+                />
+                <Input
+                  mx="10"
+                  variant="flushed"
+                  placeholder="Old password"
+                  flexDirection="column"
+                  value="old password"
+                />
+                <Input
+                  mx="10"
+                  variant="flushed"
+                  flexDirection="column"
+                  placeholder="New password"
+                  value="new password"
+                />
+              </Box>
+            </FormControl>
+            <Button
+              width="20"
+              mx="10"
+              backgroundColor={mainTheme.colors.orange}
+              color="#ffffff"
+              // eslint-disable-next-line no-alert
+              onClick={() => alert('sdfd')}
+            >
+              Save
+            </Button>
+          </>
+        )}
       </Box>
     </>
   )
