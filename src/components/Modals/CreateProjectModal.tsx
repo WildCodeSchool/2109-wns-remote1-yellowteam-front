@@ -72,7 +72,10 @@ const CreateProjectModal = ({
       <ModalCloseButton />
 
       <ModalBody>
-        <form onSubmit={handleSubmit(onSubmit as SubmitHandler<FieldValues>)}>
+        <form
+          onSubmit={handleSubmit(onSubmit as SubmitHandler<FieldValues>)}
+          data-testid="form"
+        >
           <FormLabel htmlFor="title">Project name</FormLabel>
           <ErrorMessage
             errors={errors}
@@ -81,6 +84,7 @@ const CreateProjectModal = ({
           />
           <Input
             marginBottom="1.2rem"
+            aria-label="title"
             type="text"
             placeholder="Name of your project"
             {...register('title', {
@@ -100,13 +104,14 @@ const CreateProjectModal = ({
           />
           <Input
             marginBottom="1.2rem"
+            aria-label="description"
             type="text"
             placeholder="Short project description"
             {...register('description', {
               required: 'Description is required',
               minLength: {
-                value: 4,
-                message: 'Minimum length should be 20',
+                value: 10,
+                message: 'Minimum length should be 10',
               },
             })}
           />
@@ -117,6 +122,7 @@ const CreateProjectModal = ({
             render={({ message }) => <Text color="red">{message}</Text>}
           />
           <RadioGroup
+            data-testid="is_disabled"
             marginBottom="1.2rem"
             {...register('is_disabled', {
               required: 'Project visibility is required',
@@ -135,6 +141,7 @@ const CreateProjectModal = ({
             render={({ message }) => <Text color="red">{message}</Text>}
           />
           <RadioGroup
+            data-testid="private"
             marginBottom="1.2rem"
             {...register('private', {
               required: 'Project privacy is required',
@@ -152,7 +159,7 @@ const CreateProjectModal = ({
             name="start_date"
             render={({ message }) => <Text color="red">{message}</Text>}
           />
-          <Box marginBottom="1.2rem">
+          <Box marginBottom="1.2rem" data-testid="start_date">
             <DatePicker
               {...register('start_date', {
                 required: 'Project start date is required',
@@ -168,7 +175,7 @@ const CreateProjectModal = ({
             name="end_date"
             render={({ message }) => <Text color="red">{message}</Text>}
           />
-          <Box marginBottom="1.2rem">
+          <Box marginBottom="1.2rem" data-testid="end_date">
             <DatePicker
               {...register('end_date', {
                 required: 'Project end date is required',
@@ -185,22 +192,27 @@ const CreateProjectModal = ({
             name="due_date"
             render={({ message }) => <Text color="red">{message}</Text>}
           />
-          <DatePicker
-            {...register('due_date', {
-              required: 'Project due date is required',
-            })}
-            selected={dates.dueDate}
-            onChange={(d) => setDates({ ...dates, dueDate: d })}
-            dateFormat="dd/MM/yyyy"
-          />
+          <Box data-testid="due_date">
+            <DatePicker
+              {...register('due_date', {
+                required: 'Project due date is required',
+              })}
+              selected={dates.dueDate}
+              onChange={(d) => setDates({ ...dates, dueDate: d })}
+              dateFormat="dd/MM/yyyy"
+            />
+          </Box>
 
-          <Input
+          <Button
+            data-testid="submit"
             marginBottom="1.2rem"
             marginTop="20px"
             type="submit"
             color="white"
             backgroundColor={mainTheme.colors.orange}
-          />
+          >
+            Submit
+          </Button>
         </form>
       </ModalBody>
 
