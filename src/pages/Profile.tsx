@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import {
   Box,
   Button,
@@ -11,15 +12,37 @@ import {
 import React, { ReactElement, useState } from 'react'
 import useAppState from 'src/hooks/useAppState'
 import mainTheme from 'src/theme/mainTheme'
+import { FieldValues, useForm } from 'react-hook-form'
 import Header from '../molecules/Header'
+import { useMutationUpdateUserArgsMutation } from '../generated/graphql'
 
 const Profile = (): ReactElement => {
   const { user } = useAppState()
 
   const [isHidden, setHidden] = useState<boolean>(true)
+  const [userUpdate] = useMutationUpdateUserArgsMutation({})
 
-  // const [user] = ''
+  const { handleSubmit, register } = useForm()
 
+  const onSubmit = async ({
+    first_name,
+    last_name,
+    email,
+    avatar,
+  }: FieldValues): Promise<void> => {
+    userUpdate({
+      variables: {
+        data: {
+          first_name: { set: first_name },
+          last_name: { set: last_name },
+          email: { set: email },
+          avatar: { set: avatar },
+        },
+        where: { id: user?.id },
+      },
+    })
+    console.log('new user data: ', first_name, last_name, email, avatar)
+  }
   console.warn('user:', user)
 
   return (
@@ -87,8 +110,9 @@ const Profile = (): ReactElement => {
               {user?.first_name} {user?.last_name}
             </Text>
             <Box display="flex" flexDirection="row">
-              {user?.role.map((elt) => (
+              {user?.role.map((elt, index) => (
                 <Tag
+                  key={+index}
                   backgroundColor={mainTheme.colors.orange}
                   color="white"
                   fontWeight="bold"
@@ -118,36 +142,38 @@ const Profile = (): ReactElement => {
                   variant="flushed"
                   placeholder="Firstname"
                   flexDirection="column"
-                  value={user?.first_name}
+                  type="text"
                   {...register('first_name')}
                 />
                 <Input
                   mx="10"
                   variant="flushed"
-                  placeholder="Firstname"
+                  placeholder="Lastname"
                   flexDirection="column"
-                  value={user?.last_name}
+                  type="text"
+                  {...register('last_name')}
                 />
                 <Input
                   mx="10"
                   variant="flushed"
-                  placeholder="image url"
+                  placeholder="Image url"
+                  type="text"
                   flexDirection="column"
-                  type="url"
                   // type="image"
-                  value={user?.avatar}
+                  {...register('avatar')}
+                />
+                <Input
+                  mx="10"
+                  variant="flushed"
+                  flexDirection="column"
+                  placeholder="Email"
+                  type="email"
+                  {...register('email')}
                 />
               </Box>
-              <Box display="flex" flexDirection="row" marginBottom="50px">
-                <Input
-                  mx="10"
-                  variant="flushed"
-                  flexDirection="column"
-                  placeholder="Firstname"
-                  type="email"
-                  value={user?.email}
-                />
-                <Input
+
+              {/* Autre logique avec endpoint différents */}
+              {/* <Input
                   mx="10"
                   variant="flushed"
                   placeholder="Old password"
@@ -160,8 +186,7 @@ const Profile = (): ReactElement => {
                   flexDirection="column"
                   placeholder="New password"
                   value="new password"
-                />
-              </Box>
+                /> */}
             </FormControl>
             <Button
               width="20"
@@ -169,7 +194,7 @@ const Profile = (): ReactElement => {
               backgroundColor={mainTheme.colors.orange}
               color="#ffffff"
               // eslint-disable-next-line no-alert
-              onClick={() => alert('sdfd')}
+              onClick={handleSubmit(onSubmit)}
             >
               Save
             </Button>
