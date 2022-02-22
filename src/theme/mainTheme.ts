@@ -4,13 +4,13 @@ const mainTheme = extendTheme({
   textStyles: {
     // you can also use responsive styles
     titleLogin: {
-      fontSize: ['42','56', '72'],
+      fontSize: ['42', '56', '72'],
       fontWeight: '800',
       color: '#38383A',
       fontFamily: 'Avenir',
     },
     loginText: {
-      fontSize: ['26', '32','42'],
+      fontSize: ['26', '32', '42'],
       fontWeight: '800',
       color: '#38383A',
       fontFamily: 'Avenir',
@@ -45,10 +45,10 @@ const mainTheme = extendTheme({
       fontFamily: 'Avenir',
     },
     numberTicket: {
-      fontFamily:"Avenir",
-      fontSize: "13px", 
-      color:'#9FA1A5',
-      fontWeight:"800"
+      fontFamily: 'Avenir',
+      fontSize: '13px',
+      color: '#9FA1A5',
+      fontWeight: '800',
     },
     body: {
       fontSize: ['14', '16'],
@@ -70,8 +70,25 @@ const mainTheme = extendTheme({
     lightRed: '#FFF0F0',
     darkGreen: '#1D9446',
     lightGreen: '#EBF5ED',
-    darkBrown: '#B47539', 
-    lightBrown: '#FCECE4'
+    darkBrown: '#B47539',
+    lightBrown: '#FCECE4',
+  },
+  section: {
+    card: {
+      backgroundColor: 'white',
+      minHeight: '800px',
+      margin: '0px 50px 50px 120px',
+      borderRadius: '8px',
+      padding: '30px 30px 30px 50px',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+    },
+    userAvatar: {
+      height: '150px',
+      width: '150px',
+      borderRadius: '50%',
+    },
   },
 })
 
