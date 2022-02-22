@@ -9,7 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import useAppState from 'src/hooks/useAppState'
 import mainTheme from 'src/theme/mainTheme'
 import { FieldValues, useForm } from 'react-hook-form'
@@ -19,10 +19,19 @@ import { useMutationUpdateUserArgsMutation } from '../generated/graphql'
 const Profile = (): ReactElement => {
   const { user } = useAppState()
 
+  const { dispatchUpdateUser } = useAppState()
   const [isHidden, setHidden] = useState<boolean>(true)
-  const [userUpdate] = useMutationUpdateUserArgsMutation({})
+  const [userUpdate] = useMutationUpdateUserArgsMutation({
+    onCompleted: (data) => {
+      dispatchUpdateUser(data.updateUser)
+    },
+  })
 
   const { handleSubmit, register } = useForm()
+
+  useEffect(() => {
+    console.log('user', user)
+  }, [user])
 
   const onSubmit = async ({
     first_name,
@@ -33,17 +42,15 @@ const Profile = (): ReactElement => {
     userUpdate({
       variables: {
         data: {
-          first_name: { set: first_name },
-          last_name: { set: last_name },
-          email: { set: email },
-          avatar: { set: avatar },
+          first_name: { set: !first_name ? user?.first_name : first_name },
+          last_name: { set: !last_name ? user?.last_name : last_name },
+          email: { set: !email ? user?.email : email },
+          avatar: { set: !avatar ? user?.avatar : avatar },
         },
         where: { id: user?.id },
       },
     })
-    console.log('new user data: ', first_name, last_name, email, avatar)
   }
-  console.warn('user:', user)
 
   return (
     <>

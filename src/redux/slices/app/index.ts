@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { UserFragment } from 'src/generated/graphql'
+import { MutationUpdateUserArgs, UserFragment } from 'src/generated/graphql'
 
 interface IAppState {
   user: UserFragment | undefined
@@ -21,12 +21,15 @@ const appSlice = createSlice({
       state.user = action.payload
     },
     logout: (state) => {
-      state.user= undefined 
-      state.isAuth= false
+      state.user = undefined
+      state.isAuth = false
+    },
+    updateUser: (state, action: PayloadAction<UserFragment>) => {
+      state.user = action.payload
     },
   },
 })
 
-export const { login, logout } = appSlice.actions
+export const { login, logout, updateUser } = appSlice.actions
 
 export default appSlice.reducer
