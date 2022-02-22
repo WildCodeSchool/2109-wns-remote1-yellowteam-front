@@ -1,16 +1,11 @@
-import { Box } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
-import useAppState from 'src/hooks/useAppState'
-import Header from '../molecules/Header'
+import { Text } from '@chakra-ui/react'
+import WhitePannel from 'src/components/WhitePannel'
 
-const Notifications = (): ReactElement => {
-  const { user } = useAppState()
-
-  return (
-    <Box marginLeft="69px" height="100%">
-      <Header userName={user?.first_name ?? ''} />
-    </Box>
-  )
-}
+const Notifications = (): ReactElement => (
+  <WhitePannel>
+    <Text>Notifications</Text>
+  </WhitePannel>
+)
 
 export default Notifications

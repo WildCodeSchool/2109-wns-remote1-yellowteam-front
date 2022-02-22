@@ -24,7 +24,8 @@ import Edit from 'src/static/svg/Edit'
 import mainTheme from 'src/theme/mainTheme'
 import CreateProjectModal from 'src/components/Modals/CreateProjectModal'
 import { useForm } from 'react-hook-form'
-import Header from '../molecules/Header'
+import { useNavigate } from 'react-router-dom'
+import WhitePannel from 'src/components/WhitePannel'
 
 export type Dates = {
   startDate: Date | null
@@ -33,6 +34,8 @@ export type Dates = {
 }
 
 const Project = (): ReactElement => {
+  const navigate = useNavigate()
+
   const [dates, setDates] = useState<Dates>({
     startDate: new Date(),
     endDate: new Date(),
@@ -110,81 +113,64 @@ const Project = (): ReactElement => {
 
   if (!data || !data.projects)
     return (
-      <Box marginLeft="69px" height="100%">
-        <Header userName={user?.first_name ?? ''} />
-        <Box
-          backgroundColor="white"
-          minHeight="75vh"
-          mr={45}
-          ml={45}
-          p={50}
-          borderRadius={12}
-        >
-          <Text textStyle="h2">Your projects</Text>
-          <Box textAlign="center">
-            {loadingProjects ? <Spinner /> : 'No Projects'}
-          </Box>
+      <WhitePannel>
+        <Text textStyle="h2">Your projects</Text>
+        <Box textAlign="center">
+          {loadingProjects ? <Spinner /> : 'No Projects'}
         </Box>
-      </Box>
+      </WhitePannel>
     )
 
   return (
-    <Box marginLeft="69px" height="100%">
-      <Header userName={user?.first_name ?? ''} />
-      <Box
-        backgroundColor="white"
-        minHeight="75vh"
-        mr={45}
-        ml={45}
-        p={50}
-        borderRadius={12}
-      >
-        <Text textStyle="h2" pb={15}>
-          Your projects
-        </Text>
-        <Box height="20rem" overflow="auto">
-          {data.projects.map((project) => (
-            <Flex
-              key={project.id}
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <Flex>
-                <Text textStyle="h3">{project.title} - </Text>
-                <Text textStyle="h4">
-                  &nbsp;{project.due_date.substring(0, 10)}
-                </Text>
-              </Flex>
-              <Flex alignItems="center" ml={30}>
-                <Button variant="ghost">
-                  <Edit />
-                </Button>
-                <Button variant="ghost">
-                  <Delete color={mainTheme.colors.mediumGreyText} />
-                </Button>
-              </Flex>
+    <WhitePannel>
+      <Text textStyle="h2" pb={15}>
+        Your projects
+      </Text>
+      <Box height="20rem" overflow="auto">
+        {data.projects.map((project) => (
+          <Flex
+            key={project.id}
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Flex>
+              <Text textStyle="h3">{project.title} - </Text>
+              <Text textStyle="h4">
+                &nbsp;{project.due_date.substring(0, 10)}
+              </Text>
             </Flex>
-          ))}
-        </Box>
-        <Flex mt={30} justifyContent="center">
-          <Button variant="unstyled" onClick={onOpen}>
-            <AddIcon />
-          </Button>
-          <CreateProjectModal
-            isOpen={isOpen}
-            onClose={onClose}
-            onSubmit={onSubmit}
-            setDates={setDates}
-            dates={dates}
-            setIsDisabled={setIsDisabled}
-            setIsPrivate={setIsPrivate}
-            register={register}
-            handleSubmit={handleSubmit}
-            errors={errors}
-          />
-        </Flex>
+            <Flex alignItems="center" ml={30}>
+              <Button
+                variant="ghost "
+                onClick={() => navigate(`/projects/${project.id}`)}
+              >
+                <Edit />
+              </Button>
+              <Button variant="ghost">
+                <Delete color={mainTheme.colors.mediumGreyText} />
+              </Button>
+            </Flex>
+          </Flex>
+        ))}
       </Box>
-    </Box>
+      <Flex mt={30} justifyContent="center">
+        <Button variant="unstyled" onClick={onOpen}>
+          <AddIcon />
+        </Button>
+        <CreateProjectModal
+          isOpen={isOpen}
+          onClose={onClose}
+          onSubmit={onSubmit}
+          setDates={setDates}
+          dates={dates}
+          setIsDisabled={setIsDisabled}
+          setIsPrivate={setIsPrivate}
+          register={register}
+          handleSubmit={handleSubmit}
+          errors={errors}
+        />
+      </Flex>
+    </WhitePannel>
   )
 }
 
