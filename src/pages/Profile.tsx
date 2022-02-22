@@ -53,6 +53,7 @@ const Profile = (): ReactElement => {
     })
     reset()
     setLoadBtn(false)
+    setHidden(true)
   }
 
   return (
