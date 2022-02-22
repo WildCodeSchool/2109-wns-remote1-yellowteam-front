@@ -32,7 +32,7 @@ const ProjectDetails = (): ReactElement => {
         <Text>{project?.description}</Text>
       </Box>
       <Flex>
-        <Box pt={5} pr={5} minWidth="20rem">
+        <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '30rem']}>
           <Text textStyle="titleWhiteBoard">Team members</Text>
           {project?.users.map((u) => (
             <Flex key={u.id} alignItems="center">
@@ -48,15 +48,15 @@ const ProjectDetails = (): ReactElement => {
             </Flex>
           ))}
         </Box>
-        <Box pt={5} pr={5} minWidth="20rem">
+        <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '30rem']}>
           <Text textStyle="titleWhiteBoard">Project details</Text>
         </Box>
       </Flex>
       <Flex>
-        <Box pt={5} pr={5} minWidth="20rem">
+        <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '30rem']}>
           <Text textStyle="titleWhiteBoard">Time spent on project</Text>
         </Box>
-        <Box pt={5} pr={5} minWidth="20rem">
+        <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '30rem']}>
           <Text textStyle="titleWhiteBoard">Tasks accomplished</Text>
         </Box>
       </Flex>
