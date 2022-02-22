@@ -27,9 +27,11 @@ const Profile = (): ReactElement => {
     },
   })
 
-  const { handleSubmit, register } = useForm()
+  const { handleSubmit, register, reset } = useForm()
 
-  useEffect(() => {}, [user])
+  useEffect(() => {
+    reset(undefined, { keepValues: false })
+  }, [user])
 
   const onSubmit = async ({
     first_name,
@@ -48,6 +50,7 @@ const Profile = (): ReactElement => {
         where: { id: user?.id },
       },
     })
+    reset()
   }
 
   return (
