@@ -16,6 +16,7 @@ import {
   Radio,
   Stack,
   Text,
+  Flex,
 } from '@chakra-ui/react'
 import DatePicker from 'react-datepicker'
 import React, { ReactElement } from 'react'
@@ -161,9 +162,6 @@ const CreateProjectModal = ({
           />
           <Box marginBottom="1.2rem" data-testid="start_date">
             <DatePicker
-              {...register('start_date', {
-                required: 'Project start date is required',
-              })}
               selected={dates.startDate}
               onChange={(d) => setDates({ ...dates, startDate: d })}
               dateFormat="dd/MM/yyyy"
@@ -177,9 +175,6 @@ const CreateProjectModal = ({
           />
           <Box marginBottom="1.2rem" data-testid="end_date">
             <DatePicker
-              {...register('end_date', {
-                required: 'Project end date is required',
-              })}
               selected={dates.endDate}
               onChange={(d) => setDates({ ...dates, endDate: d })}
               dateFormat="dd/MM/yyyy"
@@ -194,25 +189,25 @@ const CreateProjectModal = ({
           />
           <Box data-testid="due_date">
             <DatePicker
-              {...register('due_date', {
-                required: 'Project due date is required',
-              })}
               selected={dates.dueDate}
               onChange={(d) => setDates({ ...dates, dueDate: d })}
               dateFormat="dd/MM/yyyy"
             />
           </Box>
 
-          <Button
-            data-testid="submit"
-            marginBottom="1.2rem"
-            marginTop="20px"
-            type="submit"
-            color="white"
-            backgroundColor={mainTheme.colors.orange}
-          >
-            Submit
-          </Button>
+          <Flex justifyContent="center">
+            <Button
+              width="30%"
+              data-testid="submit"
+              marginBottom="1.2rem"
+              marginTop="20px"
+              type="submit"
+              color="white"
+              backgroundColor={mainTheme.colors.orange}
+            >
+              Submit
+            </Button>
+          </Flex>
         </form>
       </ModalBody>
 
