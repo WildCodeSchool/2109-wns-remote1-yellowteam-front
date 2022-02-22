@@ -26,6 +26,9 @@ const CardDetails = ({ taskId }: ICard): ReactElement => {
   const { user } = useAppState()
   const [card, setCard] = React.useState<ICardDetails>()
   const [comment, setComment] = React.useState<string>()
+  const [description, setDescription] = React.useState<string>()
+  const [isEditDescriptionActive, setIsEditDescriptionActive] =
+    React.useState<boolean>(false)
   const { data } = useGetSingleSelfTasksQuery({
     variables: { where: { id: taskId } },
   })
@@ -37,11 +40,14 @@ const CardDetails = ({ taskId }: ICard): ReactElement => {
         taskId,
         ...data.task,
       }
+      console.log('data.task => ', data.task)
+      console.log('workingCard => ', workingCard)
+      setDescription(workingCard?.description)
       setCard(workingCard)
     }
   }, [data])
 
-  // Save comment on local state
+  // Save comment on local state when click on "save" comment
   const saveNewComment = () => {
     if (comment) {
       const newComment: IComment = {
@@ -52,26 +58,49 @@ const CardDetails = ({ taskId }: ICard): ReactElement => {
         },
       }
 
+      console.log('newComment => ', newComment)
+
       let newCommentList: IComment[] = []
       if (card && card.comments) {
         newCommentList = [...card.comments]
       }
       newCommentList.push(newComment)
 
-      const sortedArray: IComment[] = newCommentList.sort((a, b) => {
-        const val1: number = DateTime.fromISO(a.created_at).toMillis()
-        const val2: number = DateTime.fromISO(b.created_at).toMillis()
-        return val2 - val1
-      })
+      const sortedArray: IComment[] = newCommentList.sort(
+        (a, b) =>
+          DateTime.fromISO(b.created_at).toMillis() -
+          DateTime.fromISO(a.created_at).toMillis()
+      )
 
       const newCard: ICardDetails = {
         taskId,
+        ...card,
         comments: sortedArray,
       }
 
       setCard(newCard)
     }
     setComment('')
+  }
+
+  const setNewDescription = (newDescription: string) => {
+    setDescription(newDescription)
+  }
+
+  const saveNewDescription = () => {
+    if (description) {
+      const updateCard: ICardDetails = {
+        taskId,
+        ...card,
+        description,
+      }
+      setCard(updateCard)
+      setIsEditDescriptionActive(false)
+    }
+  }
+
+  const saveCardToDB = () => {
+    console.log('final card modiefed => ', card)
   }
 
   if (card) {
@@ -106,12 +135,47 @@ const CardDetails = ({ taskId }: ICard): ReactElement => {
                   variant="unstyled"
                   aria-label=""
                   icon={<EditIcon />}
-                  onClick={() => console.log('test')}
+                  onClick={() => setIsEditDescriptionActive(true)}
                 />
               </Flex>
-              <Text textStyle="body" mt="12px">
-                {card.description}
-              </Text>
+              {isEditDescriptionActive ? (
+                <>
+                  <Textarea
+                    textStyle="body"
+                    mt="12px"
+                    placeholder="Add a new description"
+                    value={description}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                      setNewDescription(e.target.value)
+                    }
+                  />
+                  <Flex justifyContent="flex-end">
+                    <Button
+                      colorScheme="red"
+                      size="xs"
+                      mt="12px"
+                      onClick={() => {
+                        setIsEditDescriptionActive(false)
+                        setDescription(card.description)
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      colorScheme="green"
+                      size="xs"
+                      mt="12px"
+                      onClick={() => saveNewDescription()}
+                    >
+                      Save
+                    </Button>
+                  </Flex>
+                </>
+              ) : (
+                <Text textStyle="body" mt="12px">
+                  {description}
+                </Text>
+              )}
             </Flex>
 
             {/* Task progress, details and attachments */}
@@ -194,7 +258,9 @@ const CardDetails = ({ taskId }: ICard): ReactElement => {
                             Developper
                           </Text>
                           <Text textStyle="body">
-                            {commentLoop.user_task_comments.created_at}
+                            {DateTime.fromISO(
+                              commentLoop.created_at
+                            ).toLocaleString(DateTime.DATETIME_SHORT)}
                           </Text>
                         </Flex>
                       </Flex>
@@ -230,7 +296,11 @@ const CardDetails = ({ taskId }: ICard): ReactElement => {
           </ModalBody>
           {/* Footer Buttons */}
           <ModalFooter borderTop="1px" borderColor="gray.200" paddingBottom="0">
-            <Button variant="outline" colorScheme="green">
+            <Button
+              variant="outline"
+              colorScheme="green"
+              onClick={() => saveCardToDB()}
+            >
               Confirm
             </Button>
           </ModalFooter>
