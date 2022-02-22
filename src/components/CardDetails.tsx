@@ -20,7 +20,7 @@ import {
 import { EditIcon } from '@chakra-ui/icons'
 import { useGetSingleSelfTasksQuery } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
-import { DateTime } from 'luxon'
+import { DateTime, Duration } from 'luxon'
 
 const CardDetails = ({ taskId }: ICard): ReactElement => {
   const { user } = useAppState()
@@ -219,11 +219,11 @@ const CardDetails = ({ taskId }: ICard): ReactElement => {
                     {' '}
                     Total time spent
                   </Text>
-                  <Select placeholder="Select option" width="150px" h="25px">
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                  </Select>
+                  <Text>
+                    {Duration.fromMillis(card.total_time_spent).toFormat(
+                      "hh'h' mm'm' ss's'"
+                    )}
+                  </Text>
                 </Flex>
               </Flex>
               {/* attachment */}

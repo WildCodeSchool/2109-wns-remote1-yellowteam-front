@@ -10,4 +10,5 @@ interface ICardDetails extends ICard {
   description?: string
   user?: IUserTaskComments
   comments?: IComment[]
+  total_time_spent?: int
 }
