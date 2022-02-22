@@ -14,7 +14,7 @@ import {
   ProjectCreateInput,
   Status,
   useCreateProjectMutation,
-  useGetUserProjectsQuery,
+  useGetManagerProjectsQuery,
 } from 'src/generated/graphql'
 import 'react-datepicker/dist/react-datepicker.css'
 import useAppState from 'src/hooks/useAppState'
@@ -54,7 +54,7 @@ const Project = (): ReactElement => {
     data,
     refetch,
     loading: loadingProjects,
-  } = useGetUserProjectsQuery({
+  } = useGetManagerProjectsQuery({
     variables: { userId },
     skip: !userId,
   })
