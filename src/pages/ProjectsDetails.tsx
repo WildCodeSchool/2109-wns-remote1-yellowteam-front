@@ -2,11 +2,11 @@ import { Box, Spinner, Text, Image, Flex } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useParams } from 'react-router-dom'
 import WhitePannel from 'src/components/WhitePannel'
-import useProjects from 'src/hooks/useProjects'
+import useManagerProjects from 'src/hooks/useManagerProjects'
 import mainTheme from 'src/theme/mainTheme'
 
 const ProjectDetails = (): ReactElement => {
-  const { projects, loading } = useProjects()
+  const { projects, loading } = useManagerProjects()
   const { projectId } = useParams()
 
   if (loading)
@@ -25,16 +25,40 @@ const ProjectDetails = (): ReactElement => {
         src={project?.owner.avatar}
         display="flex"
         flexDirection="column"
-        style={mainTheme.section.userSmallAvatar}
+        style={mainTheme.section.userMediumAvatar}
       />
-      <Text textStyle="h2">Project description</Text>
+      <Box pt={5} pr={5}>
+        <Text textStyle="titleWhiteBoard">Project description</Text>
+        <Text>{project?.description}</Text>
+      </Box>
       <Flex>
-        <Text textStyle="h2">Team members</Text>
-        <Text textStyle="h2">Project details</Text>
+        <Box pt={5} pr={5} minWidth="20rem">
+          <Text textStyle="titleWhiteBoard">Team members</Text>
+          {project?.users.map((u) => (
+            <Flex key={u.id} alignItems="center">
+              <Image
+                src={u.avatar}
+                display="flex"
+                flexDirection="column"
+                style={mainTheme.section.userSmallAvatar}
+              />
+              <Text>
+                {u.first_name} {u.last_name}
+              </Text>
+            </Flex>
+          ))}
+        </Box>
+        <Box pt={5} pr={5} minWidth="20rem">
+          <Text textStyle="titleWhiteBoard">Project details</Text>
+        </Box>
       </Flex>
       <Flex>
-        <Text textStyle="h2">Time spent on project</Text>
-        <Text textStyle="h2">Tasks accomplished</Text>
+        <Box pt={5} pr={5} minWidth="20rem">
+          <Text textStyle="titleWhiteBoard">Time spent on project</Text>
+        </Box>
+        <Box pt={5} pr={5} minWidth="20rem">
+          <Text textStyle="titleWhiteBoard">Tasks accomplished</Text>
+        </Box>
       </Flex>
     </WhitePannel>
   )

@@ -39,7 +39,7 @@ const mainTheme = extendTheme({
       fontFamily: 'Avenir',
     },
     titleWhiteBoard: {
-      fontSize: ['22', '24'],
+      fontSize: ['18', '22'],
       fontWeight: '800',
       color: '#38383A',
       fontFamily: 'Avenir',
@@ -89,9 +89,14 @@ const mainTheme = extendTheme({
       width: '150px',
       borderRadius: '50%',
     },
-    userSmallAvatar: {
+    userMediumAvatar: {
       height: '50px',
       width: '50px',
+      borderRadius: '50%',
+    },
+    userSmallAvatar: {
+      height: '30px',
+      width: '30px',
       borderRadius: '50%',
     },
   },

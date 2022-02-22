@@ -22,7 +22,7 @@ const Card = ({
     padding="9px 14px 9px 14px"
     marginBottom="10px"
   >
-    <Text noOfLines={2} textStyle="titleTicket">
+    <Text noOfLines={2} textStyle="h3">
       {title}
     </Text>
     <Flex
