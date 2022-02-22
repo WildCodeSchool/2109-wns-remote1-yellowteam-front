@@ -38,8 +38,8 @@ const mainTheme = extendTheme({
       color: '#38383A',
       fontFamily: 'Avenir',
     },
-    titleTicket: {
-      fontSize: ['16', '18'],
+    titleWhiteBoard: {
+      fontSize: ['22', '24'],
       fontWeight: '800',
       color: '#38383A',
       fontFamily: 'Avenir',
@@ -87,6 +87,11 @@ const mainTheme = extendTheme({
     userAvatar: {
       height: '150px',
       width: '150px',
+      borderRadius: '50%',
+    },
+    userSmallAvatar: {
+      height: '50px',
+      width: '50px',
       borderRadius: '50%',
     },
   },

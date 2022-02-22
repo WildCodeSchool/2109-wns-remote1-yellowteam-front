@@ -3,6 +3,9 @@ fragment Project on Project {
   title
   status_project
   due_date
+  owner {
+    avatar
+  }
   tasks {
     id
     title
@@ -14,6 +17,8 @@ fragment Project on Project {
     }
   }
   users {
+    id
+    avatar
     first_name
     last_name
   }

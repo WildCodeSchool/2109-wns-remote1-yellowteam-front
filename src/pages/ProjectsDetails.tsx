@@ -1,8 +1,9 @@
-import { Box, Spinner, Text, Image } from '@chakra-ui/react'
+import { Box, Spinner, Text, Image, Flex } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useParams } from 'react-router-dom'
 import WhitePannel from 'src/components/WhitePannel'
 import useProjects from 'src/hooks/useProjects'
+import mainTheme from 'src/theme/mainTheme'
 
 const ProjectDetails = (): ReactElement => {
   const { projects, loading } = useProjects()
@@ -20,9 +21,21 @@ const ProjectDetails = (): ReactElement => {
   return (
     <WhitePannel>
       <Text textStyle="h3">{project?.title}</Text>
-      {project?.tasks.map((t) => (
-        <Image src={t.user.avatar} />
-      ))}
+      <Image
+        src={project?.owner.avatar}
+        display="flex"
+        flexDirection="column"
+        style={mainTheme.section.userSmallAvatar}
+      />
+      <Text textStyle="h2">Project description</Text>
+      <Flex>
+        <Text textStyle="h2">Team members</Text>
+        <Text textStyle="h2">Project details</Text>
+      </Flex>
+      <Flex>
+        <Text textStyle="h2">Time spent on project</Text>
+        <Text textStyle="h2">Tasks accomplished</Text>
+      </Flex>
     </WhitePannel>
   )
 }

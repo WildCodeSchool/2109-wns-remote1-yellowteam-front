@@ -4253,7 +4253,7 @@ export type TaskCreateInput = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutTasksInput;
+  user: UserCreateNestedOneWithoutTaskInput;
 };
 
 export type TaskCreateManyInput = {
@@ -4372,7 +4372,7 @@ export type TaskCreateWithoutCommentsInput = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutTasksInput;
+  user: UserCreateNestedOneWithoutTaskInput;
 };
 
 export type TaskCreateWithoutFilesInput = {
@@ -4389,7 +4389,7 @@ export type TaskCreateWithoutFilesInput = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutTasksInput;
+  user: UserCreateNestedOneWithoutTaskInput;
 };
 
 export type TaskCreateWithoutProjectInput = {
@@ -4406,7 +4406,7 @@ export type TaskCreateWithoutProjectInput = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutTasksInput;
+  user: UserCreateNestedOneWithoutTaskInput;
 };
 
 export type TaskCreateWithoutUserInput = {
@@ -4648,7 +4648,7 @@ export type TaskUpdateInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutTasksInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutTaskInput>;
 };
 
 export type TaskUpdateManyMutationInput = {
@@ -4747,7 +4747,7 @@ export type TaskUpdateWithoutCommentsInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutTasksInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutTaskInput>;
 };
 
 export type TaskUpdateWithoutFilesInput = {
@@ -4764,7 +4764,7 @@ export type TaskUpdateWithoutFilesInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutTasksInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutTaskInput>;
 };
 
 export type TaskUpdateWithoutProjectInput = {
@@ -4781,7 +4781,7 @@ export type TaskUpdateWithoutProjectInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutTasksInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutTaskInput>;
 };
 
 export type TaskUpdateWithoutUserInput = {
@@ -4874,8 +4874,8 @@ export type User = {
   project_comments: Array<Comment>;
   projects: Array<Project>;
   role: Array<Role>;
+  task: Array<Task>;
   task_comments: Array<Comment>;
-  tasks: Array<Task>;
   updated_at: Scalars['DateTime'];
 };
 
@@ -4950,6 +4950,16 @@ export type UserProjectsArgs = {
 };
 
 
+export type UserTaskArgs = {
+  cursor: InputMaybe<TaskWhereUniqueInput>;
+  distinct: InputMaybe<Array<TaskScalarFieldEnum>>;
+  orderBy: InputMaybe<Array<TaskOrderByWithRelationInput>>;
+  skip: InputMaybe<Scalars['Int']>;
+  take: InputMaybe<Scalars['Int']>;
+  where: InputMaybe<TaskWhereInput>;
+};
+
+
 export type UserTask_CommentsArgs = {
   cursor: InputMaybe<CommentWhereUniqueInput>;
   distinct: InputMaybe<Array<CommentScalarFieldEnum>>;
@@ -4957,16 +4967,6 @@ export type UserTask_CommentsArgs = {
   skip: InputMaybe<Scalars['Int']>;
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<CommentWhereInput>;
-};
-
-
-export type UserTasksArgs = {
-  cursor: InputMaybe<TaskWhereUniqueInput>;
-  distinct: InputMaybe<Array<TaskScalarFieldEnum>>;
-  orderBy: InputMaybe<Array<TaskOrderByWithRelationInput>>;
-  skip: InputMaybe<Scalars['Int']>;
-  take: InputMaybe<Scalars['Int']>;
-  where: InputMaybe<TaskWhereInput>;
 };
 
 export type UserCount = {
@@ -4978,8 +4978,8 @@ export type UserCount = {
   owned_projects: Scalars['Int'];
   project_comments: Scalars['Int'];
   projects: Scalars['Int'];
+  task: Scalars['Int'];
   task_comments: Scalars['Int'];
-  tasks: Scalars['Int'];
 };
 
 export type UserCountAggregate = {
@@ -5027,8 +5027,8 @@ export type UserCreateInput = {
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
+  task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5091,16 +5091,16 @@ export type UserCreateNestedOneWithoutProject_CommentsInput = {
   create?: InputMaybe<UserCreateWithoutProject_CommentsInput>;
 };
 
+export type UserCreateNestedOneWithoutTaskInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutTaskInput>;
+  create?: InputMaybe<UserCreateWithoutTaskInput>;
+};
+
 export type UserCreateNestedOneWithoutTask_CommentsInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutTask_CommentsInput>;
   create?: InputMaybe<UserCreateWithoutTask_CommentsInput>;
-};
-
-export type UserCreateNestedOneWithoutTasksInput = {
-  connect?: InputMaybe<UserWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutTasksInput>;
-  create?: InputMaybe<UserCreateWithoutTasksInput>;
 };
 
 export type UserCreateOrConnectWithoutFilesInput = {
@@ -5138,13 +5138,13 @@ export type UserCreateOrConnectWithoutProjectsInput = {
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutTask_CommentsInput = {
-  create: UserCreateWithoutTask_CommentsInput;
+export type UserCreateOrConnectWithoutTaskInput = {
+  create: UserCreateWithoutTaskInput;
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutTasksInput = {
-  create: UserCreateWithoutTasksInput;
+export type UserCreateOrConnectWithoutTask_CommentsInput = {
+  create: UserCreateWithoutTask_CommentsInput;
   where: UserWhereUniqueInput;
 };
 
@@ -5164,8 +5164,8 @@ export type UserCreateWithoutFilesInput = {
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
+  task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5185,8 +5185,8 @@ export type UserCreateWithoutInvitationsInput = {
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
+  task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5206,8 +5206,8 @@ export type UserCreateWithoutNotificationsInput = {
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
+  task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5227,8 +5227,8 @@ export type UserCreateWithoutNotifications_SentInput = {
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
+  task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5248,8 +5248,8 @@ export type UserCreateWithoutOwned_ProjectsInput = {
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
+  task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5269,8 +5269,8 @@ export type UserCreateWithoutProject_CommentsInput = {
   password: Scalars['String'];
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
+  task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5290,8 +5290,29 @@ export type UserCreateWithoutProjectsInput = {
   password: Scalars['String'];
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   role?: InputMaybe<UserCreateroleInput>;
+  task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type UserCreateWithoutTaskInput = {
+  avatar?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
+  first_name: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+  invitations?: InputMaybe<InvitationCreateNestedManyWithoutUserInput>;
+  is_disabled: Scalars['Boolean'];
+  last_name: Scalars['String'];
+  notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
+  notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
+  owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
+  password: Scalars['String'];
+  project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
+  projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
+  role?: InputMaybe<UserCreateroleInput>;
+  task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5312,28 +5333,7 @@ export type UserCreateWithoutTask_CommentsInput = {
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
-  tasks?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
-  updated_at?: InputMaybe<Scalars['DateTime']>;
-};
-
-export type UserCreateWithoutTasksInput = {
-  avatar?: InputMaybe<Scalars['String']>;
-  created_at?: InputMaybe<Scalars['DateTime']>;
-  email: Scalars['String'];
-  files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
-  first_name: Scalars['String'];
-  id?: InputMaybe<Scalars['String']>;
-  invitations?: InputMaybe<InvitationCreateNestedManyWithoutUserInput>;
-  is_disabled: Scalars['Boolean'];
-  last_name: Scalars['String'];
-  notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
-  notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
-  owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
-  password: Scalars['String'];
-  project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
-  projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
-  role?: InputMaybe<UserCreateroleInput>;
-  task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
+  task?: InputMaybe<TaskCreateNestedManyWithoutUserInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5451,8 +5451,8 @@ export type UserOrderByWithRelationInput = {
   project_comments?: InputMaybe<CommentOrderByRelationAggregateInput>;
   projects?: InputMaybe<ProjectOrderByRelationAggregateInput>;
   role?: InputMaybe<SortOrder>;
+  task?: InputMaybe<TaskOrderByRelationAggregateInput>;
   task_comments?: InputMaybe<CommentOrderByRelationAggregateInput>;
-  tasks?: InputMaybe<TaskOrderByRelationAggregateInput>;
   updated_at?: InputMaybe<SortOrder>;
 };
 
@@ -5523,8 +5523,8 @@ export type UserUpdateInput = {
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
+  task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -5599,12 +5599,12 @@ export type UserUpdateOneRequiredWithoutOwned_ProjectsInput = {
   upsert?: InputMaybe<UserUpsertWithoutOwned_ProjectsInput>;
 };
 
-export type UserUpdateOneRequiredWithoutTasksInput = {
+export type UserUpdateOneRequiredWithoutTaskInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutTasksInput>;
-  create?: InputMaybe<UserCreateWithoutTasksInput>;
-  update?: InputMaybe<UserUpdateWithoutTasksInput>;
-  upsert?: InputMaybe<UserUpsertWithoutTasksInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutTaskInput>;
+  create?: InputMaybe<UserCreateWithoutTaskInput>;
+  update?: InputMaybe<UserUpdateWithoutTaskInput>;
+  upsert?: InputMaybe<UserUpsertWithoutTaskInput>;
 };
 
 export type UserUpdateOneWithoutProject_CommentsInput = {
@@ -5648,8 +5648,8 @@ export type UserUpdateWithoutFilesInput = {
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
+  task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -5669,8 +5669,8 @@ export type UserUpdateWithoutInvitationsInput = {
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
+  task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -5690,8 +5690,8 @@ export type UserUpdateWithoutNotificationsInput = {
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
+  task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -5711,8 +5711,8 @@ export type UserUpdateWithoutNotifications_SentInput = {
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
+  task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -5732,8 +5732,8 @@ export type UserUpdateWithoutOwned_ProjectsInput = {
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
+  task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -5753,8 +5753,8 @@ export type UserUpdateWithoutProject_CommentsInput = {
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
+  task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -5774,8 +5774,29 @@ export type UserUpdateWithoutProjectsInput = {
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   role?: InputMaybe<UserUpdateroleInput>;
+  task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
-  tasks?: InputMaybe<TaskUpdateManyWithoutUserInput>;
+  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateWithoutTaskInput = {
+  avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  files?: InputMaybe<FileUpdateManyWithoutUserInput>;
+  first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  invitations?: InputMaybe<InvitationUpdateManyWithoutUserInput>;
+  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
+  notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
+  owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
+  password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
+  projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
+  role?: InputMaybe<UserUpdateroleInput>;
+  task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -5796,28 +5817,7 @@ export type UserUpdateWithoutTask_CommentsInput = {
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
-  tasks?: InputMaybe<TaskUpdateManyWithoutUserInput>;
-  updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-};
-
-export type UserUpdateWithoutTasksInput = {
-  avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<StringFieldUpdateOperationsInput>;
-  files?: InputMaybe<FileUpdateManyWithoutUserInput>;
-  first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  invitations?: InputMaybe<InvitationUpdateManyWithoutUserInput>;
-  is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
-  notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
-  notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
-  owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
-  password?: InputMaybe<StringFieldUpdateOperationsInput>;
-  project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
-  projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
-  role?: InputMaybe<UserUpdateroleInput>;
-  task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
+  task?: InputMaybe<TaskUpdateManyWithoutUserInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -5862,14 +5862,14 @@ export type UserUpsertWithoutProject_CommentsInput = {
   update: UserUpdateWithoutProject_CommentsInput;
 };
 
+export type UserUpsertWithoutTaskInput = {
+  create: UserCreateWithoutTaskInput;
+  update: UserUpdateWithoutTaskInput;
+};
+
 export type UserUpsertWithoutTask_CommentsInput = {
   create: UserCreateWithoutTask_CommentsInput;
   update: UserUpdateWithoutTask_CommentsInput;
-};
-
-export type UserUpsertWithoutTasksInput = {
-  create: UserCreateWithoutTasksInput;
-  update: UserUpdateWithoutTasksInput;
 };
 
 export type UserWhereInput = {
@@ -5892,8 +5892,8 @@ export type UserWhereInput = {
   project_comments?: InputMaybe<CommentListRelationFilter>;
   projects?: InputMaybe<ProjectListRelationFilter>;
   role?: InputMaybe<EnumRoleNullableListFilter>;
+  task?: InputMaybe<TaskListRelationFilter>;
   task_comments?: InputMaybe<CommentListRelationFilter>;
-  tasks?: InputMaybe<TaskListRelationFilter>;
   updated_at?: InputMaybe<DateTimeFilter>;
 };
 
@@ -5902,7 +5902,7 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
-export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', first_name: string, last_name: string }> };
+export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, owner: { __typename?: 'User', avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, avatar: string, first_name: string, last_name: string }> };
 
 export type UserFragment = { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> };
 
@@ -5938,7 +5938,7 @@ export type GetProjectQueryVariables = Exact<{
 }>;
 
 
-export type GetProjectQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', first_name: string, last_name: string }> } };
+export type GetProjectQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, owner: { __typename?: 'User', avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, avatar: string, first_name: string, last_name: string }> } };
 
 export type GetUserInfosQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
@@ -5952,7 +5952,7 @@ export type GetUserProjectsQueryVariables = Exact<{
 }>;
 
 
-export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', first_name: string, last_name: string }> }> };
+export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, owner: { __typename?: 'User', avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, avatar: string, first_name: string, last_name: string }> }> };
 
 export const ProjectFragmentDoc = gql`
     fragment Project on Project {
@@ -5960,6 +5960,9 @@ export const ProjectFragmentDoc = gql`
   title
   status_project
   due_date
+  owner {
+    avatar
+  }
   tasks {
     id
     title
@@ -5971,6 +5974,8 @@ export const ProjectFragmentDoc = gql`
     }
   }
   users {
+    id
+    avatar
     first_name
     last_name
   }
