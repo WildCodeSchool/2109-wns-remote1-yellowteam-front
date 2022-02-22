@@ -5932,6 +5932,12 @@ export type MutationUpdateUserArgsMutationVariables = Exact<{
 
 
 export type MutationUpdateUserArgsMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type GetManagerProjectsQueryVariables = Exact<{
+  userId: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', first_name: string, last_name: string }> }> };
 
 export type GetProjectQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
@@ -6125,6 +6131,41 @@ export function useMutationUpdateUserArgsMutation(baseOptions?: Apollo.MutationH
 export type MutationUpdateUserArgsMutationHookResult = ReturnType<typeof useMutationUpdateUserArgsMutation>;
 export type MutationUpdateUserArgsMutationResult = Apollo.MutationResult<MutationUpdateUserArgsMutation>;
 export type MutationUpdateUserArgsMutationOptions = Apollo.BaseMutationOptions<MutationUpdateUserArgsMutation, MutationUpdateUserArgsMutationVariables>;
+export const GetManagerProjectsDocument = gql`
+    query GetManagerProjects($userId: String) {
+  projects(where: {owner: {is: {id: {equals: $userId}}}}) {
+    ...Project
+  }
+}
+    ${ProjectFragmentDoc}`;
+
+/**
+ * __useGetManagerProjectsQuery__
+ *
+ * To run a query within a React component, call `useGetManagerProjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetManagerProjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetManagerProjectsQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useGetManagerProjectsQuery(baseOptions?: Apollo.QueryHookOptions<GetManagerProjectsQuery, GetManagerProjectsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetManagerProjectsQuery, GetManagerProjectsQueryVariables>(GetManagerProjectsDocument, options);
+      }
+export function useGetManagerProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetManagerProjectsQuery, GetManagerProjectsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetManagerProjectsQuery, GetManagerProjectsQueryVariables>(GetManagerProjectsDocument, options);
+        }
+export type GetManagerProjectsQueryHookResult = ReturnType<typeof useGetManagerProjectsQuery>;
+export type GetManagerProjectsLazyQueryHookResult = ReturnType<typeof useGetManagerProjectsLazyQuery>;
+export type GetManagerProjectsQueryResult = Apollo.QueryResult<GetManagerProjectsQuery, GetManagerProjectsQueryVariables>;
 export const GetProjectDocument = gql`
     query GetProject($id: String) {
   project(where: {id: $id}) {
@@ -6197,7 +6238,7 @@ export type GetUserInfosLazyQueryHookResult = ReturnType<typeof useGetUserInfosL
 export type GetUserInfosQueryResult = Apollo.QueryResult<GetUserInfosQuery, GetUserInfosQueryVariables>;
 export const GetUserProjectsDocument = gql`
     query GetUserProjects($userId: String) {
-  projects(where: {owner: {is: {id: {equals: $userId}}}}) {
+  projects(where: {users: {some: {id: {equals: $userId}}}}) {
     ...Project
   }
 }
