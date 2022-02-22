@@ -5,6 +5,7 @@ import {
   FormControl,
   Image,
   Input,
+  Spinner,
   Tag,
   Text,
 } from '@chakra-ui/react'
@@ -21,6 +22,7 @@ const Profile = (): ReactElement => {
 
   const { dispatchUpdateUser } = useAppState()
   const [isHidden, setHidden] = useState<boolean>(true)
+  const [loadBtn, setLoadBtn] = useState<boolean>(false)
   const [userUpdate] = useMutationUpdateUserArgsMutation({
     onCompleted: (data) => {
       dispatchUpdateUser(data.updateUser)
@@ -29,9 +31,7 @@ const Profile = (): ReactElement => {
 
   const { handleSubmit, register, reset } = useForm()
 
-  useEffect(() => {
-    reset(undefined, { keepValues: false })
-  }, [user])
+  useEffect(() => {}, [user])
 
   const onSubmit = async ({
     first_name,
@@ -39,6 +39,7 @@ const Profile = (): ReactElement => {
     email,
     avatar,
   }: FieldValues): Promise<void> => {
+    setLoadBtn(true)
     userUpdate({
       variables: {
         data: {
@@ -51,6 +52,7 @@ const Profile = (): ReactElement => {
       },
     })
     reset()
+    setLoadBtn(false)
   }
 
   return (
@@ -197,6 +199,7 @@ const Profile = (): ReactElement => {
                 /> */}
             </FormControl>
             <Button
+              isLoading={loadBtn}
               width="20"
               mx="10"
               backgroundColor={mainTheme.colors.orange}
