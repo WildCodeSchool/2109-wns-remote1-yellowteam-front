@@ -29,9 +29,7 @@ const Profile = (): ReactElement => {
 
   const { handleSubmit, register } = useForm()
 
-  useEffect(() => {
-    console.log('user', user)
-  }, [user])
+  useEffect(() => {}, [user])
 
   const onSubmit = async ({
     first_name,

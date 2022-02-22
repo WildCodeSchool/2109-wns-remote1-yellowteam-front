@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { MutationUpdateUserArgs, UserFragment } from 'src/generated/graphql'
+import { UserFragment } from 'src/generated/graphql'
 
 interface IAppState {
   user: UserFragment | undefined

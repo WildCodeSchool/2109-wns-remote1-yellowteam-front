@@ -20,7 +20,6 @@ const useAppState = () => {
   }
 
   const dispatchUpdateUser = (userPayload: UserFragment) => {
-    console.log('userPayload: UserFragment', userPayload)
     dispatch(updateUser(userPayload))
   }
 

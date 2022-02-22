@@ -5924,7 +5924,7 @@ export type MutationUpdateUserArgsMutationVariables = Exact<{
 }>;
 
 
-export type MutationUpdateUserArgsMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', first_name: string, last_name: string, email: string } };
+export type MutationUpdateUserArgsMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type GetProjectQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
@@ -6047,12 +6047,10 @@ export type MutateMeMutationOptions = Apollo.BaseMutationOptions<MutateMeMutatio
 export const MutationUpdateUserArgsDocument = gql`
     mutation MutationUpdateUserArgs($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
   updateUser(data: $data, where: $where) {
-    first_name
-    last_name
-    email
+    ...User
   }
 }
-    `;
+    ${UserFragmentDoc}`;
 export type MutationUpdateUserArgsMutationFn = Apollo.MutationFunction<MutationUpdateUserArgsMutation, MutationUpdateUserArgsMutationVariables>;
 
 /**
