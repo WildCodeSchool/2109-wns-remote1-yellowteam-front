@@ -13,6 +13,7 @@ import Profile from './pages/Profile'
 import Notifications from './pages/Notifications'
 import Project from './pages/Project'
 import ProjectDetails from './pages/ProjectsDetails'
+import ModifyProject from './pages/ModifyProject'
 
 const client = apolloClient()
 
@@ -21,7 +22,14 @@ const Routes = () =>
     { path: '/board', element: <Board /> },
     { path: '/board/:projectId', element: <Board /> },
     { path: '/projects', element: <Project /> },
-    { path: '/projects/:projectId', element: <ProjectDetails /> },
+    {
+      path: '/projects/:projectId',
+      element: <ProjectDetails />,
+    },
+    {
+      path: '/projects/:projectId/modify',
+      element: <ModifyProject />,
+    },
     { path: '/profile', element: <Profile /> },
     { path: '/notifications', element: <Notifications /> },
   ])

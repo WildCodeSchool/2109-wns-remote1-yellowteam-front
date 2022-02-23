@@ -1,50 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import {
-  Box,
-  Spinner,
-  Text,
-  Image,
-  Flex,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-} from '@chakra-ui/react'
-import React, { ReactElement, useEffect, useState } from 'react'
-import { FieldValues, useForm } from 'react-hook-form'
+import { Box, Spinner, Text, Image, Flex } from '@chakra-ui/react'
+import React, { ReactElement } from 'react'
 import { useParams } from 'react-router-dom'
 import WhitePannel from 'src/components/WhitePannel'
-import { useAddUserToProjectMutation } from 'src/generated/graphql'
 import useManagerProjects from 'src/hooks/useManagerProjects'
-import AddIcon from 'src/static/svg/AddIcon'
 import mainTheme from 'src/theme/mainTheme'
 
 const ProjectDetails = (): ReactElement => {
-  const { projects, refetch, loading } = useManagerProjects()
+  const { projects, loading } = useManagerProjects()
   const { projectId } = useParams()
-  const [isFormAddUserVisible, setIsFormAddUserVisible] =
-    useState<boolean>(false)
-  const { handleSubmit, register, reset } = useForm()
-  const [addUser, { loading: addUserLoading }] = useAddUserToProjectMutation()
-
-  const onSubmit = async ({ email }: FieldValues): Promise<void> => {
-    try {
-      addUser({
-        variables: {
-          data: { users: { connect: [{ email: email as string }] } },
-          projectId: { id: projectId },
-        },
-      })
-    } catch (e) {
-      console.log('error adding user to project', e)
-    }
-    setIsFormAddUserVisible(false)
-    reset()
-  }
-
-  useEffect(() => {
-    refetch()
-  }, [onSubmit])
 
   if (loading)
     return (
@@ -91,48 +55,17 @@ const ProjectDetails = (): ReactElement => {
                 </Flex>
               ))}
             </Box>
-            {isFormAddUserVisible ? (
-              <FormControl>
-                <Flex paddingTop={3}>
-                  <FormLabel htmlFor="email" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter email address"
-                    height="30px"
-                    width="60%"
-                    {...register('email')}
-                  />
-                  <Button
-                    ml={3}
-                    backgroundColor={mainTheme.colors.orange}
-                    color="white"
-                    isLoading={addUserLoading}
-                    type="submit"
-                    height="30px"
-                    width="50px"
-                    onClick={handleSubmit(onSubmit)}
-                  >
-                    Add
-                  </Button>
-                </Flex>
-              </FormControl>
-            ) : null}
-            {!isFormAddUserVisible ? (
-              <Flex justifyContent="center">
-                <Button
-                  variant="unstyled"
-                  onClick={() => setIsFormAddUserVisible(true)}
-                >
-                  <AddIcon width="30" height="32" />
-                </Button>
-              </Flex>
-            ) : null}
           </Box>
           <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
             <Text mb={3} textStyle="titleWhiteBoard">
               Project details
             </Text>
+            <Flex alignItems="center">
+              <Text textStyle="body">Total time spent:</Text>
+              <Text textStyle="bodyGreenBold" ml={2}>
+                {project?.total_time_spent}
+              </Text>
+            </Flex>
           </Box>
         </Flex>
         <Flex>

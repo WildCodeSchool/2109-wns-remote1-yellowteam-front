@@ -39,7 +39,7 @@ const mainTheme = extendTheme({
       fontFamily: 'Avenir',
     },
     titleWhiteBoard: {
-      fontSize: ['18', '22'],
+      fontSize: ['16', '18'],
       fontWeight: '800',
       color: '#38383A',
       fontFamily: 'Avenir',
@@ -56,6 +56,12 @@ const mainTheme = extendTheme({
       fontFamily: 'Avenir',
       fontWeight: '300',
     },
+    bodyGreenBold: {
+      fontSize: ['12', '14'],
+      color: '#009A96',
+      fontFamily: 'Avenir',
+      fontWeight: '800',
+    }
   },
   colors: {
     orange: '#F69826',

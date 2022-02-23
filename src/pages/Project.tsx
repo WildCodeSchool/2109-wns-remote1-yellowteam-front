@@ -130,7 +130,10 @@ const Project = (): ReactElement => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Flex>
+            <Flex
+              _hover={{ cursor: 'pointer' }}
+              onClick={() => navigate(`/projects/${project.id}`)}
+            >
               <Text textStyle="h3">{project.title} - </Text>
               <Text textStyle="h4">
                 &nbsp;{project.due_date.substring(0, 10)}
@@ -139,7 +142,7 @@ const Project = (): ReactElement => {
             <Flex alignItems="center" ml={30}>
               <Button
                 variant="ghost "
-                onClick={() => navigate(`/projects/${project.id}`)}
+                onClick={() => navigate(`/projects/${project.id}/modify`)}
               >
                 <Edit />
               </Button>

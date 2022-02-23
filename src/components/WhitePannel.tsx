@@ -35,7 +35,7 @@ const WhitePannel = ({ children, close, title }: IProps): ReactElement => {
               <CloseButton />
             </Flex>
           ) : null}
-          <Text textStyle="h2" pb={15}>
+          <Text textStyle="h2" pb="10px">
             {title}
           </Text>
           {children}
