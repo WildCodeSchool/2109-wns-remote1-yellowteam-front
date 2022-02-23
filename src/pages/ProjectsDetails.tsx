@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import WhitePannel from 'src/components/WhitePannel'
 import useManagerProjects from 'src/hooks/useManagerProjects'
 import mainTheme from 'src/theme/mainTheme'
+import convertHoursToDays from 'src/utils/convertHoursToDays'
 
 const ProjectDetails = (): ReactElement => {
   const { projects, loading } = useManagerProjects()
@@ -63,7 +64,7 @@ const ProjectDetails = (): ReactElement => {
             <Flex alignItems="center">
               <Text textStyle="body">Total time spent:</Text>
               <Text textStyle="bodyGreenBold" ml={2}>
-                {project?.total_time_spent}
+                {convertHoursToDays(project?.total_time_spent)}
               </Text>
             </Flex>
           </Box>

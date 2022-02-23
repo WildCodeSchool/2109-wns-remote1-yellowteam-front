@@ -20,6 +20,7 @@ import mainTheme from 'src/theme/mainTheme'
 import { FieldValues, useForm } from 'react-hook-form'
 import Edit from 'src/static/svg/Edit'
 import { useUpdateProjectMutation } from 'src/generated/graphql'
+import convertHoursToDays from 'src/utils/convertHoursToDays'
 
 const ModifyProject = (): ReactElement => {
   const { projects, refetch, loading } = useManagerProjects()
@@ -214,39 +215,40 @@ const ModifyProject = (): ReactElement => {
                   <Edit />
                 </Button>
               </Flex>
-              <Flex alignItems="center">
-                <Text textStyle="body">Total time spent:</Text>
-                {isTimeOnProjectModificationVisible ? (
-                  <FormControl>
-                    <Flex paddingTop={3}>
-                      <FormLabel htmlFor="total_time_spent" />
-                      <Input
-                        id="total_time_spent"
-                        type="text"
-                        height="30px"
-                        width="40%"
-                        {...register('total_time_spent')}
-                      />
-                      <Button
-                        ml={3}
-                        backgroundColor={mainTheme.colors.orange}
-                        color="white"
-                        isLoading={updateProjectLoading}
-                        type="submit"
-                        height="30px"
-                        width="auto"
-                        onClick={handleSubmit(onSubmitChangeTimeSpent)}
-                      >
-                        Ok
-                      </Button>
-                    </Flex>
-                  </FormControl>
-                ) : (
+              {isTimeOnProjectModificationVisible ? (
+                <FormControl>
+                  <Flex paddingTop={3}>
+                    <FormLabel htmlFor="total_time_spent" />
+                    <Input
+                      id="total_time_spent"
+                      type="text"
+                      height="30px"
+                      width="40%"
+                      placeholder="Enter hours"
+                      {...register('total_time_spent')}
+                    />
+                    <Button
+                      ml={3}
+                      backgroundColor={mainTheme.colors.orange}
+                      color="white"
+                      isLoading={updateProjectLoading}
+                      type="submit"
+                      height="30px"
+                      width="auto"
+                      onClick={handleSubmit(onSubmitChangeTimeSpent)}
+                    >
+                      Ok
+                    </Button>
+                  </Flex>
+                </FormControl>
+              ) : (
+                <Flex alignItems="center">
+                  <Text textStyle="body">Total time spent:</Text>
                   <Text textStyle="bodyGreenBold" ml={2}>
-                    {project?.total_time_spent}
+                    {convertHoursToDays(project?.total_time_spent)}
                   </Text>
-                )}
-              </Flex>
+                </Flex>
+              )}
             </Box>
           </Flex>
         </Box>
