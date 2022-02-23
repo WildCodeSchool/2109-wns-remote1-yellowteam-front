@@ -113,7 +113,7 @@ const Project = (): ReactElement => {
 
   if (!data || !data.projects)
     return (
-      <WhitePannel>
+      <WhitePannel close={false}>
         <Text textStyle="h2">Your projects</Text>
         <Box textAlign="center">
           {loadingProjects ? <Spinner /> : 'No Projects'}
@@ -122,10 +122,7 @@ const Project = (): ReactElement => {
     )
 
   return (
-    <WhitePannel>
-      <Text textStyle="h2" pb={15}>
-        Your projects
-      </Text>
+    <WhitePannel close={false} title="Your projects">
       <Box height="20rem" overflow="auto">
         {data.projects.map((project) => (
           <Flex

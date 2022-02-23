@@ -3,7 +3,7 @@ import { Text } from '@chakra-ui/react'
 import WhitePannel from 'src/components/WhitePannel'
 
 const Notifications = (): ReactElement => (
-  <WhitePannel>
+  <WhitePannel close={false}>
     <Text>Notifications</Text>
   </WhitePannel>
 )

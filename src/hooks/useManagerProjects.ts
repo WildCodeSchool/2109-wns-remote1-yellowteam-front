@@ -3,7 +3,7 @@ import { useGetManagerProjectsQuery } from '../generated/graphql'
 
 const useManagerProjects = () => {
     const { userId } = useAppState()
-    const { data, loading, error } = useGetManagerProjectsQuery({
+    const { data, loading, error, refetch } = useGetManagerProjectsQuery({
       variables: { userId },
       skip: !userId,
     })
@@ -12,6 +12,7 @@ const useManagerProjects = () => {
       projects: data?.projects,
       loading,
       error,
+      refetch
     }
   }
 

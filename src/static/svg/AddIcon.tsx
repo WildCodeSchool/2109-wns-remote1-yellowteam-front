@@ -1,9 +1,15 @@
+/* eslint-disable react/require-default-props */
 import * as React from 'react'
 
-const AddIcon = (): JSX.Element => (
+interface IProps {
+  width?: string
+  height?: string
+}
+
+const AddIcon = ({ width = '50', height = '52' }: IProps): JSX.Element => (
   <svg
-    width="50"
-    height="52"
+    width={width}
+    height={height}
     viewBox="0 0 50 52"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
