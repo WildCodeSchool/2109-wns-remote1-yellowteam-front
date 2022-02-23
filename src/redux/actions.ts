@@ -1,1 +1,1 @@
-export { login, logout } from './slices/app'
+export { login, logout, updateUser } from './slices/app'

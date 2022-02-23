@@ -21,12 +21,15 @@ const appSlice = createSlice({
       state.user = action.payload
     },
     logout: (state) => {
-      state.user= undefined 
-      state.isAuth= false
+      state.user = undefined
+      state.isAuth = false
+    },
+    updateUser: (state, action: PayloadAction<UserFragment>) => {
+      state.user = action.payload
     },
   },
 })
 
-export const { login, logout } = appSlice.actions
+export const { login, logout, updateUser } = appSlice.actions
 
 export default appSlice.reducer
