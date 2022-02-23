@@ -24,12 +24,15 @@ import { useUpdateProjectMutation } from 'src/generated/graphql'
 const ModifyProject = (): ReactElement => {
   const { projects, refetch, loading } = useManagerProjects()
   const { projectId } = useParams()
-  const [isFormAddUserVisible, setIsFormAddUserVisible] =
-    useState<boolean>(false)
+  const [isFormAddUserVisible, setIsFormAddUserVisible] = useState(false)
   const [
     isDescriptionModificationVisible,
     setIsDescriptionModificationVisible,
-  ] = useState<boolean>(false)
+  ] = useState(false)
+  const [
+    isTimeOnProjectModificationVisible,
+    setIsTimeOnProjectModificationVisible,
+  ] = useState(false)
   const { handleSubmit, register, reset } = useForm()
   const [uptadeproject, { loading: updateProjectLoading }] =
     useUpdateProjectMutation()
@@ -52,7 +55,6 @@ const ModifyProject = (): ReactElement => {
   const onSubmitDescription = async ({
     description,
   }: FieldValues): Promise<void> => {
-    console.log('description', description)
     try {
       uptadeproject({
         variables: {
@@ -67,9 +69,27 @@ const ModifyProject = (): ReactElement => {
     reset()
   }
 
+  const onSubmitChangeTimeSpent = async ({
+    total_time_spent,
+  }: FieldValues): Promise<void> => {
+    const nbTime = parseInt(total_time_spent, 10)
+    try {
+      uptadeproject({
+        variables: {
+          data: { total_time_spent: { set: nbTime } },
+          projectId: { id: projectId },
+        },
+      })
+    } catch (e) {
+      console.log('error changing project description', e)
+    }
+    setIsTimeOnProjectModificationVisible(false)
+    reset()
+  }
+
   useEffect(() => {
     refetch()
-  }, [onSubmitAddUser, onSubmitDescription])
+  }, [onSubmitAddUser, onSubmitDescription, onSubmitChangeTimeSpent])
 
   if (loading)
     return (
@@ -99,7 +119,7 @@ const ModifyProject = (): ReactElement => {
                 <FormLabel htmlFor="description" />
                 <Textarea
                   id="description"
-                  type="description"
+                  type="text"
                   width="70%"
                   defaultValue={project?.description}
                   {...register('description')}
@@ -111,10 +131,10 @@ const ModifyProject = (): ReactElement => {
                   isLoading={updateProjectLoading}
                   type="submit"
                   height="30px"
-                  width="50px"
+                  width="auto"
                   onClick={handleSubmit(onSubmitDescription)}
                 >
-                  Add
+                  Validate
                 </Button>
               </Flex>
             </FormControl>
@@ -161,7 +181,7 @@ const ModifyProject = (): ReactElement => {
                       isLoading={updateProjectLoading}
                       type="submit"
                       height="30px"
-                      width="50px"
+                      width="auto"
                       onClick={handleSubmit(onSubmitAddUser)}
                     >
                       Add
@@ -175,20 +195,57 @@ const ModifyProject = (): ReactElement => {
                     variant="unstyled"
                     onClick={() => setIsFormAddUserVisible(true)}
                   >
-                    <AddIcon width="30" height="32" />
+                    <AddIcon
+                      width="30"
+                      height="32"
+                      color={mainTheme.colors.mediumGreyText}
+                    />
                   </Button>
                 </Flex>
               ) : null}
             </Box>
             <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
-              <Text mb={3} textStyle="titleWhiteBoard">
-                Project details
-              </Text>
+              <Flex alignItems="center">
+                <Text textStyle="titleWhiteBoard">Project details</Text>
+                <Button
+                  variant="ghost "
+                  onClick={() => setIsTimeOnProjectModificationVisible(true)}
+                >
+                  <Edit />
+                </Button>
+              </Flex>
               <Flex alignItems="center">
                 <Text textStyle="body">Total time spent:</Text>
-                <Text textStyle="bodyGreenBold" ml={2}>
-                  {project?.total_time_spent}
-                </Text>
+                {isTimeOnProjectModificationVisible ? (
+                  <FormControl>
+                    <Flex paddingTop={3}>
+                      <FormLabel htmlFor="total_time_spent" />
+                      <Input
+                        id="total_time_spent"
+                        type="text"
+                        height="30px"
+                        width="40%"
+                        {...register('total_time_spent')}
+                      />
+                      <Button
+                        ml={3}
+                        backgroundColor={mainTheme.colors.orange}
+                        color="white"
+                        isLoading={updateProjectLoading}
+                        type="submit"
+                        height="30px"
+                        width="auto"
+                        onClick={handleSubmit(onSubmitChangeTimeSpent)}
+                      >
+                        Ok
+                      </Button>
+                    </Flex>
+                  </FormControl>
+                ) : (
+                  <Text textStyle="bodyGreenBold" ml={2}>
+                    {project?.total_time_spent}
+                  </Text>
+                )}
               </Flex>
             </Box>
           </Flex>
