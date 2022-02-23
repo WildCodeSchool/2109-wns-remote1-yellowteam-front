@@ -5,6 +5,9 @@ fragment Project on Project {
   due_date
   description
   total_time_spent
+  start_date
+  end_date
+  due_date
   owner {
     id
     first_name
