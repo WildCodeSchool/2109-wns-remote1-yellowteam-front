@@ -1,4 +1,4 @@
-mutation AddUserToProject(
+mutation UpdateProject(
   $data: ProjectUpdateInput!
   $projectId: ProjectWhereUniqueInput!
 ) {

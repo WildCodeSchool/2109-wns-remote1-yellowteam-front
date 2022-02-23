@@ -18,19 +18,25 @@ import useManagerProjects from 'src/hooks/useManagerProjects'
 import AddIcon from 'src/static/svg/AddIcon'
 import mainTheme from 'src/theme/mainTheme'
 import { FieldValues, useForm } from 'react-hook-form'
-import { useAddUserToProjectMutation } from 'src/generated/graphql'
+import Edit from 'src/static/svg/Edit'
+import { useUpdateProjectMutation } from 'src/generated/graphql'
 
 const ModifyProject = (): ReactElement => {
   const { projects, refetch, loading } = useManagerProjects()
   const { projectId } = useParams()
   const [isFormAddUserVisible, setIsFormAddUserVisible] =
     useState<boolean>(false)
+  const [
+    isDescriptionModificationVisible,
+    setIsDescriptionModificationVisible,
+  ] = useState<boolean>(false)
   const { handleSubmit, register, reset } = useForm()
-  const [addUser, { loading: addUserLoading }] = useAddUserToProjectMutation()
+  const [uptadeproject, { loading: updateProjectLoading }] =
+    useUpdateProjectMutation()
 
-  const onSubmit = async ({ email }: FieldValues): Promise<void> => {
+  const onSubmitAddUser = async ({ email }: FieldValues): Promise<void> => {
     try {
-      addUser({
+      uptadeproject({
         variables: {
           data: { users: { connect: [{ email: email as string }] } },
           projectId: { id: projectId },
@@ -43,9 +49,27 @@ const ModifyProject = (): ReactElement => {
     reset()
   }
 
+  const onSubmitDescription = async ({
+    description,
+  }: FieldValues): Promise<void> => {
+    console.log('description', description)
+    try {
+      uptadeproject({
+        variables: {
+          data: { description: { set: description } },
+          projectId: { id: projectId },
+        },
+      })
+    } catch (e) {
+      console.log('error changing project description', e)
+    }
+    setIsDescriptionModificationVisible(false)
+    reset()
+  }
+
   useEffect(() => {
     refetch()
-  }, [onSubmit])
+  }, [onSubmitAddUser, onSubmitDescription])
 
   if (loading)
     return (
@@ -60,18 +84,43 @@ const ModifyProject = (): ReactElement => {
     <WhitePannel close title={`Modify: ${project?.title}`}>
       <Box overflow="auto" height="22rem">
         <Box pt={5} pr={5} maxWidth="90%">
-          <Text mb={3} textStyle="titleWhiteBoard">
-            Project description
-          </Text>
-          <FormControl>
-            <FormLabel htmlFor="email" />
-            <Textarea
-              id="email"
-              type="email"
-              placeholder="Enter email address"
-              defaultValue={project?.description}
-            />
-          </FormControl>
+          <Flex alignItems="center">
+            <Text textStyle="titleWhiteBoard">Project description</Text>
+            <Button
+              variant="ghost "
+              onClick={() => setIsDescriptionModificationVisible(true)}
+            >
+              <Edit />
+            </Button>
+          </Flex>
+          {isDescriptionModificationVisible ? (
+            <FormControl>
+              <Flex alignItems="center">
+                <FormLabel htmlFor="description" />
+                <Textarea
+                  id="description"
+                  type="description"
+                  width="70%"
+                  defaultValue={project?.description}
+                  {...register('description')}
+                />
+                <Button
+                  ml={3}
+                  backgroundColor={mainTheme.colors.orange}
+                  color="white"
+                  isLoading={updateProjectLoading}
+                  type="submit"
+                  height="30px"
+                  width="50px"
+                  onClick={handleSubmit(onSubmitDescription)}
+                >
+                  Add
+                </Button>
+              </Flex>
+            </FormControl>
+          ) : (
+            <Text textStyle="body">{project?.description}</Text>
+          )}
           <Flex>
             <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
               <Text mb={3} textStyle="titleWhiteBoard">
@@ -109,11 +158,11 @@ const ModifyProject = (): ReactElement => {
                       ml={3}
                       backgroundColor={mainTheme.colors.orange}
                       color="white"
-                      isLoading={addUserLoading}
+                      isLoading={updateProjectLoading}
                       type="submit"
                       height="30px"
                       width="50px"
-                      onClick={handleSubmit(onSubmit)}
+                      onClick={handleSubmit(onSubmitAddUser)}
                     >
                       Add
                     </Button>
