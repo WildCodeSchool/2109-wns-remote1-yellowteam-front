@@ -34,7 +34,7 @@ const WhitePannel = ({ children, close, title }: IProps): ReactElement => {
               <CloseButton />
             </Flex>
           ) : (
-            <Box paddingTop={30} />
+            <Box paddingTop={30} data-testid="box-with-padding" />
           )}
           <Text textStyle="h2" pb="10px">
             {title}
