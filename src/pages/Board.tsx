@@ -2,26 +2,12 @@ import { Box } from '@chakra-ui/react'
 import React, { ReactElement, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
+import useProjects from 'src/hooks/useProjects'
 import TasksBoard from '../components/TasksBoard'
-import { useGetUserProjectsQuery } from '../generated/graphql'
 import Header from '../molecules/Header'
 import UserBoardHeader from '../molecules/UserBoardHeader'
 
-const useProjects = () => {
-  const { userId } = useAppState()
-  const { data, loading, error } = useGetUserProjectsQuery({
-    variables: { userId },
-    skip: !userId,
-  })
-
-  return {
-    projects: data?.projects,
-    loading,
-    error,
-  }
-}
-
-const ProjectsBoard = (): ReactElement => {
+const Board = (): ReactElement => {
   const navigate = useNavigate()
 
   const { user } = useAppState()
@@ -50,4 +36,4 @@ const ProjectsBoard = (): ReactElement => {
   )
 }
 
-export default ProjectsBoard
+export default Board

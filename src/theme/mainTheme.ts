@@ -27,7 +27,18 @@ const mainTheme = extendTheme({
       color: '#38383A',
       fontFamily: 'Avenir',
     },
-    titleTicket: {
+    h3: {
+      fontSize: ['16', '18'],
+      fontWeight: '800',
+      color: '#38383A',
+      fontFamily: 'Avenir',
+    },
+    h4: {
+      fontSize: ['16', '18'],
+      color: '#38383A',
+      fontFamily: 'Avenir',
+    },
+    titleWhiteBoard: {
       fontSize: ['16', '18'],
       fontWeight: '800',
       color: '#38383A',
@@ -45,6 +56,12 @@ const mainTheme = extendTheme({
       fontFamily: 'Avenir',
       fontWeight: '300',
     },
+    bodyGreenBold: {
+      fontSize: ['12', '14'],
+      color: '#009A96',
+      fontFamily: 'Avenir',
+      fontWeight: '800',
+    }
   },
   colors: {
     orange: '#F69826',
@@ -76,6 +93,16 @@ const mainTheme = extendTheme({
     userAvatar: {
       height: '150px',
       width: '150px',
+      borderRadius: '50%',
+    },
+    userMediumAvatar: {
+      height: '50px',
+      width: '50px',
+      borderRadius: '50%',
+    },
+    userSmallAvatar: {
+      height: '30px',
+      width: '30px',
       borderRadius: '50%',
     },
   },
