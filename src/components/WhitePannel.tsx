@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 import { Box, Flex, CloseButton, Text } from '@chakra-ui/react'
-import React, { ReactElement, ReactNode, useEffect } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import Header from 'src/molecules/Header'

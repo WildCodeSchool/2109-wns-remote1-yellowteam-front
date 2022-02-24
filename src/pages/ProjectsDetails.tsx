@@ -8,28 +8,16 @@ import mainTheme from 'src/theme/mainTheme'
 import convertHoursToDays from 'src/utils/convertHoursToDays'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
-
-const convertMillisecondsToHours = (ms: number): number => {
-  const hours = (ms / (1000 * 60 * 60)).toFixed(1)
-  return parseInt(hours, 10)
-}
-const getActualTimeAvailable = (hours: number): number => {
-  let daysToRemove = 0
-  const nbOfDays = hours / 24
-  if (nbOfDays >= 7) {
-    daysToRemove = nbOfDays % 7
-  }
-  // Removing daysToRemove * 2 to remove weekend
-  const reducedNbOfDays = nbOfDays - daysToRemove * 2
-  const hoursToWork = reducedNbOfDays * 24
-  // Removing 16 hours per days => only working 8 hours a day
-  const reducedHoursToWork = hoursToWork - reducedNbOfDays * 16
-  return reducedHoursToWork
-}
+import convertMillisecondsToHours from 'src/utils/convertMillisecondsToHours'
+import getActualTimeAvailable from 'src/utils/getActualTimeAvailable'
+import { useGetProjectQuery } from 'src/generated/graphql'
 
 const ProjectDetails = (): ReactElement => {
-  const { projects, loading } = useManagerProjects()
   const { projectId } = useParams()
+  const { data, loading } = useGetProjectQuery({
+    variables: { id: projectId! },
+    skip: projectId === undefined,
+  })
 
   ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -39,12 +27,11 @@ const ProjectDetails = (): ReactElement => {
         <Spinner />
       </WhitePannel>
     )
+  if (!data) return <WhitePannel close={false}>No project here</WhitePannel>
 
-  const project = projects?.find((p) => p.id === projectId)
-
-  const timeStartDate = new Date(project?.start_date).getTime()
-  const timeEndDate = new Date(project?.end_date).getTime()
-  const timeSpent = project?.total_time_spent
+  const timeStartDate = new Date(data.project?.start_date).getTime()
+  const timeEndDate = new Date(data.project?.end_date).getTime()
+  const timeSpent = data.project?.total_time_spent
 
   const timeAvailable = timeEndDate - timeStartDate
 
@@ -70,9 +57,9 @@ const ProjectDetails = (): ReactElement => {
   const optionsDoughnutChart = { cutout: 60 }
 
   return (
-    <WhitePannel close title={project?.title}>
+    <WhitePannel close title={data.project?.title}>
       <Image
-        src={project?.owner.avatar}
+        src={data.project?.owner.avatar}
         display="flex"
         flexDirection="column"
         style={mainTheme.section.userSmallAvatar}
@@ -82,7 +69,7 @@ const ProjectDetails = (): ReactElement => {
           <Text mb={3} textStyle="titleWhiteBoard">
             Project description
           </Text>
-          <Text textStyle="body">{project?.description}</Text>
+          <Text textStyle="body">{data.project?.description}</Text>
         </Box>
         <Flex>
           <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
@@ -90,7 +77,7 @@ const ProjectDetails = (): ReactElement => {
               Team members
             </Text>
             <Box>
-              {project?.users.map((u) => (
+              {data.project?.users.map((u) => (
                 <Flex key={u.id} alignItems="center">
                   <Image
                     src={u.avatar}
@@ -119,7 +106,7 @@ const ProjectDetails = (): ReactElement => {
             <Flex alignItems="center">
               <Text textStyle="body">Total time spent:</Text>
               <Text textStyle="bodyGreenBold" ml={2}>
-                {convertHoursToDays(project?.total_time_spent)}
+                {convertHoursToDays(data.project?.total_time_spent)}
               </Text>
             </Flex>
           </Box>

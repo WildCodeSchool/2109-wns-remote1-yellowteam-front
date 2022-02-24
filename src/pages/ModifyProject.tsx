@@ -105,7 +105,7 @@ const ModifyProject = (): ReactElement => {
       </WhitePannel>
     )
 
-  if (!data) return <WhitePannel close={false}>Aucun projet</WhitePannel>
+  if (!data) return <WhitePannel close={false}>No project here</WhitePannel>
 
   return (
     <WhitePannel close title={`Modify: ${data.project?.title}`}>
