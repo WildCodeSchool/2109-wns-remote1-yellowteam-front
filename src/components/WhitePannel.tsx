@@ -24,17 +24,18 @@ const WhitePannel = ({ children, close, title }: IProps): ReactElement => {
         mr={45}
         ml={45}
         pl={50}
-        pr={50}
-        pt={30}
+        paddingRight="1rem"
         pb={30}
         borderRadius={12}
       >
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" paddingTop="1rem">
           {close ? (
             <Flex justifyContent="flex-end" onClick={() => navigate(-1)}>
               <CloseButton />
             </Flex>
-          ) : null}
+          ) : (
+            <Box paddingTop={30} />
+          )}
           <Text textStyle="h2" pb="10px">
             {title}
           </Text>
