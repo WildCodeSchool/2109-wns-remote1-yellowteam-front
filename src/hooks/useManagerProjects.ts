@@ -7,7 +7,6 @@ const useManagerProjects = () => {
       variables: { userId },
       skip: !userId,
     })
-  
     return {
       projects: data?.projects,
       loading,

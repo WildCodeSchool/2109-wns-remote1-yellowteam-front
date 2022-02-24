@@ -55,7 +55,7 @@ const ProjectDetails = (): ReactElement => {
   const percentageTimeSpent = (timeSpent! / totalHoursAvailableOnProject) * 100
   const rest = 100 - percentageTimeSpent
 
-  const data = {
+  const dataDoughnutChart = {
     labels: [],
     datasets: [
       {
@@ -67,6 +67,7 @@ const ProjectDetails = (): ReactElement => {
       },
     ],
   }
+  const optionsDoughnutChart = { cutout: 60 }
 
   return (
     <WhitePannel close title={project?.title}>
@@ -129,9 +130,12 @@ const ProjectDetails = (): ReactElement => {
               Time spent on project
             </Text>
             <Box width="10rem" height="10rem">
-              <Doughnut data={data} />
-              <Text marginTop="-53%" marginLeft="45%">
-                {data.datasets[0].data[0]}%
+              <Doughnut
+                data={dataDoughnutChart}
+                options={optionsDoughnutChart}
+              />
+              <Text marginTop="-53%" marginLeft="37%">
+                {dataDoughnutChart.datasets[0].data[0]}%
               </Text>
             </Box>
           </Box>

@@ -19,12 +19,18 @@ import AddIcon from 'src/static/svg/AddIcon'
 import mainTheme from 'src/theme/mainTheme'
 import { FieldValues, useForm } from 'react-hook-form'
 import Edit from 'src/static/svg/Edit'
-import { useUpdateProjectMutation } from 'src/generated/graphql'
+import {
+  useGetProjectQuery,
+  useUpdateProjectMutation,
+} from 'src/generated/graphql'
 import convertHoursToDays from 'src/utils/convertHoursToDays'
 
 const ModifyProject = (): ReactElement => {
-  const { projects, refetch, loading } = useManagerProjects()
   const { projectId } = useParams()
+  const { data, refetch, loading } = useGetProjectQuery({
+    variables: { id: projectId! },
+    skip: projectId === undefined,
+  })
   const [isFormAddUserVisible, setIsFormAddUserVisible] = useState(false)
   const [
     isDescriptionModificationVisible,
@@ -99,10 +105,10 @@ const ModifyProject = (): ReactElement => {
       </WhitePannel>
     )
 
-  const project = projects?.find((p) => p.id === projectId)
+  if (!data) return <WhitePannel close={false}>Aucun projet</WhitePannel>
 
   return (
-    <WhitePannel close title={`Modify: ${project?.title}`}>
+    <WhitePannel close title={`Modify: ${data.project?.title}`}>
       <Box overflow="auto" height="22rem">
         <Box pt={5} pr={5} maxWidth="90%">
           <Flex alignItems="center">
@@ -122,7 +128,7 @@ const ModifyProject = (): ReactElement => {
                   id="description"
                   type="text"
                   width="70%"
-                  defaultValue={project?.description}
+                  defaultValue={data.project?.description}
                   {...register('description')}
                 />
                 <Button
@@ -140,7 +146,7 @@ const ModifyProject = (): ReactElement => {
               </Flex>
             </FormControl>
           ) : (
-            <Text textStyle="body">{project?.description}</Text>
+            <Text textStyle="body">{data.project?.description}</Text>
           )}
           <Flex>
             <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
@@ -148,7 +154,7 @@ const ModifyProject = (): ReactElement => {
                 Team members
               </Text>
               <Box overflow="auto" height="6rem">
-                {project?.users.map((u) => (
+                {data.project?.users.map((u) => (
                   <Flex key={u.id} alignItems="center">
                     <Image
                       src={u.avatar}
@@ -245,7 +251,7 @@ const ModifyProject = (): ReactElement => {
                 <Flex alignItems="center">
                   <Text textStyle="body">Total time spent:</Text>
                   <Text textStyle="bodyGreenBold" ml={2}>
-                    {convertHoursToDays(project?.total_time_spent)}
+                    {convertHoursToDays(data.project?.total_time_spent)}
                   </Text>
                 </Flex>
               )}
