@@ -283,14 +283,6 @@ export default function CardDetails({ taskId }: ICard) {
 
           {/* Comments */}
           <Comments taskId={data.task.id} />
-          {/* {data.task.comments.map((comment) => (
-            <Comments
-              content={comment.content}
-              created_at={comment.created_at}
-              user_task_comments={comment.user_task_comments}
-              id={comment.id}
-            />
-          ))} */}
         </ModalBody>
         {/* Footer Buttons */}
         <ModalFooter borderTop="1px" borderColor="gray.200" paddingBottom="0">
