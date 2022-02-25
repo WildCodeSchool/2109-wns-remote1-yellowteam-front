@@ -25,14 +25,17 @@ import {
   Textarea,
   Image,
   Spinner,
+  Input,
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
 import { Duration } from 'luxon'
+import Comments from './Comments'
 
 type FormData = {
   description: string
   title: string
   is_disabled: boolean
+  total_time_spent: number
 }
 
 type FormInputs = Omit<
@@ -51,6 +54,8 @@ type FormInputs = Omit<
   | 'updated_at'
 >
 
+type Props = React.ComponentProps<typeof Box>
+
 export default function CardDetails({ taskId }: ICard) {
   const {
     register,
@@ -59,7 +64,15 @@ export default function CardDetails({ taskId }: ICard) {
     formState: { errors },
   } = useForm<FormData>()
 
+  console.log(taskId)
+
   const [isEditDescriptionActive, setIsEditDescriptionActive] =
+    React.useState<boolean>(false)
+
+  const [isEditTitleActive, setIsEditTitleActive] =
+    React.useState<boolean>(false)
+
+  const [isEditTotalTimeSpentActive, setIsEditTotalTimeSpentActive] =
     React.useState<boolean>(false)
 
   const [sendUpdate] = useUpdateTaskMutation({
@@ -127,9 +140,35 @@ export default function CardDetails({ taskId }: ICard) {
     >
       <ModalOverlay />
       <ModalContent maxHeight="90vh" p="25px">
-        <ModalHeader>{data?.task.title}</ModalHeader>
+        <ModalHeader>
+          <Flex mt="12px" alignItems="center">
+            <Text textStyle="titleTicket" mt="12px">
+              {isEditTitleActive ? (
+                <>
+                  <Input
+                    textStyle="h1"
+                    mt="12px"
+                    placeholder="Add a new description"
+                    {...register('title')}
+                  />
+                </>
+              ) : (
+                <Text textStyle="h1" mt="12px">
+                  {data?.task.title}
+                </Text>
+              )}
+            </Text>
+            <IconButton
+              variant="unstyled"
+              aria-label=""
+              icon={<EditIcon />}
+              onClick={() => setIsEditTitleActive(true)}
+            />
+          </Flex>
+        </ModalHeader>
 
         <ModalCloseButton />
+
         <ModalBody>
           {/* Tag and photo */}
           <Flex alignItems="center">
@@ -163,26 +202,6 @@ export default function CardDetails({ taskId }: ICard) {
                   placeholder="Add a new description"
                   {...register('description')}
                 />
-                {/* <Flex justifyContent="flex-end">
-                  <Button
-                    colorScheme="red"
-                    size="xs"
-                    mt="12px"
-                    onClick={() => {
-                      setIsEditDescriptionActive(false)
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    colorScheme="green"
-                    size="xs"
-                    mt="12px"
-                    onClick={() => saveNewDescription()}
-                  >
-                    Save
-                  </Button>
-                </Flex> */}
               </>
             ) : (
               <Text textStyle="body" mt="12px">
@@ -217,11 +236,30 @@ export default function CardDetails({ taskId }: ICard) {
                   {' '}
                   Initial time spend estime
                 </Text>
-                <Select placeholder="Select option" width="150px" h="25px">
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
+                <Flex mt="12px" alignItems="center">
+                  <Text textStyle="body" mt="12px">
+                    {isEditTotalTimeSpentActive ? (
+                      <>
+                        <Input
+                          textStyle="body"
+                          mt="12px"
+                          placeholder="Add a new total time spent"
+                          {...register('total_time_spent')}
+                        />
+                      </>
+                    ) : (
+                      <Text textStyle="body" mt="12px">
+                        wich data on db ?{/* {data?.task.total_time_spent} */}
+                      </Text>
+                    )}
+                  </Text>
+                  <IconButton
+                    variant="unstyled"
+                    aria-label=""
+                    icon={<EditIcon />}
+                    onClick={() => setIsEditTotalTimeSpentActive(true)}
+                  />
+                </Flex>
               </Flex>
               <Flex
                 mt="12px"
@@ -244,6 +282,15 @@ export default function CardDetails({ taskId }: ICard) {
           </Flex>
 
           {/* Comments */}
+          <Comments taskId={data.task.id} />
+          {/* {data.task.comments.map((comment) => (
+            <Comments
+              content={comment.content}
+              created_at={comment.created_at}
+              user_task_comments={comment.user_task_comments}
+              id={comment.id}
+            />
+          ))} */}
         </ModalBody>
         {/* Footer Buttons */}
         <ModalFooter borderTop="1px" borderColor="gray.200" paddingBottom="0">
