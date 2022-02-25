@@ -40,17 +40,23 @@ const Profile = (): ReactElement => {
     avatar,
   }: FieldValues): Promise<void> => {
     setLoadBtn(true)
-    userUpdate({
-      variables: {
-        data: {
-          first_name: { set: !first_name ? user?.first_name : first_name },
-          last_name: { set: !last_name ? user?.last_name : last_name },
-          email: { set: !email ? user?.email : email },
-          avatar: { set: !avatar ? user?.avatar : avatar },
+
+    try {
+      await userUpdate({
+        variables: {
+          data: {
+            first_name: { set: !first_name ? user?.first_name : first_name },
+            last_name: { set: !last_name ? user?.last_name : last_name },
+            email: { set: !email ? user?.email : email },
+            avatar: { set: !avatar ? user?.avatar : avatar },
+          },
+          where: { id: user?.id },
         },
-        where: { id: user?.id },
-      },
-    })
+      })
+    } catch (e) {
+      console.error('user update error', e)
+    }
+
     reset()
     setLoadBtn(false)
     setHidden(true)
