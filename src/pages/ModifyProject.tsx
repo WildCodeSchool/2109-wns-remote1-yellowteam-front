@@ -40,19 +40,19 @@ const ModifyProject = (): ReactElement => {
     setIsTimeOnProjectModificationVisible,
   ] = useState(false)
   const { handleSubmit, register, reset } = useForm()
-  const [uptadeproject, { loading: updateProjectLoading }] =
+  const [updateproject, { loading: updateProjectLoading }] =
     useUpdateProjectMutation()
 
   const onSubmitAddUser = async ({ email }: FieldValues): Promise<void> => {
     try {
-      uptadeproject({
+      await updateproject({
         variables: {
           data: { users: { connect: [{ email: email as string }] } },
           projectId: { id: projectId },
         },
       })
     } catch (e) {
-      console.log('error adding user to project', e)
+      console.error('error adding user to project', e)
     }
     setIsFormAddUserVisible(false)
     reset()
@@ -62,14 +62,14 @@ const ModifyProject = (): ReactElement => {
     description,
   }: FieldValues): Promise<void> => {
     try {
-      uptadeproject({
+      await updateproject({
         variables: {
           data: { description: { set: description } },
           projectId: { id: projectId },
         },
       })
     } catch (e) {
-      console.log('error changing project description', e)
+      console.error('error changing project description', e)
     }
     setIsDescriptionModificationVisible(false)
     reset()
@@ -80,14 +80,14 @@ const ModifyProject = (): ReactElement => {
   }: FieldValues): Promise<void> => {
     const nbTime = parseInt(total_time_spent, 10)
     try {
-      uptadeproject({
+      await updateproject({
         variables: {
           data: { total_time_spent: { set: nbTime } },
           projectId: { id: projectId },
         },
       })
     } catch (e) {
-      console.log('error changing project description', e)
+      console.error('error changing project description', e)
     }
     setIsTimeOnProjectModificationVisible(false)
     reset()
