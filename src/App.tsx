@@ -11,9 +11,8 @@ import useAppState from './hooks/useAppState'
 import Board from './pages/Board'
 import Profile from './pages/Profile'
 import Notifications from './pages/Notifications'
-import Project from './pages/Project'
+import Projects from './pages/Projects'
 import ProjectDetails from './pages/ProjectsDetails'
-import ModifyProject from './pages/ModifyProject'
 
 const client = apolloClient()
 
@@ -21,15 +20,12 @@ const Routes = () =>
   useRoutes([
     { path: '/board', element: <Board /> },
     { path: '/board/:projectId', element: <Board /> },
-    { path: '/projects', element: <Project /> },
+    { path: '/projects', element: <Projects /> },
     {
       path: '/projects/:projectId',
       element: <ProjectDetails />,
     },
-    {
-      path: '/projects/:projectId/modify',
-      element: <ModifyProject />,
-    },
+
     { path: '/profile', element: <Profile /> },
     { path: '/notifications', element: <Notifications /> },
   ])

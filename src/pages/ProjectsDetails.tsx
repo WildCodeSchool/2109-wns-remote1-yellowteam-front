@@ -1,24 +1,118 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Box, Spinner, Text, Image, Flex } from '@chakra-ui/react'
-import React, { ReactElement } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { ReactElement, useEffect, useState } from 'react'
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Spinner,
+  Text,
+  Textarea,
+  Image,
+} from '@chakra-ui/react'
+import { DeleteIcon } from '@chakra-ui/icons'
 import WhitePannel from 'src/components/WhitePannel'
+import { useNavigate, useParams } from 'react-router-dom'
+import AddIcon from 'src/static/svg/AddIcon'
 import mainTheme from 'src/theme/mainTheme'
-import convertHoursToDays from 'src/utils/convertHoursToDays'
+import { FieldValues, useForm } from 'react-hook-form'
+import Edit from 'src/static/svg/Edit'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
+import {
+  useDeleteProjectMutation,
+  useGetProjectQuery,
+  useUpdateProjectMutation,
+} from 'src/generated/graphql'
+import convertHoursToDays from 'src/utils/convertHoursToDays'
 import convertMillisecondsToHours from 'src/utils/convertMillisecondsToHours'
 import getActualTimeAvailable from 'src/utils/getActualTimeAvailable'
-import { useGetProjectQuery } from 'src/generated/graphql'
 
-const ProjectDetails = (): ReactElement => {
+const ModifyProject = (): ReactElement => {
+  ChartJS.register(ArcElement, Tooltip, Legend)
+
   const { projectId } = useParams()
-  const { data, loading } = useGetProjectQuery({
+  const navigate = useNavigate()
+  const { data, refetch, loading } = useGetProjectQuery({
     variables: { id: projectId! },
     skip: projectId === undefined,
   })
+  const [deleteProjectData] = useDeleteProjectMutation({
+    variables: { projectId: projectId! },
+  })
+  const [isFormAddUserVisible, setIsFormAddUserVisible] = useState(false)
+  const [
+    isDescriptionModificationVisible,
+    setIsDescriptionModificationVisible,
+  ] = useState(false)
+  const [
+    isTimeOnProjectModificationVisible,
+    setIsTimeOnProjectModificationVisible,
+  ] = useState(false)
+  const { handleSubmit, register, reset } = useForm()
+  const [uptadeproject, { loading: updateProjectLoading }] =
+    useUpdateProjectMutation()
 
-  ChartJS.register(ArcElement, Tooltip, Legend)
+  const onSubmitAddUser = async ({ email }: FieldValues): Promise<void> => {
+    try {
+      uptadeproject({
+        variables: {
+          data: { users: { connect: [{ email: email as string }] } },
+          projectId: { id: projectId },
+        },
+      })
+    } catch (e) {
+      console.log('error adding user to project', e)
+    }
+    setIsFormAddUserVisible(false)
+    reset()
+  }
+
+  const deleteProject = (id: string) => {
+    deleteProjectData({ variables: { projectId: id } })
+    navigate(-1)
+  }
+
+  const onSubmitDescription = async ({
+    description,
+  }: FieldValues): Promise<void> => {
+    try {
+      uptadeproject({
+        variables: {
+          data: { description: { set: description } },
+          projectId: { id: projectId },
+        },
+      })
+    } catch (e) {
+      console.log('error changing project description', e)
+    }
+    setIsDescriptionModificationVisible(false)
+    reset()
+  }
+
+  const onSubmitChangeTimeSpent = async ({
+    total_time_spent,
+  }: FieldValues): Promise<void> => {
+    const nbTime = parseInt(total_time_spent, 10)
+    try {
+      uptadeproject({
+        variables: {
+          data: { total_time_spent: { set: nbTime } },
+          projectId: { id: projectId },
+        },
+      })
+    } catch (e) {
+      console.log('error changing project description', e)
+    }
+    setIsTimeOnProjectModificationVisible(false)
+    reset()
+  }
+
+  useEffect(() => {
+    refetch()
+  }, [onSubmitAddUser, onSubmitDescription, onSubmitChangeTimeSpent])
 
   if (loading)
     return (
@@ -63,56 +157,173 @@ const ProjectDetails = (): ReactElement => {
         flexDirection="column"
         style={mainTheme.section.userSmallAvatar}
       />
-      <Box overflow="auto" height="22rem">
+      <Box overflow="auto" height="24rem">
         <Box pt={5} pr={5} maxWidth="90%">
-          <Text mb={3} textStyle="titleWhiteBoard">
-            Project description
-          </Text>
-          <Text textStyle="body">{data.project?.description}</Text>
+          <Flex mb={3} alignItems="center">
+            <Text textStyle="titleWhiteBoard">Project description</Text>
+            <Button
+              height={0}
+              variant="ghost "
+              onClick={() => setIsDescriptionModificationVisible(true)}
+            >
+              <Edit />
+            </Button>
+          </Flex>
+          {isDescriptionModificationVisible ? (
+            <FormControl>
+              <Flex alignItems="center">
+                <FormLabel htmlFor="description" />
+                <Textarea
+                  id="description"
+                  type="text"
+                  width="70%"
+                  defaultValue={data.project?.description}
+                  {...register('description')}
+                />
+                <Button
+                  ml={3}
+                  backgroundColor={mainTheme.colors.orange}
+                  color="white"
+                  isLoading={updateProjectLoading}
+                  type="submit"
+                  height="30px"
+                  width="auto"
+                  onClick={handleSubmit(onSubmitDescription)}
+                >
+                  Validate
+                </Button>
+              </Flex>
+            </FormControl>
+          ) : (
+            <Text textStyle="body">{data.project?.description}</Text>
+          )}
+          <Flex>
+            <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
+              <Text mb={3} textStyle="titleWhiteBoard">
+                Team members
+              </Text>
+              <Box overflow="auto" maxHeight="6rem">
+                {data.project?.users.map((u) => (
+                  <Flex justifyContent="space-between">
+                    <Flex key={u.id} alignItems="center" mt={2}>
+                      <Image
+                        src={u.avatar}
+                        display="flex"
+                        flexDirection="column"
+                        style={mainTheme.section.userSmallAvatar}
+                        mr={5}
+                      />
+                      <Text textStyle="body">
+                        {u.first_name} {u.last_name}
+                      </Text>
+                    </Flex>
+                    <Button variant="unstyled" height={0}>
+                      <DeleteIcon />
+                    </Button>
+                  </Flex>
+                ))}
+              </Box>
+              {isFormAddUserVisible ? (
+                <FormControl>
+                  <Flex paddingTop={3}>
+                    <FormLabel htmlFor="email" />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Enter email address"
+                      height="30px"
+                      width="60%"
+                      {...register('email')}
+                    />
+                    <Button
+                      ml={3}
+                      backgroundColor={mainTheme.colors.orange}
+                      color="white"
+                      isLoading={updateProjectLoading}
+                      type="submit"
+                      height="30px"
+                      width="auto"
+                      onClick={handleSubmit(onSubmitAddUser)}
+                    >
+                      Add
+                    </Button>
+                  </Flex>
+                </FormControl>
+              ) : null}
+              {!isFormAddUserVisible ? (
+                <Flex justifyContent="center">
+                  <Button
+                    height={0}
+                    variant="unstyled"
+                    onClick={() => setIsFormAddUserVisible(true)}
+                  >
+                    <AddIcon
+                      width="30"
+                      height="32"
+                      color={mainTheme.colors.lightGrey}
+                    />
+                  </Button>
+                </Flex>
+              ) : null}
+            </Box>
+            <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
+              <Flex mb={3} alignItems="center">
+                <Text textStyle="titleWhiteBoard">Project details</Text>
+                <Button
+                  height={0}
+                  variant="ghost "
+                  onClick={() => setIsTimeOnProjectModificationVisible(true)}
+                >
+                  <Edit />
+                </Button>
+              </Flex>
+
+              <Flex alignItems="center">
+                <Text textStyle="body">Initial time spent estimee:</Text>
+                <Text textStyle="bodyGreenBold" ml={2}>
+                  {convertHoursToDays(totalHoursAvailableOnProject)}
+                </Text>
+              </Flex>
+              {isTimeOnProjectModificationVisible ? (
+                <FormControl>
+                  <Flex paddingTop={3}>
+                    <FormLabel htmlFor="total_time_spent" />
+                    <Input
+                      id="total_time_spent"
+                      type="text"
+                      height="30px"
+                      width="40%"
+                      placeholder="Enter hours"
+                      {...register('total_time_spent')}
+                    />
+                    <Button
+                      ml={3}
+                      backgroundColor={mainTheme.colors.orange}
+                      color="white"
+                      isLoading={updateProjectLoading}
+                      type="submit"
+                      height="30px"
+                      width="auto"
+                      onClick={handleSubmit(onSubmitChangeTimeSpent)}
+                    >
+                      Ok
+                    </Button>
+                  </Flex>
+                </FormControl>
+              ) : (
+                <Flex alignItems="center">
+                  <Text textStyle="body">Total time spent:</Text>
+                  <Text textStyle="bodyGreenBold" ml={2}>
+                    {convertHoursToDays(data.project?.total_time_spent)}
+                  </Text>
+                </Flex>
+              )}
+            </Box>
+          </Flex>
         </Box>
         <Flex>
           <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
-            <Text mb={3} textStyle="titleWhiteBoard">
-              Team members
-            </Text>
-            <Box>
-              {data.project?.users.map((u) => (
-                <Flex key={u.id} alignItems="center">
-                  <Image
-                    src={u.avatar}
-                    display="flex"
-                    flexDirection="column"
-                    style={mainTheme.section.userSmallAvatar}
-                    mr={5}
-                  />
-                  <Text textStyle="body">
-                    {u.first_name} {u.last_name}
-                  </Text>
-                </Flex>
-              ))}
-            </Box>
-          </Box>
-          <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
-            <Text mb={3} textStyle="titleWhiteBoard">
-              Project details
-            </Text>
-            <Flex alignItems="center">
-              <Text textStyle="body">Initial time spent estimee:</Text>
-              <Text textStyle="bodyGreenBold" ml={2}>
-                {convertHoursToDays(totalHoursAvailableOnProject)}
-              </Text>
-            </Flex>
-            <Flex alignItems="center">
-              <Text textStyle="body">Total time spent:</Text>
-              <Text textStyle="bodyGreenBold" ml={2}>
-                {convertHoursToDays(data.project?.total_time_spent)}
-              </Text>
-            </Flex>
-          </Box>
-        </Flex>
-        <Flex>
-          <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
-            <Text mb={3} textStyle="titleWhiteBoard">
+            <Text mb={3} mt={5} textStyle="titleWhiteBoard">
               Time spent on project
             </Text>
             <Box width="10rem" height="10rem">
@@ -126,14 +337,26 @@ const ProjectDetails = (): ReactElement => {
             </Box>
           </Box>
           <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
-            <Text mb={3} textStyle="titleWhiteBoard">
+            <Text mt={5} mb={3} textStyle="titleWhiteBoard">
               Tasks accomplished
             </Text>
           </Box>
+        </Flex>
+        <Flex justifyContent="center">
+          <Button
+            // width="auto"
+            maxWidth="20%"
+            color="white"
+            textStyle="h4"
+            backgroundColor={mainTheme.colors.orange}
+            onClick={() => deleteProject(projectId!)}
+          >
+            Delete project
+          </Button>
         </Flex>
       </Box>
     </WhitePannel>
   )
 }
 
-export default ProjectDetails
+export default ModifyProject
