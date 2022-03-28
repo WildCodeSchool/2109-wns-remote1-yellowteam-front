@@ -61,7 +61,7 @@ const mainTheme = extendTheme({
       color: '#009A96',
       fontFamily: 'Avenir',
       fontWeight: '800',
-    }
+    },
   },
   colors: {
     orange: '#F69826',
