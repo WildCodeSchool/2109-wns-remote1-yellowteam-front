@@ -22,6 +22,7 @@ fragment Project on Project {
       id
       avatar
       first_name
+      email
     }
   }
   users {
@@ -30,5 +31,6 @@ fragment Project on Project {
     last_name
     avatar
     role
+    email
   }
 }

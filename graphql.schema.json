@@ -19509,6 +19509,22 @@
             "deprecationReason": null
           },
           {
+            "name": "logout",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "me",
             "description": null,
             "args": [],
@@ -29774,13 +29790,9 @@
             "name": "total_time_spent",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -29993,13 +30005,9 @@
             "name": "total_time_spent",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -30184,13 +30192,9 @@
             "name": "total_time_spent",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -31074,13 +31078,9 @@
             "name": "total_time_spent",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -31329,13 +31329,9 @@
             "name": "total_time_spent",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -31584,13 +31580,9 @@
             "name": "total_time_spent",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -31835,13 +31827,9 @@
             "name": "total_time_spent",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -32090,13 +32078,9 @@
             "name": "total_time_spent",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -32357,13 +32341,9 @@
             "name": "total_time_spent",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -43041,7 +43021,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "UserCreateNestedOneWithoutTaskInput",
+                "name": "UserCreateNestedOneWithoutTasksInput",
                 "ofType": null
               }
             },
@@ -44375,7 +44355,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "UserCreateNestedOneWithoutTaskInput",
+                "name": "UserCreateNestedOneWithoutTasksInput",
                 "ofType": null
               }
             },
@@ -44594,7 +44574,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "UserCreateNestedOneWithoutTaskInput",
+                "name": "UserCreateNestedOneWithoutTasksInput",
                 "ofType": null
               }
             },
@@ -44809,7 +44789,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "UserCreateNestedOneWithoutTaskInput",
+                "name": "UserCreateNestedOneWithoutTasksInput",
                 "ofType": null
               }
             },
@@ -47299,7 +47279,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "UserUpdateOneRequiredWithoutTaskInput",
+              "name": "UserUpdateOneRequiredWithoutTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -48429,7 +48409,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "UserUpdateOneRequiredWithoutTaskInput",
+              "name": "UserUpdateOneRequiredWithoutTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -48608,7 +48588,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "UserUpdateOneRequiredWithoutTaskInput",
+              "name": "UserUpdateOneRequiredWithoutTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -48787,7 +48767,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "UserUpdateOneRequiredWithoutTaskInput",
+              "name": "UserUpdateOneRequiredWithoutTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -50470,119 +50450,6 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
-            "description": null,
-            "args": [
-              {
-                "name": "cursor",
-                "description": null,
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "TaskWhereUniqueInput",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "distinct",
-                "description": null,
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "ENUM",
-                      "name": "TaskScalarFieldEnum",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "orderBy",
-                "description": null,
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "INPUT_OBJECT",
-                      "name": "TaskOrderByWithRelationInput",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "skip",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "take",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "where",
-                "description": null,
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "TaskWhereInput",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "Task",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "task_comments",
             "description": null,
             "args": [
@@ -50687,6 +50554,119 @@
                   "ofType": {
                     "kind": "OBJECT",
                     "name": "Comment",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tasks",
+            "description": null,
+            "args": [
+              {
+                "name": "cursor",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskWhereUniqueInput",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "distinct",
+                "description": null,
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "TaskScalarFieldEnum",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "orderBy",
+                "description": null,
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "TaskOrderByWithRelationInput",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "skip",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "take",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "where",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TaskWhereInput",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Task",
                     "ofType": null
                   }
                 }
@@ -50835,7 +50815,7 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "args": [],
             "type": {
@@ -50851,7 +50831,7 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "args": [],
             "type": {
@@ -51409,11 +51389,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskCreateNestedManyWithoutUserInput",
+              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -51421,11 +51401,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
+              "name": "TaskCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -51990,53 +51970,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UserCreateNestedOneWithoutTaskInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "connect",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserWhereUniqueInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "connectOrCreate",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserCreateOrConnectWithoutTaskInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserCreateWithoutTaskInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "UserCreateNestedOneWithoutTask_commentsInput",
         "description": null,
         "fields": null,
@@ -52071,6 +52004,53 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "UserCreateWithoutTask_commentsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserCreateNestedOneWithoutTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "connect",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "connectOrCreate",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateOrConnectWithoutTasksInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateWithoutTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -52385,7 +52365,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UserCreateOrConnectWithoutTaskInput",
+        "name": "UserCreateOrConnectWithoutTask_commentsInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -52397,7 +52377,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "UserCreateWithoutTaskInput",
+                "name": "UserCreateWithoutTask_commentsInput",
                 "ofType": null
               }
             },
@@ -52428,7 +52408,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UserCreateOrConnectWithoutTask_commentsInput",
+        "name": "UserCreateOrConnectWithoutTasksInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -52440,7 +52420,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "UserCreateWithoutTask_commentsInput",
+                "name": "UserCreateWithoutTasksInput",
                 "ofType": null
               }
             },
@@ -52676,11 +52656,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskCreateNestedManyWithoutUserInput",
+              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -52688,11 +52668,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
+              "name": "TaskCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -52923,11 +52903,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskCreateNestedManyWithoutUserInput",
+              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -52935,11 +52915,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
+              "name": "TaskCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -53170,11 +53150,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskCreateNestedManyWithoutUserInput",
+              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -53182,11 +53162,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
+              "name": "TaskCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -53417,11 +53397,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskCreateNestedManyWithoutUserInput",
+              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -53429,11 +53409,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
+              "name": "TaskCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -53664,11 +53644,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskCreateNestedManyWithoutUserInput",
+              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -53676,11 +53656,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
+              "name": "TaskCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -53911,11 +53891,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskCreateNestedManyWithoutUserInput",
+              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -53923,11 +53903,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
+              "name": "TaskCreateNestedManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -54158,270 +54138,23 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TaskCreateNestedManyWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "task_comments",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updated_at",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "UserCreateWithoutTaskInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "avatar",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "created_at",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "files",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "FileCreateNestedManyWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "first_name",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "invitations",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "InvitationCreateNestedManyWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "is_disabled",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "last_name",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "notifications",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NotificationCreateNestedManyWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "notifications_sent",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NotificationCreateNestedManyWithoutSenderInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "owned_projects",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ProjectCreateNestedManyWithoutOwnerInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "project_comments",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CommentCreateNestedManyWithoutUser_project_commentsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "projects",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ProjectCreateNestedManyWithoutUsersInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "role",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserCreateroleInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "task_comments",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -54664,11 +54397,258 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TaskCreateNestedManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updated_at",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserCreateWithoutTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "avatar",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "created_at",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "files",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "FileCreateNestedManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "first_name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "invitations",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "InvitationCreateNestedManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_disabled",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "last_name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "notifications",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NotificationCreateNestedManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "notifications_sent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NotificationCreateNestedManyWithoutSenderInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "owned_projects",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProjectCreateNestedManyWithoutOwnerInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "project_comments",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateNestedManyWithoutUser_project_commentsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projects",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProjectCreateNestedManyWithoutUsersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "role",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserCreateroleInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "task_comments",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateNestedManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -55846,11 +55826,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskOrderByRelationAggregateInput",
+              "name": "CommentOrderByRelationAggregateInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -55858,11 +55838,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentOrderByRelationAggregateInput",
+              "name": "TaskOrderByRelationAggregateInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -56573,11 +56553,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskUpdateManyWithoutUserInput",
+              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -56585,11 +56565,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
+              "name": "TaskUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -57355,7 +57335,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UserUpdateOneRequiredWithoutTaskInput",
+        "name": "UserUpdateOneRequiredWithoutTasksInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -57376,7 +57356,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "UserCreateOrConnectWithoutTaskInput",
+              "name": "UserCreateOrConnectWithoutTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -57388,7 +57368,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "UserCreateWithoutTaskInput",
+              "name": "UserCreateWithoutTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -57400,7 +57380,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "UserUpdateWithoutTaskInput",
+              "name": "UserUpdateWithoutTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -57412,7 +57392,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "UserUpsertWithoutTaskInput",
+              "name": "UserUpsertWithoutTasksInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -57844,11 +57824,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskUpdateManyWithoutUserInput",
+              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -57856,11 +57836,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
+              "name": "TaskUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -58071,11 +58051,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskUpdateManyWithoutUserInput",
+              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -58083,11 +58063,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
+              "name": "TaskUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -58298,11 +58278,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskUpdateManyWithoutUserInput",
+              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -58310,11 +58290,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
+              "name": "TaskUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -58525,11 +58505,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskUpdateManyWithoutUserInput",
+              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -58537,11 +58517,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
+              "name": "TaskUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -58752,11 +58732,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskUpdateManyWithoutUserInput",
+              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -58764,11 +58744,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
+              "name": "TaskUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -58979,11 +58959,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskUpdateManyWithoutUserInput",
+              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -58991,11 +58971,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
+              "name": "TaskUpdateManyWithoutUserInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -59206,250 +59186,23 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TaskUpdateManyWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "task_comments",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updated_at",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "UserUpdateWithoutTaskInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "avatar",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "created_at",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "email",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "files",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "FileUpdateManyWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "first_name",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "invitations",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "InvitationUpdateManyWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "is_disabled",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "BoolFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "last_name",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "notifications",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NotificationUpdateManyWithoutUserInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "notifications_sent",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NotificationUpdateManyWithoutSenderInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "owned_projects",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ProjectUpdateManyWithoutOwnerInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "project_comments",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutUser_project_commentsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "projects",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ProjectUpdateManyWithoutUsersInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "role",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserUpdateroleInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "task_comments",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -59672,11 +59425,238 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TaskUpdateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updated_at",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserUpdateWithoutTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "avatar",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NullableStringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "created_at",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "files",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "FileUpdateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "first_name",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "invitations",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "InvitationUpdateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_disabled",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "BoolFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "last_name",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "notifications",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NotificationUpdateManyWithoutUserInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "notifications_sent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NotificationUpdateManyWithoutSenderInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "owned_projects",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProjectUpdateManyWithoutOwnerInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "project_comments",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutUser_project_commentsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projects",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ProjectUpdateManyWithoutUsersInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "role",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdateroleInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "task_comments",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutUser_task_commentsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -60070,49 +60050,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UserUpsertWithoutTaskInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserCreateWithoutTaskInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "update",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserUpdateWithoutTaskInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "UserUpsertWithoutTask_commentsInput",
         "description": null,
         "fields": null,
@@ -60142,6 +60079,49 @@
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "UserUpdateWithoutTask_commentsInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserUpsertWithoutTasksInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserCreateWithoutTasksInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserUpdateWithoutTasksInput",
                 "ofType": null
               }
             },
@@ -60413,11 +60393,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task",
+            "name": "task_comments",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TaskListRelationFilter",
+              "name": "CommentListRelationFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -60425,11 +60405,11 @@
             "deprecationReason": null
           },
           {
-            "name": "task_comments",
+            "name": "tasks",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentListRelationFilter",
+              "name": "TaskListRelationFilter",
               "ofType": null
             },
             "defaultValue": null,

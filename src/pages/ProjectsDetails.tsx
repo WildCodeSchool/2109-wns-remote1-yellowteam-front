@@ -42,6 +42,7 @@ const ModifyProject = (): ReactElement => {
   const [deleteProjectData] = useDeleteProjectMutation({
     variables: { projectId: projectId! },
   })
+
   const [isFormAddUserVisible, setIsFormAddUserVisible] = useState(false)
   const [
     isDescriptionModificationVisible,
@@ -75,6 +76,19 @@ const ModifyProject = (): ReactElement => {
     navigate(-1)
   }
 
+  const deleteUser = async (email: string): Promise<void> => {
+    try {
+      uptadeproject({
+        variables: {
+          data: { users: { delete: [{ email }] } },
+          projectId: { id: projectId },
+        },
+      })
+    } catch (e) {
+      console.log('error deleting user from project', e)
+    }
+    reset()
+  }
   const onSubmitDescription = async ({
     description,
   }: FieldValues): Promise<void> => {
@@ -151,12 +165,14 @@ const ModifyProject = (): ReactElement => {
 
   return (
     <WhitePannel close title={data.project?.title}>
-      <Image
-        src={data.project?.owner.avatar}
-        display="flex"
-        flexDirection="column"
-        style={mainTheme.section.userSmallAvatar}
-      />
+      <Box paddingBottom={5} borderBottom="1px solid grey" width="250px">
+        <Image
+          src={data.project?.owner.avatar}
+          display="flex"
+          flexDirection="column"
+          style={mainTheme.section.userSmallAvatar}
+        />
+      </Box>
       <Box overflow="auto" height="24rem">
         <Box pt={5} pr={5} maxWidth="90%">
           <Flex mb={3} alignItems="center">
@@ -202,10 +218,15 @@ const ModifyProject = (): ReactElement => {
               <Text mb={3} textStyle="titleWhiteBoard">
                 Team members
               </Text>
-              <Box overflow="auto" maxHeight="6rem">
+              <Box
+                overflow="auto"
+                maxHeight="6rem"
+                maxWidth="20rem"
+                alignItems="center"
+              >
                 {data.project?.users.map((u) => (
-                  <Flex justifyContent="space-between">
-                    <Flex key={u.id} alignItems="center" mt={2}>
+                  <Flex key={u.id} justifyContent="space-between">
+                    <Flex mt={2}>
                       <Image
                         src={u.avatar}
                         display="flex"
@@ -217,7 +238,11 @@ const ModifyProject = (): ReactElement => {
                         {u.first_name} {u.last_name}
                       </Text>
                     </Flex>
-                    <Button variant="unstyled" height={0}>
+                    <Button
+                      variant="unstyled"
+                      height={0}
+                      onClick={() => deleteUser(u.email)}
+                    >
                       <DeleteIcon />
                     </Button>
                   </Flex>
