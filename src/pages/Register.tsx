@@ -65,14 +65,6 @@ export default function Register(): JSX.Element {
         >
           SIGN IN
         </Button>
-        {/* <Text
-          textAlign="center"
-          textStyle="titleLogin"
-          color="#ffffff"
-          padding={121}
-        >
-          No account ? Sign up
-        </Text> */}
         <Text textStyle="subText" onClick={() => navigate(`/login`)}>
           Already have an account ? Sign in
         </Text>
