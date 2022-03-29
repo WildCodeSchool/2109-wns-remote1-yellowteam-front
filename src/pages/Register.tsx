@@ -1,39 +1,18 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
+import React, { ReactElement, useEffect, useState } from 'react'
 import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import useAppState from 'src/hooks/useAppState'
 import { useCookies } from 'react-cookie'
 import mainTheme from 'src/theme/mainTheme'
-import { useMutateLoginMutation } from '../generated/graphql'
+import useAppState from 'src/hooks/useAppState'
 
-export default function Login(): JSX.Element {
-  const navigate = useNavigate()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [cookies, setCookies] = useCookies()
-
-  const { dispatchLogin } = useAppState()
-  const [login] = useMutateLoginMutation({
-    onCompleted: (data) => {
-      dispatchLogin(data.login)
-      setCookies('isLoggedIn', true)
-      navigate('/board')
-    },
-    // Gérer l'erreur (un mauvais login/mdp fait crasher l'app sinon)
-    // Comment, ça reste à voir (il doit y avoir des "toasts" dans Chakra UI ?)
-    // Alternative : entourer l'appel de login d'un try/catch dans onSubmit (et précéder d'un await)
-    onError: (error) => {
-      console.error(error)
-    },
-  })
+export default function Register(): JSX.Element {
+  // const [cookies, setCookies] = useCookies()
+  // const { dispatchLogin } = useAppState()
 
   const { handleSubmit, register } = useForm()
-
-  const onSubmit = async ({ email, password }: FieldValues): Promise<void> => {
-    login({
-      variables: { data: { email, password } },
-    })
-  }
 
   return (
     <Flex direction="row" alignItems="center">
@@ -49,7 +28,7 @@ export default function Login(): JSX.Element {
           color="#ffffff"
           padding={121}
         >
-          Welcome to Y-Task Manager
+          TEST !!!!!!!!
         </Text>
       </Flex>
       <Flex
@@ -81,13 +60,19 @@ export default function Login(): JSX.Element {
           w={['65%', '55%', '35%', '25%']}
           backgroundColor={mainTheme.colors.orange}
           color="#ffffff"
-          onClick={handleSubmit(onSubmit)}
+          onClick={() => alert('sdfsdf')}
         >
           SIGN IN
         </Button>
-        <Text textStyle="subText" onClick={() => navigate(`/register`)}>
-          Not Account ? Sign up
-        </Text>
+        {/* <Text
+          textAlign="center"
+          textStyle="titleLogin"
+          color="#ffffff"
+          padding={121}
+        >
+          No account ? Sign up
+        </Text> */}
+        <Text textStyle="subText">Not Account ? Sign up</Text>
       </Flex>
     </Flex>
   )

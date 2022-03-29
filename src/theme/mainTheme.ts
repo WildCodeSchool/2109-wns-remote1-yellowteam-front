@@ -15,6 +15,13 @@ const mainTheme = extendTheme({
       color: '#38383A',
       fontFamily: 'Avenir',
     },
+    subText: {
+      fontSize: ['10'],
+      color: '#38383A',
+      fontFamily: 'Avenir',
+      textDecoration: 'underline',
+      cursor: 'pointer',
+    },
     h1: {
       fontSize: ['32', '36'],
       fontWeight: '800',
