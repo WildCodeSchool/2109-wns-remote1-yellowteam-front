@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { useMutateMeMutation } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
 import Login from 'src/pages/Login'
+import Register from 'src/pages/Register'
 
 export default function RequireAuth({
   children,
@@ -32,6 +33,7 @@ export default function RequireAuth({
     return (
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     )

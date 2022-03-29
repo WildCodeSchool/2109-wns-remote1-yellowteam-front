@@ -28,7 +28,7 @@ export default function Register(): JSX.Element {
           color="#ffffff"
           padding={121}
         >
-          TEST !!!!!!!!
+          Welcome to Y-Task Manager
         </Text>
       </Flex>
       <Flex
