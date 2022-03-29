@@ -14,7 +14,7 @@ import { useGetProjectQuery } from 'src/generated/graphql'
 const ProjectDetails = (): ReactElement => {
   const { projectId } = useParams()
   const { data, loading } = useGetProjectQuery({
-    variables: { id: projectId! },
+    variables: { id: projectId as string },
     skip: projectId === undefined,
   })
 
@@ -38,7 +38,8 @@ const ProjectDetails = (): ReactElement => {
 
   const totalHoursAvailableOnProject = getActualTimeAvailable(hoursAvailable)
 
-  const percentageTimeSpent = (timeSpent! / totalHoursAvailableOnProject) * 100
+  const percentageTimeSpent =
+    ((timeSpent as number) / totalHoursAvailableOnProject) * 100
   const rest = 100 - percentageTimeSpent
 
   const dataDoughnutChart = {
