@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { ReactElement, useEffect, useState } from 'react'
 import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import mainTheme from 'src/theme/mainTheme'
 import useAppState from 'src/hooks/useAppState'
 
 export default function Register(): JSX.Element {
+  const navigate = useNavigate()
+
   // const [cookies, setCookies] = useCookies()
   // const { dispatchLogin } = useAppState()
 
@@ -72,7 +73,9 @@ export default function Register(): JSX.Element {
         >
           No account ? Sign up
         </Text> */}
-        <Text textStyle="subText">Not Account ? Sign up</Text>
+        <Text textStyle="subText" onClick={() => navigate(`/login`)}>
+          Already have an account ? Sign in
+        </Text>
       </Flex>
     </Flex>
   )
