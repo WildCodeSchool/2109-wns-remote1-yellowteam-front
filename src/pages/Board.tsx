@@ -31,7 +31,7 @@ const Board = (): ReactElement => {
         setSelectedProjectId={setProjectId}
         projects={projects}
       />
-      <TasksBoard projectId={projectId} />
+      <TasksBoard projectId={projectId as string} />
     </Box>
   )
 }

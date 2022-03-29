@@ -5,7 +5,7 @@ export type InputMaybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -1807,6 +1807,7 @@ export type Mutation = {
   deleteTask: Maybe<Task>;
   deleteUser: Maybe<User>;
   login: User;
+  logout: Scalars['String'];
   me: User;
   register: User;
   updateComment: Maybe<Comment>;
@@ -2954,7 +2955,7 @@ export type ProjectCreateInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -2971,7 +2972,7 @@ export type ProjectCreateManyInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -2986,7 +2987,7 @@ export type ProjectCreateManyOwnerInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -3077,7 +3078,7 @@ export type ProjectCreateWithoutCommentsInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3097,7 +3098,7 @@ export type ProjectCreateWithoutFilesInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3117,7 +3118,7 @@ export type ProjectCreateWithoutInvitationsInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3137,7 +3138,7 @@ export type ProjectCreateWithoutOwnerInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3157,7 +3158,7 @@ export type ProjectCreateWithoutTasksInput = {
   start_date: Scalars['DateTime'];
   status_project: Status;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
   users?: InputMaybe<UserCreateNestedManyWithoutProjectsInput>;
 };
@@ -3178,7 +3179,7 @@ export type ProjectCreateWithoutUsersInput = {
   status_project: Status;
   tasks?: InputMaybe<TaskCreateNestedManyWithoutProjectInput>;
   title: Scalars['String'];
-  total_time_spent: Scalars['Int'];
+  total_time_spent?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -5904,6 +5905,8 @@ export type UserWhereUniqueInput = {
 
 export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> };
 
+export type TaskFragment = { __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } };
+
 export type UserFragment = { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> };
 
 export type CreateProjectMutationVariables = Exact<{
@@ -5955,6 +5958,13 @@ export type GetProjectQueryVariables = Exact<{
 
 export type GetProjectQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> } };
 
+export type GetTasksByProjectQueryVariables = Exact<{
+  where: TaskWhereInput;
+}>;
+
+
+export type GetTasksByProjectQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }> };
+
 export type GetUserInfosQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
 }>;
@@ -6002,6 +6012,18 @@ export const ProjectFragmentDoc = gql`
     last_name
     avatar
     role
+  }
+}
+    `;
+export const TaskFragmentDoc = gql`
+    fragment Task on Task {
+  id
+  title
+  status_task
+  user {
+    id
+    avatar
+    first_name
   }
 }
     `;
@@ -6253,6 +6275,41 @@ export function useGetProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetProjectQueryHookResult = ReturnType<typeof useGetProjectQuery>;
 export type GetProjectLazyQueryHookResult = ReturnType<typeof useGetProjectLazyQuery>;
 export type GetProjectQueryResult = Apollo.QueryResult<GetProjectQuery, GetProjectQueryVariables>;
+export const GetTasksByProjectDocument = gql`
+    query GetTasksByProject($where: TaskWhereInput!) {
+  tasks(where: $where) {
+    ...Task
+  }
+}
+    ${TaskFragmentDoc}`;
+
+/**
+ * __useGetTasksByProjectQuery__
+ *
+ * To run a query within a React component, call `useGetTasksByProjectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTasksByProjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTasksByProjectQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetTasksByProjectQuery(baseOptions: Apollo.QueryHookOptions<GetTasksByProjectQuery, GetTasksByProjectQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTasksByProjectQuery, GetTasksByProjectQueryVariables>(GetTasksByProjectDocument, options);
+      }
+export function useGetTasksByProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTasksByProjectQuery, GetTasksByProjectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTasksByProjectQuery, GetTasksByProjectQueryVariables>(GetTasksByProjectDocument, options);
+        }
+export type GetTasksByProjectQueryHookResult = ReturnType<typeof useGetTasksByProjectQuery>;
+export type GetTasksByProjectLazyQueryHookResult = ReturnType<typeof useGetTasksByProjectLazyQuery>;
+export type GetTasksByProjectQueryResult = Apollo.QueryResult<GetTasksByProjectQuery, GetTasksByProjectQueryVariables>;
 export const GetUserInfosDocument = gql`
     query GetUserInfos($id: String) {
   user(where: {id: $id}) {

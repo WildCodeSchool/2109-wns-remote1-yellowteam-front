@@ -22,8 +22,8 @@ export default function Login(): JSX.Element {
     // Gérer l'erreur (un mauvais login/mdp fait crasher l'app sinon)
     // Comment, ça reste à voir (il doit y avoir des "toasts" dans Chakra UI ?)
     // Alternative : entourer l'appel de login d'un try/catch dans onSubmit (et précéder d'un await)
-    onError: (error) => {
-      console.error(error)
+    onError: () => {
+      throw new Error('Error during login')
     },
   })
 

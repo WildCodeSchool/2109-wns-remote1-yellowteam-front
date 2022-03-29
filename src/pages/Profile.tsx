@@ -5,7 +5,6 @@ import {
   FormControl,
   Image,
   Input,
-  Spinner,
   Tag,
   Text,
 } from '@chakra-ui/react'
@@ -54,7 +53,7 @@ const Profile = (): ReactElement => {
         },
       })
     } catch (e) {
-      console.error('user update error', e)
+      throw new Error('user update error')
     }
 
     reset()

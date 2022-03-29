@@ -11,6 +11,7 @@ import {
   Text,
   Textarea,
   Image,
+  useToast,
 } from '@chakra-ui/react'
 import WhitePannel from 'src/components/WhitePannel'
 import { useParams } from 'react-router-dom'
@@ -25,9 +26,11 @@ import {
 import convertHoursToDays from 'src/utils/convertHoursToDays'
 
 const ModifyProject = (): ReactElement => {
+  const toast = useToast()
+
   const { projectId } = useParams()
   const { data, refetch, loading } = useGetProjectQuery({
-    variables: { id: projectId! },
+    variables: { id: projectId || '' },
     skip: projectId === undefined,
   })
   const [isFormAddUserVisible, setIsFormAddUserVisible] = useState(false)
@@ -52,7 +55,9 @@ const ModifyProject = (): ReactElement => {
         },
       })
     } catch (e) {
-      console.error('error adding user to project', e)
+      toast({
+        title: 'error adding user to project',
+      })
     }
     setIsFormAddUserVisible(false)
     reset()
@@ -69,7 +74,9 @@ const ModifyProject = (): ReactElement => {
         },
       })
     } catch (e) {
-      console.error('error changing project description', e)
+      toast({
+        title: 'error changing project description',
+      })
     }
     setIsDescriptionModificationVisible(false)
     reset()
@@ -87,7 +94,9 @@ const ModifyProject = (): ReactElement => {
         },
       })
     } catch (e) {
-      console.error('error changing project description', e)
+      toast({
+        title: 'error changing project description',
+      })
     }
     setIsTimeOnProjectModificationVisible(false)
     reset()
@@ -125,7 +134,6 @@ const ModifyProject = (): ReactElement => {
                 <FormLabel htmlFor="description" />
                 <Textarea
                   id="description"
-                  type="text"
                   width="70%"
                   defaultValue={data.project?.description}
                   {...register('description')}
