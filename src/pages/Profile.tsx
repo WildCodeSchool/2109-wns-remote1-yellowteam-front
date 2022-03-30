@@ -67,7 +67,12 @@ const Profile = (): ReactElement => {
         <Header userName={user?.first_name ?? ''} />
       </Box>
       <Box style={mainTheme.section.card}>
-        <Box flexDirection="row" display="flex" alignItems="flex-start">
+        <Box
+          flexDirection="row"
+          display="flex"
+          alignItems="flex-start"
+          justifyContent="space-between"
+        >
           <Text textStyle="h2" display="flex" flexDirection="column">
             Your profile
           </Text>
