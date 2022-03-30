@@ -78,6 +78,7 @@ export default function Login(): JSX.Element {
         </FormControl>
         <Button
           my={3}
+          // mx={1}
           w={['65%', '55%', '35%', '25%']}
           backgroundColor={mainTheme.colors.orange}
           color="#ffffff"

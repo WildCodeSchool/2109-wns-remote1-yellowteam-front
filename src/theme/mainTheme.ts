@@ -14,6 +14,9 @@ const mainTheme = extendTheme({
       fontWeight: '800',
       color: '#38383A',
       fontFamily: 'Avenir',
+      marginLeft: '10px',
+      marginRight: '10px',
+      textAlign: 'center',
     },
     subText: {
       fontSize: ['10'],
@@ -21,6 +24,8 @@ const mainTheme = extendTheme({
       fontFamily: 'Avenir',
       textDecoration: 'underline',
       cursor: 'pointer',
+      marginLeft: '10px',
+      marginRight: '10px',
     },
     h1: {
       fontSize: ['32', '36'],
