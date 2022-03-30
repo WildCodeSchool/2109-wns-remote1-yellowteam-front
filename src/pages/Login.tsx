@@ -12,9 +12,14 @@ export default function Login(): JSX.Element {
   const navigate = useNavigate()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookies] = useCookies()
-  const [isLoading, setLoading] = useState<boolean>(false)
 
-  const { handleSubmit, register } = useForm()
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isValid, isSubmitted },
+  } = useForm({
+    mode: 'onChange',
+  })
 
   const { dispatchLogin } = useAppState()
   const [login] = useMutateLoginMutation({
@@ -29,7 +34,6 @@ export default function Login(): JSX.Element {
   })
 
   const onSubmit = async ({ email, password }: FieldValues): Promise<void> => {
-    setLoading(true)
     login({
       variables: { data: { email, password } },
     })
@@ -78,12 +82,12 @@ export default function Login(): JSX.Element {
         </FormControl>
         <Button
           my={3}
-          // mx={1}
           w={['65%', '55%', '35%', '25%']}
           backgroundColor={mainTheme.colors.orange}
           color="#ffffff"
           onClick={handleSubmit(onSubmit)}
-          isLoading={isLoading}
+          isLoading={isSubmitted}
+          isDisabled={!isValid && true}
         >
           SIGN IN
         </Button>

@@ -16,9 +16,14 @@ export default function Register(): JSX.Element {
   const navigate = useNavigate()
 
   const [cookies, setCookies] = useCookies()
-  const [isLoading, setLoading] = useState<boolean>(false)
 
-  const { handleSubmit, register, formState } = useForm()
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isValid, isSubmitted },
+  } = useForm({
+    mode: 'onChange',
+  })
 
   const { dispatchLogin } = useAppState()
 
@@ -45,7 +50,6 @@ export default function Register(): JSX.Element {
     email,
     password,
   }: FieldValues): Promise<void> => {
-    setLoading(true)
     mutateRegister({
       variables: { data: { first_name, last_name, email, password } },
       onCompleted: () => {
@@ -117,8 +121,8 @@ export default function Register(): JSX.Element {
           backgroundColor={mainTheme.colors.orange}
           color="#ffffff"
           onClick={handleSubmit(onSubmit)}
-          isLoading={isLoading}
-          isDisabled={!formState.isValid}
+          isLoading={isSubmitted}
+          isDisabled={!isValid && true}
         >
           SIGN UP
         </Button>
