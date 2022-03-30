@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
+import { useState } from 'react'
 import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -15,6 +16,9 @@ export default function Register(): JSX.Element {
   const navigate = useNavigate()
 
   const [cookies, setCookies] = useCookies()
+  const [isLoading, setLoading] = useState<boolean>(false)
+
+  const { handleSubmit, register, formState } = useForm()
 
   const { dispatchLogin } = useAppState()
 
@@ -35,14 +39,13 @@ export default function Register(): JSX.Element {
     },
   })
 
-  const { handleSubmit, register } = useForm()
-
   const onSubmit = async ({
     first_name,
     last_name,
     email,
     password,
   }: FieldValues): Promise<void> => {
+    setLoading(true)
     mutateRegister({
       variables: { data: { first_name, last_name, email, password } },
       onCompleted: () => {
@@ -83,28 +86,28 @@ export default function Register(): JSX.Element {
             placeholder="Firstname"
             my={2}
             type="text"
-            {...register('first_name')}
+            {...register('first_name', { required: true })}
           />
           <Input
             variant="flushed"
             placeholder="Lastname"
             my={2}
             type="text"
-            {...register('last_name')}
+            {...register('last_name', { required: true })}
           />
           <Input
             variant="flushed"
             placeholder="Email"
             my={2}
             type="email"
-            {...register('email')}
+            {...register('email', { required: true })}
           />
           <Input
             variant="flushed"
             placeholder="Password"
             my={2}
             type="password"
-            {...register('password')}
+            {...register('password', { required: true })}
           />
         </FormControl>
         <Button
@@ -114,6 +117,8 @@ export default function Register(): JSX.Element {
           backgroundColor={mainTheme.colors.orange}
           color="#ffffff"
           onClick={handleSubmit(onSubmit)}
+          isLoading={isLoading}
+          isDisabled={!formState.isValid}
         >
           SIGN UP
         </Button>

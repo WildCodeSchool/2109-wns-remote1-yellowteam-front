@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { useState } from 'react'
 import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -11,6 +12,9 @@ export default function Login(): JSX.Element {
   const navigate = useNavigate()
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookies] = useCookies()
+  const [isLoading, setLoading] = useState<boolean>(false)
+
+  const { handleSubmit, register } = useForm()
 
   const { dispatchLogin } = useAppState()
   const [login] = useMutateLoginMutation({
@@ -19,17 +23,13 @@ export default function Login(): JSX.Element {
       setCookies('isLoggedIn', true)
       navigate('/board')
     },
-    // Gérer l'erreur (un mauvais login/mdp fait crasher l'app sinon)
-    // Comment, ça reste à voir (il doit y avoir des "toasts" dans Chakra UI ?)
-    // Alternative : entourer l'appel de login d'un try/catch dans onSubmit (et précéder d'un await)
     onError: () => {
       throw new Error('Error during login')
     },
   })
 
-  const { handleSubmit, register } = useForm()
-
   const onSubmit = async ({ email, password }: FieldValues): Promise<void> => {
+    setLoading(true)
     login({
       variables: { data: { email, password } },
     })
@@ -66,14 +66,14 @@ export default function Login(): JSX.Element {
             placeholder="Email"
             my={2}
             type="text"
-            {...register('email')}
+            {...register('email', { required: true })}
           />
           <Input
             variant="flushed"
             placeholder="Password"
             my={2}
             type="password"
-            {...register('password')}
+            {...register('password', { required: true })}
           />
         </FormControl>
         <Button
@@ -83,6 +83,7 @@ export default function Login(): JSX.Element {
           backgroundColor={mainTheme.colors.orange}
           color="#ffffff"
           onClick={handleSubmit(onSubmit)}
+          isLoading={isLoading}
         >
           SIGN IN
         </Button>

@@ -19,7 +19,7 @@ const mainTheme = extendTheme({
       textAlign: 'center',
     },
     subText: {
-      fontSize: ['10'],
+      fontSize: ['12'],
       color: '#38383A',
       fontFamily: 'Avenir',
       textDecoration: 'underline',
