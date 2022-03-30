@@ -64,14 +64,14 @@ export default function Login(): JSX.Element {
           <Input
             variant="flushed"
             placeholder="Email"
-            my={1}
+            my={2}
             type="text"
             {...register('email')}
           />
           <Input
             variant="flushed"
             placeholder="Password"
-            my={1}
+            my={2}
             type="password"
             {...register('password')}
           />
