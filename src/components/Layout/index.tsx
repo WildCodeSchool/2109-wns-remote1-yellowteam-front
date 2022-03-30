@@ -5,7 +5,7 @@ import UserNavBar from '../UserNavBar'
 
 export default function Layout(): JSX.Element {
   return (
-    <Box height="inherit">
+    <Box height="100vh">
       <UserNavBar />
       <Outlet />
     </Box>

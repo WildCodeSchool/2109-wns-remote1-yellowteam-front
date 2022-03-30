@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import useAppState from 'src/hooks/useAppState'
 import { useGetManagerProjectsQuery } from '../generated/graphql'
 

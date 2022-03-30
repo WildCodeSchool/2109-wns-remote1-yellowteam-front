@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react'
-import { Flex, Text, Box, Select, Checkbox } from '@chakra-ui/react'
+import { Flex, Text, Box, Select } from '@chakra-ui/react'
 import { GetUserProjectsQuery } from 'src/generated/graphql'
 
-interface UserBoardHeaderProps {
+interface IProps {
   selectedProjectId: string | undefined
   setSelectedProjectId: (id: string) => void
   projects: GetUserProjectsQuery['projects'] | undefined
@@ -12,7 +12,7 @@ const UserBoardHeader = ({
   selectedProjectId,
   setSelectedProjectId,
   projects,
-}: UserBoardHeaderProps): ReactElement => (
+}: IProps): ReactElement => (
   <Box marginLeft="69px">
     <Flex
       flexDirection="row"
@@ -21,10 +21,7 @@ const UserBoardHeader = ({
       mr="95px"
       justifyContent="space-between"
     >
-      <Text textStyle="h2">Your tasks</Text>
-      <Checkbox colorScheme="red" fontFamily="Avenir" fontWeight="800">
-        Assigned only to me
-      </Checkbox>
+      <Text textStyle="h2">Select a project</Text>
     </Flex>
     <Select
       fontFamily="Avenir"

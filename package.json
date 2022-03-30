@@ -97,5 +97,8 @@
     "*.{js,jsx,ts,tsx}": [
       "npm run lint -- --quiet --fix"
     ]
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
   }
 }

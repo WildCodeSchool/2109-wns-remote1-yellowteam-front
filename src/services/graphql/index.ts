@@ -10,6 +10,9 @@ let apolloClient: ApolloClient<NormalizedCacheObject> | null = null
 const link = createHttpLink({
   uri: process.env.REACT_APP_SERVER_URL,
   credentials: 'include',
+  headers: {
+    'platform-auth-user-agent': 'web-platform',
+  },
 })
 
 export const client = new ApolloClient({
