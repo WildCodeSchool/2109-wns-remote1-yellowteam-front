@@ -1,12 +1,19 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useState } from 'react'
 import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import { useCookies } from 'react-cookie'
 import mainTheme from 'src/theme/mainTheme'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { validationsLogin } from '../formResolvers/yupResolver'
 import { useMutateLoginMutation } from '../generated/graphql'
+
+/**
+ * ! TODO
+ * 1 - Toast error
+ * 2 - message d'erreur: https://react-hook-form.com/api/useformstate/errormessage/
+ */
 
 export default function Login(): JSX.Element {
   const navigate = useNavigate()
@@ -16,20 +23,21 @@ export default function Login(): JSX.Element {
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid, isSubmitted },
+    formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
+    resolver: yupResolver(validationsLogin),
   })
 
   const { dispatchLogin } = useAppState()
-  const [login] = useMutateLoginMutation({
+  const [login, { loading }] = useMutateLoginMutation({
     onCompleted: (data) => {
       dispatchLogin(data.login)
       setCookies('isLoggedIn', true)
       navigate('/board')
     },
     onError: () => {
-      throw new Error('Error during login')
+      console.error("this email doesn't exist")
     },
   })
 
@@ -70,14 +78,14 @@ export default function Login(): JSX.Element {
             placeholder="Email"
             my={2}
             type="text"
-            {...register('email', { required: true })}
+            {...register('email')}
           />
           <Input
             variant="flushed"
             placeholder="Password"
             my={2}
             type="password"
-            {...register('password', { required: true })}
+            {...register('password')}
           />
         </FormControl>
         <Button
@@ -86,8 +94,8 @@ export default function Login(): JSX.Element {
           backgroundColor={mainTheme.colors.orange}
           color="#ffffff"
           onClick={handleSubmit(onSubmit)}
-          isLoading={isSubmitted}
-          isDisabled={!isValid && true}
+          isLoading={loading}
+          isDisabled={(!isValid || loading) && true}
         >
           SIGN IN
         </Button>
