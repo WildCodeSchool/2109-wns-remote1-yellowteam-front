@@ -1,24 +1,26 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
+import {
+  Button,
+  Flex,
+  FormControl,
+  Input,
+  Text,
+  useToast,
+} from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import { useCookies } from 'react-cookie'
 import mainTheme from 'src/theme/mainTheme'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { ErrorMessage } from '@hookform/error-message'
 import { validationsLogin } from '../formResolvers/yupResolver'
 import { useMutateLoginMutation } from '../generated/graphql'
 
-/**
- * ! TODO
- * 1 - Toast error
- * 2 - message d'erreur: https://react-hook-form.com/api/useformstate/errormessage/
- */
-
 export default function Login(): JSX.Element {
   const navigate = useNavigate()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookies] = useCookies()
+  const toast = useToast()
 
   const {
     handleSubmit,
@@ -30,6 +32,7 @@ export default function Login(): JSX.Element {
   })
 
   const { dispatchLogin } = useAppState()
+
   const [login, { loading }] = useMutateLoginMutation({
     onCompleted: (data) => {
       dispatchLogin(data.login)
@@ -37,7 +40,13 @@ export default function Login(): JSX.Element {
       navigate('/board')
     },
     onError: () => {
-      console.error("this email doesn't exist")
+      toast({
+        title: `your email doesn't exist`,
+        status: 'error',
+        isClosable: true,
+        duration: 9000,
+        position: 'bottom',
+      })
     },
   })
 
@@ -78,14 +87,26 @@ export default function Login(): JSX.Element {
             placeholder="Email"
             my={2}
             type="text"
+            isInvalid={errors.email && true}
             {...register('email')}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="email"
+            render={({ message }) => <p>{message}</p>}
           />
           <Input
             variant="flushed"
             placeholder="Password"
             my={2}
             type="password"
+            isInvalid={errors.password && true}
             {...register('password')}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="password"
+            render={({ message }) => <p>{message}</p>}
           />
         </FormControl>
         <Button

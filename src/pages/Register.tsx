@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
-import { useState } from 'react'
 import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import mainTheme from 'src/theme/mainTheme'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { ErrorMessage } from '@hookform/error-message'
 import useAppState from 'src/hooks/useAppState'
+import { validationsRegister } from '../formResolvers/yupResolver'
 import {
   useMutateRegisterMutation,
   useMutateLoginMutation,
@@ -20,14 +22,15 @@ export default function Register(): JSX.Element {
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid, isSubmitted },
+    formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
+    resolver: yupResolver(validationsRegister),
   })
 
   const { dispatchLogin } = useAppState()
 
-  const [mutateRegister] = useMutateRegisterMutation({
+  const [mutateRegister, { loading }] = useMutateRegisterMutation({
     onError: () => {
       throw new Error('Error during Register')
     },
@@ -90,28 +93,54 @@ export default function Register(): JSX.Element {
             placeholder="Firstname"
             my={2}
             type="text"
+            isInvalid={errors.first_name && true}
             {...register('first_name', { required: true })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="first_name"
+            render={({ message }) => <p>{message}</p>}
           />
           <Input
             variant="flushed"
             placeholder="Lastname"
             my={2}
             type="text"
+            isInvalid={errors.last_name && true}
             {...register('last_name', { required: true })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="last_name"
+            render={({ message }) => <p>{message}</p>}
           />
           <Input
             variant="flushed"
             placeholder="Email"
             my={2}
             type="email"
+            isInvalid={errors.email && true}
             {...register('email', { required: true })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="email"
+            render={({ message }) => <p>{message}</p>}
           />
           <Input
             variant="flushed"
             placeholder="Password"
             my={2}
             type="password"
-            {...register('password', { required: true })}
+            isInvalid={errors.password && true}
+            {...register('password', {
+              required: true,
+            })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="password"
+            render={({ message }) => <p>{message}</p>}
           />
         </FormControl>
         <Button
@@ -121,8 +150,8 @@ export default function Register(): JSX.Element {
           backgroundColor={mainTheme.colors.orange}
           color="#ffffff"
           onClick={handleSubmit(onSubmit)}
-          isLoading={isSubmitted}
-          isDisabled={!isValid && true}
+          isLoading={loading}
+          isDisabled={(!isValid || loading) && true}
         >
           SIGN UP
         </Button>

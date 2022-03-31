@@ -189,25 +189,9 @@ const Profile = (): ReactElement => {
                   flexDirection="column"
                   placeholder="Email"
                   type="email"
-                  {...register('email')}
+                  {...register('email', { pattern: /^\S+@\S+\.\S+$/ })}
                 />
               </Box>
-
-              {/* Autre logique avec endpoint différents */}
-              {/* <Input
-                  mx="10"
-                  variant="flushed"
-                  placeholder="Old password"
-                  flexDirection="column"
-                  value="old password"
-                />
-                <Input
-                  mx="10"
-                  variant="flushed"
-                  flexDirection="column"
-                  placeholder="New password"
-                  value="new password"
-                /> */}
             </FormControl>
             <Button
               isLoading={loadBtn}
