@@ -1823,6 +1823,7 @@ export type Mutation = {
   updateNotification: Maybe<Notification>;
   updateProject: Maybe<Project>;
   updateTask: Maybe<Task>;
+  updateTaskStatus: Task;
   updateUser: Maybe<User>;
   uploadFile: File;
   upsertComment: Comment;
@@ -2067,6 +2068,11 @@ export type MutationUpdateProjectArgs = {
 export type MutationUpdateTaskArgs = {
   data: TaskUpdateInput;
   where: TaskWhereUniqueInput;
+};
+
+
+export type MutationUpdateTaskStatusArgs = {
+  data: TaskStatusInput;
 };
 
 
@@ -4625,6 +4631,11 @@ export type TaskScalarWhereWithAggregatesInput = {
   user_id?: InputMaybe<StringWithAggregatesFilter>;
 };
 
+export type TaskStatusInput = {
+  status: Scalars['String'];
+  taskId: Scalars['String'];
+};
+
 export type TaskSumAggregate = {
   __typename?: 'TaskSumAggregate';
   total_time_spent: Maybe<Scalars['Int']>;
@@ -5945,12 +5956,11 @@ export type UpdateProjectMutationVariables = Exact<{
 export type UpdateProjectMutation = { __typename?: 'Mutation', updateProject: { __typename?: 'Project', id: string } };
 
 export type UpdateTaskStatusMutationVariables = Exact<{
-  where: TaskWhereUniqueInput;
-  data: TaskUpdateInput;
+  data: TaskStatusInput;
 }>;
 
 
-export type UpdateTaskStatusMutation = { __typename?: 'Mutation', updateTask: { __typename?: 'Task', id: string, title: string, status_task: Status } };
+export type UpdateTaskStatusMutation = { __typename?: 'Mutation', updateTaskStatus: { __typename?: 'Task', id: string, title: string, status_task: Status } };
 
 export type GetManagerProjectsQueryVariables = Exact<{
   userId: InputMaybe<Scalars['String']>;
@@ -6214,8 +6224,8 @@ export type UpdateProjectMutationHookResult = ReturnType<typeof useUpdateProject
 export type UpdateProjectMutationResult = Apollo.MutationResult<UpdateProjectMutation>;
 export type UpdateProjectMutationOptions = Apollo.BaseMutationOptions<UpdateProjectMutation, UpdateProjectMutationVariables>;
 export const UpdateTaskStatusDocument = gql`
-    mutation updateTaskStatus($where: TaskWhereUniqueInput!, $data: TaskUpdateInput!) {
-  updateTask(where: $where, data: $data) {
+    mutation updateTaskStatus($data: TaskStatusInput!) {
+  updateTaskStatus(data: $data) {
     id
     title
     status_task
@@ -6237,7 +6247,6 @@ export type UpdateTaskStatusMutationFn = Apollo.MutationFunction<UpdateTaskStatu
  * @example
  * const [updateTaskStatusMutation, { data, loading, error }] = useUpdateTaskStatusMutation({
  *   variables: {
- *      where: // value for 'where'
  *      data: // value for 'data'
  *   },
  * });

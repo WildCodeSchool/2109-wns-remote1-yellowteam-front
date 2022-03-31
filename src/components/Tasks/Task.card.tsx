@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react'
-import { Box, Text, Flex } from '@chakra-ui/react'
+import { Box, Text, Flex, useToast } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useParams } from 'react-router-dom'
 import useBoardState from 'src/hooks/useBoardState'
@@ -27,19 +27,16 @@ const Card = ({
   title,
   task,
 }: ICard): ReactElement => {
+  const toast = useToast()
   const [isDragging, setDragging] = useState(false)
   const { projectId } = useParams()
   const { hoveredList } = useBoardState()
 
   const [updateTaskStatus] = useUpdateTaskStatusMutation({
     variables: {
-      where: {
-        id: task.id,
-      },
       data: {
-        status_task: {
-          set: hoveredList as Status,
-        },
+        status: hoveredList as Status,
+        taskId: task.id,
       },
     },
     refetchQueries: [
@@ -55,10 +52,17 @@ const Card = ({
       },
     ],
     optimisticResponse: {
-      updateTask: {
+      updateTaskStatus: {
         ...task,
         status_task: hoveredList as Status,
       },
+    },
+    onError: () => {
+      toast({
+        status: 'error',
+        title: 'Error',
+        description: "Error while updating task's status",
+      })
     },
   })
 
