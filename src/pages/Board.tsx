@@ -3,7 +3,7 @@ import React, { ReactElement, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import useProjects from 'src/hooks/useProjects'
-import TasksBoard from '../components/TasksBoard'
+import TasksBoard from '../components/Tasks/TasksBoard'
 import Header from '../molecules/Header'
 import UserBoardHeader from '../molecules/UserBoardHeader'
 

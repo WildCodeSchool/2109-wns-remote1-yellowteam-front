@@ -1823,6 +1823,7 @@ export type Mutation = {
   updateNotification: Maybe<Notification>;
   updateProject: Maybe<Project>;
   updateTask: Maybe<Task>;
+  updateTaskStatus: Task;
   updateUser: Maybe<User>;
   uploadFile: File;
   upsertComment: Comment;
@@ -2067,6 +2068,11 @@ export type MutationUpdateProjectArgs = {
 export type MutationUpdateTaskArgs = {
   data: TaskUpdateInput;
   where: TaskWhereUniqueInput;
+};
+
+
+export type MutationUpdateTaskStatusArgs = {
+  data: TaskStatusInput;
 };
 
 
@@ -4625,6 +4631,11 @@ export type TaskScalarWhereWithAggregatesInput = {
   user_id?: InputMaybe<StringWithAggregatesFilter>;
 };
 
+export type TaskStatusInput = {
+  status: Scalars['String'];
+  taskId: Scalars['String'];
+};
+
 export type TaskSumAggregate = {
   __typename?: 'TaskSumAggregate';
   total_time_spent: Maybe<Scalars['Int']>;
@@ -5944,6 +5955,13 @@ export type UpdateProjectMutationVariables = Exact<{
 
 export type UpdateProjectMutation = { __typename?: 'Mutation', updateProject: { __typename?: 'Project', id: string } };
 
+export type UpdateTaskStatusMutationVariables = Exact<{
+  data: TaskStatusInput;
+}>;
+
+
+export type UpdateTaskStatusMutation = { __typename?: 'Mutation', updateTaskStatus: { __typename?: 'Task', id: string, title: string, status_task: Status } };
+
 export type GetManagerProjectsQueryVariables = Exact<{
   userId: InputMaybe<Scalars['String']>;
 }>;
@@ -6205,6 +6223,41 @@ export function useUpdateProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateProjectMutationHookResult = ReturnType<typeof useUpdateProjectMutation>;
 export type UpdateProjectMutationResult = Apollo.MutationResult<UpdateProjectMutation>;
 export type UpdateProjectMutationOptions = Apollo.BaseMutationOptions<UpdateProjectMutation, UpdateProjectMutationVariables>;
+export const UpdateTaskStatusDocument = gql`
+    mutation updateTaskStatus($data: TaskStatusInput!) {
+  updateTaskStatus(data: $data) {
+    id
+    title
+    status_task
+  }
+}
+    `;
+export type UpdateTaskStatusMutationFn = Apollo.MutationFunction<UpdateTaskStatusMutation, UpdateTaskStatusMutationVariables>;
+
+/**
+ * __useUpdateTaskStatusMutation__
+ *
+ * To run a mutation, you first call `useUpdateTaskStatusMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTaskStatusMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTaskStatusMutation, { data, loading, error }] = useUpdateTaskStatusMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useUpdateTaskStatusMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTaskStatusMutation, UpdateTaskStatusMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTaskStatusMutation, UpdateTaskStatusMutationVariables>(UpdateTaskStatusDocument, options);
+      }
+export type UpdateTaskStatusMutationHookResult = ReturnType<typeof useUpdateTaskStatusMutation>;
+export type UpdateTaskStatusMutationResult = Apollo.MutationResult<UpdateTaskStatusMutation>;
+export type UpdateTaskStatusMutationOptions = Apollo.BaseMutationOptions<UpdateTaskStatusMutation, UpdateTaskStatusMutationVariables>;
 export const GetManagerProjectsDocument = gql`
     query GetManagerProjects($userId: String) {
   projects(where: {owner: {is: {id: {equals: $userId}}}}) {
