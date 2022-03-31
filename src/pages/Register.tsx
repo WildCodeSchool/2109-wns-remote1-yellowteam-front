@@ -17,8 +17,6 @@ import {
 export default function Register(): JSX.Element {
   const navigate = useNavigate()
 
-  const [cookies, setCookies] = useCookies()
-
   const {
     handleSubmit,
     register,
@@ -39,7 +37,6 @@ export default function Register(): JSX.Element {
   const [login] = useMutateLoginMutation({
     onCompleted: (data) => {
       dispatchLogin(data.login)
-      setCookies('isLoggedIn', true)
       navigate('/board')
     },
     onError: () => {

@@ -19,7 +19,7 @@ import { useMutateLoginMutation } from '../generated/graphql'
 
 export default function Login(): JSX.Element {
   const navigate = useNavigate()
-  const [cookies, setCookies] = useCookies()
+
   const toast = useToast()
 
   const {
@@ -36,7 +36,6 @@ export default function Login(): JSX.Element {
   const [login, { loading }] = useMutateLoginMutation({
     onCompleted: (data) => {
       dispatchLogin(data.login)
-      setCookies('isLoggedIn', true)
       navigate('/board')
     },
     onError: () => {
