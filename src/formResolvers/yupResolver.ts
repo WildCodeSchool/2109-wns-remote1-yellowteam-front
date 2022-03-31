@@ -12,3 +12,10 @@ export const validationsRegister = Yup.object({
   email: Yup.string().email().required(),
   password: Yup.string().required(),
 })
+
+export const validationsProfilUpdate = Yup.object({
+  first_name: Yup.string().required(),
+  last_name: Yup.string().required(),
+  email: Yup.string().email().required(),
+  avatar: Yup.string().email().required(),
+})

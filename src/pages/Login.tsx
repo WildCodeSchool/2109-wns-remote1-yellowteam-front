@@ -44,7 +44,7 @@ export default function Login(): JSX.Element {
         title: `your email doesn't exist`,
         status: 'error',
         isClosable: true,
-        duration: 9000,
+        duration: 5000,
         position: 'bottom',
       })
     },
