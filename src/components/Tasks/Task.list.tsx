@@ -8,20 +8,21 @@ import MotionFlex from '../Motion/MotionFlex'
 import Card from './Task.card'
 
 type Props = {
-  todoTasks: GetTasksByProjectQuery['tasks']
+  tasks: GetTasksByProjectQuery['tasks']
+  name: string
+  status: Status
 }
 
-export default function TodoList({ todoTasks }: Props): JSX.Element {
-  if (!todoTasks) return <Spinner />
-
+export default function TaskList({ tasks, name, status }: Props): JSX.Element {
+  if (!tasks) return <Spinner />
   const { dispatchSetHoveredList } = useBoardState()
 
-  const handleHover = () => dispatchSetHoveredList(Status.NotStarted)
+  const handleHover = () => dispatchSetHoveredList(status)
 
   return (
     <MotionFlex onMouseEnter={handleHover} flexDirection="column" height="100%">
-      <BoardTicketsStatus title="Queue" numberOfTickets={todoTasks.length} />
-      {todoTasks.map((t) => (
+      <BoardTicketsStatus title={name} numberOfTickets={tasks.length} />
+      {tasks.map((t) => (
         <Card
           task={t}
           key={t.id}

@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Flex } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import { Status } from 'src/generated/graphql'
 import useProjectTasks from 'src/hooks/useProjectTasks'
-import DoneList from './Done.list'
-import InProgressList from './Inprogress.list'
-import TodoList from './Todo.list'
+
+import TaskList from './Task.list'
 
 interface IBoardContent {
   projectId: string
@@ -32,9 +31,13 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
       overflowX="hidden"
       height="100%"
     >
-      <TodoList todoTasks={todoTasks} />
-      <InProgressList inProgressTasks={inProgressTasks} />
-      <DoneList doneTasks={doneTasks} />
+      <TaskList name="To Do" status={Status.NotStarted} tasks={todoTasks} />
+      <TaskList
+        name="In Progress"
+        status={Status.InProgress}
+        tasks={inProgressTasks}
+      />
+      <TaskList name="Done" status={Status.Fihished} tasks={doneTasks} />
     </MotionFlex>
   )
 }
