@@ -16,6 +16,7 @@ const UserNavBar = (): JSX.Element => {
 
   const [mutateLogout] = useMutateLogoutMutation({
     onCompleted: () => dispatchLogout(),
+    // eslint-disable-next-line no-console
     onError: (err) => console.log('error', err),
   })
 

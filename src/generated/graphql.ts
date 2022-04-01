@@ -4636,11 +4636,6 @@ export type TaskStatusInput = {
   taskId: Scalars['String'];
 };
 
-export type TaskStatusInput = {
-  status: Scalars['String'];
-  taskId: Scalars['String'];
-};
-
 export type TaskSumAggregate = {
   __typename?: 'TaskSumAggregate';
   total_time_spent: Maybe<Scalars['Int']>;

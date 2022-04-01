@@ -3,7 +3,6 @@
 import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
 import mainTheme from 'src/theme/mainTheme'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ErrorMessage } from '@hookform/error-message'
