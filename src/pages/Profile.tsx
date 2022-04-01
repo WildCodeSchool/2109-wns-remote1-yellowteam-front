@@ -8,13 +8,15 @@ import {
   Tag,
   Text,
 } from '@chakra-ui/react'
-
 import React, { ReactElement, useEffect, useState } from 'react'
 import useAppState from 'src/hooks/useAppState'
 import mainTheme from 'src/theme/mainTheme'
 import { FieldValues, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { ErrorMessage } from '@hookform/error-message'
 import Header from '../molecules/Header'
 import { useMutationUpdateUserArgsMutation } from '../generated/graphql'
+import { validationsProfilUpdate } from '../formResolvers/yupResolver'
 
 const Profile = (): ReactElement => {
   const { user } = useAppState()
@@ -28,7 +30,14 @@ const Profile = (): ReactElement => {
     },
   })
 
-  const { handleSubmit, register, reset } = useForm()
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationsProfilUpdate),
+  })
 
   useEffect(() => {}, [user])
 
@@ -55,7 +64,6 @@ const Profile = (): ReactElement => {
     } catch (e) {
       throw new Error('user update error')
     }
-
     reset()
     setLoadBtn(false)
     setHidden(true)
@@ -67,7 +75,12 @@ const Profile = (): ReactElement => {
         <Header userName={user?.first_name ?? ''} />
       </Box>
       <Box style={mainTheme.section.card}>
-        <Box flexDirection="row" display="flex" alignItems="flex-start">
+        <Box
+          flexDirection="row"
+          display="flex"
+          alignItems="flex-start"
+          justifyContent="space-between"
+        >
           <Text textStyle="h2" display="flex" flexDirection="column">
             Your profile
           </Text>
@@ -187,22 +200,11 @@ const Profile = (): ReactElement => {
                   {...register('email')}
                 />
               </Box>
-
-              {/* Autre logique avec endpoint différents */}
-              {/* <Input
-                  mx="10"
-                  variant="flushed"
-                  placeholder="Old password"
-                  flexDirection="column"
-                  value="old password"
-                />
-                <Input
-                  mx="10"
-                  variant="flushed"
-                  flexDirection="column"
-                  placeholder="New password"
-                  value="new password"
-                /> */}
+              <ErrorMessage
+                errors={errors}
+                name="email"
+                render={({ message }) => <p>{message}</p>}
+              />
             </FormControl>
             <Button
               isLoading={loadBtn}
