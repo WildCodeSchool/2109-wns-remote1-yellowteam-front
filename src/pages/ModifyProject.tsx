@@ -165,6 +165,7 @@ const ModifyProject = (): ReactElement => {
                   <Flex key={u.id} alignItems="center">
                     <Image
                       src={u.avatar}
+                      fallbackSrc="https://www.toos-parents.com/wp-content/uploads/2020/04/AVATAR.png"
                       display="flex"
                       flexDirection="column"
                       style={mainTheme.section.userSmallAvatar}

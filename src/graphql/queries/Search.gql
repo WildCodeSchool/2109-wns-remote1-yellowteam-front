@@ -1,0 +1,8 @@
+query Search($data: SearchInput!) {
+  search(data: $data) {
+    title
+    description
+    id
+    type
+  }
+}

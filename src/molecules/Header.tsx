@@ -1,5 +1,6 @@
 import React from 'react'
 import { Flex, Text, Input } from '@chakra-ui/react'
+import SearchInput from 'src/components/UI/SearchInput'
 
 interface IHeader {
   userName: string
@@ -21,6 +22,7 @@ const Header = ({ userName }: IHeader): JSX.Element => (
         &nbsp; &nbsp; Welcome {userName}
       </Text>
     </Flex>
+    <SearchInput />
     <Input
       width="220px"
       variant="filled"

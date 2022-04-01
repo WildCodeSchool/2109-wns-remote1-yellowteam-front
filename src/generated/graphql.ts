@@ -810,8 +810,8 @@ export type File = {
   task_id: Maybe<Scalars['String']>;
   type: Scalars['String'];
   updated_at: Scalars['DateTime'];
-  user: User;
-  user_id: Scalars['String'];
+  user: Maybe<User>;
+  user_id: Maybe<Scalars['String']>;
 };
 
 export type FileAvgAggregate = {
@@ -864,7 +864,7 @@ export type FileCreateInput = {
   task?: InputMaybe<TaskCreateNestedOneWithoutFilesInput>;
   type: Scalars['String'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutFilesInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutFilesInput>;
 };
 
 export type FileCreateManyInput = {
@@ -878,7 +878,7 @@ export type FileCreateManyInput = {
   task_id?: InputMaybe<Scalars['String']>;
   type: Scalars['String'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user_id: Scalars['String'];
+  user_id?: InputMaybe<Scalars['String']>;
 };
 
 export type FileCreateManyProjectInput = {
@@ -891,7 +891,7 @@ export type FileCreateManyProjectInput = {
   task_id?: InputMaybe<Scalars['String']>;
   type: Scalars['String'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user_id: Scalars['String'];
+  user_id?: InputMaybe<Scalars['String']>;
 };
 
 export type FileCreateManyProjectInputEnvelope = {
@@ -909,7 +909,7 @@ export type FileCreateManyTaskInput = {
   size: Scalars['Int'];
   type: Scalars['String'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user_id: Scalars['String'];
+  user_id?: InputMaybe<Scalars['String']>;
 };
 
 export type FileCreateManyTaskInputEnvelope = {
@@ -981,7 +981,7 @@ export type FileCreateWithoutProjectInput = {
   task?: InputMaybe<TaskCreateNestedOneWithoutFilesInput>;
   type: Scalars['String'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutFilesInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutFilesInput>;
 };
 
 export type FileCreateWithoutTaskInput = {
@@ -994,7 +994,7 @@ export type FileCreateWithoutTaskInput = {
   size: Scalars['Int'];
   type: Scalars['String'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutFilesInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutFilesInput>;
 };
 
 export type FileCreateWithoutUserInput = {
@@ -1027,7 +1027,7 @@ export type FileGroupBy = {
   task_id: Maybe<Scalars['String']>;
   type: Scalars['String'];
   updated_at: Scalars['DateTime'];
-  user_id: Scalars['String'];
+  user_id: Maybe<Scalars['String']>;
 };
 
 export type FileListRelationFilter = {
@@ -1162,7 +1162,7 @@ export type FileScalarWhereInput = {
   task_id?: InputMaybe<StringNullableFilter>;
   type?: InputMaybe<StringFilter>;
   updated_at?: InputMaybe<DateTimeFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
 };
 
 export type FileScalarWhereWithAggregatesInput = {
@@ -1179,7 +1179,7 @@ export type FileScalarWhereWithAggregatesInput = {
   task_id?: InputMaybe<StringNullableWithAggregatesFilter>;
   type?: InputMaybe<StringWithAggregatesFilter>;
   updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
-  user_id?: InputMaybe<StringWithAggregatesFilter>;
+  user_id?: InputMaybe<StringNullableWithAggregatesFilter>;
 };
 
 export type FileSumAggregate = {
@@ -1202,7 +1202,7 @@ export type FileUpdateInput = {
   task?: InputMaybe<TaskUpdateOneWithoutFilesInput>;
   type?: InputMaybe<StringFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutFilesInput>;
+  user?: InputMaybe<UserUpdateOneWithoutFilesInput>;
 };
 
 export type FileUpdateManyMutationInput = {
@@ -1298,7 +1298,7 @@ export type FileUpdateWithoutProjectInput = {
   task?: InputMaybe<TaskUpdateOneWithoutFilesInput>;
   type?: InputMaybe<StringFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutFilesInput>;
+  user?: InputMaybe<UserUpdateOneWithoutFilesInput>;
 };
 
 export type FileUpdateWithoutTaskInput = {
@@ -1311,7 +1311,7 @@ export type FileUpdateWithoutTaskInput = {
   size?: InputMaybe<IntFieldUpdateOperationsInput>;
   type?: InputMaybe<StringFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutFilesInput>;
+  user?: InputMaybe<UserUpdateOneWithoutFilesInput>;
 };
 
 export type FileUpdateWithoutUserInput = {
@@ -1362,7 +1362,7 @@ export type FileWhereInput = {
   type?: InputMaybe<StringFilter>;
   updated_at?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
 };
 
 export type FileWhereUniqueInput = {
@@ -1413,8 +1413,8 @@ export type Invitation = {
   project_id: Scalars['String'];
   status: Status_Invitation;
   updated_at: Scalars['DateTime'];
-  user: User;
-  user_id: Scalars['String'];
+  user: Maybe<User>;
+  user_id: Maybe<Scalars['String']>;
 };
 
 export type InvitationCountAggregate = {
@@ -1446,7 +1446,7 @@ export type InvitationCreateInput = {
   project: ProjectCreateNestedOneWithoutInvitationsInput;
   status: Status_Invitation;
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutInvitationsInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutInvitationsInput>;
 };
 
 export type InvitationCreateManyInput = {
@@ -1456,7 +1456,7 @@ export type InvitationCreateManyInput = {
   project_id: Scalars['String'];
   status: Status_Invitation;
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user_id: Scalars['String'];
+  user_id?: InputMaybe<Scalars['String']>;
 };
 
 export type InvitationCreateManyProjectInput = {
@@ -1465,7 +1465,7 @@ export type InvitationCreateManyProjectInput = {
   id?: InputMaybe<Scalars['String']>;
   status: Status_Invitation;
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user_id: Scalars['String'];
+  user_id?: InputMaybe<Scalars['String']>;
 };
 
 export type InvitationCreateManyProjectInputEnvelope = {
@@ -1517,7 +1517,7 @@ export type InvitationCreateWithoutProjectInput = {
   id?: InputMaybe<Scalars['String']>;
   status: Status_Invitation;
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutInvitationsInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutInvitationsInput>;
 };
 
 export type InvitationCreateWithoutUserInput = {
@@ -1540,7 +1540,7 @@ export type InvitationGroupBy = {
   project_id: Scalars['String'];
   status: Status_Invitation;
   updated_at: Scalars['DateTime'];
-  user_id: Scalars['String'];
+  user_id: Maybe<Scalars['String']>;
 };
 
 export type InvitationListRelationFilter = {
@@ -1640,7 +1640,7 @@ export type InvitationScalarWhereInput = {
   project_id?: InputMaybe<StringFilter>;
   status?: InputMaybe<EnumStatus_InvitationFilter>;
   updated_at?: InputMaybe<DateTimeFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
 };
 
 export type InvitationScalarWhereWithAggregatesInput = {
@@ -1653,7 +1653,7 @@ export type InvitationScalarWhereWithAggregatesInput = {
   project_id?: InputMaybe<StringWithAggregatesFilter>;
   status?: InputMaybe<EnumStatus_InvitationWithAggregatesFilter>;
   updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
-  user_id?: InputMaybe<StringWithAggregatesFilter>;
+  user_id?: InputMaybe<StringNullableWithAggregatesFilter>;
 };
 
 export type InvitationUpdateInput = {
@@ -1663,7 +1663,7 @@ export type InvitationUpdateInput = {
   project?: InputMaybe<ProjectUpdateOneRequiredWithoutInvitationsInput>;
   status?: InputMaybe<EnumStatus_InvitationFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutInvitationsInput>;
+  user?: InputMaybe<UserUpdateOneWithoutInvitationsInput>;
 };
 
 export type InvitationUpdateManyMutationInput = {
@@ -1728,7 +1728,7 @@ export type InvitationUpdateWithoutProjectInput = {
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumStatus_InvitationFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutInvitationsInput>;
+  user?: InputMaybe<UserUpdateOneWithoutInvitationsInput>;
 };
 
 export type InvitationUpdateWithoutUserInput = {
@@ -1764,7 +1764,7 @@ export type InvitationWhereInput = {
   status?: InputMaybe<EnumStatus_InvitationFilter>;
   updated_at?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
 };
 
 export type InvitationWhereUniqueInput = {
@@ -2365,8 +2365,8 @@ export type Notification = {
   title: Scalars['String'];
   type: Type_Notification;
   updated_at: Scalars['DateTime'];
-  user: User;
-  user_id: Scalars['String'];
+  user: Maybe<User>;
+  user_id: Maybe<Scalars['String']>;
 };
 
 export type NotificationCountAggregate = {
@@ -2410,7 +2410,7 @@ export type NotificationCreateInput = {
   title: Scalars['String'];
   type: Type_Notification;
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutNotificationsInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutNotificationsInput>;
 };
 
 export type NotificationCreateManyInput = {
@@ -2424,7 +2424,7 @@ export type NotificationCreateManyInput = {
   title: Scalars['String'];
   type: Type_Notification;
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user_id: Scalars['String'];
+  user_id?: InputMaybe<Scalars['String']>;
 };
 
 export type NotificationCreateManySenderInput = {
@@ -2437,7 +2437,7 @@ export type NotificationCreateManySenderInput = {
   title: Scalars['String'];
   type: Type_Notification;
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user_id: Scalars['String'];
+  user_id?: InputMaybe<Scalars['String']>;
 };
 
 export type NotificationCreateManySenderInputEnvelope = {
@@ -2497,7 +2497,7 @@ export type NotificationCreateWithoutSenderInput = {
   title: Scalars['String'];
   type: Type_Notification;
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutNotificationsInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutNotificationsInput>;
 };
 
 export type NotificationCreateWithoutUserInput = {
@@ -2528,7 +2528,7 @@ export type NotificationGroupBy = {
   title: Scalars['String'];
   type: Type_Notification;
   updated_at: Scalars['DateTime'];
-  user_id: Scalars['String'];
+  user_id: Maybe<Scalars['String']>;
 };
 
 export type NotificationListRelationFilter = {
@@ -2660,7 +2660,7 @@ export type NotificationScalarWhereInput = {
   title?: InputMaybe<StringFilter>;
   type?: InputMaybe<EnumType_NotificationFilter>;
   updated_at?: InputMaybe<DateTimeFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
 };
 
 export type NotificationScalarWhereWithAggregatesInput = {
@@ -2677,7 +2677,7 @@ export type NotificationScalarWhereWithAggregatesInput = {
   title?: InputMaybe<StringWithAggregatesFilter>;
   type?: InputMaybe<EnumType_NotificationWithAggregatesFilter>;
   updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
-  user_id?: InputMaybe<StringWithAggregatesFilter>;
+  user_id?: InputMaybe<StringNullableWithAggregatesFilter>;
 };
 
 export type NotificationUpdateInput = {
@@ -2691,7 +2691,7 @@ export type NotificationUpdateInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   type?: InputMaybe<EnumType_NotificationFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutNotificationsInput>;
+  user?: InputMaybe<UserUpdateOneWithoutNotificationsInput>;
 };
 
 export type NotificationUpdateManyMutationInput = {
@@ -2764,7 +2764,7 @@ export type NotificationUpdateWithoutSenderInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   type?: InputMaybe<EnumType_NotificationFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutNotificationsInput>;
+  user?: InputMaybe<UserUpdateOneWithoutNotificationsInput>;
 };
 
 export type NotificationUpdateWithoutUserInput = {
@@ -2808,7 +2808,7 @@ export type NotificationWhereInput = {
   type?: InputMaybe<EnumType_NotificationFilter>;
   updated_at?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
 };
 
 export type NotificationWhereUniqueInput = {
@@ -3729,6 +3729,7 @@ export type Query = {
   notifications: Array<Notification>;
   project: Maybe<Project>;
   projects: Array<Project>;
+  search: Maybe<Array<SearchResult>>;
   task: Maybe<Task>;
   tasks: Array<Task>;
   user: Maybe<User>;
@@ -4014,6 +4015,11 @@ export type QueryProjectsArgs = {
 };
 
 
+export type QuerySearchArgs = {
+  data: SearchInput;
+};
+
+
 export type QueryTaskArgs = {
   where: TaskWhereUniqueInput;
 };
@@ -4061,6 +4067,18 @@ export enum Role {
   SuperAdmin = 'SUPER_ADMIN',
   User = 'USER'
 }
+
+export type SearchInput = {
+  searchValue: Scalars['String'];
+};
+
+export type SearchResult = {
+  __typename?: 'SearchResult';
+  description: Scalars['String'];
+  id: Scalars['String'];
+  title: Scalars['String'];
+  type: Scalars['String'];
+};
 
 export enum SortOrder {
   Asc = 'asc',
@@ -4172,8 +4190,8 @@ export type Task = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at: Scalars['DateTime'];
-  user: User;
-  user_id: Scalars['String'];
+  user: Maybe<User>;
+  user_id: Maybe<Scalars['String']>;
 };
 
 
@@ -4260,7 +4278,7 @@ export type TaskCreateInput = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutTasksInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutTasksInput>;
 };
 
 export type TaskCreateManyInput = {
@@ -4276,7 +4294,7 @@ export type TaskCreateManyInput = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user_id: Scalars['String'];
+  user_id?: InputMaybe<Scalars['String']>;
 };
 
 export type TaskCreateManyProjectInput = {
@@ -4291,7 +4309,7 @@ export type TaskCreateManyProjectInput = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user_id: Scalars['String'];
+  user_id?: InputMaybe<Scalars['String']>;
 };
 
 export type TaskCreateManyProjectInputEnvelope = {
@@ -4379,7 +4397,7 @@ export type TaskCreateWithoutCommentsInput = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutTasksInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutTasksInput>;
 };
 
 export type TaskCreateWithoutFilesInput = {
@@ -4396,7 +4414,7 @@ export type TaskCreateWithoutFilesInput = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutTasksInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutTasksInput>;
 };
 
 export type TaskCreateWithoutProjectInput = {
@@ -4413,7 +4431,7 @@ export type TaskCreateWithoutProjectInput = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at?: InputMaybe<Scalars['DateTime']>;
-  user: UserCreateNestedOneWithoutTasksInput;
+  user?: InputMaybe<UserCreateNestedOneWithoutTasksInput>;
 };
 
 export type TaskCreateWithoutUserInput = {
@@ -4452,7 +4470,7 @@ export type TaskGroupBy = {
   title: Scalars['String'];
   total_time_spent: Scalars['Int'];
   updated_at: Scalars['DateTime'];
-  user_id: Scalars['String'];
+  user_id: Maybe<Scalars['String']>;
 };
 
 export type TaskListRelationFilter = {
@@ -4609,7 +4627,7 @@ export type TaskScalarWhereInput = {
   title?: InputMaybe<StringFilter>;
   total_time_spent?: InputMaybe<IntFilter>;
   updated_at?: InputMaybe<DateTimeFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
 };
 
 export type TaskScalarWhereWithAggregatesInput = {
@@ -4628,7 +4646,7 @@ export type TaskScalarWhereWithAggregatesInput = {
   title?: InputMaybe<StringWithAggregatesFilter>;
   total_time_spent?: InputMaybe<IntWithAggregatesFilter>;
   updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
-  user_id?: InputMaybe<StringWithAggregatesFilter>;
+  user_id?: InputMaybe<StringNullableWithAggregatesFilter>;
 };
 
 export type TaskStatusInput = {
@@ -4660,7 +4678,7 @@ export type TaskUpdateInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutTasksInput>;
+  user?: InputMaybe<UserUpdateOneWithoutTasksInput>;
 };
 
 export type TaskUpdateManyMutationInput = {
@@ -4759,7 +4777,7 @@ export type TaskUpdateWithoutCommentsInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutTasksInput>;
+  user?: InputMaybe<UserUpdateOneWithoutTasksInput>;
 };
 
 export type TaskUpdateWithoutFilesInput = {
@@ -4776,7 +4794,7 @@ export type TaskUpdateWithoutFilesInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutTasksInput>;
+  user?: InputMaybe<UserUpdateOneWithoutTasksInput>;
 };
 
 export type TaskUpdateWithoutProjectInput = {
@@ -4793,7 +4811,7 @@ export type TaskUpdateWithoutProjectInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   total_time_spent?: InputMaybe<IntFieldUpdateOperationsInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  user?: InputMaybe<UserUpdateOneRequiredWithoutTasksInput>;
+  user?: InputMaybe<UserUpdateOneWithoutTasksInput>;
 };
 
 export type TaskUpdateWithoutUserInput = {
@@ -4855,7 +4873,7 @@ export type TaskWhereInput = {
   total_time_spent?: InputMaybe<IntFilter>;
   updated_at?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
-  user_id?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<StringNullableFilter>;
 };
 
 export type TaskWhereUniqueInput = {
@@ -5571,30 +5589,6 @@ export type UserUpdateManyWithoutProjectsInput = {
   upsert?: InputMaybe<Array<UserUpsertWithWhereUniqueWithoutProjectsInput>>;
 };
 
-export type UserUpdateOneRequiredWithoutFilesInput = {
-  connect?: InputMaybe<UserWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutFilesInput>;
-  create?: InputMaybe<UserCreateWithoutFilesInput>;
-  update?: InputMaybe<UserUpdateWithoutFilesInput>;
-  upsert?: InputMaybe<UserUpsertWithoutFilesInput>;
-};
-
-export type UserUpdateOneRequiredWithoutInvitationsInput = {
-  connect?: InputMaybe<UserWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutInvitationsInput>;
-  create?: InputMaybe<UserCreateWithoutInvitationsInput>;
-  update?: InputMaybe<UserUpdateWithoutInvitationsInput>;
-  upsert?: InputMaybe<UserUpsertWithoutInvitationsInput>;
-};
-
-export type UserUpdateOneRequiredWithoutNotificationsInput = {
-  connect?: InputMaybe<UserWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutNotificationsInput>;
-  create?: InputMaybe<UserCreateWithoutNotificationsInput>;
-  update?: InputMaybe<UserUpdateWithoutNotificationsInput>;
-  upsert?: InputMaybe<UserUpsertWithoutNotificationsInput>;
-};
-
 export type UserUpdateOneRequiredWithoutNotifications_SentInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutNotifications_SentInput>;
@@ -5611,12 +5605,34 @@ export type UserUpdateOneRequiredWithoutOwned_ProjectsInput = {
   upsert?: InputMaybe<UserUpsertWithoutOwned_ProjectsInput>;
 };
 
-export type UserUpdateOneRequiredWithoutTasksInput = {
+export type UserUpdateOneWithoutFilesInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutTasksInput>;
-  create?: InputMaybe<UserCreateWithoutTasksInput>;
-  update?: InputMaybe<UserUpdateWithoutTasksInput>;
-  upsert?: InputMaybe<UserUpsertWithoutTasksInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutFilesInput>;
+  create?: InputMaybe<UserCreateWithoutFilesInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<UserUpdateWithoutFilesInput>;
+  upsert?: InputMaybe<UserUpsertWithoutFilesInput>;
+};
+
+export type UserUpdateOneWithoutInvitationsInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutInvitationsInput>;
+  create?: InputMaybe<UserCreateWithoutInvitationsInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<UserUpdateWithoutInvitationsInput>;
+  upsert?: InputMaybe<UserUpsertWithoutInvitationsInput>;
+};
+
+export type UserUpdateOneWithoutNotificationsInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutNotificationsInput>;
+  create?: InputMaybe<UserCreateWithoutNotificationsInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<UserUpdateWithoutNotificationsInput>;
+  upsert?: InputMaybe<UserUpsertWithoutNotificationsInput>;
 };
 
 export type UserUpdateOneWithoutProject_CommentsInput = {
@@ -5637,6 +5653,16 @@ export type UserUpdateOneWithoutTask_CommentsInput = {
   disconnect?: InputMaybe<Scalars['Boolean']>;
   update?: InputMaybe<UserUpdateWithoutTask_CommentsInput>;
   upsert?: InputMaybe<UserUpsertWithoutTask_CommentsInput>;
+};
+
+export type UserUpdateOneWithoutTasksInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutTasksInput>;
+  create?: InputMaybe<UserCreateWithoutTasksInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<UserUpdateWithoutTasksInput>;
+  upsert?: InputMaybe<UserUpsertWithoutTasksInput>;
 };
 
 export type UserUpdateWithWhereUniqueWithoutProjectsInput = {
@@ -5996,6 +6022,13 @@ export type GetUserProjectsQueryVariables = Exact<{
 
 
 export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> }> };
+
+export type SearchQueryVariables = Exact<{
+  data: SearchInput;
+}>;
+
+
+export type SearchQuery = { __typename?: 'Query', search: Array<{ __typename?: 'SearchResult', title: string, description: string, id: string, type: string }> };
 
 export const ProjectFragmentDoc = gql`
     fragment Project on Project {
@@ -6433,3 +6466,41 @@ export function useGetUserProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type GetUserProjectsQueryHookResult = ReturnType<typeof useGetUserProjectsQuery>;
 export type GetUserProjectsLazyQueryHookResult = ReturnType<typeof useGetUserProjectsLazyQuery>;
 export type GetUserProjectsQueryResult = Apollo.QueryResult<GetUserProjectsQuery, GetUserProjectsQueryVariables>;
+export const SearchDocument = gql`
+    query Search($data: SearchInput!) {
+  search(data: $data) {
+    title
+    description
+    id
+    type
+  }
+}
+    `;
+
+/**
+ * __useSearchQuery__
+ *
+ * To run a query within a React component, call `useSearchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchQuery({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useSearchQuery(baseOptions: Apollo.QueryHookOptions<SearchQuery, SearchQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchQuery, SearchQueryVariables>(SearchDocument, options);
+      }
+export function useSearchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchQuery, SearchQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchQuery, SearchQueryVariables>(SearchDocument, options);
+        }
+export type SearchQueryHookResult = ReturnType<typeof useSearchQuery>;
+export type SearchLazyQueryHookResult = ReturnType<typeof useSearchLazyQuery>;
+export type SearchQueryResult = Apollo.QueryResult<SearchQuery, SearchQueryVariables>;
