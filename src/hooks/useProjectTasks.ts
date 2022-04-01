@@ -9,6 +9,7 @@ interface UseProjectTasks {
 }
 
 const useProjectTasks = (projectId: string): UseProjectTasks => {
+  console.log(projectId)
   const { data, loading } = useGetTasksByProjectQuery({
     variables: {
       where: {
@@ -17,7 +18,7 @@ const useProjectTasks = (projectId: string): UseProjectTasks => {
         },
       },
     },
-    skip: !!projectId,
+    skip: projectId === undefined,
   })
   return { tasks: data?.tasks || [], loading }
 }
