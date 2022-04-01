@@ -91,7 +91,7 @@ export default function Login(): JSX.Element {
           <ErrorMessage
             errors={errors}
             name="email"
-            render={({ message }) => <p>{message}</p>}
+            render={({ message }) => <Text color="red">{message}</Text>}
           />
           <Input
             variant="flushed"
@@ -104,7 +104,7 @@ export default function Login(): JSX.Element {
           <ErrorMessage
             errors={errors}
             name="password"
-            render={({ message }) => <p>{message}</p>}
+            render={({ message }) => <Text color="red">{message}</Text>}
           />
         </FormControl>
         <Button

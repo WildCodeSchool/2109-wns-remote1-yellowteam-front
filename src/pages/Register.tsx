@@ -121,7 +121,7 @@ export default function Register(): JSX.Element {
           <ErrorMessage
             errors={errors}
             name="email"
-            render={({ message }) => <p>{message}</p>}
+            render={({ message }) => <Text color="red">{message}</Text>}
           />
           <Input
             variant="flushed"
