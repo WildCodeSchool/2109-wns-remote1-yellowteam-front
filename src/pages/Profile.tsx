@@ -8,13 +8,15 @@ import {
   Tag,
   Text,
 } from '@chakra-ui/react'
-
 import React, { ReactElement, useEffect, useState } from 'react'
 import useAppState from 'src/hooks/useAppState'
 import mainTheme from 'src/theme/mainTheme'
 import { FieldValues, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { ErrorMessage } from '@hookform/error-message'
 import Header from '../molecules/Header'
 import { useMutationUpdateUserArgsMutation } from '../generated/graphql'
+import { validationsProfilUpdate } from '../formResolvers/yupResolver'
 
 const Profile = (): ReactElement => {
   const { user } = useAppState()
@@ -28,7 +30,14 @@ const Profile = (): ReactElement => {
     },
   })
 
-  const { handleSubmit, register, reset } = useForm()
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationsProfilUpdate),
+  })
 
   useEffect(() => {}, [user])
 
@@ -55,7 +64,6 @@ const Profile = (): ReactElement => {
     } catch (e) {
       throw new Error('user update error')
     }
-
     reset()
     setLoadBtn(false)
     setHidden(true)
@@ -189,9 +197,14 @@ const Profile = (): ReactElement => {
                   flexDirection="column"
                   placeholder="Email"
                   type="email"
-                  {...register('email', { pattern: /^\S+@\S+\.\S+$/ })}
+                  {...register('email')}
                 />
               </Box>
+              <ErrorMessage
+                errors={errors}
+                name="email"
+                render={({ message }) => <p>{message}</p>}
+              />
             </FormControl>
             <Button
               isLoading={loadBtn}
