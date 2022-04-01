@@ -19,12 +19,8 @@ import {
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
 import {
-  BoolFieldUpdateOperationsInput,
-  CommentUpdateManyWithoutTaskInput,
-  StringFieldUpdateOperationsInput,
   TaskUpdateInput,
   useGetSingleSelfTasksQuery,
-  UserUpdateOneRequiredWithoutTaskInput,
   useUpdateTaskMutation,
 } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
