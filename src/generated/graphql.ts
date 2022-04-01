@@ -704,6 +704,11 @@ export type DateTimeWithAggregatesFilter = {
   notIn?: InputMaybe<Array<Scalars['DateTime']>>;
 };
 
+export type DeleteUserFromProjectInput = {
+  projectId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
 export type EnumRoleNullableListFilter = {
   equals?: InputMaybe<Array<Role>>;
   has?: InputMaybe<Role>;
@@ -1806,6 +1811,7 @@ export type Mutation = {
   deleteProject: Maybe<Project>;
   deleteTask: Maybe<Task>;
   deleteUser: Maybe<User>;
+  deleteUserFromProject: Project;
   login: User;
   logout: Scalars['String'];
   me: User;
@@ -1823,6 +1829,7 @@ export type Mutation = {
   updateNotification: Maybe<Notification>;
   updateProject: Maybe<Project>;
   updateTask: Maybe<Task>;
+  updateTaskStatus: Task;
   updateUser: Maybe<User>;
   uploadFile: File;
   upsertComment: Comment;
@@ -1982,6 +1989,11 @@ export type MutationDeleteUserArgs = {
 };
 
 
+export type MutationDeleteUserFromProjectArgs = {
+  data: DeleteUserFromProjectInput;
+};
+
+
 export type MutationLoginArgs = {
   data: LoginInput;
 };
@@ -2067,6 +2079,11 @@ export type MutationUpdateProjectArgs = {
 export type MutationUpdateTaskArgs = {
   data: TaskUpdateInput;
   where: TaskWhereUniqueInput;
+};
+
+
+export type MutationUpdateTaskStatusArgs = {
+  data: TaskStatusInput;
 };
 
 
@@ -4625,6 +4642,11 @@ export type TaskScalarWhereWithAggregatesInput = {
   user_id?: InputMaybe<StringWithAggregatesFilter>;
 };
 
+export type TaskStatusInput = {
+  status: Scalars['String'];
+  taskId: Scalars['String'];
+};
+
 export type TaskSumAggregate = {
   __typename?: 'TaskSumAggregate';
   total_time_spent: Maybe<Scalars['Int']>;
@@ -5921,6 +5943,13 @@ export type DeleteProjectMutationVariables = Exact<{
 
 export type DeleteProjectMutation = { __typename?: 'Mutation', deleteProject: { __typename?: 'Project', id: string } };
 
+export type DeleteUserFromProjectMutationVariables = Exact<{
+  data: DeleteUserFromProjectInput;
+}>;
+
+
+export type DeleteUserFromProjectMutation = { __typename?: 'Mutation', deleteUserFromProject: { __typename?: 'Project', id: string } };
+
 export type MutateLoginMutationVariables = Exact<{
   data: LoginInput;
 }>;
@@ -6098,6 +6127,39 @@ export function useDeleteProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type DeleteProjectMutationHookResult = ReturnType<typeof useDeleteProjectMutation>;
 export type DeleteProjectMutationResult = Apollo.MutationResult<DeleteProjectMutation>;
 export type DeleteProjectMutationOptions = Apollo.BaseMutationOptions<DeleteProjectMutation, DeleteProjectMutationVariables>;
+export const DeleteUserFromProjectDocument = gql`
+    mutation deleteUserFromProject($data: DeleteUserFromProjectInput!) {
+  deleteUserFromProject(data: $data) {
+    id
+  }
+}
+    `;
+export type DeleteUserFromProjectMutationFn = Apollo.MutationFunction<DeleteUserFromProjectMutation, DeleteUserFromProjectMutationVariables>;
+
+/**
+ * __useDeleteUserFromProjectMutation__
+ *
+ * To run a mutation, you first call `useDeleteUserFromProjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteUserFromProjectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteUserFromProjectMutation, { data, loading, error }] = useDeleteUserFromProjectMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useDeleteUserFromProjectMutation(baseOptions?: Apollo.MutationHookOptions<DeleteUserFromProjectMutation, DeleteUserFromProjectMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteUserFromProjectMutation, DeleteUserFromProjectMutationVariables>(DeleteUserFromProjectDocument, options);
+      }
+export type DeleteUserFromProjectMutationHookResult = ReturnType<typeof useDeleteUserFromProjectMutation>;
+export type DeleteUserFromProjectMutationResult = Apollo.MutationResult<DeleteUserFromProjectMutation>;
+export type DeleteUserFromProjectMutationOptions = Apollo.BaseMutationOptions<DeleteUserFromProjectMutation, DeleteUserFromProjectMutationVariables>;
 export const MutateLoginDocument = gql`
     mutation MutateLogin($data: LoginInput!) {
   login(data: $data) {

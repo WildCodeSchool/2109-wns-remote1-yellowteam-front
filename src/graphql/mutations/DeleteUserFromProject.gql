@@ -1,0 +1,5 @@
+mutation deleteUserFromProject($data: DeleteUserFromProjectInput!) {
+  deleteUserFromProject(data: $data) {
+    id
+  }
+}

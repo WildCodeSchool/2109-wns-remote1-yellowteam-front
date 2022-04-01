@@ -22,6 +22,7 @@ import Edit from 'src/static/svg/Edit'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
 import {
+  StringFilter,
   useDeleteProjectMutation,
   useGetProjectQuery,
   useUpdateProjectMutation,
@@ -76,11 +77,13 @@ const ModifyProject = (): ReactElement => {
     navigate(-1)
   }
 
-  const deleteUser = async (email: string): Promise<void> => {
+  const deleteUser = async (id: string): Promise<void> => {
     try {
       uptadeproject({
         variables: {
-          data: { users: { delete: [{ email }] } },
+          data: {
+            users: { delete: [{ id }] },
+          },
           projectId: { id: projectId },
         },
       })
@@ -241,7 +244,7 @@ const ModifyProject = (): ReactElement => {
                     <Button
                       variant="unstyled"
                       height={0}
-                      onClick={() => deleteUser(u.email)}
+                      onClick={() => deleteUser(u.id)}
                     >
                       <DeleteIcon />
                     </Button>
