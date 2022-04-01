@@ -198,14 +198,15 @@ const Profile = (): ReactElement => {
                   placeholder="Email"
                   type="email"
                   {...register('email')}
+                  isInvalid={errors.email && true}
                 />
               </Box>
-              <ErrorMessage
-                errors={errors}
-                name="email"
-                render={({ message }) => <p>{message}</p>}
-              />
             </FormControl>
+            {errors.email && (
+              <Text mx="10" width="50" my="5" color="red">
+                Email is invalid
+              </Text>
+            )}
             <Button
               isLoading={loadBtn}
               width="20"
@@ -214,6 +215,7 @@ const Profile = (): ReactElement => {
               color="#ffffff"
               // eslint-disable-next-line no-alert
               onClick={handleSubmit(onSubmit)}
+              isDisabled={errors.email && true}
             >
               Save
             </Button>
