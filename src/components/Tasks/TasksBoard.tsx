@@ -25,12 +25,7 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
   )
 
   return (
-    <MotionFlex
-      justifyContent="space-between"
-      padding="48px 172px 10px 72px"
-      overflowX="hidden"
-      height="100%"
-    >
+    <MotionFlex justifyContent="space-between" overflowX="hidden" height="70%">
       <TaskList name="To Do" status={Status.NotStarted} tasks={todoTasks} />
       <TaskList
         name="In Progress"

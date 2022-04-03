@@ -5960,10 +5960,22 @@ export type MutateLoginMutationVariables = Exact<{
 
 export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
+export type MutateLogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MutateLogoutMutation = { __typename?: 'Mutation', logout: string };
+
 export type MutateMeMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+
+export type MutateRegisterMutationVariables = Exact<{
+  data: RegisterInput;
+}>;
+
+
+export type MutateRegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type MutationUpdateUserArgsMutationVariables = Exact<{
   data: UserUpdateInput;
@@ -6156,6 +6168,36 @@ export function useMutateLoginMutation(baseOptions?: Apollo.MutationHookOptions<
 export type MutateLoginMutationHookResult = ReturnType<typeof useMutateLoginMutation>;
 export type MutateLoginMutationResult = Apollo.MutationResult<MutateLoginMutation>;
 export type MutateLoginMutationOptions = Apollo.BaseMutationOptions<MutateLoginMutation, MutateLoginMutationVariables>;
+export const MutateLogoutDocument = gql`
+    mutation MutateLogout {
+  logout
+}
+    `;
+export type MutateLogoutMutationFn = Apollo.MutationFunction<MutateLogoutMutation, MutateLogoutMutationVariables>;
+
+/**
+ * __useMutateLogoutMutation__
+ *
+ * To run a mutation, you first call `useMutateLogoutMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useMutateLogoutMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [mutateLogoutMutation, { data, loading, error }] = useMutateLogoutMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMutateLogoutMutation(baseOptions?: Apollo.MutationHookOptions<MutateLogoutMutation, MutateLogoutMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<MutateLogoutMutation, MutateLogoutMutationVariables>(MutateLogoutDocument, options);
+      }
+export type MutateLogoutMutationHookResult = ReturnType<typeof useMutateLogoutMutation>;
+export type MutateLogoutMutationResult = Apollo.MutationResult<MutateLogoutMutation>;
+export type MutateLogoutMutationOptions = Apollo.BaseMutationOptions<MutateLogoutMutation, MutateLogoutMutationVariables>;
 export const MutateMeDocument = gql`
     mutation MutateMe {
   me {
@@ -6188,6 +6230,39 @@ export function useMutateMeMutation(baseOptions?: Apollo.MutationHookOptions<Mut
 export type MutateMeMutationHookResult = ReturnType<typeof useMutateMeMutation>;
 export type MutateMeMutationResult = Apollo.MutationResult<MutateMeMutation>;
 export type MutateMeMutationOptions = Apollo.BaseMutationOptions<MutateMeMutation, MutateMeMutationVariables>;
+export const MutateRegisterDocument = gql`
+    mutation MutateRegister($data: RegisterInput!) {
+  register(data: $data) {
+    ...User
+  }
+}
+    ${UserFragmentDoc}`;
+export type MutateRegisterMutationFn = Apollo.MutationFunction<MutateRegisterMutation, MutateRegisterMutationVariables>;
+
+/**
+ * __useMutateRegisterMutation__
+ *
+ * To run a mutation, you first call `useMutateRegisterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useMutateRegisterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [mutateRegisterMutation, { data, loading, error }] = useMutateRegisterMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useMutateRegisterMutation(baseOptions?: Apollo.MutationHookOptions<MutateRegisterMutation, MutateRegisterMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<MutateRegisterMutation, MutateRegisterMutationVariables>(MutateRegisterDocument, options);
+      }
+export type MutateRegisterMutationHookResult = ReturnType<typeof useMutateRegisterMutation>;
+export type MutateRegisterMutationResult = Apollo.MutationResult<MutateRegisterMutation>;
+export type MutateRegisterMutationOptions = Apollo.BaseMutationOptions<MutateRegisterMutation, MutateRegisterMutationVariables>;
 export const MutationUpdateUserArgsDocument = gql`
     mutation MutationUpdateUserArgs($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
   updateUser(data: $data, where: $where) {

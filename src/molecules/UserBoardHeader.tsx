@@ -13,12 +13,11 @@ const UserBoardHeader = ({
   setSelectedProjectId,
   projects,
 }: IProps): ReactElement => (
-  <Box marginLeft="69px">
+  <Box w="100%" marginY="50px">
     <Flex
+      my="15px"
       flexDirection="row"
       alignItems="center"
-      mb="33px"
-      mr="95px"
       justifyContent="space-between"
     >
       <Text textStyle="h2">Select a project</Text>

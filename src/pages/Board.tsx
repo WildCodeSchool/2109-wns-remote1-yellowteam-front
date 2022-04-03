@@ -24,7 +24,7 @@ const Board = (): ReactElement => {
   const setProjectId = (newId: string) => navigate(`/board/${newId}`)
 
   return (
-    <Box marginLeft="69px" height="100%">
+    <Box marginLeft="69px" h="100%" p="40px">
       <Header userName={user?.first_name ?? ''} />
       <UserBoardHeader
         selectedProjectId={projectId}

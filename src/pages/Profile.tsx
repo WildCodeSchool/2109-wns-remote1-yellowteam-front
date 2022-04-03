@@ -8,13 +8,14 @@ import {
   Tag,
   Text,
 } from '@chakra-ui/react'
-
 import React, { ReactElement, useEffect, useState } from 'react'
 import useAppState from 'src/hooks/useAppState'
 import mainTheme from 'src/theme/mainTheme'
 import { FieldValues, useForm } from 'react-hook-form'
+// import { yupResolver } from '@hookform/resolvers/yup'
 import Header from '../molecules/Header'
 import { useMutationUpdateUserArgsMutation } from '../generated/graphql'
+// import { validationsProfilUpdate } from '../formResolvers/yupResolver'
 
 const Profile = (): ReactElement => {
   const { user } = useAppState()
@@ -28,7 +29,12 @@ const Profile = (): ReactElement => {
     },
   })
 
-  const { handleSubmit, register, reset } = useForm()
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm({})
 
   useEffect(() => {}, [user])
 
@@ -55,7 +61,6 @@ const Profile = (): ReactElement => {
     } catch (e) {
       throw new Error('user update error')
     }
-
     reset()
     setLoadBtn(false)
     setHidden(true)
@@ -67,7 +72,12 @@ const Profile = (): ReactElement => {
         <Header userName={user?.first_name ?? ''} />
       </Box>
       <Box style={mainTheme.section.card}>
-        <Box flexDirection="row" display="flex" alignItems="flex-start">
+        <Box
+          flexDirection="row"
+          display="flex"
+          alignItems="flex-start"
+          justifyContent="space-between"
+        >
           <Text textStyle="h2" display="flex" flexDirection="column">
             Your profile
           </Text>
@@ -185,25 +195,15 @@ const Profile = (): ReactElement => {
                   placeholder="Email"
                   type="email"
                   {...register('email')}
+                  isInvalid={errors.email && true}
                 />
               </Box>
-
-              {/* Autre logique avec endpoint différents */}
-              {/* <Input
-                  mx="10"
-                  variant="flushed"
-                  placeholder="Old password"
-                  flexDirection="column"
-                  value="old password"
-                />
-                <Input
-                  mx="10"
-                  variant="flushed"
-                  flexDirection="column"
-                  placeholder="New password"
-                  value="new password"
-                /> */}
             </FormControl>
+            {errors.email && (
+              <Text mx="10" width="50" my="5" color="red">
+                Email is invalid
+              </Text>
+            )}
             <Button
               isLoading={loadBtn}
               width="20"
@@ -212,6 +212,7 @@ const Profile = (): ReactElement => {
               color="#ffffff"
               // eslint-disable-next-line no-alert
               onClick={handleSubmit(onSubmit)}
+              isDisabled={errors.email && true}
             >
               Save
             </Button>

@@ -17,8 +17,8 @@ const useProjectTasks = (projectId: string): UseProjectTasks => {
         },
       },
     },
+    skip: projectId === undefined,
   })
-
   return { tasks: data?.tasks || [], loading }
 }
 

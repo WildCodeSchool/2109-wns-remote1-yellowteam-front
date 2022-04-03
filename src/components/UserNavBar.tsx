@@ -3,6 +3,7 @@ import { Flex, Box, Switch } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import ProjectIcon from 'src/static/svg/ProjectIcon'
+import { useMutateLogoutMutation } from 'src/generated/graphql'
 import TasksIcon from '../static/svg/TasksIcon'
 import mainTheme from '../theme/mainTheme'
 import UserIcon from '../static/svg/UserIcon'
@@ -12,6 +13,12 @@ import SignOutIcon from '../static/svg/SignOutIcon'
 const UserNavBar = (): JSX.Element => {
   const navigate = useNavigate()
   const { dispatchLogout } = useAppState()
+
+  const [mutateLogout] = useMutateLogoutMutation({
+    onCompleted: () => dispatchLogout(),
+    // eslint-disable-next-line no-console
+    onError: (err) => console.log('error', err),
+  })
 
   const setTab = (tab: string) => navigate(`/${tab}`)
   const location = useLocation()
@@ -79,7 +86,11 @@ const UserNavBar = (): JSX.Element => {
           }
         />
       </Box>
-      <Box as="button" data-testid="sign-out-button" onClick={dispatchLogout}>
+      <Box
+        as="button"
+        data-testid="sign-out-button"
+        onClick={() => mutateLogout()}
+      >
         <SignOutIcon color={mainTheme.colors.deactivatedGrey} />
       </Box>
       <Switch />

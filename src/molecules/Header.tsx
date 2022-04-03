@@ -8,9 +8,8 @@ interface IHeader {
 
 const Header = ({ userName }: IHeader): JSX.Element => (
   <Flex
-    padding="27px 0px 51px 69px"
+    marginY="50px"
     width="100%"
-    height="fit-content"
     alignItems="center"
     justifyContent="space-between"
   >
@@ -23,12 +22,6 @@ const Header = ({ userName }: IHeader): JSX.Element => (
       </Text>
     </Flex>
     <SearchInput />
-    <Input
-      width="220px"
-      variant="filled"
-      placeholder="Search"
-      marginRight="95px"
-    />
   </Flex>
 )
 
