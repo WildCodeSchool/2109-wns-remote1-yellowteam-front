@@ -14,6 +14,18 @@ const mainTheme = extendTheme({
       fontWeight: '800',
       color: '#38383A',
       fontFamily: 'Avenir',
+      marginLeft: '10px',
+      marginRight: '10px',
+      textAlign: 'center',
+    },
+    subText: {
+      fontSize: ['12'],
+      color: '#38383A',
+      fontFamily: 'Avenir',
+      textDecoration: 'underline',
+      cursor: 'pointer',
+      marginLeft: '10px',
+      marginRight: '10px',
     },
     h1: {
       fontSize: ['32', '36'],
@@ -34,7 +46,7 @@ const mainTheme = extendTheme({
       fontFamily: 'Avenir',
     },
     h4: {
-      fontSize: ['12','16', '18'],
+      fontSize: ['12', '16', '18'],
       color: '#38383A',
       fontFamily: 'Avenir',
     },
@@ -61,7 +73,7 @@ const mainTheme = extendTheme({
       color: '#009A96',
       fontFamily: 'Avenir',
       fontWeight: '800',
-    }
+    },
   },
   colors: {
     orange: '#F69826',

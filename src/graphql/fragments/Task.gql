@@ -1,0 +1,10 @@
+fragment Task on Task {
+  id
+  title
+  status_task
+  user {
+    id
+    avatar
+    first_name
+  }
+}

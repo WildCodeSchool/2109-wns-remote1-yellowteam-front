@@ -49,7 +49,7 @@ const Projects = (): ReactElement => {
   } = useForm()
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { user, userId } = useAppState()
+  const { userId } = useAppState()
   const {
     data,
     refetch,
@@ -98,7 +98,7 @@ const Projects = (): ReactElement => {
         },
       })
     } catch (e) {
-      console.log('error creating project', e)
+      throw new Error('error creating project')
     }
     onClose()
     reset()

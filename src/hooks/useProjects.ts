@@ -1,18 +1,28 @@
+import { ApolloError } from '@apollo/client'
 import useAppState from 'src/hooks/useAppState'
-import { useGetUserProjectsQuery } from '../generated/graphql'
+import {
+  useGetUserProjectsQuery,
+  GetUserProjectsQuery,
+} from '../generated/graphql'
 
-const useProjects = () => {
-    const { userId } = useAppState()
-    const { data, loading, error } = useGetUserProjectsQuery({
-      variables: { userId },
-      skip: !userId,
-    })
-  
-    return {
-      projects: data?.projects,
-      loading,
-      error,
-    }
+interface UseProjectsHook {
+  projects: GetUserProjectsQuery['projects'] | undefined
+  loading: boolean
+  error: ApolloError | undefined
+}
+
+const useProjects = (): UseProjectsHook => {
+  const { userId } = useAppState()
+  const { data, loading, error } = useGetUserProjectsQuery({
+    variables: { userId },
+    skip: !userId,
+  })
+
+  return {
+    projects: data?.projects,
+    loading,
+    error,
   }
+}
 
-  export default useProjects
+export default useProjects
