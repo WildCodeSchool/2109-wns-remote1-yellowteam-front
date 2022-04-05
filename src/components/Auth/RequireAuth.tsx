@@ -4,7 +4,7 @@ import { useRoutes } from 'react-router-dom'
 import { useMutateMeMutation } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
 
-import authRoutes from 'src/config/authConfig'
+import authRoutes from 'src/config/auth.routes'
 
 const AuthRoutes = () => useRoutes(authRoutes)
 
