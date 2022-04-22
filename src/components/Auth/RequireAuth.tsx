@@ -1,4 +1,4 @@
-import { Spinner } from '@chakra-ui/react'
+import { Center, Spinner } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import { useRoutes } from 'react-router-dom'
 import { useMutateMeMutation } from 'src/generated/graphql'
@@ -29,7 +29,12 @@ export default function RequireAuth({
     me()
   }, [])
 
-  if (!isAuth && loading) return <Spinner />
+  if (loading)
+    return (
+      <Center w="100%" h="100vh">
+        <Spinner />
+      </Center>
+    )
 
   if (!isAuth || !user) {
     return <AuthRoutes />
