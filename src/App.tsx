@@ -8,7 +8,7 @@ import apolloClient from './services/graphql'
 import RequireAuth from './components/Auth/RequireAuth'
 import routes from './config/routes'
 
-const client = apolloClient()
+export const client = apolloClient()
 
 const MyRoutes = () => useRoutes(routes)
 

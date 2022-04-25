@@ -9,8 +9,9 @@ import {
   useBoolean,
   Spinner,
 } from '@chakra-ui/react'
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import {
+  GetManagerProjectsDocument,
   ProjectCreateInput,
   Status,
   useCreateProjectMutation,
@@ -26,6 +27,7 @@ import CreateProjectModal from 'src/components/Modals/CreateProjectModal'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import WhitePannel from 'src/components/WhitePannel'
+import { client } from 'src/App'
 
 export type Dates = {
   startDate: Date | null
@@ -52,64 +54,59 @@ const Project = (): ReactElement => {
   } = useForm()
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+
   const { userId } = useAppState()
-  const {
-    data,
-    refetch,
-    loading: loadingProjects,
-  } = useGetManagerProjectsQuery({
+  const { data, loading: loadingProjects } = useGetManagerProjectsQuery({
     variables: { userId },
     skip: !userId,
   })
-  const [createProject] = useCreateProjectMutation()
+  const [createProject] = useCreateProjectMutation({
+    onCompleted: () => {
+      client.refetchQueries({
+        include: [GetManagerProjectsDocument],
+      })
+    },
+  })
 
   const onSubmit = (data: ProjectCreateInput) => {
-    try {
-      createProject({
-        variables: {
-          data: {
-            title: data.title,
-            description: data.description,
-            users: {
-              connect: [{ id: userId }],
-            },
-            is_disabled: isDisabled,
-            private: isPrivate,
-            start_date: JSON.stringify(
-              dates.startDate
-                ?.toString()
-                .replace('(Central European Standard Time)', '')
-            ),
-            end_date: JSON.stringify(
-              dates.endDate
-                ?.toString()
-                .replace('(Central European Standard Time)', '')
-            ),
-            due_date: JSON.stringify(
-              dates.dueDate
-                ?.toString()
-                .replace('(Central European Standard Time)', '')
-            ),
-            status_project: Status.NotStarted,
-            total_time_spent: 0,
-            owner: {
-              connect: {
-                id: userId,
-              },
+    createProject({
+      variables: {
+        data: {
+          title: data.title,
+          description: data.description,
+          users: {
+            connect: [{ id: userId }],
+          },
+          is_disabled: isDisabled,
+          private: isPrivate,
+          start_date: JSON.stringify(
+            dates.startDate
+              ?.toString()
+              .replace('(Central European Standard Time)', '')
+          ),
+          end_date: JSON.stringify(
+            dates.endDate
+              ?.toString()
+              .replace('(Central European Standard Time)', '')
+          ),
+          due_date: JSON.stringify(
+            dates.dueDate
+              ?.toString()
+              .replace('(Central European Standard Time)', '')
+          ),
+          status_project: Status.NotStarted,
+          total_time_spent: 0,
+          owner: {
+            connect: {
+              id: userId,
             },
           },
         },
-      })
-    } catch (e) {
-      throw new Error('error creating project')
-    }
+      },
+    })
     onClose()
     reset()
   }
-
-  useEffect(() => {
-    refetch()
-  }, [onSubmit])
 
   if (!data || !data.projects)
     return (
@@ -153,7 +150,7 @@ const Project = (): ReactElement => {
           </Flex>
         ))}
       </Box>
-      <Flex mt={30} justifyContent="center">
+      <Flex mt={30} justifyContent="center" alignItems="center">
         <Button variant="unstyled" onClick={onOpen}>
           <AddIcon />
         </Button>
