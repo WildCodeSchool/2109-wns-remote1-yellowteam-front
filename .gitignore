@@ -11,6 +11,8 @@
 # production
 /build
 
+/logs
+
 # misc
 .DS_Store
 .env
@@ -27,3 +29,6 @@ yarn-error.log*
 .todo
 
 .vscode
+
+# logs
+/logs
