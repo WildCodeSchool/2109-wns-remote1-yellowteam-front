@@ -31,7 +31,6 @@ const UserNavBar = (): JSX.Element => {
       flexDirection="column"
       alignItems="center"
       justifyContent="space-evenly"
-      position="fixed"
       z-index="1"
     >
       <Box

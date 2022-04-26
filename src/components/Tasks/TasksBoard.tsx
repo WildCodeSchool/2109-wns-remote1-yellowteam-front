@@ -17,6 +17,7 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
   const { tasks } = useProjectTasks(projectId)
 
   const doneTasks = tasks.filter((task) => task.status_task === Status.Fihished)
+
   const inProgressTasks = tasks.filter(
     (task) => task.status_task === Status.InProgress
   )
@@ -27,9 +28,8 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
   return (
     <MotionFlex
       justifyContent="space-between"
-      padding="48px 172px 10px 72px"
-      overflowX="hidden"
-      height="100%"
+      padding="48px 48px 48px 72px"
+      height="full"
     >
       <TaskList name="To Do" status={Status.NotStarted} tasks={todoTasks} />
       <TaskList
