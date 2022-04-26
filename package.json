@@ -42,7 +42,7 @@
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "build": "react-scripts build",
     "prod": "node build/index.js",
-    "deploy": "npm run build && ",
+    "deploy": "npm run build && npm run prod",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "apollo:download-schema": "apollo client:download-schema schema.graphql",

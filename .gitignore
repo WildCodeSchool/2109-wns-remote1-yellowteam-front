@@ -27,3 +27,6 @@ yarn-error.log*
 .todo
 
 .vscode
+
+# logs
+/logs

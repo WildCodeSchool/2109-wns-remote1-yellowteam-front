@@ -1,11 +1,14 @@
-FROM node:alpine
+FROM node:14.17.3-alpine
 
+RUN mkdir /app
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 
-COPY . .
+RUN npm install
 
-EXPOSE 3000
+COPY tsconfig.json ./
+COPY public public
+COPY src src
 
-CMD ["yarn", "run", "build"]
+CMD npm start
