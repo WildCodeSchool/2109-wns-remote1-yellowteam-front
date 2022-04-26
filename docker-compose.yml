@@ -5,11 +5,9 @@ services:
     build: ./
     environment:
       REACT_APP_SERVER_URL: ${REACT_APP_SERVER_URL}
-    command: sh -c "npm run build && npm run prod"
+    command: sh -c "npm run build"
     volumes:
       - ytask-client:/app/build
-    ports:
-      - '3000:3000'
 
   nginx:
     image: nginx:1.21.3
