@@ -14,13 +14,23 @@ type Props = {
 }
 
 export default function TaskList({ tasks, name, status }: Props): JSX.Element {
-  if (!tasks) return <Spinner />
   const { dispatchSetHoveredList } = useBoardState()
 
   const handleHover = () => dispatchSetHoveredList(status)
 
+  if (!tasks) return <Spinner />
+
   return (
-    <MotionFlex onMouseEnter={handleHover} flexDirection="column" height="100%">
+    <MotionFlex
+      border={2}
+      p={5}
+      borderColor="gray.400"
+      borderStyle="dashed"
+      onMouseEnter={handleHover}
+      flexDirection="column"
+      height="full"
+      rounded={10}
+    >
       <BoardTicketsStatus title={name} numberOfTickets={tasks.length} />
       {tasks.map((t) => (
         <Card
