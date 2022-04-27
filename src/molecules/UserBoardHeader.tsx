@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { Flex, Text, Box, Select } from '@chakra-ui/react'
+import { Flex, Text, Select } from '@chakra-ui/react'
 import { GetUserProjectsQuery } from 'src/generated/graphql'
 
 interface IProps {
@@ -13,16 +13,11 @@ const UserBoardHeader = ({
   setSelectedProjectId,
   projects,
 }: IProps): ReactElement => (
-  <Box marginLeft="69px">
-    <Flex
-      flexDirection="row"
-      alignItems="center"
-      mb="33px"
-      mr="95px"
-      justifyContent="space-between"
-    >
-      <Text textStyle="h2">Select a project</Text>
-    </Flex>
+  <Flex direction="row" my={10}>
+    <Text mr={5} textStyle="h2">
+      Select a project
+    </Text>
+
     <Select
       fontFamily="Avenir"
       fontWeight="800"
@@ -37,7 +32,7 @@ const UserBoardHeader = ({
         </option>
       ))}
     </Select>
-  </Box>
+  </Flex>
 )
 
 export default UserBoardHeader

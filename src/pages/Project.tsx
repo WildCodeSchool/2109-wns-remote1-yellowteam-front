@@ -9,7 +9,7 @@ import {
   useBoolean,
   Spinner,
 } from '@chakra-ui/react'
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useRef, useState } from 'react'
 import {
   GetManagerProjectsDocument,
   ProjectCreateInput,
@@ -22,12 +22,13 @@ import useAppState from 'src/hooks/useAppState'
 import AddIcon from 'src/static/svg/AddIcon'
 import Delete from 'src/static/svg/Delete'
 import Edit from 'src/static/svg/Edit'
-import mainTheme from 'src/theme/mainTheme'
+import mainTheme from 'src/definitions/chakra/theme/mainTheme'
 import CreateProjectModal from 'src/components/Modals/CreateProjectModal'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import WhitePannel from 'src/components/WhitePannel'
 import { client } from 'src/App'
+import DeleteProjectAlert from 'src/components/Alert/DeleteProject.alert'
 
 export type Dates = {
   startDate: Date | null
@@ -37,6 +38,12 @@ export type Dates = {
 
 const Project = (): ReactElement => {
   const navigate = useNavigate()
+  const {
+    isOpen: isDeleteProjectModalOpen,
+    onOpen: onDeleteProjectModalOpen,
+    onClose: onDeleteProjectClose,
+  } = useDisclosure()
+  const cancelRef = useRef<HTMLButtonElement>(null)
 
   const [dates, setDates] = useState<Dates>({
     startDate: new Date(),
@@ -145,6 +152,14 @@ const Project = (): ReactElement => {
               </Button>
               <Button variant="ghost">
                 <Delete color={mainTheme.colors.mediumGreyText} />
+                {/* <DeleteProjectAlert
+                  loading={false}
+                  onSubmit={() => {}}
+                  cancelRef={cancelRef}
+                  isOpen={isDeleteProjectModalOpen}
+                  onClose={onDeleteProjectClose}
+                  onOpen={onDeleteProjectModalOpen}
+                /> */}
               </Button>
             </Flex>
           </Flex>
@@ -154,6 +169,7 @@ const Project = (): ReactElement => {
         <Button variant="unstyled" onClick={onOpen}>
           <AddIcon />
         </Button>
+
         <CreateProjectModal
           isOpen={isOpen}
           onClose={onClose}

@@ -1,6 +1,6 @@
-import { extendTheme } from '@chakra-ui/react'
+const customProperties = {
+  config: { initialColorMode: 'light', useSystemColorMode: false },
 
-const mainTheme = extendTheme({
   textStyles: {
     // you can also use responsive styles
     titleLogin: {
@@ -118,6 +118,6 @@ const mainTheme = extendTheme({
       borderRadius: '50%',
     },
   },
-})
+}
 
-export default mainTheme
+export default customProperties

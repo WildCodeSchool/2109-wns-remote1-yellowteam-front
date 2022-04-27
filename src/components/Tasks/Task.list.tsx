@@ -15,9 +15,9 @@ type Props = {
 
 export default function TaskList({ tasks, name, status }: Props): JSX.Element {
   const { dispatchSetHoveredList } = useBoardState()
-  
+
   const handleHover = () => dispatchSetHoveredList(status)
-  
+
   if (!tasks) return <Spinner />
 
   if (!tasks) return <Spinner />
