@@ -1,20 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import {
-  Box,
-  Button,
-  FormLabel,
-  HStack,
-  Input,
-  Text,
-  VStack,
-} from '@chakra-ui/react'
-import { ErrorMessage } from '@hookform/error-message'
+import { Box, Button, FormLabel, HStack, VStack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useEffect, useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { validationsProfilUpdate } from 'src/formResolvers/yupResolver'
 import { useMutationUpdateUserArgsMutation } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
+import InputWithError from './InputWithError'
 
 export default function UserProfileForm(): JSX.Element {
   const [isEditable, setIsEditable] = useState(false)
@@ -26,6 +18,7 @@ export default function UserProfileForm(): JSX.Element {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationsProfilUpdate),
+    criteriaMode: 'all',
   })
   const { dispatchUpdateUser, user } = useAppState()
 
@@ -75,50 +68,37 @@ export default function UserProfileForm(): JSX.Element {
       <HStack spacing={10}>
         <VStack justifyContent="flex-start" alignItems="start" spacing={2}>
           <FormLabel>First Name</FormLabel>
-          <Input
-            disabled={!isEditable}
-            variant={!isEditable ? 'action' : 'filled'}
-            aria-label="first_name"
-            type="text"
-            {...register('first_name')}
+          <InputWithError
+            errors={errors}
+            name="first_name"
+            isEditable={isEditable}
+            register={register}
           />
 
           <FormLabel>Last Name</FormLabel>
-          <Input
-            disabled={!isEditable}
-            variant={!isEditable ? 'action' : 'filled'}
-            aria-label="last_name"
-            type="text"
-            {...register('last_name')}
+          <InputWithError
+            errors={errors}
+            name="last_name"
+            isEditable={isEditable}
+            register={register}
           />
         </VStack>
 
         <VStack justifyContent="flex-start" alignItems="start" spacing={2}>
           <FormLabel>Phone number</FormLabel>
-          <Input
-            disabled={!isEditable}
-            variant={!isEditable ? 'action' : 'filled'}
-            aria-label="phone_number"
-            type="text"
-            // {...register('first_name')}
+          <InputWithError
+            errors={errors}
+            name="phone_number"
+            isEditable={false}
+            register={register}
           />
 
           <FormLabel>Email</FormLabel>
-          <Input
-            disabled={!isEditable}
-            variant={!isEditable ? 'action' : 'filled'}
-            aria-label="email"
-            type="text"
-            {...register('email')}
-          />
-          <ErrorMessage
+          <InputWithError
             errors={errors}
             name="email"
-            render={({ message }) => (
-              <Text position="absolute" color="red">
-                {message}
-              </Text>
-            )}
+            isEditable={isEditable}
+            register={register}
           />
         </VStack>
       </HStack>

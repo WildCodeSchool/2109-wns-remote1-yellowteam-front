@@ -28,7 +28,6 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import WhitePannel from 'src/components/WhitePannel'
 import { client } from 'src/App'
-import DeleteProjectAlert from 'src/components/Alert/DeleteProject.alert'
 
 export type Dates = {
   startDate: Date | null
@@ -43,6 +42,7 @@ const Project = (): ReactElement => {
     onOpen: onDeleteProjectModalOpen,
     onClose: onDeleteProjectClose,
   } = useDisclosure()
+
   const cancelRef = useRef<HTMLButtonElement>(null)
 
   const [dates, setDates] = useState<Dates>({
