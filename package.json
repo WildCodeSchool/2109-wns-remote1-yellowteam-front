@@ -83,11 +83,8 @@
     "@graphql-codegen/typescript-react-apollo": "^3.2.2",
     "@types/enzyme": "^3.10.11",
     "@types/react-datepicker": "^4.3.4",
-<<<<<<< HEAD
     "@types/luxon": "^2.0.9",
-=======
     "@types/react-lottie": "^1.2.6",
->>>>>>> dev
     "@types/react-redux": "^7.1.16",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
