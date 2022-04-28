@@ -10,7 +10,7 @@ import {
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
-import mainTheme from 'src/theme/mainTheme'
+import mainTheme from 'src/definitions/chakra/theme/mainTheme'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ErrorMessage } from '@hookform/error-message'
 import { validationsLogin } from '../formResolvers/yupResolver'
