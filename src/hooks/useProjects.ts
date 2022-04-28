@@ -14,7 +14,17 @@ interface UseProjectsHook {
 const useProjects = (): UseProjectsHook => {
   const { userId } = useAppState()
   const { data, loading, error } = useGetUserProjectsQuery({
-    variables: { userId },
+    variables: {
+      where: {
+        users: {
+          some: {
+            id: {
+              equals: userId,
+            },
+          },
+        },
+      },
+    },
     skip: !userId,
   })
 

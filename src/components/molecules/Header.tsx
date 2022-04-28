@@ -1,7 +1,6 @@
 import React from 'react'
-import { Flex, Text, Input, Box } from '@chakra-ui/react'
-import BellIcon from 'src/static/svg/BellIcon'
-import mainTheme from '../../definitions/chakra/theme/mainTheme'
+import { Flex, Text, Input } from '@chakra-ui/react'
+import NotificationsHOC from '../Notifictions/NotificationsHOC'
 
 interface IHeader {
   userName: string
@@ -17,7 +16,8 @@ const Header = ({ userName }: IHeader): JSX.Element => (
     </Flex>
     <Flex alignItems="center" as="button" data-testid="notifications-button">
       <Input ml={4} width="220px" variant="filled" placeholder="Search" />
-      <BellIcon color={mainTheme.colors.greyText} />
+      {/* <BellIcon color={mainTheme.colors.greyText} /> */}
+      <NotificationsHOC />
     </Flex>
   </Flex>
 )

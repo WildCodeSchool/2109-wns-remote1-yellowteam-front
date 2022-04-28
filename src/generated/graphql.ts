@@ -5987,6 +5987,14 @@ export type MutationUpdateUserArgsMutationVariables = Exact<{
 
 export type MutationUpdateUserArgsMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
+export type SetNotificationReadMutationVariables = Exact<{
+  where: NotificationWhereUniqueInput;
+  data: NotificationUpdateInput;
+}>;
+
+
+export type SetNotificationReadMutation = { __typename?: 'Mutation', updateNotification: { __typename?: 'Notification', id: string, status: Status_Notification } };
+
 export type UpdateProjectMutationVariables = Exact<{
   data: ProjectUpdateInput;
   projectId: ProjectWhereUniqueInput;
@@ -6007,7 +6015,7 @@ export type GetManagerProjectsQueryVariables = Exact<{
 }>;
 
 
-export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> }> };
+export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean }> };
 
 export type GetAllNotificationsQueryVariables = Exact<{
   where: NotificationWhereInput;
@@ -6039,11 +6047,11 @@ export type GetUserInfosQueryVariables = Exact<{
 export type GetUserInfosQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type GetUserProjectsQueryVariables = Exact<{
-  userId: InputMaybe<Scalars['String']>;
+  where: ProjectWhereInput;
 }>;
 
 
-export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> }> };
+export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean }> };
 
 export const ProjectFragmentDoc = gql`
     fragment Project on Project {
@@ -6301,6 +6309,41 @@ export function useMutationUpdateUserArgsMutation(baseOptions?: Apollo.MutationH
 export type MutationUpdateUserArgsMutationHookResult = ReturnType<typeof useMutationUpdateUserArgsMutation>;
 export type MutationUpdateUserArgsMutationResult = Apollo.MutationResult<MutationUpdateUserArgsMutation>;
 export type MutationUpdateUserArgsMutationOptions = Apollo.BaseMutationOptions<MutationUpdateUserArgsMutation, MutationUpdateUserArgsMutationVariables>;
+export const SetNotificationReadDocument = gql`
+    mutation SetNotificationRead($where: NotificationWhereUniqueInput!, $data: NotificationUpdateInput!) {
+  updateNotification(where: $where, data: $data) {
+    id
+    status
+  }
+}
+    `;
+export type SetNotificationReadMutationFn = Apollo.MutationFunction<SetNotificationReadMutation, SetNotificationReadMutationVariables>;
+
+/**
+ * __useSetNotificationReadMutation__
+ *
+ * To run a mutation, you first call `useSetNotificationReadMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSetNotificationReadMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [setNotificationReadMutation, { data, loading, error }] = useSetNotificationReadMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useSetNotificationReadMutation(baseOptions?: Apollo.MutationHookOptions<SetNotificationReadMutation, SetNotificationReadMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SetNotificationReadMutation, SetNotificationReadMutationVariables>(SetNotificationReadDocument, options);
+      }
+export type SetNotificationReadMutationHookResult = ReturnType<typeof useSetNotificationReadMutation>;
+export type SetNotificationReadMutationResult = Apollo.MutationResult<SetNotificationReadMutation>;
+export type SetNotificationReadMutationOptions = Apollo.BaseMutationOptions<SetNotificationReadMutation, SetNotificationReadMutationVariables>;
 export const UpdateProjectDocument = gql`
     mutation UpdateProject($data: ProjectUpdateInput!, $projectId: ProjectWhereUniqueInput!) {
   updateProject(data: $data, where: $projectId) {
@@ -6373,10 +6416,19 @@ export type UpdateTaskStatusMutationOptions = Apollo.BaseMutationOptions<UpdateT
 export const GetManagerProjectsDocument = gql`
     query GetManagerProjects($where: ProjectWhereInput) {
   projects(where: $where) {
-    ...Project
+    id
+    title
+    status_project
+    due_date
+    description
+    total_time_spent
+    start_date
+    end_date
+    is_disabled
+    due_date
   }
 }
-    ${ProjectFragmentDoc}`;
+    `;
 
 /**
  * __useGetManagerProjectsQuery__
@@ -6559,12 +6611,21 @@ export type GetUserInfosQueryHookResult = ReturnType<typeof useGetUserInfosQuery
 export type GetUserInfosLazyQueryHookResult = ReturnType<typeof useGetUserInfosLazyQuery>;
 export type GetUserInfosQueryResult = Apollo.QueryResult<GetUserInfosQuery, GetUserInfosQueryVariables>;
 export const GetUserProjectsDocument = gql`
-    query GetUserProjects($userId: String) {
-  projects(where: {users: {some: {id: {equals: $userId}}}}) {
-    ...Project
+    query GetUserProjects($where: ProjectWhereInput!) {
+  projects(where: $where) {
+    id
+    title
+    status_project
+    due_date
+    description
+    total_time_spent
+    start_date
+    end_date
+    is_disabled
+    due_date
   }
 }
-    ${ProjectFragmentDoc}`;
+    `;
 
 /**
  * __useGetUserProjectsQuery__
@@ -6578,11 +6639,11 @@ export const GetUserProjectsDocument = gql`
  * @example
  * const { data, loading, error } = useGetUserProjectsQuery({
  *   variables: {
- *      userId: // value for 'userId'
+ *      where: // value for 'where'
  *   },
  * });
  */
-export function useGetUserProjectsQuery(baseOptions?: Apollo.QueryHookOptions<GetUserProjectsQuery, GetUserProjectsQueryVariables>) {
+export function useGetUserProjectsQuery(baseOptions: Apollo.QueryHookOptions<GetUserProjectsQuery, GetUserProjectsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetUserProjectsQuery, GetUserProjectsQueryVariables>(GetUserProjectsDocument, options);
       }

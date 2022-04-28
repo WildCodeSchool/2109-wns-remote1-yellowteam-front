@@ -1,5 +1,14 @@
-query GetUserProjects($userId: String) {
-  projects(where: { users: { some: { id: { equals: $userId } } } }) {
-    ...Project
+query GetUserProjects($where: ProjectWhereInput!) {
+  projects(where: $where) {
+    id
+    title
+    status_project
+    due_date
+    description
+    total_time_spent
+    start_date
+    end_date
+    is_disabled
+    due_date
   }
 }

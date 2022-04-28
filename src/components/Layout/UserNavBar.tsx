@@ -7,7 +7,6 @@ import { useMutateLogoutMutation } from 'src/generated/graphql'
 import TasksIcon from '../../static/svg/TasksIcon'
 import mainTheme from '../../definitions/chakra/theme/mainTheme'
 import UserIcon from '../../static/svg/UserIcon'
-import BellIcon from '../../static/svg/BellIcon'
 import SignOutIcon from '../../static/svg/SignOutIcon'
 
 const UserNavBar = (): JSX.Element => {

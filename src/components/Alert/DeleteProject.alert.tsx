@@ -49,16 +49,6 @@ export default function DeleteProjectAlert({
 
   return (
     <>
-      {/* <Button
-        backgroundColor="#24323F"
-        color="white"
-        w="full"
-        my={2}
-        onClick={onOpen}
-      >
-        Delete Websites
-      </Button> */}
-
       <Button onClick={onOpen} variant="ghost">
         <Delete color={mainTheme.colors.mediumGreyText} />
       </Button>
