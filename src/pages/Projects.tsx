@@ -35,7 +35,7 @@ export type Dates = {
   dueDate: Date | null
 }
 
-const Project = (): ReactElement => {
+const Projects = (): ReactElement => {
   const navigate = useNavigate()
   // const {
   //   isOpen: isDeleteProjectModalOpen,
@@ -122,6 +122,23 @@ const Project = (): ReactElement => {
         <Box textAlign="center">
           {loadingProjects ? <Spinner /> : 'No Projects'}
         </Box>
+        <Flex mt={30} justifyContent="center">
+          <Button variant="unstyled" onClick={onOpen}>
+            <AddIcon />
+          </Button>
+          <CreateProjectModal
+            isOpen={isOpen}
+            onClose={onClose}
+            onSubmit={onSubmit}
+            setDates={setDates}
+            dates={dates}
+            setIsDisabled={setIsDisabled}
+            setIsPrivate={setIsPrivate}
+            register={register}
+            handleSubmit={handleSubmit}
+            errors={errors}
+          />
+        </Flex>
       </WhitePannel>
     )
 
@@ -135,6 +152,7 @@ const Project = (): ReactElement => {
             justifyContent="space-between"
           >
             <Flex
+              p={2}
               _hover={{ cursor: 'pointer' }}
               onClick={() => navigate(`/projects/${project.id}`)}
             >
@@ -151,7 +169,7 @@ const Project = (): ReactElement => {
                 <Edit />
               </Button>
               <Button variant="ghost">
-                <Delete color={mainTheme.colors.mediumGreyText} />
+                <Delete color={mainTheme.colors.darkGrey} />
                 {/* <DeleteProjectAlert
                   loading={false}
                   onSubmit={() => {}}
@@ -187,4 +205,4 @@ const Project = (): ReactElement => {
   )
 }
 
-export default Project
+export default Projects

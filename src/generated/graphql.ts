@@ -1826,6 +1826,7 @@ export type Mutation = {
   updateTaskStatus: Task;
   updateUser: Maybe<User>;
   uploadFile: File;
+  uploadProfilePicture: User;
   upsertComment: Comment;
   upsertFile: File;
   upsertInvitation: Invitation;
@@ -2083,6 +2084,11 @@ export type MutationUpdateUserArgs = {
 
 
 export type MutationUploadFileArgs = {
+  file: Scalars['Upload'];
+};
+
+
+export type MutationUploadProfilePictureArgs = {
   file: Scalars['Upload'];
 };
 
@@ -3729,6 +3735,7 @@ export type Query = {
   notifications: Array<Notification>;
   project: Maybe<Project>;
   projects: Array<Project>;
+  search: Maybe<Array<SearchResult>>;
   task: Maybe<Task>;
   tasks: Array<Task>;
   user: Maybe<User>;
@@ -4014,6 +4021,11 @@ export type QueryProjectsArgs = {
 };
 
 
+export type QuerySearchArgs = {
+  data: SearchInput;
+};
+
+
 export type QueryTaskArgs = {
   where: TaskWhereUniqueInput;
 };
@@ -4061,6 +4073,18 @@ export enum Role {
   SuperAdmin = 'SUPER_ADMIN',
   User = 'USER'
 }
+
+export type SearchInput = {
+  searchValue: Scalars['String'];
+};
+
+export type SearchResult = {
+  __typename?: 'SearchResult';
+  description: Scalars['String'];
+  id: Scalars['String'];
+  title: Scalars['String'];
+  type: Scalars['String'];
+};
 
 export enum SortOrder {
   Asc = 'asc',
@@ -5053,12 +5077,8 @@ export type UserCreateManyInput = {
   is_disabled: Scalars['Boolean'];
   last_name: Scalars['String'];
   password: Scalars['String'];
-  role?: InputMaybe<UserCreateManyroleInput>;
+  role?: InputMaybe<UserCreateroleInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
-};
-
-export type UserCreateManyroleInput = {
-  set: Array<Role>;
 };
 
 export type UserCreateNestedManyWithoutProjectsInput = {
@@ -5922,7 +5942,7 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
-export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> };
+export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string, email: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role>, email: string }> };
 
 export type TaskFragment = { __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } };
 
@@ -5987,14 +6007,14 @@ export type GetManagerProjectsQueryVariables = Exact<{
 }>;
 
 
-export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> }> };
+export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string, email: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role>, email: string }> }> };
 
 export type GetProjectQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetProjectQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> } };
+export type GetProjectQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string, email: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role>, email: string }> } };
 
 export type GetTasksByProjectQueryVariables = Exact<{
   where: TaskWhereInput;
@@ -6015,7 +6035,7 @@ export type GetUserProjectsQueryVariables = Exact<{
 }>;
 
 
-export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> }> };
+export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string, email: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role>, email: string }> }> };
 
 export const ProjectFragmentDoc = gql`
     fragment Project on Project {
@@ -6042,6 +6062,7 @@ export const ProjectFragmentDoc = gql`
       id
       avatar
       first_name
+      email
     }
   }
   users {
@@ -6050,6 +6071,7 @@ export const ProjectFragmentDoc = gql`
     last_name
     avatar
     role
+    email
   }
 }
     `;

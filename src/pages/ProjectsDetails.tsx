@@ -1,24 +1,60 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
-import { Box, Spinner, Text, Image, Flex } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
-import { useParams } from 'react-router-dom'
+import {
+  Box,
+  Button,
+  Flex,
+  Spinner,
+  Image,
+  useToast,
+  Text,
+} from '@chakra-ui/react'
 import WhitePannel from 'src/components/WhitePannel'
+import { useNavigate, useParams } from 'react-router-dom'
 import mainTheme from 'src/definitions/chakra/theme/mainTheme'
-import convertHoursToDays from 'src/utils/convertHoursToDays'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Doughnut } from 'react-chartjs-2'
+import {
+  useGetProjectQuery,
+  useUpdateProjectMutation,
+} from 'src/generated/graphql'
 import convertMillisecondsToHours from 'src/utils/convertMillisecondsToHours'
 import getActualTimeAvailable from 'src/utils/getActualTimeAvailable'
-import { useGetProjectQuery } from 'src/generated/graphql'
+
+import TimeSpentOnProject from 'src/components/molecules/ProjectDetails/TimeSpentOnProject'
+import TasksAccomplished from 'src/components/molecules/ProjectDetails/TasksAccomplished'
+import convertHoursToDays from 'src/utils/convertHoursToDays'
 
 const ProjectDetails = (): ReactElement => {
+  ChartJS.register(ArcElement, Tooltip, Legend)
+  const navigate = useNavigate()
   const { projectId } = useParams()
+  const toast = useToast()
+
+  const [uptadeproject] = useUpdateProjectMutation({
+    notifyOnNetworkStatusChange: true,
+  })
+
   const { data, loading } = useGetProjectQuery({
     variables: { id: projectId as string },
     skip: projectId === undefined,
   })
 
-  ChartJS.register(ArcElement, Tooltip, Legend)
+  const disableProject = async (id: string) => {
+    await uptadeproject({
+      variables: {
+        data: { is_disabled: { set: true } },
+        projectId: { id },
+      },
+    })
+    toast({
+      title: 'Project deleted.',
+      status: 'success',
+      duration: 5000,
+      isClosable: true,
+    })
+    navigate(-1)
+  }
 
   if (loading)
     return (
@@ -58,80 +94,92 @@ const ProjectDetails = (): ReactElement => {
 
   return (
     <WhitePannel close title={data.project?.title}>
-      <Image
-        src={data.project?.owner.avatar}
-        display="flex"
-        flexDirection="column"
-        style={mainTheme.section.userSmallAvatar}
-      />
-      <Box overflow="auto" height="22rem">
-        <Box pt={5} pr={5} maxWidth="90%">
-          <Text mb={3} textStyle="titleWhiteBoard">
-            Project description
-          </Text>
-          <Text textStyle="body">{data.project?.description}</Text>
+      <Box paddingBottom={5} width="250px">
+        <Image
+          src={data.project?.owner.avatar}
+          display="flex"
+          flexDirection="column"
+          style={mainTheme.section.userSmallAvatar}
+        />
+      </Box>
+      <Box overflow="auto" height="24rem">
+        <Box pt={5}>
+          <Flex justifyContent="space-between">
+            <Box flex={1}>
+              <Flex mb={3} alignItems="center">
+                <Text textStyle="titleWhiteBoard">Project description</Text>
+              </Flex>
+              <Text textStyle="body">{data.project?.description}</Text>
+            </Box>
+            <Box pr={5} flex={1} ml={5}>
+              <Flex mb={3} alignItems="center">
+                <Text textStyle="titleWhiteBoard">Project details</Text>
+              </Flex>
+
+              <Flex alignItems="center">
+                <Text textStyle="body">Initial time spent estimee:</Text>
+                <Text textStyle="bodyGreenBold" ml={2}>
+                  {convertHoursToDays(totalHoursAvailableOnProject)}
+                </Text>
+              </Flex>
+
+              <Flex alignItems="center">
+                <Text textStyle="body">Total time spent:</Text>
+                <Text textStyle="bodyGreenBold" ml={2}>
+                  {convertHoursToDays(data.project?.total_time_spent)}
+                </Text>
+              </Flex>
+            </Box>
+          </Flex>
+          <Flex
+            pt={5}
+            width="100%"
+            // minWidth={['5rem', '10rem', '20rem', '27rem']}
+            justifyContent="space-between"
+          >
+            <Box mr={5} flex={1}>
+              <Text mb={3} textStyle="titleWhiteBoard">
+                Team members
+              </Text>
+              <Box maxWidth="20rem" alignItems="center">
+                {data.project?.users.map((u) => (
+                  <Flex key={u.id} justifyContent="space-between">
+                    <Flex mt={2}>
+                      <Image
+                        src={u.avatar}
+                        display="flex"
+                        flexDirection="column"
+                        style={mainTheme.section.userSmallAvatar}
+                        mr={5}
+                      />
+                      <Text textStyle="body">
+                        {u.first_name} {u.last_name}
+                      </Text>
+                    </Flex>
+                  </Flex>
+                ))}
+              </Box>
+            </Box>
+            <TimeSpentOnProject
+              dataDoughnutChart={dataDoughnutChart}
+              optionsDoughnutChart={optionsDoughnutChart}
+            />
+          </Flex>
+          <Flex>
+            <TasksAccomplished />
+          </Flex>
+          <Flex justifyContent="center">
+            <Button
+              maxWidth="20%"
+              color="white"
+              textStyle="h4"
+              backgroundColor={mainTheme.colors.orange}
+              onClick={() => disableProject(projectId as string)}
+            >
+              Delete project
+            </Button>
+          </Flex>
         </Box>
-        <Flex>
-          <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
-            <Text mb={3} textStyle="titleWhiteBoard">
-              Team members
-            </Text>
-            <Box>
-              {data.project?.users.map((u) => (
-                <Flex key={u.id} alignItems="center">
-                  <Image
-                    src={u.avatar}
-                    display="flex"
-                    flexDirection="column"
-                    style={mainTheme.section.userSmallAvatar}
-                    mr={5}
-                  />
-                  <Text textStyle="body">
-                    {u.first_name} {u.last_name}
-                  </Text>
-                </Flex>
-              ))}
-            </Box>
-          </Box>
-          <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
-            <Text mb={3} textStyle="titleWhiteBoard">
-              Project details
-            </Text>
-            <Flex alignItems="center">
-              <Text textStyle="body">Initial time spent estimee:</Text>
-              <Text textStyle="bodyGreenBold" ml={2}>
-                {convertHoursToDays(totalHoursAvailableOnProject)}
-              </Text>
-            </Flex>
-            <Flex alignItems="center">
-              <Text textStyle="body">Total time spent:</Text>
-              <Text textStyle="bodyGreenBold" ml={2}>
-                {convertHoursToDays(data.project?.total_time_spent)}
-              </Text>
-            </Flex>
-          </Box>
-        </Flex>
-        <Flex>
-          <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
-            <Text mb={3} textStyle="titleWhiteBoard">
-              Time spent on project
-            </Text>
-            <Box width="10rem" height="10rem">
-              <Doughnut
-                data={dataDoughnutChart}
-                options={optionsDoughnutChart}
-              />
-              <Text marginTop="-53%" marginLeft="37%">
-                {dataDoughnutChart.datasets[0].data[0]}%
-              </Text>
-            </Box>
-          </Box>
-          <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
-            <Text mb={3} textStyle="titleWhiteBoard">
-              Tasks accomplished
-            </Text>
-          </Box>
-        </Flex>
       </Box>
     </WhitePannel>
   )
