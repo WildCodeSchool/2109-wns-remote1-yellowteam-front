@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { ReactElement, useEffect, useState } from 'react'
 import {
@@ -33,15 +34,16 @@ import getActualTimeAvailable from 'src/utils/getActualTimeAvailable'
 
 const ModifyProject = (): ReactElement => {
   ChartJS.register(ArcElement, Tooltip, Legend)
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const { projectId } = useParams()
   const { data, loading } = useGetProjectQuery({
     variables: { id: projectId as string },
     skip: projectId === undefined,
   })
-  const [deleteProjectData] = useDeleteProjectMutation({
-    variables: { projectId: projectId! },
-  })
+
+  // const [deleteProjectData] = useDeleteProjectMutation({
+  //   variables: { projectId: projectId as string },
+  // })
 
   const [isFormAddUserVisible, setIsFormAddUserVisible] = useState(false)
   const [
@@ -71,10 +73,10 @@ const ModifyProject = (): ReactElement => {
     reset()
   }
 
-  const deleteProject = (id: string) => {
-    deleteProjectData({ variables: { projectId: id } })
-    navigate(-1)
-  }
+  // const deleteProject = (id: string) => {
+  //   deleteProjectData({ variables: { projectId: id } })
+  //   navigate(-1)
+  // }
 
   const deleteUser = async (id: string): Promise<void> => {
     try {
@@ -127,7 +129,7 @@ const ModifyProject = (): ReactElement => {
   }
 
   useEffect(() => {
-    refetch()
+    // refetch()
   }, [onSubmitAddUser, onSubmitDescription, onSubmitChangeTimeSpent])
 
   if (loading)
@@ -194,7 +196,6 @@ const ModifyProject = (): ReactElement => {
                 <FormLabel htmlFor="description" />
                 <Textarea
                   id="description"
-                  type="text"
                   width="70%"
                   defaultValue={data.project?.description}
                   {...register('description')}
@@ -246,7 +247,7 @@ const ModifyProject = (): ReactElement => {
                       height={0}
                       onClick={() => deleteUser(u.id)}
                     >
-                      <DeleteIcon />
+                      {/* <DeleteIcon /> */}
                     </Button>
                   </Flex>
                 ))}
@@ -288,7 +289,7 @@ const ModifyProject = (): ReactElement => {
                     <AddIcon
                       width="30"
                       height="32"
-                      color={mainTheme.colors.lightGrey}
+                      // color={mainTheme.colors.lightGrey}
                     />
                   </Button>
                 </Flex>
@@ -372,12 +373,11 @@ const ModifyProject = (): ReactElement => {
         </Flex>
         <Flex justifyContent="center">
           <Button
-            // width="auto"
             maxWidth="20%"
             color="white"
             textStyle="h4"
             backgroundColor={mainTheme.colors.orange}
-            onClick={() => deleteProject(projectId!)}
+            // onClick={() => deleteProject(projectId as string)}
           >
             Delete project
           </Button>

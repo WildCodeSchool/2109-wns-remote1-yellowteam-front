@@ -4,7 +4,7 @@ import Board from 'src/pages/Board'
 import ModifyProject from 'src/pages/ModifyProject'
 import Notifications from 'src/pages/Notifications'
 import Profile from 'src/pages/Profile'
-import Project from 'src/pages/Project'
+import Projects from 'src/pages/Projects'
 import ProjectDetails from 'src/pages/ProjectsDetails'
 
 const routes: RouteObject[] = [
@@ -14,7 +14,7 @@ const routes: RouteObject[] = [
     children: [
       { path: '/board', element: <Board /> },
       { path: '/board/:projectId', element: <Board /> },
-      { path: '/projects', element: <Project /> },
+      { path: '/projects', element: <Projects /> },
       {
         path: '/projects/:projectId',
         element: <ProjectDetails />,
