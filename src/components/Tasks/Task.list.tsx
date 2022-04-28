@@ -3,7 +3,7 @@ import React from 'react'
 import { GetTasksByProjectQuery, Status } from 'src/generated/graphql'
 import useBoardState from 'src/hooks/useBoardState'
 import BoardTicketsStatus from 'src/components/molecules/BoardTicketsStatus'
-import Tag from '../molecules/Tags'
+import Tag, { TagColor, tagColorSwitch } from '../molecules/Tags'
 import MotionFlex from '../Motion/MotionFlex'
 import Card from './Task.card'
 
@@ -36,7 +36,11 @@ export default function TaskList({ tasks, name, status }: Props): JSX.Element {
           task={t}
           key={t.id}
           tag={
-            <Tag textColor="darkGreen" tagColor="lightGreen" text="feature" />
+            <Tag
+              textColor="white"
+              tagColor={tagColorSwitch[t.status_task]}
+              text="feature"
+            />
           }
           title={t.title}
         />

@@ -7,7 +7,7 @@ interface IBoardTicketsStatus {
   title: string
 }
 
-const BoardTicketsStatus = ({
+export const BoardTicketsStatus = ({
   title,
   numberOfTickets,
 }: IBoardTicketsStatus): ReactElement => (

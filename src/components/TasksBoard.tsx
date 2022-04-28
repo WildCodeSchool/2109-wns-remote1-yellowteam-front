@@ -1,8 +1,8 @@
 import { Flex, Text } from '@chakra-ui/react'
 import React, { ReactElement, useMemo } from 'react'
 import { Status, useGetProjectQuery } from 'src/generated/graphql'
-import BoardTicketsStatus from '../molecules/BoardTicketsStatus'
-import Tag from '../molecules/Tags'
+import { BoardTicketsStatus } from './molecules/BoardTicketsStatus'
+import Tag, { TagColor, tagColorSwitch } from './molecules/Tags'
 import Card from './Card'
 
 const useProjectTasks = (projectId: string | undefined) => {
@@ -56,8 +56,8 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
                 key={t.id}
                 tag={
                   <Tag
-                    textColor="darkGreen"
-                    tagColor="lightGreen"
+                    textColor="white"
+                    tagColor={tagColorSwitch[t.status_task]}
                     text="feature"
                   />
                 }
@@ -78,8 +78,8 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
                 key={t.id}
                 tag={
                   <Tag
-                    textColor="darkGreen"
-                    tagColor="lightGreen"
+                    textColor="white"
+                    tagColor={tagColorSwitch[t.status_task]}
                     text="feature"
                   />
                 }
@@ -100,8 +100,8 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
                 key={t.id}
                 tag={
                   <Tag
-                    textColor="darkGreen"
-                    tagColor="lightGreen"
+                    textColor="white"
+                    tagColor={tagColorSwitch[t.status_task]}
                     text="feature"
                   />
                 }

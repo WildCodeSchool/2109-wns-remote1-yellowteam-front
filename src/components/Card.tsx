@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react'
 import { Box, Text, Flex, useDisclosure, Modal } from '@chakra-ui/react'
 import PlaceholderIcon from '../static/svg/PlaceholderIcon'
 import CardDetails from './CardDetails'
+import TaskeDetailModal from './Modals/TaskDetailModal'
 
 /* eslint-disable react/require-default-props */
 
@@ -35,14 +36,7 @@ const Card = ({
         <Box>{tag}</Box>
         <Box m="12px 4px">{photo}</Box>
       </Flex>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        size="6xl"
-        scrollBehavior="inside"
-      >
-        <CardDetails taskId={taskId} />
-      </Modal>
+      <TaskeDetailModal isOpen={isOpen} onClose={onClose} taskId={taskId} />
     </Box>
   )
 }

@@ -1,5 +1,12 @@
 import React, { ReactElement, useState } from 'react'
-import { Box, Text, Flex, useToast } from '@chakra-ui/react'
+import {
+  Box,
+  Text,
+  Flex,
+  useToast,
+  useDisclosure,
+  Modal,
+} from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useParams } from 'react-router-dom'
 import useBoardState from 'src/hooks/useBoardState'
@@ -10,6 +17,8 @@ import {
   useUpdateTaskStatusMutation,
 } from 'src/generated/graphql'
 import PlaceholderIcon from '../../static/svg/PlaceholderIcon'
+import CardDetails from '../CardDetails'
+import TaskeDetailModal from '../Modals/TaskDetailModal'
 
 /* eslint-disable react/require-default-props */
 interface ICard {
@@ -71,42 +80,54 @@ const Card = ({
     updateTaskStatus()
     setDragging(false)
   }
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-    <MotionBox
-      pointerEvents={isDragging ? 'none' : 'all'}
-      cursor="pointer"
-      layout
-      drag
-      onDragStart={() => setDragging(true)}
-      onDragEnd={handleDrop}
-      whileHover={{
-        scale: 1.03,
-        boxShadow: '0px 3px 3px rgba(0,0,0,0.15)',
-      }}
-      whileTap={{
-        scale: 1.12,
-        boxShadow: '0px 5px 5px rgba(0,0,0,0.1)',
-      }}
-      backgroundColor="#FFFFFF"
-      width="218px"
-      borderRadius="10"
-      padding="9px 14px 9px 14px"
-      marginBottom="10px"
-    >
-      <Text noOfLines={2} textStyle="h3">
-        {title}
-      </Text>
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        height="24px"
-        mt="12px"
+    <Flex onClick={onOpen}>
+      <MotionBox
+        pointerEvents={isDragging ? 'none' : 'all'}
+        cursor="pointer"
+        layout
+        drag
+        onDragStart={() => setDragging(true)}
+        onDragEnd={handleDrop}
+        whileHover={{
+          scale: 1.03,
+          boxShadow: '0px 3px 3px rgba(0,0,0,0.15)',
+        }}
+        whileTap={{
+          scale: 1.12,
+          boxShadow: '0px 5px 5px rgba(0,0,0,0.1)',
+        }}
+        backgroundColor="#FFFFFF"
+        width="218px"
+        borderRadius="10"
+        padding="9px 14px 9px 14px"
+        marginBottom="10px"
       >
-        <Box>{tag}</Box>
-        <Box m="12px 4px">{photo}</Box>
-      </Flex>
-    </MotionBox>
+        <Text noOfLines={2} textStyle="h3">
+          {title}
+        </Text>
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          height="24px"
+          mt="12px"
+        >
+          <Box>{tag}</Box>
+          <Box m="12px 4px">{photo}</Box>
+        </Flex>
+      </MotionBox>
+      <TaskeDetailModal isOpen={isOpen} onClose={onClose} taskId={task.id} />
+      {/* <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size="6xl"
+        scrollBehavior="inside"
+      >
+        <CardDetails taskId={task.id} />
+      </Modal> */}
+    </Flex>
   )
 }
 
