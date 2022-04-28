@@ -7,6 +7,7 @@ import {
   MenuItem,
   Text,
   Image,
+  Box,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { client } from 'src/App'
@@ -60,6 +61,7 @@ export default function NotificationsHOC(): JSX.Element {
   return (
     <Menu>
       <MenuButton
+        as={Box}
         mx={2}
         px={4}
         py={2}
