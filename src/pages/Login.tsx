@@ -1,27 +1,52 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
+import {
+  Button,
+  Flex,
+  FormControl,
+  Input,
+  Text,
+  useToast,
+} from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
-import { useCookies } from 'react-cookie'
-import mainTheme from 'src/theme/mainTheme'
+import mainTheme from 'src/definitions/chakra/theme/mainTheme'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { ErrorMessage } from '@hookform/error-message'
+import { validationsLogin } from '../formResolvers/yupResolver'
 import { useMutateLoginMutation } from '../generated/graphql'
 
 export default function Login(): JSX.Element {
   const navigate = useNavigate()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [cookies, setCookies] = useCookies()
 
-  const { dispatchLogin } = useAppState()
-  const [login] = useMutateLoginMutation({
-    onCompleted: (data) => {
-      dispatchLogin(data.login)
-      setCookies('isLoggedIn', true)
-      navigate('/board')
-    },
+  const toast = useToast()
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(validationsLogin),
   })
 
-  const { handleSubmit, register } = useForm()
+  const { dispatchLogin } = useAppState()
+
+  const [login, { loading }] = useMutateLoginMutation({
+    onCompleted: (data) => {
+      dispatchLogin(data.login)
+      navigate('/board')
+    },
+    onError: () => {
+      toast({
+        title: `your email doesn't exist`,
+        status: 'error',
+        isClosable: true,
+        duration: 5000,
+        position: 'bottom',
+      })
+    },
+  })
 
   const onSubmit = async ({ email, password }: FieldValues): Promise<void> => {
     login({
@@ -58,16 +83,28 @@ export default function Login(): JSX.Element {
           <Input
             variant="flushed"
             placeholder="Email"
-            my={1}
+            my={2}
             type="text"
+            isInvalid={errors.email && true}
             {...register('email')}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="email"
+            render={({ message }) => <Text color="red">{message}</Text>}
           />
           <Input
             variant="flushed"
             placeholder="Password"
-            my={1}
+            my={2}
             type="password"
+            isInvalid={errors.password && true}
             {...register('password')}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="password"
+            render={({ message }) => <Text color="red">{message}</Text>}
           />
         </FormControl>
         <Button
@@ -76,9 +113,14 @@ export default function Login(): JSX.Element {
           backgroundColor={mainTheme.colors.orange}
           color="#ffffff"
           onClick={handleSubmit(onSubmit)}
+          isLoading={loading}
+          isDisabled={(!isValid || loading) && true}
         >
           SIGN IN
         </Button>
+        <Text textStyle="subText" onClick={() => navigate(`/register`)}>
+          Not Account ? Sign up
+        </Text>
       </Flex>
     </Flex>
   )

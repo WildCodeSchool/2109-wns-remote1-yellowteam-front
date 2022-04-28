@@ -27,8 +27,8 @@ import {
   UseFormHandleSubmit,
 } from 'react-hook-form'
 import { ProjectCreateInput } from 'src/generated/graphql'
-import mainTheme from 'src/theme/mainTheme'
-import { Dates } from 'src/pages/Projects'
+import mainTheme from 'src/definitions/chakra/theme/mainTheme'
+import { Dates } from 'src/pages/Project'
 import { ErrorMessage } from '@hookform/error-message'
 
 export interface IProps {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Tag from '../molecules/Tags'
+import Tag from '../components/molecules/Tags'
 
 describe('Renders the tags', () => {
   it('Renders the text of the tag', () => {

@@ -1,6 +1,6 @@
-import { extendTheme } from '@chakra-ui/react'
+const customProperties = {
+  config: { initialColorMode: 'light', useSystemColorMode: false },
 
-const mainTheme = extendTheme({
   textStyles: {
     // you can also use responsive styles
     titleLogin: {
@@ -14,6 +14,18 @@ const mainTheme = extendTheme({
       fontWeight: '800',
       color: '#38383A',
       fontFamily: 'Avenir',
+      marginLeft: '10px',
+      marginRight: '10px',
+      textAlign: 'center',
+    },
+    subText: {
+      fontSize: ['12'],
+      color: '#38383A',
+      fontFamily: 'Avenir',
+      textDecoration: 'underline',
+      cursor: 'pointer',
+      marginLeft: '10px',
+      marginRight: '10px',
     },
     h1: {
       fontSize: ['32', '36'],
@@ -61,7 +73,7 @@ const mainTheme = extendTheme({
       color: '#009A96',
       fontFamily: 'Avenir',
       fontWeight: '800',
-    }
+    },
   },
   colors: {
     orange: '#F69826',
@@ -106,6 +118,6 @@ const mainTheme = extendTheme({
       borderRadius: '50%',
     },
   },
-})
+}
 
-export default mainTheme
+export default customProperties

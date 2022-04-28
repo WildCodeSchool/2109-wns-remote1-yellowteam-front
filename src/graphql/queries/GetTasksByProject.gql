@@ -1,0 +1,5 @@
+query GetTasksByProject($where: TaskWhereInput!) {
+  tasks(where: $where) {
+    ...Task
+  }
+}

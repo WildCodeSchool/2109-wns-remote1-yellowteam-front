@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  ytask-client:
+    build: ./
+    environment:
+      REACT_APP_SERVER_URL: ${REACT_APP_SERVER_URL}
+    command: sh -c "npm run build"
+    volumes:
+      - ytask-client:/app/build
+
+  nginx:
+    image: nginx:1.21.3
+
+    depends_on:
+      - ytask-client
+    restart: always
+    ports:
+      - ${GATEWAY_PORT:-3000}:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ytask-client:/ytask-client
+      - ./logs:/var/log/nginx
+
+volumes:
+  ytask-client:
+#   ytask-api.remote9-0921.wns.wilders.dev {
+#         reverse_proxy localhost:4000
+# }

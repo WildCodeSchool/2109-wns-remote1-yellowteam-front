@@ -12,32 +12,31 @@ import {
   Textarea,
   Image,
 } from '@chakra-ui/react'
-import { DeleteIcon } from '@chakra-ui/icons'
+// import { DeleteIcon } from '@chakra-ui/icons'
 import WhitePannel from 'src/components/WhitePannel'
 import { useNavigate, useParams } from 'react-router-dom'
 import AddIcon from 'src/static/svg/AddIcon'
-import mainTheme from 'src/theme/mainTheme'
 import { FieldValues, useForm } from 'react-hook-form'
 import Edit from 'src/static/svg/Edit'
+import mainTheme from 'src/definitions/chakra/theme/mainTheme'
+import convertHoursToDays from 'src/utils/convertHoursToDays'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
 import {
   StringFilter,
-  useDeleteProjectMutation,
+  // useDeleteProjectMutation,
   useGetProjectQuery,
   useUpdateProjectMutation,
 } from 'src/generated/graphql'
-import convertHoursToDays from 'src/utils/convertHoursToDays'
 import convertMillisecondsToHours from 'src/utils/convertMillisecondsToHours'
 import getActualTimeAvailable from 'src/utils/getActualTimeAvailable'
 
 const ModifyProject = (): ReactElement => {
   ChartJS.register(ArcElement, Tooltip, Legend)
-
-  const { projectId } = useParams()
   const navigate = useNavigate()
-  const { data, refetch, loading } = useGetProjectQuery({
-    variables: { id: projectId! },
+  const { projectId } = useParams()
+  const { data, loading } = useGetProjectQuery({
+    variables: { id: projectId as string },
     skip: projectId === undefined,
   })
   const [deleteProjectData] = useDeleteProjectMutation({
@@ -149,7 +148,8 @@ const ModifyProject = (): ReactElement => {
 
   const totalHoursAvailableOnProject = getActualTimeAvailable(hoursAvailable)
 
-  const percentageTimeSpent = (timeSpent! / totalHoursAvailableOnProject) * 100
+  const percentageTimeSpent =
+    ((timeSpent as number) / totalHoursAvailableOnProject) * 100
   const rest = 100 - percentageTimeSpent
 
   const dataDoughnutChart = {
