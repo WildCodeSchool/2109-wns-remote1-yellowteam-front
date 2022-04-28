@@ -1,5 +1,7 @@
 import React from 'react'
-import { Flex, Text, Input } from '@chakra-ui/react'
+import { Flex, Text, Input, Box } from '@chakra-ui/react'
+import BellIcon from 'src/static/svg/BellIcon'
+import mainTheme from '../../definitions/chakra/theme/mainTheme'
 
 interface IHeader {
   userName: string
@@ -13,7 +15,10 @@ const Header = ({ userName }: IHeader): JSX.Element => (
         &nbsp; &nbsp; Welcome {userName}
       </Text>
     </Flex>
-    <Input width="220px" variant="filled" placeholder="Search" />
+    <Flex alignItems="center" as="button" data-testid="notifications-button">
+      <Input ml={4} width="220px" variant="filled" placeholder="Search" />
+      <BellIcon color={mainTheme.colors.greyText} />
+    </Flex>
   </Flex>
 )
 

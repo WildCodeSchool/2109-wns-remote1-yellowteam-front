@@ -9,7 +9,7 @@ import {
   useBoolean,
   Spinner,
 } from '@chakra-ui/react'
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useRef, useState } from 'react'
 import {
   GetManagerProjectsDocument,
   ProjectCreateInput,
@@ -28,6 +28,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import WhitePannel from 'src/components/WhitePannel'
 import { client } from 'src/App'
+import DeleteProjectAlert from 'src/components/Alert/DeleteProject.alert'
 
 export type Dates = {
   startDate: Date | null
@@ -37,13 +38,13 @@ export type Dates = {
 
 const Project = (): ReactElement => {
   const navigate = useNavigate()
-  // const {
-  //   isOpen: isDeleteProjectModalOpen,
-  //   onOpen: onDeleteProjectModalOpen,
-  //   onClose: onDeleteProjectClose,
-  // } = useDisclosure()
+  const {
+    isOpen: isDeleteProjectModalOpen,
+    onOpen: onDeleteProjectModalOpen,
+    onClose: onDeleteProjectClose,
+  } = useDisclosure()
 
-  // const cancelRef = useRef<HTMLButtonElement>(null)
+  const cancelRef = useRef<HTMLButtonElement>(null)
 
   const [dates, setDates] = useState<Dates>({
     startDate: new Date(),
@@ -64,7 +65,20 @@ const Project = (): ReactElement => {
 
   const { userId } = useAppState()
   const { data, loading: loadingProjects } = useGetManagerProjectsQuery({
-    variables: { userId },
+    variables: {
+      where: {
+        owner: {
+          is: {
+            id: {
+              equals: userId,
+            },
+          },
+        },
+        is_disabled: {
+          equals: false,
+        },
+      },
+    },
     skip: !userId,
   })
   const [createProject] = useCreateProjectMutation({
@@ -150,17 +164,15 @@ const Project = (): ReactElement => {
               >
                 <Edit />
               </Button>
-              <Button variant="ghost">
-                <Delete color={mainTheme.colors.mediumGreyText} />
-                {/* <DeleteProjectAlert
-                  loading={false}
-                  onSubmit={() => {}}
-                  cancelRef={cancelRef}
-                  isOpen={isDeleteProjectModalOpen}
-                  onClose={onDeleteProjectClose}
-                  onOpen={onDeleteProjectModalOpen}
-                /> */}
-              </Button>
+
+              <DeleteProjectAlert
+                loading={false}
+                onSubmit={() => {}}
+                cancelRef={cancelRef}
+                isOpen={isDeleteProjectModalOpen}
+                onClose={onDeleteProjectClose}
+                onOpen={onDeleteProjectModalOpen}
+              />
             </Flex>
           </Flex>
         ))}

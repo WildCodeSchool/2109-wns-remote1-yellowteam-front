@@ -1826,6 +1826,7 @@ export type Mutation = {
   updateTaskStatus: Task;
   updateUser: Maybe<User>;
   uploadFile: File;
+  uploadProfilePicture: User;
   upsertComment: Comment;
   upsertFile: File;
   upsertInvitation: Invitation;
@@ -2083,6 +2084,11 @@ export type MutationUpdateUserArgs = {
 
 
 export type MutationUploadFileArgs = {
+  file: Scalars['Upload'];
+};
+
+
+export type MutationUploadProfilePictureArgs = {
   file: Scalars['Upload'];
 };
 
@@ -3729,6 +3735,7 @@ export type Query = {
   notifications: Array<Notification>;
   project: Maybe<Project>;
   projects: Array<Project>;
+  search: Maybe<Array<SearchResult>>;
   task: Maybe<Task>;
   tasks: Array<Task>;
   user: Maybe<User>;
@@ -4014,6 +4021,11 @@ export type QueryProjectsArgs = {
 };
 
 
+export type QuerySearchArgs = {
+  data: SearchInput;
+};
+
+
 export type QueryTaskArgs = {
   where: TaskWhereUniqueInput;
 };
@@ -4061,6 +4073,18 @@ export enum Role {
   SuperAdmin = 'SUPER_ADMIN',
   User = 'USER'
 }
+
+export type SearchInput = {
+  searchValue: Scalars['String'];
+};
+
+export type SearchResult = {
+  __typename?: 'SearchResult';
+  description: Scalars['String'];
+  id: Scalars['String'];
+  title: Scalars['String'];
+  type: Scalars['String'];
+};
 
 export enum SortOrder {
   Asc = 'asc',
@@ -5053,12 +5077,8 @@ export type UserCreateManyInput = {
   is_disabled: Scalars['Boolean'];
   last_name: Scalars['String'];
   password: Scalars['String'];
-  role?: InputMaybe<UserCreateManyroleInput>;
+  role?: InputMaybe<UserCreateroleInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
-};
-
-export type UserCreateManyroleInput = {
-  set: Array<Role>;
 };
 
 export type UserCreateNestedManyWithoutProjectsInput = {
@@ -5922,7 +5942,7 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
-export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> };
+export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> };
 
 export type TaskFragment = { __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } };
 
@@ -5983,18 +6003,26 @@ export type UpdateTaskStatusMutationVariables = Exact<{
 export type UpdateTaskStatusMutation = { __typename?: 'Mutation', updateTaskStatus: { __typename?: 'Task', id: string, title: string, status_task: Status } };
 
 export type GetManagerProjectsQueryVariables = Exact<{
-  userId: InputMaybe<Scalars['String']>;
+  where: InputMaybe<ProjectWhereInput>;
 }>;
 
 
-export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> }> };
+export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> }> };
+
+export type GetAllNotificationsQueryVariables = Exact<{
+  where: NotificationWhereInput;
+  orderBy: InputMaybe<Array<NotificationOrderByWithRelationInput> | NotificationOrderByWithRelationInput>;
+}>;
+
+
+export type GetAllNotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: string, title: string, status: Status_Notification, content: string, created_at: any, updated_at: any, sender: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string } }> };
 
 export type GetProjectQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetProjectQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> } };
+export type GetProjectQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> } };
 
 export type GetTasksByProjectQueryVariables = Exact<{
   where: TaskWhereInput;
@@ -6015,7 +6043,7 @@ export type GetUserProjectsQueryVariables = Exact<{
 }>;
 
 
-export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> }> };
+export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> }> };
 
 export const ProjectFragmentDoc = gql`
     fragment Project on Project {
@@ -6027,6 +6055,7 @@ export const ProjectFragmentDoc = gql`
   total_time_spent
   start_date
   end_date
+  is_disabled
   due_date
   owner {
     id
@@ -6342,8 +6371,8 @@ export type UpdateTaskStatusMutationHookResult = ReturnType<typeof useUpdateTask
 export type UpdateTaskStatusMutationResult = Apollo.MutationResult<UpdateTaskStatusMutation>;
 export type UpdateTaskStatusMutationOptions = Apollo.BaseMutationOptions<UpdateTaskStatusMutation, UpdateTaskStatusMutationVariables>;
 export const GetManagerProjectsDocument = gql`
-    query GetManagerProjects($userId: String) {
-  projects(where: {owner: {is: {id: {equals: $userId}}}}) {
+    query GetManagerProjects($where: ProjectWhereInput) {
+  projects(where: $where) {
     ...Project
   }
 }
@@ -6361,7 +6390,7 @@ export const GetManagerProjectsDocument = gql`
  * @example
  * const { data, loading, error } = useGetManagerProjectsQuery({
  *   variables: {
- *      userId: // value for 'userId'
+ *      where: // value for 'where'
  *   },
  * });
  */
@@ -6376,6 +6405,54 @@ export function useGetManagerProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type GetManagerProjectsQueryHookResult = ReturnType<typeof useGetManagerProjectsQuery>;
 export type GetManagerProjectsLazyQueryHookResult = ReturnType<typeof useGetManagerProjectsLazyQuery>;
 export type GetManagerProjectsQueryResult = Apollo.QueryResult<GetManagerProjectsQuery, GetManagerProjectsQueryVariables>;
+export const GetAllNotificationsDocument = gql`
+    query GetAllNotifications($where: NotificationWhereInput!, $orderBy: [NotificationOrderByWithRelationInput!]) {
+  notifications(orderBy: $orderBy, where: $where) {
+    id
+    title
+    status
+    sender {
+      id
+      first_name
+      last_name
+      email
+      avatar
+    }
+    content
+    created_at
+    updated_at
+  }
+}
+    `;
+
+/**
+ * __useGetAllNotificationsQuery__
+ *
+ * To run a query within a React component, call `useGetAllNotificationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllNotificationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllNotificationsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function useGetAllNotificationsQuery(baseOptions: Apollo.QueryHookOptions<GetAllNotificationsQuery, GetAllNotificationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllNotificationsQuery, GetAllNotificationsQueryVariables>(GetAllNotificationsDocument, options);
+      }
+export function useGetAllNotificationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllNotificationsQuery, GetAllNotificationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllNotificationsQuery, GetAllNotificationsQueryVariables>(GetAllNotificationsDocument, options);
+        }
+export type GetAllNotificationsQueryHookResult = ReturnType<typeof useGetAllNotificationsQuery>;
+export type GetAllNotificationsLazyQueryHookResult = ReturnType<typeof useGetAllNotificationsLazyQuery>;
+export type GetAllNotificationsQueryResult = Apollo.QueryResult<GetAllNotificationsQuery, GetAllNotificationsQueryVariables>;
 export const GetProjectDocument = gql`
     query GetProject($id: String) {
   project(where: {id: $id}) {
