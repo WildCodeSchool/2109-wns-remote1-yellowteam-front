@@ -169,7 +169,7 @@ const Projects = (): ReactElement => {
                 <Edit />
               </Button>
               <Button variant="ghost">
-                <Delete color={mainTheme.colors.mediumGreyText} />
+                <Delete color={mainTheme.colors.darkGrey} />
                 {/* <DeleteProjectAlert
                   loading={false}
                   onSubmit={() => {}}
