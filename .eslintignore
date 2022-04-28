@@ -1,1 +1,3 @@
 src/reportWebVitals.ts
+src/generated/graphql.ts
+src/__test__/**/*.tsx

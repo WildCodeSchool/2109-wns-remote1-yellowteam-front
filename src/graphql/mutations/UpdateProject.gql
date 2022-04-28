@@ -1,0 +1,8 @@
+mutation UpdateProject(
+  $data: ProjectUpdateInput!
+  $projectId: ProjectWhereUniqueInput!
+) {
+  updateProject(data: $data, where: $projectId) {
+    id
+  }
+}

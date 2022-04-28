@@ -1,0 +1,5453 @@
+type Query {
+  comment(where: CommentWhereUniqueInput!): Comment
+  findFirstComment(
+    where: CommentWhereInput
+    orderBy: [CommentOrderByWithRelationInput!]
+    cursor: CommentWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [CommentScalarFieldEnum!]
+  ): Comment
+  comments(
+    where: CommentWhereInput
+    orderBy: [CommentOrderByWithRelationInput!]
+    cursor: CommentWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [CommentScalarFieldEnum!]
+  ): [Comment!]!
+  aggregateComment(
+    where: CommentWhereInput
+    orderBy: [CommentOrderByWithRelationInput!]
+    cursor: CommentWhereUniqueInput
+    take: Int
+    skip: Int
+  ): AggregateComment!
+  groupByComment(
+    where: CommentWhereInput
+    orderBy: [CommentOrderByWithAggregationInput!]
+    by: [CommentScalarFieldEnum!]!
+    having: CommentScalarWhereWithAggregatesInput
+    take: Int
+    skip: Int
+  ): [CommentGroupBy!]!
+  file(where: FileWhereUniqueInput!): File
+  findFirstFile(
+    where: FileWhereInput
+    orderBy: [FileOrderByWithRelationInput!]
+    cursor: FileWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [FileScalarFieldEnum!]
+  ): File
+  files(
+    where: FileWhereInput
+    orderBy: [FileOrderByWithRelationInput!]
+    cursor: FileWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [FileScalarFieldEnum!]
+  ): [File!]!
+  aggregateFile(
+    where: FileWhereInput
+    orderBy: [FileOrderByWithRelationInput!]
+    cursor: FileWhereUniqueInput
+    take: Int
+    skip: Int
+  ): AggregateFile!
+  groupByFile(
+    where: FileWhereInput
+    orderBy: [FileOrderByWithAggregationInput!]
+    by: [FileScalarFieldEnum!]!
+    having: FileScalarWhereWithAggregatesInput
+    take: Int
+    skip: Int
+  ): [FileGroupBy!]!
+  invitation(where: InvitationWhereUniqueInput!): Invitation
+  findFirstInvitation(
+    where: InvitationWhereInput
+    orderBy: [InvitationOrderByWithRelationInput!]
+    cursor: InvitationWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [InvitationScalarFieldEnum!]
+  ): Invitation
+  invitations(
+    where: InvitationWhereInput
+    orderBy: [InvitationOrderByWithRelationInput!]
+    cursor: InvitationWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [InvitationScalarFieldEnum!]
+  ): [Invitation!]!
+  aggregateInvitation(
+    where: InvitationWhereInput
+    orderBy: [InvitationOrderByWithRelationInput!]
+    cursor: InvitationWhereUniqueInput
+    take: Int
+    skip: Int
+  ): AggregateInvitation!
+  groupByInvitation(
+    where: InvitationWhereInput
+    orderBy: [InvitationOrderByWithAggregationInput!]
+    by: [InvitationScalarFieldEnum!]!
+    having: InvitationScalarWhereWithAggregatesInput
+    take: Int
+    skip: Int
+  ): [InvitationGroupBy!]!
+  notification(where: NotificationWhereUniqueInput!): Notification
+  findFirstNotification(
+    where: NotificationWhereInput
+    orderBy: [NotificationOrderByWithRelationInput!]
+    cursor: NotificationWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [NotificationScalarFieldEnum!]
+  ): Notification
+  notifications(
+    where: NotificationWhereInput
+    orderBy: [NotificationOrderByWithRelationInput!]
+    cursor: NotificationWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [NotificationScalarFieldEnum!]
+  ): [Notification!]!
+  aggregateNotification(
+    where: NotificationWhereInput
+    orderBy: [NotificationOrderByWithRelationInput!]
+    cursor: NotificationWhereUniqueInput
+    take: Int
+    skip: Int
+  ): AggregateNotification!
+  groupByNotification(
+    where: NotificationWhereInput
+    orderBy: [NotificationOrderByWithAggregationInput!]
+    by: [NotificationScalarFieldEnum!]!
+    having: NotificationScalarWhereWithAggregatesInput
+    take: Int
+    skip: Int
+  ): [NotificationGroupBy!]!
+  project(where: ProjectWhereUniqueInput!): Project
+  findFirstProject(
+    where: ProjectWhereInput
+    orderBy: [ProjectOrderByWithRelationInput!]
+    cursor: ProjectWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [ProjectScalarFieldEnum!]
+  ): Project
+  projects(
+    where: ProjectWhereInput
+    orderBy: [ProjectOrderByWithRelationInput!]
+    cursor: ProjectWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [ProjectScalarFieldEnum!]
+  ): [Project!]!
+  aggregateProject(
+    where: ProjectWhereInput
+    orderBy: [ProjectOrderByWithRelationInput!]
+    cursor: ProjectWhereUniqueInput
+    take: Int
+    skip: Int
+  ): AggregateProject!
+  groupByProject(
+    where: ProjectWhereInput
+    orderBy: [ProjectOrderByWithAggregationInput!]
+    by: [ProjectScalarFieldEnum!]!
+    having: ProjectScalarWhereWithAggregatesInput
+    take: Int
+    skip: Int
+  ): [ProjectGroupBy!]!
+  task(where: TaskWhereUniqueInput!): Task
+  findFirstTask(
+    where: TaskWhereInput
+    orderBy: [TaskOrderByWithRelationInput!]
+    cursor: TaskWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [TaskScalarFieldEnum!]
+  ): Task
+  tasks(
+    where: TaskWhereInput
+    orderBy: [TaskOrderByWithRelationInput!]
+    cursor: TaskWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [TaskScalarFieldEnum!]
+  ): [Task!]!
+  aggregateTask(
+    where: TaskWhereInput
+    orderBy: [TaskOrderByWithRelationInput!]
+    cursor: TaskWhereUniqueInput
+    take: Int
+    skip: Int
+  ): AggregateTask!
+  groupByTask(
+    where: TaskWhereInput
+    orderBy: [TaskOrderByWithAggregationInput!]
+    by: [TaskScalarFieldEnum!]!
+    having: TaskScalarWhereWithAggregatesInput
+    take: Int
+    skip: Int
+  ): [TaskGroupBy!]!
+  user(where: UserWhereUniqueInput!): User
+  findFirstUser(
+    where: UserWhereInput
+    orderBy: [UserOrderByWithRelationInput!]
+    cursor: UserWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [UserScalarFieldEnum!]
+  ): User
+  users(
+    where: UserWhereInput
+    orderBy: [UserOrderByWithRelationInput!]
+    cursor: UserWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [UserScalarFieldEnum!]
+  ): [User!]!
+  aggregateUser(
+    where: UserWhereInput
+    orderBy: [UserOrderByWithRelationInput!]
+    cursor: UserWhereUniqueInput
+    take: Int
+    skip: Int
+  ): AggregateUser!
+  groupByUser(
+    where: UserWhereInput
+    orderBy: [UserOrderByWithAggregationInput!]
+    by: [UserScalarFieldEnum!]!
+    having: UserScalarWhereWithAggregatesInput
+    take: Int
+    skip: Int
+  ): [UserGroupBy!]!
+}
+
+type Comment {
+  id: String!
+  is_disabled: Boolean!
+  content: String!
+  task_comment_user_id: String
+  project_id: String
+  task_id: String
+  project_comment_user_id: String
+  created_at: DateTime!
+  updated_at: DateTime!
+  project: Project
+  task: Task
+  user_task_comments: User
+  user_project_comments: User
+}
+
+# The javascript `Date` as string. Type represents date and time as the ISO Date string.
+scalar DateTime
+
+type Project {
+  id: String!
+  project_owner_id: String!
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_project: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  due_date: DateTime!
+  created_at: DateTime!
+  updated_at: DateTime!
+  _count: ProjectCount
+  users(
+    where: UserWhereInput
+    orderBy: [UserOrderByWithRelationInput!]
+    cursor: UserWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [UserScalarFieldEnum!]
+  ): [User!]!
+  owner: User!
+  tasks(
+    where: TaskWhereInput
+    orderBy: [TaskOrderByWithRelationInput!]
+    cursor: TaskWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [TaskScalarFieldEnum!]
+  ): [Task!]!
+  files(
+    where: FileWhereInput
+    orderBy: [FileOrderByWithRelationInput!]
+    cursor: FileWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [FileScalarFieldEnum!]
+  ): [File!]!
+  comments(
+    where: CommentWhereInput
+    orderBy: [CommentOrderByWithRelationInput!]
+    cursor: CommentWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [CommentScalarFieldEnum!]
+  ): [Comment!]!
+  invitations(
+    where: InvitationWhereInput
+    orderBy: [InvitationOrderByWithRelationInput!]
+    cursor: InvitationWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [InvitationScalarFieldEnum!]
+  ): [Invitation!]!
+}
+
+enum Status {
+  IN_PROGRESS
+  NOT_STARTED
+  FIHISHED
+}
+
+type ProjectCount {
+  users: Int!
+  tasks: Int!
+  files: Int!
+  comments: Int!
+  invitations: Int!
+}
+
+type User {
+  id: String!
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  role: [Role!]!
+  created_at: DateTime!
+  updated_at: DateTime!
+  _count: UserCount
+  projects(
+    where: ProjectWhereInput
+    orderBy: [ProjectOrderByWithRelationInput!]
+    cursor: ProjectWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [ProjectScalarFieldEnum!]
+  ): [Project!]!
+  task(
+    where: TaskWhereInput
+    orderBy: [TaskOrderByWithRelationInput!]
+    cursor: TaskWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [TaskScalarFieldEnum!]
+  ): [Task!]!
+  files(
+    where: FileWhereInput
+    orderBy: [FileOrderByWithRelationInput!]
+    cursor: FileWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [FileScalarFieldEnum!]
+  ): [File!]!
+  task_comments(
+    where: CommentWhereInput
+    orderBy: [CommentOrderByWithRelationInput!]
+    cursor: CommentWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [CommentScalarFieldEnum!]
+  ): [Comment!]!
+  project_comments(
+    where: CommentWhereInput
+    orderBy: [CommentOrderByWithRelationInput!]
+    cursor: CommentWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [CommentScalarFieldEnum!]
+  ): [Comment!]!
+  invitations(
+    where: InvitationWhereInput
+    orderBy: [InvitationOrderByWithRelationInput!]
+    cursor: InvitationWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [InvitationScalarFieldEnum!]
+  ): [Invitation!]!
+  notifications(
+    where: NotificationWhereInput
+    orderBy: [NotificationOrderByWithRelationInput!]
+    cursor: NotificationWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [NotificationScalarFieldEnum!]
+  ): [Notification!]!
+  owned_projects(
+    where: ProjectWhereInput
+    orderBy: [ProjectOrderByWithRelationInput!]
+    cursor: ProjectWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [ProjectScalarFieldEnum!]
+  ): [Project!]!
+  notifications_sent(
+    where: NotificationWhereInput
+    orderBy: [NotificationOrderByWithRelationInput!]
+    cursor: NotificationWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [NotificationScalarFieldEnum!]
+  ): [Notification!]!
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  USER
+}
+
+type UserCount {
+  projects: Int!
+  task: Int!
+  files: Int!
+  task_comments: Int!
+  project_comments: Int!
+  invitations: Int!
+  notifications: Int!
+  owned_projects: Int!
+  notifications_sent: Int!
+}
+
+input ProjectWhereInput {
+  AND: [ProjectWhereInput!]
+  OR: [ProjectWhereInput!]
+  NOT: [ProjectWhereInput!]
+  id: StringFilter
+  users: UserListRelationFilter
+  owner: UserRelationFilter
+  project_owner_id: StringFilter
+  title: StringFilter
+  description: StringFilter
+  private: BoolFilter
+  is_disabled: BoolFilter
+  status_project: EnumStatusFilter
+  total_time_spent: IntFilter
+  start_date: DateTimeFilter
+  end_date: DateTimeFilter
+  due_date: DateTimeFilter
+  tasks: TaskListRelationFilter
+  files: FileListRelationFilter
+  comments: CommentListRelationFilter
+  invitations: InvitationListRelationFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input UserListRelationFilter {
+  every: UserWhereInput
+  some: UserWhereInput
+  none: UserWhereInput
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  id: StringFilter
+  first_name: StringFilter
+  last_name: StringFilter
+  email: StringFilter
+  password: StringFilter
+  is_disabled: BoolFilter
+  avatar: StringNullableFilter
+  role: EnumRoleNullableListFilter
+  projects: ProjectListRelationFilter
+  task: TaskListRelationFilter
+  files: FileListRelationFilter
+  task_comments: CommentListRelationFilter
+  project_comments: CommentListRelationFilter
+  invitations: InvitationListRelationFilter
+  notifications: NotificationListRelationFilter
+  owned_projects: ProjectListRelationFilter
+  notifications_sent: NotificationListRelationFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input EnumRoleNullableListFilter {
+  equals: [Role!]
+  has: Role
+  hasEvery: [Role!]
+  hasSome: [Role!]
+  isEmpty: Boolean
+}
+
+input ProjectListRelationFilter {
+  every: ProjectWhereInput
+  some: ProjectWhereInput
+  none: ProjectWhereInput
+}
+
+input TaskListRelationFilter {
+  every: TaskWhereInput
+  some: TaskWhereInput
+  none: TaskWhereInput
+}
+
+input TaskWhereInput {
+  AND: [TaskWhereInput!]
+  OR: [TaskWhereInput!]
+  NOT: [TaskWhereInput!]
+  id: StringFilter
+  title: StringFilter
+  description: StringFilter
+  private: BoolFilter
+  is_disabled: BoolFilter
+  status_task: EnumStatusFilter
+  total_time_spent: IntFilter
+  start_date: DateTimeFilter
+  end_date: DateTimeFilter
+  user: UserRelationFilter
+  user_id: StringFilter
+  project: ProjectRelationFilter
+  project_id: StringFilter
+  files: FileListRelationFilter
+  comments: CommentListRelationFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input EnumStatusFilter {
+  equals: Status
+  in: [Status!]
+  notIn: [Status!]
+  not: NestedEnumStatusFilter
+}
+
+input NestedEnumStatusFilter {
+  equals: Status
+  in: [Status!]
+  notIn: [Status!]
+  not: NestedEnumStatusFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input UserRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
+input ProjectRelationFilter {
+  is: ProjectWhereInput
+  isNot: ProjectWhereInput
+}
+
+input FileListRelationFilter {
+  every: FileWhereInput
+  some: FileWhereInput
+  none: FileWhereInput
+}
+
+input FileWhereInput {
+  AND: [FileWhereInput!]
+  OR: [FileWhereInput!]
+  NOT: [FileWhereInput!]
+  id: StringFilter
+  name: StringFilter
+  path: StringFilter
+  size: IntFilter
+  type: StringFilter
+  user: UserRelationFilter
+  user_id: StringFilter
+  project: ProjectRelationFilter
+  project_id: StringFilter
+  task: TaskRelationFilter
+  task_id: StringNullableFilter
+  is_disabled: BoolFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input TaskRelationFilter {
+  is: TaskWhereInput
+  isNot: TaskWhereInput
+}
+
+input CommentListRelationFilter {
+  every: CommentWhereInput
+  some: CommentWhereInput
+  none: CommentWhereInput
+}
+
+input CommentWhereInput {
+  AND: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  NOT: [CommentWhereInput!]
+  id: StringFilter
+  is_disabled: BoolFilter
+  content: StringFilter
+  task_comment_user_id: StringNullableFilter
+  project: ProjectRelationFilter
+  project_id: StringNullableFilter
+  task: TaskRelationFilter
+  task_id: StringNullableFilter
+  user_task_comments: UserRelationFilter
+  user_project_comments: UserRelationFilter
+  project_comment_user_id: StringNullableFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input InvitationListRelationFilter {
+  every: InvitationWhereInput
+  some: InvitationWhereInput
+  none: InvitationWhereInput
+}
+
+input InvitationWhereInput {
+  AND: [InvitationWhereInput!]
+  OR: [InvitationWhereInput!]
+  NOT: [InvitationWhereInput!]
+  id: StringFilter
+  status: EnumStatus_InvitationFilter
+  email: StringFilter
+  project: ProjectRelationFilter
+  project_id: StringFilter
+  user: UserRelationFilter
+  user_id: StringFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input EnumStatus_InvitationFilter {
+  equals: Status_Invitation
+  in: [Status_Invitation!]
+  notIn: [Status_Invitation!]
+  not: NestedEnumStatus_InvitationFilter
+}
+
+enum Status_Invitation {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+input NestedEnumStatus_InvitationFilter {
+  equals: Status_Invitation
+  in: [Status_Invitation!]
+  notIn: [Status_Invitation!]
+  not: NestedEnumStatus_InvitationFilter
+}
+
+input NotificationListRelationFilter {
+  every: NotificationWhereInput
+  some: NotificationWhereInput
+  none: NotificationWhereInput
+}
+
+input NotificationWhereInput {
+  AND: [NotificationWhereInput!]
+  OR: [NotificationWhereInput!]
+  NOT: [NotificationWhereInput!]
+  id: StringFilter
+  is_disabled: BoolFilter
+  title: StringFilter
+  content: StringFilter
+  user: UserRelationFilter
+  user_id: StringFilter
+  type: EnumType_NotificationFilter
+  status: EnumStatus_NotificationFilter
+  reference_id: StringFilter
+  sender: UserRelationFilter
+  sender_id: StringFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input EnumType_NotificationFilter {
+  equals: Type_Notification
+  in: [Type_Notification!]
+  notIn: [Type_Notification!]
+  not: NestedEnumType_NotificationFilter
+}
+
+enum Type_Notification {
+  PROJECT
+  TASK
+}
+
+input NestedEnumType_NotificationFilter {
+  equals: Type_Notification
+  in: [Type_Notification!]
+  notIn: [Type_Notification!]
+  not: NestedEnumType_NotificationFilter
+}
+
+input EnumStatus_NotificationFilter {
+  equals: Status_Notification
+  in: [Status_Notification!]
+  notIn: [Status_Notification!]
+  not: NestedEnumStatus_NotificationFilter
+}
+
+enum Status_Notification {
+  READ
+  UNREAD
+}
+
+input NestedEnumStatus_NotificationFilter {
+  equals: Status_Notification
+  in: [Status_Notification!]
+  notIn: [Status_Notification!]
+  not: NestedEnumStatus_NotificationFilter
+}
+
+input ProjectOrderByWithRelationInput {
+  id: SortOrder
+  users: UserOrderByRelationAggregateInput
+  owner: UserOrderByWithRelationInput
+  project_owner_id: SortOrder
+  title: SortOrder
+  description: SortOrder
+  private: SortOrder
+  is_disabled: SortOrder
+  status_project: SortOrder
+  total_time_spent: SortOrder
+  start_date: SortOrder
+  end_date: SortOrder
+  due_date: SortOrder
+  tasks: TaskOrderByRelationAggregateInput
+  files: FileOrderByRelationAggregateInput
+  comments: CommentOrderByRelationAggregateInput
+  invitations: InvitationOrderByRelationAggregateInput
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input UserOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input UserOrderByWithRelationInput {
+  id: SortOrder
+  first_name: SortOrder
+  last_name: SortOrder
+  email: SortOrder
+  password: SortOrder
+  is_disabled: SortOrder
+  avatar: SortOrder
+  role: SortOrder
+  projects: ProjectOrderByRelationAggregateInput
+  task: TaskOrderByRelationAggregateInput
+  files: FileOrderByRelationAggregateInput
+  task_comments: CommentOrderByRelationAggregateInput
+  project_comments: CommentOrderByRelationAggregateInput
+  invitations: InvitationOrderByRelationAggregateInput
+  notifications: NotificationOrderByRelationAggregateInput
+  owned_projects: ProjectOrderByRelationAggregateInput
+  notifications_sent: NotificationOrderByRelationAggregateInput
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input ProjectOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input TaskOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input FileOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input CommentOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input InvitationOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input NotificationOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ProjectWhereUniqueInput {
+  id: String
+}
+
+enum ProjectScalarFieldEnum {
+  id
+  project_owner_id
+  title
+  description
+  private
+  is_disabled
+  status_project
+  total_time_spent
+  start_date
+  end_date
+  due_date
+  created_at
+  updated_at
+}
+
+type Task {
+  id: String!
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_task: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  user_id: String!
+  project_id: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  _count: TaskCount
+  user: User!
+  project: Project!
+  files(
+    where: FileWhereInput
+    orderBy: [FileOrderByWithRelationInput!]
+    cursor: FileWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [FileScalarFieldEnum!]
+  ): [File!]!
+  comments(
+    where: CommentWhereInput
+    orderBy: [CommentOrderByWithRelationInput!]
+    cursor: CommentWhereUniqueInput
+    take: Int
+    skip: Int
+    distinct: [CommentScalarFieldEnum!]
+  ): [Comment!]!
+}
+
+type TaskCount {
+  files: Int!
+  comments: Int!
+}
+
+type File {
+  id: String!
+  name: String!
+  path: String!
+  size: Int!
+  type: String!
+  user_id: String!
+  project_id: String!
+  task_id: String
+  is_disabled: Boolean!
+  created_at: DateTime!
+  updated_at: DateTime!
+  user: User!
+  project: Project!
+  task: Task
+}
+
+input FileOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  path: SortOrder
+  size: SortOrder
+  type: SortOrder
+  user: UserOrderByWithRelationInput
+  user_id: SortOrder
+  project: ProjectOrderByWithRelationInput
+  project_id: SortOrder
+  task: TaskOrderByWithRelationInput
+  task_id: SortOrder
+  is_disabled: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input TaskOrderByWithRelationInput {
+  id: SortOrder
+  title: SortOrder
+  description: SortOrder
+  private: SortOrder
+  is_disabled: SortOrder
+  status_task: SortOrder
+  total_time_spent: SortOrder
+  start_date: SortOrder
+  end_date: SortOrder
+  user: UserOrderByWithRelationInput
+  user_id: SortOrder
+  project: ProjectOrderByWithRelationInput
+  project_id: SortOrder
+  files: FileOrderByRelationAggregateInput
+  comments: CommentOrderByRelationAggregateInput
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input FileWhereUniqueInput {
+  id: String
+}
+
+enum FileScalarFieldEnum {
+  id
+  name
+  path
+  size
+  type
+  user_id
+  project_id
+  task_id
+  is_disabled
+  created_at
+  updated_at
+}
+
+input CommentOrderByWithRelationInput {
+  id: SortOrder
+  is_disabled: SortOrder
+  content: SortOrder
+  task_comment_user_id: SortOrder
+  project: ProjectOrderByWithRelationInput
+  project_id: SortOrder
+  task: TaskOrderByWithRelationInput
+  task_id: SortOrder
+  user_task_comments: UserOrderByWithRelationInput
+  user_project_comments: UserOrderByWithRelationInput
+  project_comment_user_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input CommentWhereUniqueInput {
+  id: String
+}
+
+enum CommentScalarFieldEnum {
+  id
+  is_disabled
+  content
+  task_comment_user_id
+  project_id
+  task_id
+  project_comment_user_id
+  created_at
+  updated_at
+}
+
+input TaskWhereUniqueInput {
+  id: String
+}
+
+enum TaskScalarFieldEnum {
+  id
+  title
+  description
+  private
+  is_disabled
+  status_task
+  total_time_spent
+  start_date
+  end_date
+  user_id
+  project_id
+  created_at
+  updated_at
+}
+
+type Invitation {
+  id: String!
+  status: Status_Invitation!
+  email: String!
+  project_id: String!
+  user_id: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  project: Project!
+  user: User!
+}
+
+input InvitationOrderByWithRelationInput {
+  id: SortOrder
+  status: SortOrder
+  email: SortOrder
+  project: ProjectOrderByWithRelationInput
+  project_id: SortOrder
+  user: UserOrderByWithRelationInput
+  user_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input InvitationWhereUniqueInput {
+  id: String
+}
+
+enum InvitationScalarFieldEnum {
+  id
+  status
+  email
+  project_id
+  user_id
+  created_at
+  updated_at
+}
+
+type Notification {
+  id: String!
+  is_disabled: Boolean!
+  title: String!
+  content: String!
+  user_id: String!
+  type: Type_Notification!
+  status: Status_Notification!
+  reference_id: String!
+  sender_id: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  user: User!
+  sender: User!
+}
+
+input NotificationOrderByWithRelationInput {
+  id: SortOrder
+  is_disabled: SortOrder
+  title: SortOrder
+  content: SortOrder
+  user: UserOrderByWithRelationInput
+  user_id: SortOrder
+  type: SortOrder
+  status: SortOrder
+  reference_id: SortOrder
+  sender: UserOrderByWithRelationInput
+  sender_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input NotificationWhereUniqueInput {
+  id: String
+}
+
+enum NotificationScalarFieldEnum {
+  id
+  is_disabled
+  title
+  content
+  user_id
+  type
+  status
+  reference_id
+  sender_id
+  created_at
+  updated_at
+}
+
+input UserWhereUniqueInput {
+  id: String
+  email: String
+}
+
+enum UserScalarFieldEnum {
+  id
+  first_name
+  last_name
+  email
+  password
+  is_disabled
+  avatar
+  role
+  created_at
+  updated_at
+}
+
+type AggregateComment {
+  _count: CommentCountAggregate
+  _min: CommentMinAggregate
+  _max: CommentMaxAggregate
+}
+
+type CommentCountAggregate {
+  id: Int!
+  is_disabled: Int!
+  content: Int!
+  task_comment_user_id: Int!
+  project_id: Int!
+  task_id: Int!
+  project_comment_user_id: Int!
+  created_at: Int!
+  updated_at: Int!
+  _all: Int!
+}
+
+type CommentMinAggregate {
+  id: String
+  is_disabled: Boolean
+  content: String
+  task_comment_user_id: String
+  project_id: String
+  task_id: String
+  project_comment_user_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type CommentMaxAggregate {
+  id: String
+  is_disabled: Boolean
+  content: String
+  task_comment_user_id: String
+  project_id: String
+  task_id: String
+  project_comment_user_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type CommentGroupBy {
+  id: String!
+  is_disabled: Boolean!
+  content: String!
+  task_comment_user_id: String
+  project_id: String
+  task_id: String
+  project_comment_user_id: String
+  created_at: DateTime!
+  updated_at: DateTime!
+  _count: CommentCountAggregate
+  _min: CommentMinAggregate
+  _max: CommentMaxAggregate
+}
+
+input CommentOrderByWithAggregationInput {
+  id: SortOrder
+  is_disabled: SortOrder
+  content: SortOrder
+  task_comment_user_id: SortOrder
+  project_id: SortOrder
+  task_id: SortOrder
+  project_comment_user_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+  _count: CommentCountOrderByAggregateInput
+  _max: CommentMaxOrderByAggregateInput
+  _min: CommentMinOrderByAggregateInput
+}
+
+input CommentCountOrderByAggregateInput {
+  id: SortOrder
+  is_disabled: SortOrder
+  content: SortOrder
+  task_comment_user_id: SortOrder
+  project_id: SortOrder
+  task_id: SortOrder
+  project_comment_user_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input CommentMaxOrderByAggregateInput {
+  id: SortOrder
+  is_disabled: SortOrder
+  content: SortOrder
+  task_comment_user_id: SortOrder
+  project_id: SortOrder
+  task_id: SortOrder
+  project_comment_user_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input CommentMinOrderByAggregateInput {
+  id: SortOrder
+  is_disabled: SortOrder
+  content: SortOrder
+  task_comment_user_id: SortOrder
+  project_id: SortOrder
+  task_id: SortOrder
+  project_comment_user_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input CommentScalarWhereWithAggregatesInput {
+  AND: [CommentScalarWhereWithAggregatesInput!]
+  OR: [CommentScalarWhereWithAggregatesInput!]
+  NOT: [CommentScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  is_disabled: BoolWithAggregatesFilter
+  content: StringWithAggregatesFilter
+  task_comment_user_id: StringNullableWithAggregatesFilter
+  project_id: StringNullableWithAggregatesFilter
+  task_id: StringNullableWithAggregatesFilter
+  project_comment_user_id: StringNullableWithAggregatesFilter
+  created_at: DateTimeWithAggregatesFilter
+  updated_at: DateTimeWithAggregatesFilter
+}
+
+input StringWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedStringFilter
+  _max: NestedStringFilter
+}
+
+input NestedStringWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedStringFilter
+  _max: NestedStringFilter
+}
+
+input BoolWithAggregatesFilter {
+  equals: Boolean
+  not: NestedBoolWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedBoolFilter
+  _max: NestedBoolFilter
+}
+
+input NestedBoolWithAggregatesFilter {
+  equals: Boolean
+  not: NestedBoolWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedBoolFilter
+  _max: NestedBoolFilter
+}
+
+input StringNullableWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  _min: NestedStringNullableFilter
+  _max: NestedStringNullableFilter
+}
+
+input NestedStringNullableWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  _min: NestedStringNullableFilter
+  _max: NestedStringNullableFilter
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input DateTimeWithAggregatesFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedDateTimeFilter
+  _max: NestedDateTimeFilter
+}
+
+input NestedDateTimeWithAggregatesFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedDateTimeFilter
+  _max: NestedDateTimeFilter
+}
+
+type AggregateFile {
+  _count: FileCountAggregate
+  _avg: FileAvgAggregate
+  _sum: FileSumAggregate
+  _min: FileMinAggregate
+  _max: FileMaxAggregate
+}
+
+type FileCountAggregate {
+  id: Int!
+  name: Int!
+  path: Int!
+  size: Int!
+  type: Int!
+  user_id: Int!
+  project_id: Int!
+  task_id: Int!
+  is_disabled: Int!
+  created_at: Int!
+  updated_at: Int!
+  _all: Int!
+}
+
+type FileAvgAggregate {
+  size: Float
+}
+
+type FileSumAggregate {
+  size: Int
+}
+
+type FileMinAggregate {
+  id: String
+  name: String
+  path: String
+  size: Int
+  type: String
+  user_id: String
+  project_id: String
+  task_id: String
+  is_disabled: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type FileMaxAggregate {
+  id: String
+  name: String
+  path: String
+  size: Int
+  type: String
+  user_id: String
+  project_id: String
+  task_id: String
+  is_disabled: Boolean
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type FileGroupBy {
+  id: String!
+  name: String!
+  path: String!
+  size: Int!
+  type: String!
+  user_id: String!
+  project_id: String!
+  task_id: String
+  is_disabled: Boolean!
+  created_at: DateTime!
+  updated_at: DateTime!
+  _count: FileCountAggregate
+  _avg: FileAvgAggregate
+  _sum: FileSumAggregate
+  _min: FileMinAggregate
+  _max: FileMaxAggregate
+}
+
+input FileOrderByWithAggregationInput {
+  id: SortOrder
+  name: SortOrder
+  path: SortOrder
+  size: SortOrder
+  type: SortOrder
+  user_id: SortOrder
+  project_id: SortOrder
+  task_id: SortOrder
+  is_disabled: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+  _count: FileCountOrderByAggregateInput
+  _avg: FileAvgOrderByAggregateInput
+  _max: FileMaxOrderByAggregateInput
+  _min: FileMinOrderByAggregateInput
+  _sum: FileSumOrderByAggregateInput
+}
+
+input FileCountOrderByAggregateInput {
+  id: SortOrder
+  name: SortOrder
+  path: SortOrder
+  size: SortOrder
+  type: SortOrder
+  user_id: SortOrder
+  project_id: SortOrder
+  task_id: SortOrder
+  is_disabled: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input FileAvgOrderByAggregateInput {
+  size: SortOrder
+}
+
+input FileMaxOrderByAggregateInput {
+  id: SortOrder
+  name: SortOrder
+  path: SortOrder
+  size: SortOrder
+  type: SortOrder
+  user_id: SortOrder
+  project_id: SortOrder
+  task_id: SortOrder
+  is_disabled: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input FileMinOrderByAggregateInput {
+  id: SortOrder
+  name: SortOrder
+  path: SortOrder
+  size: SortOrder
+  type: SortOrder
+  user_id: SortOrder
+  project_id: SortOrder
+  task_id: SortOrder
+  is_disabled: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input FileSumOrderByAggregateInput {
+  size: SortOrder
+}
+
+input FileScalarWhereWithAggregatesInput {
+  AND: [FileScalarWhereWithAggregatesInput!]
+  OR: [FileScalarWhereWithAggregatesInput!]
+  NOT: [FileScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+  path: StringWithAggregatesFilter
+  size: IntWithAggregatesFilter
+  type: StringWithAggregatesFilter
+  user_id: StringWithAggregatesFilter
+  project_id: StringWithAggregatesFilter
+  task_id: StringNullableWithAggregatesFilter
+  is_disabled: BoolWithAggregatesFilter
+  created_at: DateTimeWithAggregatesFilter
+  updated_at: DateTimeWithAggregatesFilter
+}
+
+input IntWithAggregatesFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntWithAggregatesFilter
+  _count: NestedIntFilter
+  _avg: NestedFloatFilter
+  _sum: NestedIntFilter
+  _min: NestedIntFilter
+  _max: NestedIntFilter
+}
+
+input NestedIntWithAggregatesFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntWithAggregatesFilter
+  _count: NestedIntFilter
+  _avg: NestedFloatFilter
+  _sum: NestedIntFilter
+  _min: NestedIntFilter
+  _max: NestedIntFilter
+}
+
+input NestedFloatFilter {
+  equals: Float
+  in: [Float!]
+  notIn: [Float!]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: NestedFloatFilter
+}
+
+type AggregateInvitation {
+  _count: InvitationCountAggregate
+  _min: InvitationMinAggregate
+  _max: InvitationMaxAggregate
+}
+
+type InvitationCountAggregate {
+  id: Int!
+  status: Int!
+  email: Int!
+  project_id: Int!
+  user_id: Int!
+  created_at: Int!
+  updated_at: Int!
+  _all: Int!
+}
+
+type InvitationMinAggregate {
+  id: String
+  status: Status_Invitation
+  email: String
+  project_id: String
+  user_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type InvitationMaxAggregate {
+  id: String
+  status: Status_Invitation
+  email: String
+  project_id: String
+  user_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type InvitationGroupBy {
+  id: String!
+  status: Status_Invitation!
+  email: String!
+  project_id: String!
+  user_id: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  _count: InvitationCountAggregate
+  _min: InvitationMinAggregate
+  _max: InvitationMaxAggregate
+}
+
+input InvitationOrderByWithAggregationInput {
+  id: SortOrder
+  status: SortOrder
+  email: SortOrder
+  project_id: SortOrder
+  user_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+  _count: InvitationCountOrderByAggregateInput
+  _max: InvitationMaxOrderByAggregateInput
+  _min: InvitationMinOrderByAggregateInput
+}
+
+input InvitationCountOrderByAggregateInput {
+  id: SortOrder
+  status: SortOrder
+  email: SortOrder
+  project_id: SortOrder
+  user_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input InvitationMaxOrderByAggregateInput {
+  id: SortOrder
+  status: SortOrder
+  email: SortOrder
+  project_id: SortOrder
+  user_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input InvitationMinOrderByAggregateInput {
+  id: SortOrder
+  status: SortOrder
+  email: SortOrder
+  project_id: SortOrder
+  user_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input InvitationScalarWhereWithAggregatesInput {
+  AND: [InvitationScalarWhereWithAggregatesInput!]
+  OR: [InvitationScalarWhereWithAggregatesInput!]
+  NOT: [InvitationScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  status: EnumStatus_InvitationWithAggregatesFilter
+  email: StringWithAggregatesFilter
+  project_id: StringWithAggregatesFilter
+  user_id: StringWithAggregatesFilter
+  created_at: DateTimeWithAggregatesFilter
+  updated_at: DateTimeWithAggregatesFilter
+}
+
+input EnumStatus_InvitationWithAggregatesFilter {
+  equals: Status_Invitation
+  in: [Status_Invitation!]
+  notIn: [Status_Invitation!]
+  not: NestedEnumStatus_InvitationWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumStatus_InvitationFilter
+  _max: NestedEnumStatus_InvitationFilter
+}
+
+input NestedEnumStatus_InvitationWithAggregatesFilter {
+  equals: Status_Invitation
+  in: [Status_Invitation!]
+  notIn: [Status_Invitation!]
+  not: NestedEnumStatus_InvitationWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumStatus_InvitationFilter
+  _max: NestedEnumStatus_InvitationFilter
+}
+
+type AggregateNotification {
+  _count: NotificationCountAggregate
+  _min: NotificationMinAggregate
+  _max: NotificationMaxAggregate
+}
+
+type NotificationCountAggregate {
+  id: Int!
+  is_disabled: Int!
+  title: Int!
+  content: Int!
+  user_id: Int!
+  type: Int!
+  status: Int!
+  reference_id: Int!
+  sender_id: Int!
+  created_at: Int!
+  updated_at: Int!
+  _all: Int!
+}
+
+type NotificationMinAggregate {
+  id: String
+  is_disabled: Boolean
+  title: String
+  content: String
+  user_id: String
+  type: Type_Notification
+  status: Status_Notification
+  reference_id: String
+  sender_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type NotificationMaxAggregate {
+  id: String
+  is_disabled: Boolean
+  title: String
+  content: String
+  user_id: String
+  type: Type_Notification
+  status: Status_Notification
+  reference_id: String
+  sender_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type NotificationGroupBy {
+  id: String!
+  is_disabled: Boolean!
+  title: String!
+  content: String!
+  user_id: String!
+  type: Type_Notification!
+  status: Status_Notification!
+  reference_id: String!
+  sender_id: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  _count: NotificationCountAggregate
+  _min: NotificationMinAggregate
+  _max: NotificationMaxAggregate
+}
+
+input NotificationOrderByWithAggregationInput {
+  id: SortOrder
+  is_disabled: SortOrder
+  title: SortOrder
+  content: SortOrder
+  user_id: SortOrder
+  type: SortOrder
+  status: SortOrder
+  reference_id: SortOrder
+  sender_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+  _count: NotificationCountOrderByAggregateInput
+  _max: NotificationMaxOrderByAggregateInput
+  _min: NotificationMinOrderByAggregateInput
+}
+
+input NotificationCountOrderByAggregateInput {
+  id: SortOrder
+  is_disabled: SortOrder
+  title: SortOrder
+  content: SortOrder
+  user_id: SortOrder
+  type: SortOrder
+  status: SortOrder
+  reference_id: SortOrder
+  sender_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input NotificationMaxOrderByAggregateInput {
+  id: SortOrder
+  is_disabled: SortOrder
+  title: SortOrder
+  content: SortOrder
+  user_id: SortOrder
+  type: SortOrder
+  status: SortOrder
+  reference_id: SortOrder
+  sender_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input NotificationMinOrderByAggregateInput {
+  id: SortOrder
+  is_disabled: SortOrder
+  title: SortOrder
+  content: SortOrder
+  user_id: SortOrder
+  type: SortOrder
+  status: SortOrder
+  reference_id: SortOrder
+  sender_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input NotificationScalarWhereWithAggregatesInput {
+  AND: [NotificationScalarWhereWithAggregatesInput!]
+  OR: [NotificationScalarWhereWithAggregatesInput!]
+  NOT: [NotificationScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  is_disabled: BoolWithAggregatesFilter
+  title: StringWithAggregatesFilter
+  content: StringWithAggregatesFilter
+  user_id: StringWithAggregatesFilter
+  type: EnumType_NotificationWithAggregatesFilter
+  status: EnumStatus_NotificationWithAggregatesFilter
+  reference_id: StringWithAggregatesFilter
+  sender_id: StringWithAggregatesFilter
+  created_at: DateTimeWithAggregatesFilter
+  updated_at: DateTimeWithAggregatesFilter
+}
+
+input EnumType_NotificationWithAggregatesFilter {
+  equals: Type_Notification
+  in: [Type_Notification!]
+  notIn: [Type_Notification!]
+  not: NestedEnumType_NotificationWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumType_NotificationFilter
+  _max: NestedEnumType_NotificationFilter
+}
+
+input NestedEnumType_NotificationWithAggregatesFilter {
+  equals: Type_Notification
+  in: [Type_Notification!]
+  notIn: [Type_Notification!]
+  not: NestedEnumType_NotificationWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumType_NotificationFilter
+  _max: NestedEnumType_NotificationFilter
+}
+
+input EnumStatus_NotificationWithAggregatesFilter {
+  equals: Status_Notification
+  in: [Status_Notification!]
+  notIn: [Status_Notification!]
+  not: NestedEnumStatus_NotificationWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumStatus_NotificationFilter
+  _max: NestedEnumStatus_NotificationFilter
+}
+
+input NestedEnumStatus_NotificationWithAggregatesFilter {
+  equals: Status_Notification
+  in: [Status_Notification!]
+  notIn: [Status_Notification!]
+  not: NestedEnumStatus_NotificationWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumStatus_NotificationFilter
+  _max: NestedEnumStatus_NotificationFilter
+}
+
+type AggregateProject {
+  _count: ProjectCountAggregate
+  _avg: ProjectAvgAggregate
+  _sum: ProjectSumAggregate
+  _min: ProjectMinAggregate
+  _max: ProjectMaxAggregate
+}
+
+type ProjectCountAggregate {
+  id: Int!
+  project_owner_id: Int!
+  title: Int!
+  description: Int!
+  private: Int!
+  is_disabled: Int!
+  status_project: Int!
+  total_time_spent: Int!
+  start_date: Int!
+  end_date: Int!
+  due_date: Int!
+  created_at: Int!
+  updated_at: Int!
+  _all: Int!
+}
+
+type ProjectAvgAggregate {
+  total_time_spent: Float
+}
+
+type ProjectSumAggregate {
+  total_time_spent: Int
+}
+
+type ProjectMinAggregate {
+  id: String
+  project_owner_id: String
+  title: String
+  description: String
+  private: Boolean
+  is_disabled: Boolean
+  status_project: Status
+  total_time_spent: Int
+  start_date: DateTime
+  end_date: DateTime
+  due_date: DateTime
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type ProjectMaxAggregate {
+  id: String
+  project_owner_id: String
+  title: String
+  description: String
+  private: Boolean
+  is_disabled: Boolean
+  status_project: Status
+  total_time_spent: Int
+  start_date: DateTime
+  end_date: DateTime
+  due_date: DateTime
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type ProjectGroupBy {
+  id: String!
+  project_owner_id: String!
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_project: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  due_date: DateTime!
+  created_at: DateTime!
+  updated_at: DateTime!
+  _count: ProjectCountAggregate
+  _avg: ProjectAvgAggregate
+  _sum: ProjectSumAggregate
+  _min: ProjectMinAggregate
+  _max: ProjectMaxAggregate
+}
+
+input ProjectOrderByWithAggregationInput {
+  id: SortOrder
+  project_owner_id: SortOrder
+  title: SortOrder
+  description: SortOrder
+  private: SortOrder
+  is_disabled: SortOrder
+  status_project: SortOrder
+  total_time_spent: SortOrder
+  start_date: SortOrder
+  end_date: SortOrder
+  due_date: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+  _count: ProjectCountOrderByAggregateInput
+  _avg: ProjectAvgOrderByAggregateInput
+  _max: ProjectMaxOrderByAggregateInput
+  _min: ProjectMinOrderByAggregateInput
+  _sum: ProjectSumOrderByAggregateInput
+}
+
+input ProjectCountOrderByAggregateInput {
+  id: SortOrder
+  project_owner_id: SortOrder
+  title: SortOrder
+  description: SortOrder
+  private: SortOrder
+  is_disabled: SortOrder
+  status_project: SortOrder
+  total_time_spent: SortOrder
+  start_date: SortOrder
+  end_date: SortOrder
+  due_date: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input ProjectAvgOrderByAggregateInput {
+  total_time_spent: SortOrder
+}
+
+input ProjectMaxOrderByAggregateInput {
+  id: SortOrder
+  project_owner_id: SortOrder
+  title: SortOrder
+  description: SortOrder
+  private: SortOrder
+  is_disabled: SortOrder
+  status_project: SortOrder
+  total_time_spent: SortOrder
+  start_date: SortOrder
+  end_date: SortOrder
+  due_date: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input ProjectMinOrderByAggregateInput {
+  id: SortOrder
+  project_owner_id: SortOrder
+  title: SortOrder
+  description: SortOrder
+  private: SortOrder
+  is_disabled: SortOrder
+  status_project: SortOrder
+  total_time_spent: SortOrder
+  start_date: SortOrder
+  end_date: SortOrder
+  due_date: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input ProjectSumOrderByAggregateInput {
+  total_time_spent: SortOrder
+}
+
+input ProjectScalarWhereWithAggregatesInput {
+  AND: [ProjectScalarWhereWithAggregatesInput!]
+  OR: [ProjectScalarWhereWithAggregatesInput!]
+  NOT: [ProjectScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  project_owner_id: StringWithAggregatesFilter
+  title: StringWithAggregatesFilter
+  description: StringWithAggregatesFilter
+  private: BoolWithAggregatesFilter
+  is_disabled: BoolWithAggregatesFilter
+  status_project: EnumStatusWithAggregatesFilter
+  total_time_spent: IntWithAggregatesFilter
+  start_date: DateTimeWithAggregatesFilter
+  end_date: DateTimeWithAggregatesFilter
+  due_date: DateTimeWithAggregatesFilter
+  created_at: DateTimeWithAggregatesFilter
+  updated_at: DateTimeWithAggregatesFilter
+}
+
+input EnumStatusWithAggregatesFilter {
+  equals: Status
+  in: [Status!]
+  notIn: [Status!]
+  not: NestedEnumStatusWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumStatusFilter
+  _max: NestedEnumStatusFilter
+}
+
+input NestedEnumStatusWithAggregatesFilter {
+  equals: Status
+  in: [Status!]
+  notIn: [Status!]
+  not: NestedEnumStatusWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumStatusFilter
+  _max: NestedEnumStatusFilter
+}
+
+type AggregateTask {
+  _count: TaskCountAggregate
+  _avg: TaskAvgAggregate
+  _sum: TaskSumAggregate
+  _min: TaskMinAggregate
+  _max: TaskMaxAggregate
+}
+
+type TaskCountAggregate {
+  id: Int!
+  title: Int!
+  description: Int!
+  private: Int!
+  is_disabled: Int!
+  status_task: Int!
+  total_time_spent: Int!
+  start_date: Int!
+  end_date: Int!
+  user_id: Int!
+  project_id: Int!
+  created_at: Int!
+  updated_at: Int!
+  _all: Int!
+}
+
+type TaskAvgAggregate {
+  total_time_spent: Float
+}
+
+type TaskSumAggregate {
+  total_time_spent: Int
+}
+
+type TaskMinAggregate {
+  id: String
+  title: String
+  description: String
+  private: Boolean
+  is_disabled: Boolean
+  status_task: Status
+  total_time_spent: Int
+  start_date: DateTime
+  end_date: DateTime
+  user_id: String
+  project_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type TaskMaxAggregate {
+  id: String
+  title: String
+  description: String
+  private: Boolean
+  is_disabled: Boolean
+  status_task: Status
+  total_time_spent: Int
+  start_date: DateTime
+  end_date: DateTime
+  user_id: String
+  project_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type TaskGroupBy {
+  id: String!
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_task: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  user_id: String!
+  project_id: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  _count: TaskCountAggregate
+  _avg: TaskAvgAggregate
+  _sum: TaskSumAggregate
+  _min: TaskMinAggregate
+  _max: TaskMaxAggregate
+}
+
+input TaskOrderByWithAggregationInput {
+  id: SortOrder
+  title: SortOrder
+  description: SortOrder
+  private: SortOrder
+  is_disabled: SortOrder
+  status_task: SortOrder
+  total_time_spent: SortOrder
+  start_date: SortOrder
+  end_date: SortOrder
+  user_id: SortOrder
+  project_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+  _count: TaskCountOrderByAggregateInput
+  _avg: TaskAvgOrderByAggregateInput
+  _max: TaskMaxOrderByAggregateInput
+  _min: TaskMinOrderByAggregateInput
+  _sum: TaskSumOrderByAggregateInput
+}
+
+input TaskCountOrderByAggregateInput {
+  id: SortOrder
+  title: SortOrder
+  description: SortOrder
+  private: SortOrder
+  is_disabled: SortOrder
+  status_task: SortOrder
+  total_time_spent: SortOrder
+  start_date: SortOrder
+  end_date: SortOrder
+  user_id: SortOrder
+  project_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input TaskAvgOrderByAggregateInput {
+  total_time_spent: SortOrder
+}
+
+input TaskMaxOrderByAggregateInput {
+  id: SortOrder
+  title: SortOrder
+  description: SortOrder
+  private: SortOrder
+  is_disabled: SortOrder
+  status_task: SortOrder
+  total_time_spent: SortOrder
+  start_date: SortOrder
+  end_date: SortOrder
+  user_id: SortOrder
+  project_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input TaskMinOrderByAggregateInput {
+  id: SortOrder
+  title: SortOrder
+  description: SortOrder
+  private: SortOrder
+  is_disabled: SortOrder
+  status_task: SortOrder
+  total_time_spent: SortOrder
+  start_date: SortOrder
+  end_date: SortOrder
+  user_id: SortOrder
+  project_id: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input TaskSumOrderByAggregateInput {
+  total_time_spent: SortOrder
+}
+
+input TaskScalarWhereWithAggregatesInput {
+  AND: [TaskScalarWhereWithAggregatesInput!]
+  OR: [TaskScalarWhereWithAggregatesInput!]
+  NOT: [TaskScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  title: StringWithAggregatesFilter
+  description: StringWithAggregatesFilter
+  private: BoolWithAggregatesFilter
+  is_disabled: BoolWithAggregatesFilter
+  status_task: EnumStatusWithAggregatesFilter
+  total_time_spent: IntWithAggregatesFilter
+  start_date: DateTimeWithAggregatesFilter
+  end_date: DateTimeWithAggregatesFilter
+  user_id: StringWithAggregatesFilter
+  project_id: StringWithAggregatesFilter
+  created_at: DateTimeWithAggregatesFilter
+  updated_at: DateTimeWithAggregatesFilter
+}
+
+type AggregateUser {
+  _count: UserCountAggregate
+  _min: UserMinAggregate
+  _max: UserMaxAggregate
+}
+
+type UserCountAggregate {
+  id: Int!
+  first_name: Int!
+  last_name: Int!
+  email: Int!
+  password: Int!
+  is_disabled: Int!
+  avatar: Int!
+  role: Int!
+  created_at: Int!
+  updated_at: Int!
+  _all: Int!
+}
+
+type UserMinAggregate {
+  id: String
+  first_name: String
+  last_name: String
+  email: String
+  password: String
+  is_disabled: Boolean
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type UserMaxAggregate {
+  id: String
+  first_name: String
+  last_name: String
+  email: String
+  password: String
+  is_disabled: Boolean
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+type UserGroupBy {
+  id: String!
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  role: [Role!]
+  created_at: DateTime!
+  updated_at: DateTime!
+  _count: UserCountAggregate
+  _min: UserMinAggregate
+  _max: UserMaxAggregate
+}
+
+input UserOrderByWithAggregationInput {
+  id: SortOrder
+  first_name: SortOrder
+  last_name: SortOrder
+  email: SortOrder
+  password: SortOrder
+  is_disabled: SortOrder
+  avatar: SortOrder
+  role: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+  _count: UserCountOrderByAggregateInput
+  _max: UserMaxOrderByAggregateInput
+  _min: UserMinOrderByAggregateInput
+}
+
+input UserCountOrderByAggregateInput {
+  id: SortOrder
+  first_name: SortOrder
+  last_name: SortOrder
+  email: SortOrder
+  password: SortOrder
+  is_disabled: SortOrder
+  avatar: SortOrder
+  role: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input UserMaxOrderByAggregateInput {
+  id: SortOrder
+  first_name: SortOrder
+  last_name: SortOrder
+  email: SortOrder
+  password: SortOrder
+  is_disabled: SortOrder
+  avatar: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input UserMinOrderByAggregateInput {
+  id: SortOrder
+  first_name: SortOrder
+  last_name: SortOrder
+  email: SortOrder
+  password: SortOrder
+  is_disabled: SortOrder
+  avatar: SortOrder
+  created_at: SortOrder
+  updated_at: SortOrder
+}
+
+input UserScalarWhereWithAggregatesInput {
+  AND: [UserScalarWhereWithAggregatesInput!]
+  OR: [UserScalarWhereWithAggregatesInput!]
+  NOT: [UserScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  first_name: StringWithAggregatesFilter
+  last_name: StringWithAggregatesFilter
+  email: StringWithAggregatesFilter
+  password: StringWithAggregatesFilter
+  is_disabled: BoolWithAggregatesFilter
+  avatar: StringNullableWithAggregatesFilter
+  role: EnumRoleNullableListFilter
+  created_at: DateTimeWithAggregatesFilter
+  updated_at: DateTimeWithAggregatesFilter
+}
+
+type Mutation {
+  createComment(data: CommentCreateInput!): Comment!
+  createManyComment(
+    data: [CommentCreateManyInput!]!
+    skipDuplicates: Boolean
+  ): AffectedRowsOutput!
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  updateComment(
+    data: CommentUpdateInput!
+    where: CommentWhereUniqueInput!
+  ): Comment
+  deleteManyComment(where: CommentWhereInput): AffectedRowsOutput!
+  updateManyComment(
+    data: CommentUpdateManyMutationInput!
+    where: CommentWhereInput
+  ): AffectedRowsOutput!
+  upsertComment(
+    where: CommentWhereUniqueInput!
+    create: CommentCreateInput!
+    update: CommentUpdateInput!
+  ): Comment!
+  createFile(data: FileCreateInput!): File!
+  createManyFile(
+    data: [FileCreateManyInput!]!
+    skipDuplicates: Boolean
+  ): AffectedRowsOutput!
+  deleteFile(where: FileWhereUniqueInput!): File
+  updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
+  deleteManyFile(where: FileWhereInput): AffectedRowsOutput!
+  updateManyFile(
+    data: FileUpdateManyMutationInput!
+    where: FileWhereInput
+  ): AffectedRowsOutput!
+  upsertFile(
+    where: FileWhereUniqueInput!
+    create: FileCreateInput!
+    update: FileUpdateInput!
+  ): File!
+  createInvitation(data: InvitationCreateInput!): Invitation!
+  createManyInvitation(
+    data: [InvitationCreateManyInput!]!
+    skipDuplicates: Boolean
+  ): AffectedRowsOutput!
+  deleteInvitation(where: InvitationWhereUniqueInput!): Invitation
+  updateInvitation(
+    data: InvitationUpdateInput!
+    where: InvitationWhereUniqueInput!
+  ): Invitation
+  deleteManyInvitation(where: InvitationWhereInput): AffectedRowsOutput!
+  updateManyInvitation(
+    data: InvitationUpdateManyMutationInput!
+    where: InvitationWhereInput
+  ): AffectedRowsOutput!
+  upsertInvitation(
+    where: InvitationWhereUniqueInput!
+    create: InvitationCreateInput!
+    update: InvitationUpdateInput!
+  ): Invitation!
+  createNotification(data: NotificationCreateInput!): Notification!
+  createManyNotification(
+    data: [NotificationCreateManyInput!]!
+    skipDuplicates: Boolean
+  ): AffectedRowsOutput!
+  deleteNotification(where: NotificationWhereUniqueInput!): Notification
+  updateNotification(
+    data: NotificationUpdateInput!
+    where: NotificationWhereUniqueInput!
+  ): Notification
+  deleteManyNotification(where: NotificationWhereInput): AffectedRowsOutput!
+  updateManyNotification(
+    data: NotificationUpdateManyMutationInput!
+    where: NotificationWhereInput
+  ): AffectedRowsOutput!
+  upsertNotification(
+    where: NotificationWhereUniqueInput!
+    create: NotificationCreateInput!
+    update: NotificationUpdateInput!
+  ): Notification!
+  createProject(data: ProjectCreateInput!): Project!
+  createManyProject(
+    data: [ProjectCreateManyInput!]!
+    skipDuplicates: Boolean
+  ): AffectedRowsOutput!
+  deleteProject(where: ProjectWhereUniqueInput!): Project
+  updateProject(
+    data: ProjectUpdateInput!
+    where: ProjectWhereUniqueInput!
+  ): Project
+  deleteManyProject(where: ProjectWhereInput): AffectedRowsOutput!
+  updateManyProject(
+    data: ProjectUpdateManyMutationInput!
+    where: ProjectWhereInput
+  ): AffectedRowsOutput!
+  upsertProject(
+    where: ProjectWhereUniqueInput!
+    create: ProjectCreateInput!
+    update: ProjectUpdateInput!
+  ): Project!
+  createTask(data: TaskCreateInput!): Task!
+  createManyTask(
+    data: [TaskCreateManyInput!]!
+    skipDuplicates: Boolean
+  ): AffectedRowsOutput!
+  deleteTask(where: TaskWhereUniqueInput!): Task
+  updateTask(data: TaskUpdateInput!, where: TaskWhereUniqueInput!): Task
+  deleteManyTask(where: TaskWhereInput): AffectedRowsOutput!
+  updateManyTask(
+    data: TaskUpdateManyMutationInput!
+    where: TaskWhereInput
+  ): AffectedRowsOutput!
+  upsertTask(
+    where: TaskWhereUniqueInput!
+    create: TaskCreateInput!
+    update: TaskUpdateInput!
+  ): Task!
+  createUser(data: UserCreateInput!): User!
+  createManyUser(
+    data: [UserCreateManyInput!]!
+    skipDuplicates: Boolean
+  ): AffectedRowsOutput!
+  deleteUser(where: UserWhereUniqueInput!): User
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
+  updateManyUser(
+    data: UserUpdateManyMutationInput!
+    where: UserWhereInput
+  ): AffectedRowsOutput!
+  upsertUser(
+    where: UserWhereUniqueInput!
+    create: UserCreateInput!
+    update: UserUpdateInput!
+  ): User!
+  uploadFile(file: Upload!): File!
+  register(data: RegisterInput!): User!
+  login(data: LoginInput!): User!
+}
+
+input CommentCreateInput {
+  id: String
+  is_disabled: Boolean!
+  content: String!
+  created_at: DateTime
+  updated_at: DateTime
+  project: ProjectCreateNestedOneWithoutCommentsInput
+  task: TaskCreateNestedOneWithoutCommentsInput
+  user_task_comments: UserCreateNestedOneWithoutTask_commentsInput
+  user_project_comments: UserCreateNestedOneWithoutProject_commentsInput
+}
+
+input ProjectCreateNestedOneWithoutCommentsInput {
+  create: ProjectCreateWithoutCommentsInput
+  connectOrCreate: ProjectCreateOrConnectWithoutCommentsInput
+  connect: ProjectWhereUniqueInput
+}
+
+input ProjectCreateWithoutCommentsInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_project: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  due_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  users: UserCreateNestedManyWithoutProjectsInput
+  owner: UserCreateNestedOneWithoutOwned_projectsInput!
+  tasks: TaskCreateNestedManyWithoutProjectInput
+  files: FileCreateNestedManyWithoutProjectInput
+  invitations: InvitationCreateNestedManyWithoutProjectInput
+}
+
+input UserCreateNestedManyWithoutProjectsInput {
+  create: [UserCreateWithoutProjectsInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutProjectsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateWithoutProjectsInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  role: UserCreateroleInput
+  task: TaskCreateNestedManyWithoutUserInput
+  files: FileCreateNestedManyWithoutUserInput
+  task_comments: CommentCreateNestedManyWithoutUser_task_commentsInput
+  project_comments: CommentCreateNestedManyWithoutUser_project_commentsInput
+  invitations: InvitationCreateNestedManyWithoutUserInput
+  notifications: NotificationCreateNestedManyWithoutUserInput
+  owned_projects: ProjectCreateNestedManyWithoutOwnerInput
+  notifications_sent: NotificationCreateNestedManyWithoutSenderInput
+}
+
+input UserCreateroleInput {
+  set: [Role!]!
+}
+
+input TaskCreateNestedManyWithoutUserInput {
+  create: [TaskCreateWithoutUserInput!]
+  connectOrCreate: [TaskCreateOrConnectWithoutUserInput!]
+  createMany: TaskCreateManyUserInputEnvelope
+  connect: [TaskWhereUniqueInput!]
+}
+
+input TaskCreateWithoutUserInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_task: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  project: ProjectCreateNestedOneWithoutTasksInput!
+  files: FileCreateNestedManyWithoutTaskInput
+  comments: CommentCreateNestedManyWithoutTaskInput
+}
+
+input ProjectCreateNestedOneWithoutTasksInput {
+  create: ProjectCreateWithoutTasksInput
+  connectOrCreate: ProjectCreateOrConnectWithoutTasksInput
+  connect: ProjectWhereUniqueInput
+}
+
+input ProjectCreateWithoutTasksInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_project: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  due_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  users: UserCreateNestedManyWithoutProjectsInput
+  owner: UserCreateNestedOneWithoutOwned_projectsInput!
+  files: FileCreateNestedManyWithoutProjectInput
+  comments: CommentCreateNestedManyWithoutProjectInput
+  invitations: InvitationCreateNestedManyWithoutProjectInput
+}
+
+input UserCreateNestedOneWithoutOwned_projectsInput {
+  create: UserCreateWithoutOwned_projectsInput
+  connectOrCreate: UserCreateOrConnectWithoutOwned_projectsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutOwned_projectsInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  role: UserCreateroleInput
+  projects: ProjectCreateNestedManyWithoutUsersInput
+  task: TaskCreateNestedManyWithoutUserInput
+  files: FileCreateNestedManyWithoutUserInput
+  task_comments: CommentCreateNestedManyWithoutUser_task_commentsInput
+  project_comments: CommentCreateNestedManyWithoutUser_project_commentsInput
+  invitations: InvitationCreateNestedManyWithoutUserInput
+  notifications: NotificationCreateNestedManyWithoutUserInput
+  notifications_sent: NotificationCreateNestedManyWithoutSenderInput
+}
+
+input ProjectCreateNestedManyWithoutUsersInput {
+  create: [ProjectCreateWithoutUsersInput!]
+  connectOrCreate: [ProjectCreateOrConnectWithoutUsersInput!]
+  connect: [ProjectWhereUniqueInput!]
+}
+
+input ProjectCreateWithoutUsersInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_project: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  due_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  owner: UserCreateNestedOneWithoutOwned_projectsInput!
+  tasks: TaskCreateNestedManyWithoutProjectInput
+  files: FileCreateNestedManyWithoutProjectInput
+  comments: CommentCreateNestedManyWithoutProjectInput
+  invitations: InvitationCreateNestedManyWithoutProjectInput
+}
+
+input TaskCreateNestedManyWithoutProjectInput {
+  create: [TaskCreateWithoutProjectInput!]
+  connectOrCreate: [TaskCreateOrConnectWithoutProjectInput!]
+  createMany: TaskCreateManyProjectInputEnvelope
+  connect: [TaskWhereUniqueInput!]
+}
+
+input TaskCreateWithoutProjectInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_task: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  user: UserCreateNestedOneWithoutTaskInput!
+  files: FileCreateNestedManyWithoutTaskInput
+  comments: CommentCreateNestedManyWithoutTaskInput
+}
+
+input UserCreateNestedOneWithoutTaskInput {
+  create: UserCreateWithoutTaskInput
+  connectOrCreate: UserCreateOrConnectWithoutTaskInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutTaskInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  role: UserCreateroleInput
+  projects: ProjectCreateNestedManyWithoutUsersInput
+  files: FileCreateNestedManyWithoutUserInput
+  task_comments: CommentCreateNestedManyWithoutUser_task_commentsInput
+  project_comments: CommentCreateNestedManyWithoutUser_project_commentsInput
+  invitations: InvitationCreateNestedManyWithoutUserInput
+  notifications: NotificationCreateNestedManyWithoutUserInput
+  owned_projects: ProjectCreateNestedManyWithoutOwnerInput
+  notifications_sent: NotificationCreateNestedManyWithoutSenderInput
+}
+
+input FileCreateNestedManyWithoutUserInput {
+  create: [FileCreateWithoutUserInput!]
+  connectOrCreate: [FileCreateOrConnectWithoutUserInput!]
+  createMany: FileCreateManyUserInputEnvelope
+  connect: [FileWhereUniqueInput!]
+}
+
+input FileCreateWithoutUserInput {
+  id: String
+  name: String!
+  path: String!
+  size: Int!
+  type: String!
+  is_disabled: Boolean!
+  created_at: DateTime
+  updated_at: DateTime
+  project: ProjectCreateNestedOneWithoutFilesInput!
+  task: TaskCreateNestedOneWithoutFilesInput
+}
+
+input ProjectCreateNestedOneWithoutFilesInput {
+  create: ProjectCreateWithoutFilesInput
+  connectOrCreate: ProjectCreateOrConnectWithoutFilesInput
+  connect: ProjectWhereUniqueInput
+}
+
+input ProjectCreateWithoutFilesInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_project: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  due_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  users: UserCreateNestedManyWithoutProjectsInput
+  owner: UserCreateNestedOneWithoutOwned_projectsInput!
+  tasks: TaskCreateNestedManyWithoutProjectInput
+  comments: CommentCreateNestedManyWithoutProjectInput
+  invitations: InvitationCreateNestedManyWithoutProjectInput
+}
+
+input CommentCreateNestedManyWithoutProjectInput {
+  create: [CommentCreateWithoutProjectInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutProjectInput!]
+  createMany: CommentCreateManyProjectInputEnvelope
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutProjectInput {
+  id: String
+  is_disabled: Boolean!
+  content: String!
+  created_at: DateTime
+  updated_at: DateTime
+  task: TaskCreateNestedOneWithoutCommentsInput
+  user_task_comments: UserCreateNestedOneWithoutTask_commentsInput
+  user_project_comments: UserCreateNestedOneWithoutProject_commentsInput
+}
+
+input TaskCreateNestedOneWithoutCommentsInput {
+  create: TaskCreateWithoutCommentsInput
+  connectOrCreate: TaskCreateOrConnectWithoutCommentsInput
+  connect: TaskWhereUniqueInput
+}
+
+input TaskCreateWithoutCommentsInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_task: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  user: UserCreateNestedOneWithoutTaskInput!
+  project: ProjectCreateNestedOneWithoutTasksInput!
+  files: FileCreateNestedManyWithoutTaskInput
+}
+
+input FileCreateNestedManyWithoutTaskInput {
+  create: [FileCreateWithoutTaskInput!]
+  connectOrCreate: [FileCreateOrConnectWithoutTaskInput!]
+  createMany: FileCreateManyTaskInputEnvelope
+  connect: [FileWhereUniqueInput!]
+}
+
+input FileCreateWithoutTaskInput {
+  id: String
+  name: String!
+  path: String!
+  size: Int!
+  type: String!
+  is_disabled: Boolean!
+  created_at: DateTime
+  updated_at: DateTime
+  user: UserCreateNestedOneWithoutFilesInput!
+  project: ProjectCreateNestedOneWithoutFilesInput!
+}
+
+input UserCreateNestedOneWithoutFilesInput {
+  create: UserCreateWithoutFilesInput
+  connectOrCreate: UserCreateOrConnectWithoutFilesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutFilesInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  role: UserCreateroleInput
+  projects: ProjectCreateNestedManyWithoutUsersInput
+  task: TaskCreateNestedManyWithoutUserInput
+  task_comments: CommentCreateNestedManyWithoutUser_task_commentsInput
+  project_comments: CommentCreateNestedManyWithoutUser_project_commentsInput
+  invitations: InvitationCreateNestedManyWithoutUserInput
+  notifications: NotificationCreateNestedManyWithoutUserInput
+  owned_projects: ProjectCreateNestedManyWithoutOwnerInput
+  notifications_sent: NotificationCreateNestedManyWithoutSenderInput
+}
+
+input CommentCreateNestedManyWithoutUser_task_commentsInput {
+  create: [CommentCreateWithoutUser_task_commentsInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutUser_task_commentsInput!]
+  createMany: CommentCreateManyUser_task_commentsInputEnvelope
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutUser_task_commentsInput {
+  id: String
+  is_disabled: Boolean!
+  content: String!
+  created_at: DateTime
+  updated_at: DateTime
+  project: ProjectCreateNestedOneWithoutCommentsInput
+  task: TaskCreateNestedOneWithoutCommentsInput
+  user_project_comments: UserCreateNestedOneWithoutProject_commentsInput
+}
+
+input UserCreateNestedOneWithoutProject_commentsInput {
+  create: UserCreateWithoutProject_commentsInput
+  connectOrCreate: UserCreateOrConnectWithoutProject_commentsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutProject_commentsInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  role: UserCreateroleInput
+  projects: ProjectCreateNestedManyWithoutUsersInput
+  task: TaskCreateNestedManyWithoutUserInput
+  files: FileCreateNestedManyWithoutUserInput
+  task_comments: CommentCreateNestedManyWithoutUser_task_commentsInput
+  invitations: InvitationCreateNestedManyWithoutUserInput
+  notifications: NotificationCreateNestedManyWithoutUserInput
+  owned_projects: ProjectCreateNestedManyWithoutOwnerInput
+  notifications_sent: NotificationCreateNestedManyWithoutSenderInput
+}
+
+input InvitationCreateNestedManyWithoutUserInput {
+  create: [InvitationCreateWithoutUserInput!]
+  connectOrCreate: [InvitationCreateOrConnectWithoutUserInput!]
+  createMany: InvitationCreateManyUserInputEnvelope
+  connect: [InvitationWhereUniqueInput!]
+}
+
+input InvitationCreateWithoutUserInput {
+  id: String
+  status: Status_Invitation!
+  email: String!
+  created_at: DateTime
+  updated_at: DateTime
+  project: ProjectCreateNestedOneWithoutInvitationsInput!
+}
+
+input ProjectCreateNestedOneWithoutInvitationsInput {
+  create: ProjectCreateWithoutInvitationsInput
+  connectOrCreate: ProjectCreateOrConnectWithoutInvitationsInput
+  connect: ProjectWhereUniqueInput
+}
+
+input ProjectCreateWithoutInvitationsInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_project: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  due_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  users: UserCreateNestedManyWithoutProjectsInput
+  owner: UserCreateNestedOneWithoutOwned_projectsInput!
+  tasks: TaskCreateNestedManyWithoutProjectInput
+  files: FileCreateNestedManyWithoutProjectInput
+  comments: CommentCreateNestedManyWithoutProjectInput
+}
+
+input FileCreateNestedManyWithoutProjectInput {
+  create: [FileCreateWithoutProjectInput!]
+  connectOrCreate: [FileCreateOrConnectWithoutProjectInput!]
+  createMany: FileCreateManyProjectInputEnvelope
+  connect: [FileWhereUniqueInput!]
+}
+
+input FileCreateWithoutProjectInput {
+  id: String
+  name: String!
+  path: String!
+  size: Int!
+  type: String!
+  is_disabled: Boolean!
+  created_at: DateTime
+  updated_at: DateTime
+  user: UserCreateNestedOneWithoutFilesInput!
+  task: TaskCreateNestedOneWithoutFilesInput
+}
+
+input TaskCreateNestedOneWithoutFilesInput {
+  create: TaskCreateWithoutFilesInput
+  connectOrCreate: TaskCreateOrConnectWithoutFilesInput
+  connect: TaskWhereUniqueInput
+}
+
+input TaskCreateWithoutFilesInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_task: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  user: UserCreateNestedOneWithoutTaskInput!
+  project: ProjectCreateNestedOneWithoutTasksInput!
+  comments: CommentCreateNestedManyWithoutTaskInput
+}
+
+input CommentCreateNestedManyWithoutTaskInput {
+  create: [CommentCreateWithoutTaskInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutTaskInput!]
+  createMany: CommentCreateManyTaskInputEnvelope
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutTaskInput {
+  id: String
+  is_disabled: Boolean!
+  content: String!
+  created_at: DateTime
+  updated_at: DateTime
+  project: ProjectCreateNestedOneWithoutCommentsInput
+  user_task_comments: UserCreateNestedOneWithoutTask_commentsInput
+  user_project_comments: UserCreateNestedOneWithoutProject_commentsInput
+}
+
+input UserCreateNestedOneWithoutTask_commentsInput {
+  create: UserCreateWithoutTask_commentsInput
+  connectOrCreate: UserCreateOrConnectWithoutTask_commentsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutTask_commentsInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  role: UserCreateroleInput
+  projects: ProjectCreateNestedManyWithoutUsersInput
+  task: TaskCreateNestedManyWithoutUserInput
+  files: FileCreateNestedManyWithoutUserInput
+  project_comments: CommentCreateNestedManyWithoutUser_project_commentsInput
+  invitations: InvitationCreateNestedManyWithoutUserInput
+  notifications: NotificationCreateNestedManyWithoutUserInput
+  owned_projects: ProjectCreateNestedManyWithoutOwnerInput
+  notifications_sent: NotificationCreateNestedManyWithoutSenderInput
+}
+
+input CommentCreateNestedManyWithoutUser_project_commentsInput {
+  create: [CommentCreateWithoutUser_project_commentsInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutUser_project_commentsInput!]
+  createMany: CommentCreateManyUser_project_commentsInputEnvelope
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutUser_project_commentsInput {
+  id: String
+  is_disabled: Boolean!
+  content: String!
+  created_at: DateTime
+  updated_at: DateTime
+  project: ProjectCreateNestedOneWithoutCommentsInput
+  task: TaskCreateNestedOneWithoutCommentsInput
+  user_task_comments: UserCreateNestedOneWithoutTask_commentsInput
+}
+
+input CommentCreateOrConnectWithoutUser_project_commentsInput {
+  where: CommentWhereUniqueInput!
+  create: CommentCreateWithoutUser_project_commentsInput!
+}
+
+input CommentCreateManyUser_project_commentsInputEnvelope {
+  data: [CommentCreateManyUser_project_commentsInput!]!
+  skipDuplicates: Boolean
+}
+
+input CommentCreateManyUser_project_commentsInput {
+  id: String
+  is_disabled: Boolean!
+  content: String!
+  project_id: String
+  task_id: String
+  project_comment_user_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input NotificationCreateNestedManyWithoutUserInput {
+  create: [NotificationCreateWithoutUserInput!]
+  connectOrCreate: [NotificationCreateOrConnectWithoutUserInput!]
+  createMany: NotificationCreateManyUserInputEnvelope
+  connect: [NotificationWhereUniqueInput!]
+}
+
+input NotificationCreateWithoutUserInput {
+  id: String
+  is_disabled: Boolean!
+  title: String!
+  content: String!
+  type: Type_Notification!
+  status: Status_Notification!
+  reference_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+  sender: UserCreateNestedOneWithoutNotifications_sentInput!
+}
+
+input UserCreateNestedOneWithoutNotifications_sentInput {
+  create: UserCreateWithoutNotifications_sentInput
+  connectOrCreate: UserCreateOrConnectWithoutNotifications_sentInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutNotifications_sentInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  role: UserCreateroleInput
+  projects: ProjectCreateNestedManyWithoutUsersInput
+  task: TaskCreateNestedManyWithoutUserInput
+  files: FileCreateNestedManyWithoutUserInput
+  task_comments: CommentCreateNestedManyWithoutUser_task_commentsInput
+  project_comments: CommentCreateNestedManyWithoutUser_project_commentsInput
+  invitations: InvitationCreateNestedManyWithoutUserInput
+  notifications: NotificationCreateNestedManyWithoutUserInput
+  owned_projects: ProjectCreateNestedManyWithoutOwnerInput
+}
+
+input ProjectCreateNestedManyWithoutOwnerInput {
+  create: [ProjectCreateWithoutOwnerInput!]
+  connectOrCreate: [ProjectCreateOrConnectWithoutOwnerInput!]
+  createMany: ProjectCreateManyOwnerInputEnvelope
+  connect: [ProjectWhereUniqueInput!]
+}
+
+input ProjectCreateWithoutOwnerInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_project: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  due_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  users: UserCreateNestedManyWithoutProjectsInput
+  tasks: TaskCreateNestedManyWithoutProjectInput
+  files: FileCreateNestedManyWithoutProjectInput
+  comments: CommentCreateNestedManyWithoutProjectInput
+  invitations: InvitationCreateNestedManyWithoutProjectInput
+}
+
+input InvitationCreateNestedManyWithoutProjectInput {
+  create: [InvitationCreateWithoutProjectInput!]
+  connectOrCreate: [InvitationCreateOrConnectWithoutProjectInput!]
+  createMany: InvitationCreateManyProjectInputEnvelope
+  connect: [InvitationWhereUniqueInput!]
+}
+
+input InvitationCreateWithoutProjectInput {
+  id: String
+  status: Status_Invitation!
+  email: String!
+  created_at: DateTime
+  updated_at: DateTime
+  user: UserCreateNestedOneWithoutInvitationsInput!
+}
+
+input UserCreateNestedOneWithoutInvitationsInput {
+  create: UserCreateWithoutInvitationsInput
+  connectOrCreate: UserCreateOrConnectWithoutInvitationsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutInvitationsInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  role: UserCreateroleInput
+  projects: ProjectCreateNestedManyWithoutUsersInput
+  task: TaskCreateNestedManyWithoutUserInput
+  files: FileCreateNestedManyWithoutUserInput
+  task_comments: CommentCreateNestedManyWithoutUser_task_commentsInput
+  project_comments: CommentCreateNestedManyWithoutUser_project_commentsInput
+  notifications: NotificationCreateNestedManyWithoutUserInput
+  owned_projects: ProjectCreateNestedManyWithoutOwnerInput
+  notifications_sent: NotificationCreateNestedManyWithoutSenderInput
+}
+
+input NotificationCreateNestedManyWithoutSenderInput {
+  create: [NotificationCreateWithoutSenderInput!]
+  connectOrCreate: [NotificationCreateOrConnectWithoutSenderInput!]
+  createMany: NotificationCreateManySenderInputEnvelope
+  connect: [NotificationWhereUniqueInput!]
+}
+
+input NotificationCreateWithoutSenderInput {
+  id: String
+  is_disabled: Boolean!
+  title: String!
+  content: String!
+  type: Type_Notification!
+  status: Status_Notification!
+  reference_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+  user: UserCreateNestedOneWithoutNotificationsInput!
+}
+
+input UserCreateNestedOneWithoutNotificationsInput {
+  create: UserCreateWithoutNotificationsInput
+  connectOrCreate: UserCreateOrConnectWithoutNotificationsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutNotificationsInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  role: UserCreateroleInput
+  projects: ProjectCreateNestedManyWithoutUsersInput
+  task: TaskCreateNestedManyWithoutUserInput
+  files: FileCreateNestedManyWithoutUserInput
+  task_comments: CommentCreateNestedManyWithoutUser_task_commentsInput
+  project_comments: CommentCreateNestedManyWithoutUser_project_commentsInput
+  invitations: InvitationCreateNestedManyWithoutUserInput
+  owned_projects: ProjectCreateNestedManyWithoutOwnerInput
+  notifications_sent: NotificationCreateNestedManyWithoutSenderInput
+}
+
+input UserCreateOrConnectWithoutNotificationsInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutNotificationsInput!
+}
+
+input NotificationCreateOrConnectWithoutSenderInput {
+  where: NotificationWhereUniqueInput!
+  create: NotificationCreateWithoutSenderInput!
+}
+
+input NotificationCreateManySenderInputEnvelope {
+  data: [NotificationCreateManySenderInput!]!
+  skipDuplicates: Boolean
+}
+
+input NotificationCreateManySenderInput {
+  id: String
+  is_disabled: Boolean!
+  title: String!
+  content: String!
+  user_id: String!
+  type: Type_Notification!
+  status: Status_Notification!
+  reference_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input UserCreateOrConnectWithoutInvitationsInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutInvitationsInput!
+}
+
+input InvitationCreateOrConnectWithoutProjectInput {
+  where: InvitationWhereUniqueInput!
+  create: InvitationCreateWithoutProjectInput!
+}
+
+input InvitationCreateManyProjectInputEnvelope {
+  data: [InvitationCreateManyProjectInput!]!
+  skipDuplicates: Boolean
+}
+
+input InvitationCreateManyProjectInput {
+  id: String
+  status: Status_Invitation!
+  email: String!
+  user_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input ProjectCreateOrConnectWithoutOwnerInput {
+  where: ProjectWhereUniqueInput!
+  create: ProjectCreateWithoutOwnerInput!
+}
+
+input ProjectCreateManyOwnerInputEnvelope {
+  data: [ProjectCreateManyOwnerInput!]!
+  skipDuplicates: Boolean
+}
+
+input ProjectCreateManyOwnerInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_project: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  due_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input UserCreateOrConnectWithoutNotifications_sentInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutNotifications_sentInput!
+}
+
+input NotificationCreateOrConnectWithoutUserInput {
+  where: NotificationWhereUniqueInput!
+  create: NotificationCreateWithoutUserInput!
+}
+
+input NotificationCreateManyUserInputEnvelope {
+  data: [NotificationCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input NotificationCreateManyUserInput {
+  id: String
+  is_disabled: Boolean!
+  title: String!
+  content: String!
+  type: Type_Notification!
+  status: Status_Notification!
+  reference_id: String!
+  sender_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input UserCreateOrConnectWithoutTask_commentsInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutTask_commentsInput!
+}
+
+input CommentCreateOrConnectWithoutTaskInput {
+  where: CommentWhereUniqueInput!
+  create: CommentCreateWithoutTaskInput!
+}
+
+input CommentCreateManyTaskInputEnvelope {
+  data: [CommentCreateManyTaskInput!]!
+  skipDuplicates: Boolean
+}
+
+input CommentCreateManyTaskInput {
+  id: String
+  is_disabled: Boolean!
+  content: String!
+  task_comment_user_id: String
+  project_id: String
+  project_comment_user_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input TaskCreateOrConnectWithoutFilesInput {
+  where: TaskWhereUniqueInput!
+  create: TaskCreateWithoutFilesInput!
+}
+
+input FileCreateOrConnectWithoutProjectInput {
+  where: FileWhereUniqueInput!
+  create: FileCreateWithoutProjectInput!
+}
+
+input FileCreateManyProjectInputEnvelope {
+  data: [FileCreateManyProjectInput!]!
+  skipDuplicates: Boolean
+}
+
+input FileCreateManyProjectInput {
+  id: String
+  name: String!
+  path: String!
+  size: Int!
+  type: String!
+  user_id: String!
+  task_id: String
+  is_disabled: Boolean!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input ProjectCreateOrConnectWithoutInvitationsInput {
+  where: ProjectWhereUniqueInput!
+  create: ProjectCreateWithoutInvitationsInput!
+}
+
+input InvitationCreateOrConnectWithoutUserInput {
+  where: InvitationWhereUniqueInput!
+  create: InvitationCreateWithoutUserInput!
+}
+
+input InvitationCreateManyUserInputEnvelope {
+  data: [InvitationCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input InvitationCreateManyUserInput {
+  id: String
+  status: Status_Invitation!
+  email: String!
+  project_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input UserCreateOrConnectWithoutProject_commentsInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutProject_commentsInput!
+}
+
+input CommentCreateOrConnectWithoutUser_task_commentsInput {
+  where: CommentWhereUniqueInput!
+  create: CommentCreateWithoutUser_task_commentsInput!
+}
+
+input CommentCreateManyUser_task_commentsInputEnvelope {
+  data: [CommentCreateManyUser_task_commentsInput!]!
+  skipDuplicates: Boolean
+}
+
+input CommentCreateManyUser_task_commentsInput {
+  id: String
+  is_disabled: Boolean!
+  content: String!
+  task_comment_user_id: String
+  project_id: String
+  task_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input UserCreateOrConnectWithoutFilesInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutFilesInput!
+}
+
+input FileCreateOrConnectWithoutTaskInput {
+  where: FileWhereUniqueInput!
+  create: FileCreateWithoutTaskInput!
+}
+
+input FileCreateManyTaskInputEnvelope {
+  data: [FileCreateManyTaskInput!]!
+  skipDuplicates: Boolean
+}
+
+input FileCreateManyTaskInput {
+  id: String
+  name: String!
+  path: String!
+  size: Int!
+  type: String!
+  user_id: String!
+  project_id: String!
+  is_disabled: Boolean!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input TaskCreateOrConnectWithoutCommentsInput {
+  where: TaskWhereUniqueInput!
+  create: TaskCreateWithoutCommentsInput!
+}
+
+input CommentCreateOrConnectWithoutProjectInput {
+  where: CommentWhereUniqueInput!
+  create: CommentCreateWithoutProjectInput!
+}
+
+input CommentCreateManyProjectInputEnvelope {
+  data: [CommentCreateManyProjectInput!]!
+  skipDuplicates: Boolean
+}
+
+input CommentCreateManyProjectInput {
+  id: String
+  is_disabled: Boolean!
+  content: String!
+  task_comment_user_id: String
+  task_id: String
+  project_comment_user_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input ProjectCreateOrConnectWithoutFilesInput {
+  where: ProjectWhereUniqueInput!
+  create: ProjectCreateWithoutFilesInput!
+}
+
+input FileCreateOrConnectWithoutUserInput {
+  where: FileWhereUniqueInput!
+  create: FileCreateWithoutUserInput!
+}
+
+input FileCreateManyUserInputEnvelope {
+  data: [FileCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input FileCreateManyUserInput {
+  id: String
+  name: String!
+  path: String!
+  size: Int!
+  type: String!
+  project_id: String!
+  task_id: String
+  is_disabled: Boolean!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input UserCreateOrConnectWithoutTaskInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutTaskInput!
+}
+
+input TaskCreateOrConnectWithoutProjectInput {
+  where: TaskWhereUniqueInput!
+  create: TaskCreateWithoutProjectInput!
+}
+
+input TaskCreateManyProjectInputEnvelope {
+  data: [TaskCreateManyProjectInput!]!
+  skipDuplicates: Boolean
+}
+
+input TaskCreateManyProjectInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_task: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  user_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input ProjectCreateOrConnectWithoutUsersInput {
+  where: ProjectWhereUniqueInput!
+  create: ProjectCreateWithoutUsersInput!
+}
+
+input UserCreateOrConnectWithoutOwned_projectsInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutOwned_projectsInput!
+}
+
+input ProjectCreateOrConnectWithoutTasksInput {
+  where: ProjectWhereUniqueInput!
+  create: ProjectCreateWithoutTasksInput!
+}
+
+input TaskCreateOrConnectWithoutUserInput {
+  where: TaskWhereUniqueInput!
+  create: TaskCreateWithoutUserInput!
+}
+
+input TaskCreateManyUserInputEnvelope {
+  data: [TaskCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input TaskCreateManyUserInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_task: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  project_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input UserCreateOrConnectWithoutProjectsInput {
+  where: UserWhereUniqueInput!
+  create: UserCreateWithoutProjectsInput!
+}
+
+input ProjectCreateOrConnectWithoutCommentsInput {
+  where: ProjectWhereUniqueInput!
+  create: ProjectCreateWithoutCommentsInput!
+}
+
+type AffectedRowsOutput {
+  count: Int!
+}
+
+input CommentCreateManyInput {
+  id: String
+  is_disabled: Boolean!
+  content: String!
+  task_comment_user_id: String
+  project_id: String
+  task_id: String
+  project_comment_user_id: String
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input CommentUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  project: ProjectUpdateOneWithoutCommentsInput
+  task: TaskUpdateOneWithoutCommentsInput
+  user_task_comments: UserUpdateOneWithoutTask_commentsInput
+  user_project_comments: UserUpdateOneWithoutProject_commentsInput
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input ProjectUpdateOneWithoutCommentsInput {
+  create: ProjectCreateWithoutCommentsInput
+  connectOrCreate: ProjectCreateOrConnectWithoutCommentsInput
+  upsert: ProjectUpsertWithoutCommentsInput
+  disconnect: Boolean
+  delete: Boolean
+  connect: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutCommentsInput
+}
+
+input ProjectUpsertWithoutCommentsInput {
+  update: ProjectUpdateWithoutCommentsInput!
+  create: ProjectCreateWithoutCommentsInput!
+}
+
+input ProjectUpdateWithoutCommentsInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_project: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  due_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  users: UserUpdateManyWithoutProjectsInput
+  owner: UserUpdateOneRequiredWithoutOwned_projectsInput
+  tasks: TaskUpdateManyWithoutProjectInput
+  files: FileUpdateManyWithoutProjectInput
+  invitations: InvitationUpdateManyWithoutProjectInput
+}
+
+input EnumStatusFieldUpdateOperationsInput {
+  set: Status
+}
+
+input IntFieldUpdateOperationsInput {
+  set: Int
+  increment: Int
+  decrement: Int
+  multiply: Int
+  divide: Int
+}
+
+input UserUpdateManyWithoutProjectsInput {
+  create: [UserCreateWithoutProjectsInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutProjectsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutProjectsInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutProjectsInput!]
+  updateMany: [UserUpdateManyWithWhereWithoutProjectsInput!]
+  deleteMany: [UserScalarWhereInput!]
+}
+
+input UserUpsertWithWhereUniqueWithoutProjectsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutProjectsInput!
+  create: UserCreateWithoutProjectsInput!
+}
+
+input UserUpdateWithoutProjectsInput {
+  id: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  role: UserUpdateroleInput
+  task: TaskUpdateManyWithoutUserInput
+  files: FileUpdateManyWithoutUserInput
+  task_comments: CommentUpdateManyWithoutUser_task_commentsInput
+  project_comments: CommentUpdateManyWithoutUser_project_commentsInput
+  invitations: InvitationUpdateManyWithoutUserInput
+  notifications: NotificationUpdateManyWithoutUserInput
+  owned_projects: ProjectUpdateManyWithoutOwnerInput
+  notifications_sent: NotificationUpdateManyWithoutSenderInput
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+input UserUpdateroleInput {
+  set: [Role!]
+  push: [Role!]
+}
+
+input TaskUpdateManyWithoutUserInput {
+  create: [TaskCreateWithoutUserInput!]
+  connectOrCreate: [TaskCreateOrConnectWithoutUserInput!]
+  upsert: [TaskUpsertWithWhereUniqueWithoutUserInput!]
+  createMany: TaskCreateManyUserInputEnvelope
+  set: [TaskWhereUniqueInput!]
+  disconnect: [TaskWhereUniqueInput!]
+  delete: [TaskWhereUniqueInput!]
+  connect: [TaskWhereUniqueInput!]
+  update: [TaskUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [TaskUpdateManyWithWhereWithoutUserInput!]
+  deleteMany: [TaskScalarWhereInput!]
+}
+
+input TaskUpsertWithWhereUniqueWithoutUserInput {
+  where: TaskWhereUniqueInput!
+  update: TaskUpdateWithoutUserInput!
+  create: TaskCreateWithoutUserInput!
+}
+
+input TaskUpdateWithoutUserInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_task: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  project: ProjectUpdateOneRequiredWithoutTasksInput
+  files: FileUpdateManyWithoutTaskInput
+  comments: CommentUpdateManyWithoutTaskInput
+}
+
+input ProjectUpdateOneRequiredWithoutTasksInput {
+  create: ProjectCreateWithoutTasksInput
+  connectOrCreate: ProjectCreateOrConnectWithoutTasksInput
+  upsert: ProjectUpsertWithoutTasksInput
+  connect: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutTasksInput
+}
+
+input ProjectUpsertWithoutTasksInput {
+  update: ProjectUpdateWithoutTasksInput!
+  create: ProjectCreateWithoutTasksInput!
+}
+
+input ProjectUpdateWithoutTasksInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_project: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  due_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  users: UserUpdateManyWithoutProjectsInput
+  owner: UserUpdateOneRequiredWithoutOwned_projectsInput
+  files: FileUpdateManyWithoutProjectInput
+  comments: CommentUpdateManyWithoutProjectInput
+  invitations: InvitationUpdateManyWithoutProjectInput
+}
+
+input UserUpdateOneRequiredWithoutOwned_projectsInput {
+  create: UserCreateWithoutOwned_projectsInput
+  connectOrCreate: UserCreateOrConnectWithoutOwned_projectsInput
+  upsert: UserUpsertWithoutOwned_projectsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutOwned_projectsInput
+}
+
+input UserUpsertWithoutOwned_projectsInput {
+  update: UserUpdateWithoutOwned_projectsInput!
+  create: UserCreateWithoutOwned_projectsInput!
+}
+
+input UserUpdateWithoutOwned_projectsInput {
+  id: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  role: UserUpdateroleInput
+  projects: ProjectUpdateManyWithoutUsersInput
+  task: TaskUpdateManyWithoutUserInput
+  files: FileUpdateManyWithoutUserInput
+  task_comments: CommentUpdateManyWithoutUser_task_commentsInput
+  project_comments: CommentUpdateManyWithoutUser_project_commentsInput
+  invitations: InvitationUpdateManyWithoutUserInput
+  notifications: NotificationUpdateManyWithoutUserInput
+  notifications_sent: NotificationUpdateManyWithoutSenderInput
+}
+
+input ProjectUpdateManyWithoutUsersInput {
+  create: [ProjectCreateWithoutUsersInput!]
+  connectOrCreate: [ProjectCreateOrConnectWithoutUsersInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutUsersInput!]
+  set: [ProjectWhereUniqueInput!]
+  disconnect: [ProjectWhereUniqueInput!]
+  delete: [ProjectWhereUniqueInput!]
+  connect: [ProjectWhereUniqueInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutUsersInput!]
+  updateMany: [ProjectUpdateManyWithWhereWithoutUsersInput!]
+  deleteMany: [ProjectScalarWhereInput!]
+}
+
+input ProjectUpsertWithWhereUniqueWithoutUsersInput {
+  where: ProjectWhereUniqueInput!
+  update: ProjectUpdateWithoutUsersInput!
+  create: ProjectCreateWithoutUsersInput!
+}
+
+input ProjectUpdateWithoutUsersInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_project: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  due_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  owner: UserUpdateOneRequiredWithoutOwned_projectsInput
+  tasks: TaskUpdateManyWithoutProjectInput
+  files: FileUpdateManyWithoutProjectInput
+  comments: CommentUpdateManyWithoutProjectInput
+  invitations: InvitationUpdateManyWithoutProjectInput
+}
+
+input TaskUpdateManyWithoutProjectInput {
+  create: [TaskCreateWithoutProjectInput!]
+  connectOrCreate: [TaskCreateOrConnectWithoutProjectInput!]
+  upsert: [TaskUpsertWithWhereUniqueWithoutProjectInput!]
+  createMany: TaskCreateManyProjectInputEnvelope
+  set: [TaskWhereUniqueInput!]
+  disconnect: [TaskWhereUniqueInput!]
+  delete: [TaskWhereUniqueInput!]
+  connect: [TaskWhereUniqueInput!]
+  update: [TaskUpdateWithWhereUniqueWithoutProjectInput!]
+  updateMany: [TaskUpdateManyWithWhereWithoutProjectInput!]
+  deleteMany: [TaskScalarWhereInput!]
+}
+
+input TaskUpsertWithWhereUniqueWithoutProjectInput {
+  where: TaskWhereUniqueInput!
+  update: TaskUpdateWithoutProjectInput!
+  create: TaskCreateWithoutProjectInput!
+}
+
+input TaskUpdateWithoutProjectInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_task: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutTaskInput
+  files: FileUpdateManyWithoutTaskInput
+  comments: CommentUpdateManyWithoutTaskInput
+}
+
+input UserUpdateOneRequiredWithoutTaskInput {
+  create: UserCreateWithoutTaskInput
+  connectOrCreate: UserCreateOrConnectWithoutTaskInput
+  upsert: UserUpsertWithoutTaskInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutTaskInput
+}
+
+input UserUpsertWithoutTaskInput {
+  update: UserUpdateWithoutTaskInput!
+  create: UserCreateWithoutTaskInput!
+}
+
+input UserUpdateWithoutTaskInput {
+  id: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  role: UserUpdateroleInput
+  projects: ProjectUpdateManyWithoutUsersInput
+  files: FileUpdateManyWithoutUserInput
+  task_comments: CommentUpdateManyWithoutUser_task_commentsInput
+  project_comments: CommentUpdateManyWithoutUser_project_commentsInput
+  invitations: InvitationUpdateManyWithoutUserInput
+  notifications: NotificationUpdateManyWithoutUserInput
+  owned_projects: ProjectUpdateManyWithoutOwnerInput
+  notifications_sent: NotificationUpdateManyWithoutSenderInput
+}
+
+input FileUpdateManyWithoutUserInput {
+  create: [FileCreateWithoutUserInput!]
+  connectOrCreate: [FileCreateOrConnectWithoutUserInput!]
+  upsert: [FileUpsertWithWhereUniqueWithoutUserInput!]
+  createMany: FileCreateManyUserInputEnvelope
+  set: [FileWhereUniqueInput!]
+  disconnect: [FileWhereUniqueInput!]
+  delete: [FileWhereUniqueInput!]
+  connect: [FileWhereUniqueInput!]
+  update: [FileUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [FileUpdateManyWithWhereWithoutUserInput!]
+  deleteMany: [FileScalarWhereInput!]
+}
+
+input FileUpsertWithWhereUniqueWithoutUserInput {
+  where: FileWhereUniqueInput!
+  update: FileUpdateWithoutUserInput!
+  create: FileCreateWithoutUserInput!
+}
+
+input FileUpdateWithoutUserInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  path: StringFieldUpdateOperationsInput
+  size: IntFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  project: ProjectUpdateOneRequiredWithoutFilesInput
+  task: TaskUpdateOneWithoutFilesInput
+}
+
+input ProjectUpdateOneRequiredWithoutFilesInput {
+  create: ProjectCreateWithoutFilesInput
+  connectOrCreate: ProjectCreateOrConnectWithoutFilesInput
+  upsert: ProjectUpsertWithoutFilesInput
+  connect: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutFilesInput
+}
+
+input ProjectUpsertWithoutFilesInput {
+  update: ProjectUpdateWithoutFilesInput!
+  create: ProjectCreateWithoutFilesInput!
+}
+
+input ProjectUpdateWithoutFilesInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_project: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  due_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  users: UserUpdateManyWithoutProjectsInput
+  owner: UserUpdateOneRequiredWithoutOwned_projectsInput
+  tasks: TaskUpdateManyWithoutProjectInput
+  comments: CommentUpdateManyWithoutProjectInput
+  invitations: InvitationUpdateManyWithoutProjectInput
+}
+
+input CommentUpdateManyWithoutProjectInput {
+  create: [CommentCreateWithoutProjectInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutProjectInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutProjectInput!]
+  createMany: CommentCreateManyProjectInputEnvelope
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutProjectInput!]
+  updateMany: [CommentUpdateManyWithWhereWithoutProjectInput!]
+  deleteMany: [CommentScalarWhereInput!]
+}
+
+input CommentUpsertWithWhereUniqueWithoutProjectInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutProjectInput!
+  create: CommentCreateWithoutProjectInput!
+}
+
+input CommentUpdateWithoutProjectInput {
+  id: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  task: TaskUpdateOneWithoutCommentsInput
+  user_task_comments: UserUpdateOneWithoutTask_commentsInput
+  user_project_comments: UserUpdateOneWithoutProject_commentsInput
+}
+
+input TaskUpdateOneWithoutCommentsInput {
+  create: TaskCreateWithoutCommentsInput
+  connectOrCreate: TaskCreateOrConnectWithoutCommentsInput
+  upsert: TaskUpsertWithoutCommentsInput
+  disconnect: Boolean
+  delete: Boolean
+  connect: TaskWhereUniqueInput
+  update: TaskUpdateWithoutCommentsInput
+}
+
+input TaskUpsertWithoutCommentsInput {
+  update: TaskUpdateWithoutCommentsInput!
+  create: TaskCreateWithoutCommentsInput!
+}
+
+input TaskUpdateWithoutCommentsInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_task: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutTaskInput
+  project: ProjectUpdateOneRequiredWithoutTasksInput
+  files: FileUpdateManyWithoutTaskInput
+}
+
+input FileUpdateManyWithoutTaskInput {
+  create: [FileCreateWithoutTaskInput!]
+  connectOrCreate: [FileCreateOrConnectWithoutTaskInput!]
+  upsert: [FileUpsertWithWhereUniqueWithoutTaskInput!]
+  createMany: FileCreateManyTaskInputEnvelope
+  set: [FileWhereUniqueInput!]
+  disconnect: [FileWhereUniqueInput!]
+  delete: [FileWhereUniqueInput!]
+  connect: [FileWhereUniqueInput!]
+  update: [FileUpdateWithWhereUniqueWithoutTaskInput!]
+  updateMany: [FileUpdateManyWithWhereWithoutTaskInput!]
+  deleteMany: [FileScalarWhereInput!]
+}
+
+input FileUpsertWithWhereUniqueWithoutTaskInput {
+  where: FileWhereUniqueInput!
+  update: FileUpdateWithoutTaskInput!
+  create: FileCreateWithoutTaskInput!
+}
+
+input FileUpdateWithoutTaskInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  path: StringFieldUpdateOperationsInput
+  size: IntFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutFilesInput
+  project: ProjectUpdateOneRequiredWithoutFilesInput
+}
+
+input UserUpdateOneRequiredWithoutFilesInput {
+  create: UserCreateWithoutFilesInput
+  connectOrCreate: UserCreateOrConnectWithoutFilesInput
+  upsert: UserUpsertWithoutFilesInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutFilesInput
+}
+
+input UserUpsertWithoutFilesInput {
+  update: UserUpdateWithoutFilesInput!
+  create: UserCreateWithoutFilesInput!
+}
+
+input UserUpdateWithoutFilesInput {
+  id: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  role: UserUpdateroleInput
+  projects: ProjectUpdateManyWithoutUsersInput
+  task: TaskUpdateManyWithoutUserInput
+  task_comments: CommentUpdateManyWithoutUser_task_commentsInput
+  project_comments: CommentUpdateManyWithoutUser_project_commentsInput
+  invitations: InvitationUpdateManyWithoutUserInput
+  notifications: NotificationUpdateManyWithoutUserInput
+  owned_projects: ProjectUpdateManyWithoutOwnerInput
+  notifications_sent: NotificationUpdateManyWithoutSenderInput
+}
+
+input CommentUpdateManyWithoutUser_task_commentsInput {
+  create: [CommentCreateWithoutUser_task_commentsInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutUser_task_commentsInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutUser_task_commentsInput!]
+  createMany: CommentCreateManyUser_task_commentsInputEnvelope
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutUser_task_commentsInput!]
+  updateMany: [CommentUpdateManyWithWhereWithoutUser_task_commentsInput!]
+  deleteMany: [CommentScalarWhereInput!]
+}
+
+input CommentUpsertWithWhereUniqueWithoutUser_task_commentsInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutUser_task_commentsInput!
+  create: CommentCreateWithoutUser_task_commentsInput!
+}
+
+input CommentUpdateWithoutUser_task_commentsInput {
+  id: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  project: ProjectUpdateOneWithoutCommentsInput
+  task: TaskUpdateOneWithoutCommentsInput
+  user_project_comments: UserUpdateOneWithoutProject_commentsInput
+}
+
+input UserUpdateOneWithoutProject_commentsInput {
+  create: UserCreateWithoutProject_commentsInput
+  connectOrCreate: UserCreateOrConnectWithoutProject_commentsInput
+  upsert: UserUpsertWithoutProject_commentsInput
+  disconnect: Boolean
+  delete: Boolean
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutProject_commentsInput
+}
+
+input UserUpsertWithoutProject_commentsInput {
+  update: UserUpdateWithoutProject_commentsInput!
+  create: UserCreateWithoutProject_commentsInput!
+}
+
+input UserUpdateWithoutProject_commentsInput {
+  id: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  role: UserUpdateroleInput
+  projects: ProjectUpdateManyWithoutUsersInput
+  task: TaskUpdateManyWithoutUserInput
+  files: FileUpdateManyWithoutUserInput
+  task_comments: CommentUpdateManyWithoutUser_task_commentsInput
+  invitations: InvitationUpdateManyWithoutUserInput
+  notifications: NotificationUpdateManyWithoutUserInput
+  owned_projects: ProjectUpdateManyWithoutOwnerInput
+  notifications_sent: NotificationUpdateManyWithoutSenderInput
+}
+
+input InvitationUpdateManyWithoutUserInput {
+  create: [InvitationCreateWithoutUserInput!]
+  connectOrCreate: [InvitationCreateOrConnectWithoutUserInput!]
+  upsert: [InvitationUpsertWithWhereUniqueWithoutUserInput!]
+  createMany: InvitationCreateManyUserInputEnvelope
+  set: [InvitationWhereUniqueInput!]
+  disconnect: [InvitationWhereUniqueInput!]
+  delete: [InvitationWhereUniqueInput!]
+  connect: [InvitationWhereUniqueInput!]
+  update: [InvitationUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [InvitationUpdateManyWithWhereWithoutUserInput!]
+  deleteMany: [InvitationScalarWhereInput!]
+}
+
+input InvitationUpsertWithWhereUniqueWithoutUserInput {
+  where: InvitationWhereUniqueInput!
+  update: InvitationUpdateWithoutUserInput!
+  create: InvitationCreateWithoutUserInput!
+}
+
+input InvitationUpdateWithoutUserInput {
+  id: StringFieldUpdateOperationsInput
+  status: EnumStatus_InvitationFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  project: ProjectUpdateOneRequiredWithoutInvitationsInput
+}
+
+input EnumStatus_InvitationFieldUpdateOperationsInput {
+  set: Status_Invitation
+}
+
+input ProjectUpdateOneRequiredWithoutInvitationsInput {
+  create: ProjectCreateWithoutInvitationsInput
+  connectOrCreate: ProjectCreateOrConnectWithoutInvitationsInput
+  upsert: ProjectUpsertWithoutInvitationsInput
+  connect: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutInvitationsInput
+}
+
+input ProjectUpsertWithoutInvitationsInput {
+  update: ProjectUpdateWithoutInvitationsInput!
+  create: ProjectCreateWithoutInvitationsInput!
+}
+
+input ProjectUpdateWithoutInvitationsInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_project: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  due_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  users: UserUpdateManyWithoutProjectsInput
+  owner: UserUpdateOneRequiredWithoutOwned_projectsInput
+  tasks: TaskUpdateManyWithoutProjectInput
+  files: FileUpdateManyWithoutProjectInput
+  comments: CommentUpdateManyWithoutProjectInput
+}
+
+input FileUpdateManyWithoutProjectInput {
+  create: [FileCreateWithoutProjectInput!]
+  connectOrCreate: [FileCreateOrConnectWithoutProjectInput!]
+  upsert: [FileUpsertWithWhereUniqueWithoutProjectInput!]
+  createMany: FileCreateManyProjectInputEnvelope
+  set: [FileWhereUniqueInput!]
+  disconnect: [FileWhereUniqueInput!]
+  delete: [FileWhereUniqueInput!]
+  connect: [FileWhereUniqueInput!]
+  update: [FileUpdateWithWhereUniqueWithoutProjectInput!]
+  updateMany: [FileUpdateManyWithWhereWithoutProjectInput!]
+  deleteMany: [FileScalarWhereInput!]
+}
+
+input FileUpsertWithWhereUniqueWithoutProjectInput {
+  where: FileWhereUniqueInput!
+  update: FileUpdateWithoutProjectInput!
+  create: FileCreateWithoutProjectInput!
+}
+
+input FileUpdateWithoutProjectInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  path: StringFieldUpdateOperationsInput
+  size: IntFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutFilesInput
+  task: TaskUpdateOneWithoutFilesInput
+}
+
+input TaskUpdateOneWithoutFilesInput {
+  create: TaskCreateWithoutFilesInput
+  connectOrCreate: TaskCreateOrConnectWithoutFilesInput
+  upsert: TaskUpsertWithoutFilesInput
+  disconnect: Boolean
+  delete: Boolean
+  connect: TaskWhereUniqueInput
+  update: TaskUpdateWithoutFilesInput
+}
+
+input TaskUpsertWithoutFilesInput {
+  update: TaskUpdateWithoutFilesInput!
+  create: TaskCreateWithoutFilesInput!
+}
+
+input TaskUpdateWithoutFilesInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_task: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutTaskInput
+  project: ProjectUpdateOneRequiredWithoutTasksInput
+  comments: CommentUpdateManyWithoutTaskInput
+}
+
+input CommentUpdateManyWithoutTaskInput {
+  create: [CommentCreateWithoutTaskInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutTaskInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutTaskInput!]
+  createMany: CommentCreateManyTaskInputEnvelope
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutTaskInput!]
+  updateMany: [CommentUpdateManyWithWhereWithoutTaskInput!]
+  deleteMany: [CommentScalarWhereInput!]
+}
+
+input CommentUpsertWithWhereUniqueWithoutTaskInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutTaskInput!
+  create: CommentCreateWithoutTaskInput!
+}
+
+input CommentUpdateWithoutTaskInput {
+  id: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  project: ProjectUpdateOneWithoutCommentsInput
+  user_task_comments: UserUpdateOneWithoutTask_commentsInput
+  user_project_comments: UserUpdateOneWithoutProject_commentsInput
+}
+
+input UserUpdateOneWithoutTask_commentsInput {
+  create: UserCreateWithoutTask_commentsInput
+  connectOrCreate: UserCreateOrConnectWithoutTask_commentsInput
+  upsert: UserUpsertWithoutTask_commentsInput
+  disconnect: Boolean
+  delete: Boolean
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutTask_commentsInput
+}
+
+input UserUpsertWithoutTask_commentsInput {
+  update: UserUpdateWithoutTask_commentsInput!
+  create: UserCreateWithoutTask_commentsInput!
+}
+
+input UserUpdateWithoutTask_commentsInput {
+  id: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  role: UserUpdateroleInput
+  projects: ProjectUpdateManyWithoutUsersInput
+  task: TaskUpdateManyWithoutUserInput
+  files: FileUpdateManyWithoutUserInput
+  project_comments: CommentUpdateManyWithoutUser_project_commentsInput
+  invitations: InvitationUpdateManyWithoutUserInput
+  notifications: NotificationUpdateManyWithoutUserInput
+  owned_projects: ProjectUpdateManyWithoutOwnerInput
+  notifications_sent: NotificationUpdateManyWithoutSenderInput
+}
+
+input CommentUpdateManyWithoutUser_project_commentsInput {
+  create: [CommentCreateWithoutUser_project_commentsInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutUser_project_commentsInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutUser_project_commentsInput!]
+  createMany: CommentCreateManyUser_project_commentsInputEnvelope
+  set: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  connect: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutUser_project_commentsInput!]
+  updateMany: [CommentUpdateManyWithWhereWithoutUser_project_commentsInput!]
+  deleteMany: [CommentScalarWhereInput!]
+}
+
+input CommentUpsertWithWhereUniqueWithoutUser_project_commentsInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutUser_project_commentsInput!
+  create: CommentCreateWithoutUser_project_commentsInput!
+}
+
+input CommentUpdateWithoutUser_project_commentsInput {
+  id: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  project: ProjectUpdateOneWithoutCommentsInput
+  task: TaskUpdateOneWithoutCommentsInput
+  user_task_comments: UserUpdateOneWithoutTask_commentsInput
+}
+
+input CommentUpdateWithWhereUniqueWithoutUser_project_commentsInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutUser_project_commentsInput!
+}
+
+input CommentUpdateManyWithWhereWithoutUser_project_commentsInput {
+  where: CommentScalarWhereInput!
+  data: CommentUpdateManyMutationInput!
+}
+
+input CommentScalarWhereInput {
+  AND: [CommentScalarWhereInput!]
+  OR: [CommentScalarWhereInput!]
+  NOT: [CommentScalarWhereInput!]
+  id: StringFilter
+  is_disabled: BoolFilter
+  content: StringFilter
+  task_comment_user_id: StringNullableFilter
+  project_id: StringNullableFilter
+  task_id: StringNullableFilter
+  project_comment_user_id: StringNullableFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input CommentUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+}
+
+input NotificationUpdateManyWithoutUserInput {
+  create: [NotificationCreateWithoutUserInput!]
+  connectOrCreate: [NotificationCreateOrConnectWithoutUserInput!]
+  upsert: [NotificationUpsertWithWhereUniqueWithoutUserInput!]
+  createMany: NotificationCreateManyUserInputEnvelope
+  set: [NotificationWhereUniqueInput!]
+  disconnect: [NotificationWhereUniqueInput!]
+  delete: [NotificationWhereUniqueInput!]
+  connect: [NotificationWhereUniqueInput!]
+  update: [NotificationUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [NotificationUpdateManyWithWhereWithoutUserInput!]
+  deleteMany: [NotificationScalarWhereInput!]
+}
+
+input NotificationUpsertWithWhereUniqueWithoutUserInput {
+  where: NotificationWhereUniqueInput!
+  update: NotificationUpdateWithoutUserInput!
+  create: NotificationCreateWithoutUserInput!
+}
+
+input NotificationUpdateWithoutUserInput {
+  id: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  type: EnumType_NotificationFieldUpdateOperationsInput
+  status: EnumStatus_NotificationFieldUpdateOperationsInput
+  reference_id: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  sender: UserUpdateOneRequiredWithoutNotifications_sentInput
+}
+
+input EnumType_NotificationFieldUpdateOperationsInput {
+  set: Type_Notification
+}
+
+input EnumStatus_NotificationFieldUpdateOperationsInput {
+  set: Status_Notification
+}
+
+input UserUpdateOneRequiredWithoutNotifications_sentInput {
+  create: UserCreateWithoutNotifications_sentInput
+  connectOrCreate: UserCreateOrConnectWithoutNotifications_sentInput
+  upsert: UserUpsertWithoutNotifications_sentInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutNotifications_sentInput
+}
+
+input UserUpsertWithoutNotifications_sentInput {
+  update: UserUpdateWithoutNotifications_sentInput!
+  create: UserCreateWithoutNotifications_sentInput!
+}
+
+input UserUpdateWithoutNotifications_sentInput {
+  id: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  role: UserUpdateroleInput
+  projects: ProjectUpdateManyWithoutUsersInput
+  task: TaskUpdateManyWithoutUserInput
+  files: FileUpdateManyWithoutUserInput
+  task_comments: CommentUpdateManyWithoutUser_task_commentsInput
+  project_comments: CommentUpdateManyWithoutUser_project_commentsInput
+  invitations: InvitationUpdateManyWithoutUserInput
+  notifications: NotificationUpdateManyWithoutUserInput
+  owned_projects: ProjectUpdateManyWithoutOwnerInput
+}
+
+input ProjectUpdateManyWithoutOwnerInput {
+  create: [ProjectCreateWithoutOwnerInput!]
+  connectOrCreate: [ProjectCreateOrConnectWithoutOwnerInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutOwnerInput!]
+  createMany: ProjectCreateManyOwnerInputEnvelope
+  set: [ProjectWhereUniqueInput!]
+  disconnect: [ProjectWhereUniqueInput!]
+  delete: [ProjectWhereUniqueInput!]
+  connect: [ProjectWhereUniqueInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutOwnerInput!]
+  updateMany: [ProjectUpdateManyWithWhereWithoutOwnerInput!]
+  deleteMany: [ProjectScalarWhereInput!]
+}
+
+input ProjectUpsertWithWhereUniqueWithoutOwnerInput {
+  where: ProjectWhereUniqueInput!
+  update: ProjectUpdateWithoutOwnerInput!
+  create: ProjectCreateWithoutOwnerInput!
+}
+
+input ProjectUpdateWithoutOwnerInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_project: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  due_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  users: UserUpdateManyWithoutProjectsInput
+  tasks: TaskUpdateManyWithoutProjectInput
+  files: FileUpdateManyWithoutProjectInput
+  comments: CommentUpdateManyWithoutProjectInput
+  invitations: InvitationUpdateManyWithoutProjectInput
+}
+
+input InvitationUpdateManyWithoutProjectInput {
+  create: [InvitationCreateWithoutProjectInput!]
+  connectOrCreate: [InvitationCreateOrConnectWithoutProjectInput!]
+  upsert: [InvitationUpsertWithWhereUniqueWithoutProjectInput!]
+  createMany: InvitationCreateManyProjectInputEnvelope
+  set: [InvitationWhereUniqueInput!]
+  disconnect: [InvitationWhereUniqueInput!]
+  delete: [InvitationWhereUniqueInput!]
+  connect: [InvitationWhereUniqueInput!]
+  update: [InvitationUpdateWithWhereUniqueWithoutProjectInput!]
+  updateMany: [InvitationUpdateManyWithWhereWithoutProjectInput!]
+  deleteMany: [InvitationScalarWhereInput!]
+}
+
+input InvitationUpsertWithWhereUniqueWithoutProjectInput {
+  where: InvitationWhereUniqueInput!
+  update: InvitationUpdateWithoutProjectInput!
+  create: InvitationCreateWithoutProjectInput!
+}
+
+input InvitationUpdateWithoutProjectInput {
+  id: StringFieldUpdateOperationsInput
+  status: EnumStatus_InvitationFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutInvitationsInput
+}
+
+input UserUpdateOneRequiredWithoutInvitationsInput {
+  create: UserCreateWithoutInvitationsInput
+  connectOrCreate: UserCreateOrConnectWithoutInvitationsInput
+  upsert: UserUpsertWithoutInvitationsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutInvitationsInput
+}
+
+input UserUpsertWithoutInvitationsInput {
+  update: UserUpdateWithoutInvitationsInput!
+  create: UserCreateWithoutInvitationsInput!
+}
+
+input UserUpdateWithoutInvitationsInput {
+  id: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  role: UserUpdateroleInput
+  projects: ProjectUpdateManyWithoutUsersInput
+  task: TaskUpdateManyWithoutUserInput
+  files: FileUpdateManyWithoutUserInput
+  task_comments: CommentUpdateManyWithoutUser_task_commentsInput
+  project_comments: CommentUpdateManyWithoutUser_project_commentsInput
+  notifications: NotificationUpdateManyWithoutUserInput
+  owned_projects: ProjectUpdateManyWithoutOwnerInput
+  notifications_sent: NotificationUpdateManyWithoutSenderInput
+}
+
+input NotificationUpdateManyWithoutSenderInput {
+  create: [NotificationCreateWithoutSenderInput!]
+  connectOrCreate: [NotificationCreateOrConnectWithoutSenderInput!]
+  upsert: [NotificationUpsertWithWhereUniqueWithoutSenderInput!]
+  createMany: NotificationCreateManySenderInputEnvelope
+  set: [NotificationWhereUniqueInput!]
+  disconnect: [NotificationWhereUniqueInput!]
+  delete: [NotificationWhereUniqueInput!]
+  connect: [NotificationWhereUniqueInput!]
+  update: [NotificationUpdateWithWhereUniqueWithoutSenderInput!]
+  updateMany: [NotificationUpdateManyWithWhereWithoutSenderInput!]
+  deleteMany: [NotificationScalarWhereInput!]
+}
+
+input NotificationUpsertWithWhereUniqueWithoutSenderInput {
+  where: NotificationWhereUniqueInput!
+  update: NotificationUpdateWithoutSenderInput!
+  create: NotificationCreateWithoutSenderInput!
+}
+
+input NotificationUpdateWithoutSenderInput {
+  id: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  type: EnumType_NotificationFieldUpdateOperationsInput
+  status: EnumStatus_NotificationFieldUpdateOperationsInput
+  reference_id: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutNotificationsInput
+}
+
+input UserUpdateOneRequiredWithoutNotificationsInput {
+  create: UserCreateWithoutNotificationsInput
+  connectOrCreate: UserCreateOrConnectWithoutNotificationsInput
+  upsert: UserUpsertWithoutNotificationsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutNotificationsInput
+}
+
+input UserUpsertWithoutNotificationsInput {
+  update: UserUpdateWithoutNotificationsInput!
+  create: UserCreateWithoutNotificationsInput!
+}
+
+input UserUpdateWithoutNotificationsInput {
+  id: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  role: UserUpdateroleInput
+  projects: ProjectUpdateManyWithoutUsersInput
+  task: TaskUpdateManyWithoutUserInput
+  files: FileUpdateManyWithoutUserInput
+  task_comments: CommentUpdateManyWithoutUser_task_commentsInput
+  project_comments: CommentUpdateManyWithoutUser_project_commentsInput
+  invitations: InvitationUpdateManyWithoutUserInput
+  owned_projects: ProjectUpdateManyWithoutOwnerInput
+  notifications_sent: NotificationUpdateManyWithoutSenderInput
+}
+
+input NotificationUpdateWithWhereUniqueWithoutSenderInput {
+  where: NotificationWhereUniqueInput!
+  data: NotificationUpdateWithoutSenderInput!
+}
+
+input NotificationUpdateManyWithWhereWithoutSenderInput {
+  where: NotificationScalarWhereInput!
+  data: NotificationUpdateManyMutationInput!
+}
+
+input NotificationScalarWhereInput {
+  AND: [NotificationScalarWhereInput!]
+  OR: [NotificationScalarWhereInput!]
+  NOT: [NotificationScalarWhereInput!]
+  id: StringFilter
+  is_disabled: BoolFilter
+  title: StringFilter
+  content: StringFilter
+  user_id: StringFilter
+  type: EnumType_NotificationFilter
+  status: EnumStatus_NotificationFilter
+  reference_id: StringFilter
+  sender_id: StringFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input NotificationUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  type: EnumType_NotificationFieldUpdateOperationsInput
+  status: EnumStatus_NotificationFieldUpdateOperationsInput
+  reference_id: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+}
+
+input InvitationUpdateWithWhereUniqueWithoutProjectInput {
+  where: InvitationWhereUniqueInput!
+  data: InvitationUpdateWithoutProjectInput!
+}
+
+input InvitationUpdateManyWithWhereWithoutProjectInput {
+  where: InvitationScalarWhereInput!
+  data: InvitationUpdateManyMutationInput!
+}
+
+input InvitationScalarWhereInput {
+  AND: [InvitationScalarWhereInput!]
+  OR: [InvitationScalarWhereInput!]
+  NOT: [InvitationScalarWhereInput!]
+  id: StringFilter
+  status: EnumStatus_InvitationFilter
+  email: StringFilter
+  project_id: StringFilter
+  user_id: StringFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input InvitationUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  status: EnumStatus_InvitationFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectUpdateWithWhereUniqueWithoutOwnerInput {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateWithoutOwnerInput!
+}
+
+input ProjectUpdateManyWithWhereWithoutOwnerInput {
+  where: ProjectScalarWhereInput!
+  data: ProjectUpdateManyMutationInput!
+}
+
+input ProjectScalarWhereInput {
+  AND: [ProjectScalarWhereInput!]
+  OR: [ProjectScalarWhereInput!]
+  NOT: [ProjectScalarWhereInput!]
+  id: StringFilter
+  project_owner_id: StringFilter
+  title: StringFilter
+  description: StringFilter
+  private: BoolFilter
+  is_disabled: BoolFilter
+  status_project: EnumStatusFilter
+  total_time_spent: IntFilter
+  start_date: DateTimeFilter
+  end_date: DateTimeFilter
+  due_date: DateTimeFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input ProjectUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_project: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  due_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+}
+
+input NotificationUpdateWithWhereUniqueWithoutUserInput {
+  where: NotificationWhereUniqueInput!
+  data: NotificationUpdateWithoutUserInput!
+}
+
+input NotificationUpdateManyWithWhereWithoutUserInput {
+  where: NotificationScalarWhereInput!
+  data: NotificationUpdateManyMutationInput!
+}
+
+input CommentUpdateWithWhereUniqueWithoutTaskInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutTaskInput!
+}
+
+input CommentUpdateManyWithWhereWithoutTaskInput {
+  where: CommentScalarWhereInput!
+  data: CommentUpdateManyMutationInput!
+}
+
+input FileUpdateWithWhereUniqueWithoutProjectInput {
+  where: FileWhereUniqueInput!
+  data: FileUpdateWithoutProjectInput!
+}
+
+input FileUpdateManyWithWhereWithoutProjectInput {
+  where: FileScalarWhereInput!
+  data: FileUpdateManyMutationInput!
+}
+
+input FileScalarWhereInput {
+  AND: [FileScalarWhereInput!]
+  OR: [FileScalarWhereInput!]
+  NOT: [FileScalarWhereInput!]
+  id: StringFilter
+  name: StringFilter
+  path: StringFilter
+  size: IntFilter
+  type: StringFilter
+  user_id: StringFilter
+  project_id: StringFilter
+  task_id: StringNullableFilter
+  is_disabled: BoolFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input FileUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  path: StringFieldUpdateOperationsInput
+  size: IntFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+}
+
+input InvitationUpdateWithWhereUniqueWithoutUserInput {
+  where: InvitationWhereUniqueInput!
+  data: InvitationUpdateWithoutUserInput!
+}
+
+input InvitationUpdateManyWithWhereWithoutUserInput {
+  where: InvitationScalarWhereInput!
+  data: InvitationUpdateManyMutationInput!
+}
+
+input CommentUpdateWithWhereUniqueWithoutUser_task_commentsInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutUser_task_commentsInput!
+}
+
+input CommentUpdateManyWithWhereWithoutUser_task_commentsInput {
+  where: CommentScalarWhereInput!
+  data: CommentUpdateManyMutationInput!
+}
+
+input FileUpdateWithWhereUniqueWithoutTaskInput {
+  where: FileWhereUniqueInput!
+  data: FileUpdateWithoutTaskInput!
+}
+
+input FileUpdateManyWithWhereWithoutTaskInput {
+  where: FileScalarWhereInput!
+  data: FileUpdateManyMutationInput!
+}
+
+input CommentUpdateWithWhereUniqueWithoutProjectInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutProjectInput!
+}
+
+input CommentUpdateManyWithWhereWithoutProjectInput {
+  where: CommentScalarWhereInput!
+  data: CommentUpdateManyMutationInput!
+}
+
+input FileUpdateWithWhereUniqueWithoutUserInput {
+  where: FileWhereUniqueInput!
+  data: FileUpdateWithoutUserInput!
+}
+
+input FileUpdateManyWithWhereWithoutUserInput {
+  where: FileScalarWhereInput!
+  data: FileUpdateManyMutationInput!
+}
+
+input TaskUpdateWithWhereUniqueWithoutProjectInput {
+  where: TaskWhereUniqueInput!
+  data: TaskUpdateWithoutProjectInput!
+}
+
+input TaskUpdateManyWithWhereWithoutProjectInput {
+  where: TaskScalarWhereInput!
+  data: TaskUpdateManyMutationInput!
+}
+
+input TaskScalarWhereInput {
+  AND: [TaskScalarWhereInput!]
+  OR: [TaskScalarWhereInput!]
+  NOT: [TaskScalarWhereInput!]
+  id: StringFilter
+  title: StringFilter
+  description: StringFilter
+  private: BoolFilter
+  is_disabled: BoolFilter
+  status_task: EnumStatusFilter
+  total_time_spent: IntFilter
+  start_date: DateTimeFilter
+  end_date: DateTimeFilter
+  user_id: StringFilter
+  project_id: StringFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input TaskUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_task: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectUpdateWithWhereUniqueWithoutUsersInput {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateWithoutUsersInput!
+}
+
+input ProjectUpdateManyWithWhereWithoutUsersInput {
+  where: ProjectScalarWhereInput!
+  data: ProjectUpdateManyMutationInput!
+}
+
+input TaskUpdateWithWhereUniqueWithoutUserInput {
+  where: TaskWhereUniqueInput!
+  data: TaskUpdateWithoutUserInput!
+}
+
+input TaskUpdateManyWithWhereWithoutUserInput {
+  where: TaskScalarWhereInput!
+  data: TaskUpdateManyMutationInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutProjectsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutProjectsInput!
+}
+
+input UserUpdateManyWithWhereWithoutProjectsInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyMutationInput!
+}
+
+input UserScalarWhereInput {
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+  id: StringFilter
+  first_name: StringFilter
+  last_name: StringFilter
+  email: StringFilter
+  password: StringFilter
+  is_disabled: BoolFilter
+  avatar: StringNullableFilter
+  role: EnumRoleNullableListFilter
+  created_at: DateTimeFilter
+  updated_at: DateTimeFilter
+}
+
+input UserUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  role: UserUpdateroleInput
+}
+
+input FileCreateInput {
+  id: String
+  name: String!
+  path: String!
+  size: Int!
+  type: String!
+  is_disabled: Boolean!
+  created_at: DateTime
+  updated_at: DateTime
+  user: UserCreateNestedOneWithoutFilesInput!
+  project: ProjectCreateNestedOneWithoutFilesInput!
+  task: TaskCreateNestedOneWithoutFilesInput
+}
+
+input FileCreateManyInput {
+  id: String
+  name: String!
+  path: String!
+  size: Int!
+  type: String!
+  user_id: String!
+  project_id: String!
+  task_id: String
+  is_disabled: Boolean!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input FileUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  path: StringFieldUpdateOperationsInput
+  size: IntFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutFilesInput
+  project: ProjectUpdateOneRequiredWithoutFilesInput
+  task: TaskUpdateOneWithoutFilesInput
+}
+
+input InvitationCreateInput {
+  id: String
+  status: Status_Invitation!
+  email: String!
+  created_at: DateTime
+  updated_at: DateTime
+  project: ProjectCreateNestedOneWithoutInvitationsInput!
+  user: UserCreateNestedOneWithoutInvitationsInput!
+}
+
+input InvitationCreateManyInput {
+  id: String
+  status: Status_Invitation!
+  email: String!
+  project_id: String!
+  user_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input InvitationUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  status: EnumStatus_InvitationFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  project: ProjectUpdateOneRequiredWithoutInvitationsInput
+  user: UserUpdateOneRequiredWithoutInvitationsInput
+}
+
+input NotificationCreateInput {
+  id: String
+  is_disabled: Boolean!
+  title: String!
+  content: String!
+  type: Type_Notification!
+  status: Status_Notification!
+  reference_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+  user: UserCreateNestedOneWithoutNotificationsInput!
+  sender: UserCreateNestedOneWithoutNotifications_sentInput!
+}
+
+input NotificationCreateManyInput {
+  id: String
+  is_disabled: Boolean!
+  title: String!
+  content: String!
+  user_id: String!
+  type: Type_Notification!
+  status: Status_Notification!
+  reference_id: String!
+  sender_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input NotificationUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  type: EnumType_NotificationFieldUpdateOperationsInput
+  status: EnumStatus_NotificationFieldUpdateOperationsInput
+  reference_id: StringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutNotificationsInput
+  sender: UserUpdateOneRequiredWithoutNotifications_sentInput
+}
+
+input ProjectCreateInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_project: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  due_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  users: UserCreateNestedManyWithoutProjectsInput
+  owner: UserCreateNestedOneWithoutOwned_projectsInput!
+  tasks: TaskCreateNestedManyWithoutProjectInput
+  files: FileCreateNestedManyWithoutProjectInput
+  comments: CommentCreateNestedManyWithoutProjectInput
+  invitations: InvitationCreateNestedManyWithoutProjectInput
+}
+
+input ProjectCreateManyInput {
+  id: String
+  project_owner_id: String!
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_project: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  due_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input ProjectUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_project: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  due_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  users: UserUpdateManyWithoutProjectsInput
+  owner: UserUpdateOneRequiredWithoutOwned_projectsInput
+  tasks: TaskUpdateManyWithoutProjectInput
+  files: FileUpdateManyWithoutProjectInput
+  comments: CommentUpdateManyWithoutProjectInput
+  invitations: InvitationUpdateManyWithoutProjectInput
+}
+
+input TaskCreateInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_task: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  created_at: DateTime
+  updated_at: DateTime
+  user: UserCreateNestedOneWithoutTaskInput!
+  project: ProjectCreateNestedOneWithoutTasksInput!
+  files: FileCreateNestedManyWithoutTaskInput
+  comments: CommentCreateNestedManyWithoutTaskInput
+}
+
+input TaskCreateManyInput {
+  id: String
+  title: String!
+  description: String!
+  private: Boolean!
+  is_disabled: Boolean!
+  status_task: Status!
+  total_time_spent: Int!
+  start_date: DateTime!
+  end_date: DateTime!
+  user_id: String!
+  project_id: String!
+  created_at: DateTime
+  updated_at: DateTime
+}
+
+input TaskUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  private: BoolFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  status_task: EnumStatusFieldUpdateOperationsInput
+  total_time_spent: IntFieldUpdateOperationsInput
+  start_date: DateTimeFieldUpdateOperationsInput
+  end_date: DateTimeFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutTaskInput
+  project: ProjectUpdateOneRequiredWithoutTasksInput
+  files: FileUpdateManyWithoutTaskInput
+  comments: CommentUpdateManyWithoutTaskInput
+}
+
+input UserCreateInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  role: UserCreateroleInput
+  projects: ProjectCreateNestedManyWithoutUsersInput
+  task: TaskCreateNestedManyWithoutUserInput
+  files: FileCreateNestedManyWithoutUserInput
+  task_comments: CommentCreateNestedManyWithoutUser_task_commentsInput
+  project_comments: CommentCreateNestedManyWithoutUser_project_commentsInput
+  invitations: InvitationCreateNestedManyWithoutUserInput
+  notifications: NotificationCreateNestedManyWithoutUserInput
+  owned_projects: ProjectCreateNestedManyWithoutOwnerInput
+  notifications_sent: NotificationCreateNestedManyWithoutSenderInput
+}
+
+input UserCreateManyInput {
+  id: String
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+  is_disabled: Boolean!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  role: UserCreateManyroleInput
+}
+
+input UserCreateManyroleInput {
+  set: [Role!]!
+}
+
+input UserUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  is_disabled: BoolFieldUpdateOperationsInput
+  avatar: NullableStringFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  updated_at: DateTimeFieldUpdateOperationsInput
+  role: UserUpdateroleInput
+  projects: ProjectUpdateManyWithoutUsersInput
+  task: TaskUpdateManyWithoutUserInput
+  files: FileUpdateManyWithoutUserInput
+  task_comments: CommentUpdateManyWithoutUser_task_commentsInput
+  project_comments: CommentUpdateManyWithoutUser_project_commentsInput
+  invitations: InvitationUpdateManyWithoutUserInput
+  notifications: NotificationUpdateManyWithoutUserInput
+  owned_projects: ProjectUpdateManyWithoutOwnerInput
+  notifications_sent: NotificationUpdateManyWithoutSenderInput
+}
+
+# The `Upload` scalar type represents a file upload.
+scalar Upload
+
+input RegisterInput {
+  first_name: String!
+  last_name: String!
+  email: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}

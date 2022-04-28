@@ -1,0 +1,5 @@
+mutation MutateMe {
+  me {
+    ...User
+  }
+}

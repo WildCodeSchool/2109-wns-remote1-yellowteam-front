@@ -1,0 +1,5 @@
+query GetManagerProjects($userId: String) {
+  projects(where: { owner: { is: { id: { equals: $userId } } } }) {
+    ...Project
+  }
+}
