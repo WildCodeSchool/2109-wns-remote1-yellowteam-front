@@ -1,11 +1,21 @@
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import { useRef } from 'react'
 import useAppState from 'src/hooks/useAppState'
+import useUpload from 'src/hooks/useUpload'
+import MyDropzone from '../DropZone'
+import UploadProfilePictureModal from '../Modals/UploadProfilePicture'
 
 const MotionImage = motion(Image)
 
 export default function UserInfoCard(): JSX.Element {
   const { user } = useAppState()
+  const { uploadProfilePicture, setFile, file, modal } = useUpload()
+  const uploadButtonRef = useRef<HTMLButtonElement>(null)
+
+  const handleUpload = async () => {
+    await uploadProfilePicture(file[0])
+  }
 
   return (
     <Flex
@@ -23,9 +33,16 @@ export default function UserInfoCard(): JSX.Element {
         justifyContent="center"
         alignItems="center"
       >
-        <Text textAlign="center" textStyle="h1" position="absolute">
+        <Box
+          textAlign="center"
+          overflow="hidden"
+          textStyle="h1"
+          position="absolute"
+        >
           EDIT
-        </Text>
+          <MyDropzone file={file} setFile={setFile} />
+        </Box>
+
         <MotionImage
           top={0}
           left={0}
@@ -38,7 +55,20 @@ export default function UserInfoCard(): JSX.Element {
           whileHover={{ opacity: 0.8 }}
         />
       </Box>
+      <UploadProfilePictureModal
+        buttonRef={uploadButtonRef}
+        isOpen={modal.isOpen}
+        onClose={modal.onClose}
+        file={file}
+      />
       <Flex mx={5} direction="column">
+        <Button
+          ref={uploadButtonRef}
+          visibility="hidden"
+          onClick={handleUpload}
+        >
+          UPLOAD
+        </Button>
         <Text textAlign="left" fontWeight="bold">
           {user?.first_name} {user?.last_name}
         </Text>

@@ -9,7 +9,7 @@ import {
   useBoolean,
   Spinner,
 } from '@chakra-ui/react'
-import React, { ReactElement, useRef, useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import {
   GetManagerProjectsDocument,
   ProjectCreateInput,
@@ -37,13 +37,13 @@ export type Dates = {
 
 const Project = (): ReactElement => {
   const navigate = useNavigate()
-  const {
-    isOpen: isDeleteProjectModalOpen,
-    onOpen: onDeleteProjectModalOpen,
-    onClose: onDeleteProjectClose,
-  } = useDisclosure()
+  // const {
+  //   isOpen: isDeleteProjectModalOpen,
+  //   onOpen: onDeleteProjectModalOpen,
+  //   onClose: onDeleteProjectClose,
+  // } = useDisclosure()
 
-  const cancelRef = useRef<HTMLButtonElement>(null)
+  // const cancelRef = useRef<HTMLButtonElement>(null)
 
   const [dates, setDates] = useState<Dates>({
     startDate: new Date(),

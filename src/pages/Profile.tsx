@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, Flex, Image } from '@chakra-ui/react'
 import { ReactElement } from 'react'
-import UserInfoCard from 'src/molecules/UserInfoCard'
+import UserInfoCard from 'src/components/molecules/UserInfoCard'
 import UserProfileForm from 'src/components/forms/UserProfile.form'
 
 const Profile = (): ReactElement => {

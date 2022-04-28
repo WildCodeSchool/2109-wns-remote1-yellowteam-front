@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
-import Header from 'src/molecules/Header'
+import Header from 'src/components/molecules/Header'
 
 import UserNavBar from '../UserNavBar'
 

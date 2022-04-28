@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { Flex, Text } from '@chakra-ui/react'
-import mainTheme from '../definitions/chakra/theme/mainTheme'
+import mainTheme from '../../definitions/chakra/theme/mainTheme'
 
 interface IBoardTicketsStatus {
   numberOfTickets: number
