@@ -1,5 +1,0 @@
-mutation DeleteProject($projectId: String) {
-  deleteProject(where: { id: $projectId }) {
-    id
-  }
-}

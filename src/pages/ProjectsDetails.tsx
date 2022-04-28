@@ -15,25 +15,24 @@ import { useNavigate, useParams } from 'react-router-dom'
 import mainTheme from 'src/definitions/chakra/theme/mainTheme'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import {
-  useDeleteProjectMutation,
   useGetProjectQuery,
+  useUpdateProjectMutation,
 } from 'src/generated/graphql'
 import convertMillisecondsToHours from 'src/utils/convertMillisecondsToHours'
 import getActualTimeAvailable from 'src/utils/getActualTimeAvailable'
 
 import TimeSpentOnProject from 'src/components/molecules/ProjectDetails/TimeSpentOnProject'
 import TasksAccomplished from 'src/components/molecules/ProjectDetails/TasksAccomplished'
-import DeleteProjectAlert from 'src/components/Alert/DeleteProject.alert'
 import convertHoursToDays from 'src/utils/convertHoursToDays'
 
-const ModifyProject = (): ReactElement => {
+const ProjectDetails = (): ReactElement => {
   ChartJS.register(ArcElement, Tooltip, Legend)
   const navigate = useNavigate()
   const { projectId } = useParams()
   const toast = useToast()
 
-  const [deleteProjectData] = useDeleteProjectMutation({
-    variables: { projectId: projectId as string },
+  const [uptadeproject] = useUpdateProjectMutation({
+    notifyOnNetworkStatusChange: true,
   })
 
   const { data, loading } = useGetProjectQuery({
@@ -41,8 +40,13 @@ const ModifyProject = (): ReactElement => {
     skip: projectId === undefined,
   })
 
-  const deleteProject = async (id: string) => {
-    await deleteProjectData({ variables: { projectId: id } })
+  const disableProject = async (id: string) => {
+    await uptadeproject({
+      variables: {
+        data: { is_disabled: { set: true } },
+        projectId: { id },
+      },
+    })
     toast({
       title: 'Project deleted.',
       status: 'success',
@@ -170,7 +174,7 @@ const ModifyProject = (): ReactElement => {
               color="white"
               textStyle="h4"
               backgroundColor={mainTheme.colors.orange}
-              onClick={() => deleteProject(projectId as string)}
+              onClick={() => disableProject(projectId as string)}
             >
               Delete project
             </Button>
@@ -181,4 +185,4 @@ const ModifyProject = (): ReactElement => {
   )
 }
 
-export default ModifyProject
+export default ProjectDetails
