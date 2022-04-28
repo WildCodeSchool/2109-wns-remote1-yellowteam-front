@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import React from 'react'
 import { Status } from 'src/generated/graphql'
 import Card from '../components/Tasks/Task.card'
-import Tag from '../molecules/Tags'
+import Tag from '../components/molecules/Tags'
 import PlaceholderIcon from '../static/svg/PlaceholderIcon'
 import { render } from './test-utils'
 

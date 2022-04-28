@@ -7,6 +7,7 @@
     "@babel/preset-typescript": "^7.16.7",
     "@chakra-ui/icons": "^1.1.5",
     "@chakra-ui/react": "^1.7.2",
+    "@dropzone-ui/react": "^6.7.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@hookform/error-message": "^2.0.0",
@@ -19,7 +20,6 @@
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
-
     "@types/react-dom": "^17.0.0",
     "axios": "^0.24.0",
     "chart.js": "^3.7.1",
@@ -32,7 +32,9 @@
     "react-cookie": "^4.1.1",
     "react-datepicker": "^4.6.0",
     "react-dom": "^17.0.2",
+    "react-dropzone": "^12.1.0",
     "react-hook-form": "^7.24.1",
+    "react-lottie": "^1.2.3",
     "react-redux": "^7.2.4",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
@@ -44,6 +46,7 @@
     "start": "react-scripts start",
     "lint": "eslint --ext .ts,.tsx --fix src/",
     "build": "react-scripts build",
+    "deploy": "npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "apollo:download-schema": "apollo client:download-schema schema.graphql",
@@ -80,7 +83,11 @@
     "@graphql-codegen/typescript-react-apollo": "^3.2.2",
     "@types/enzyme": "^3.10.11",
     "@types/react-datepicker": "^4.3.4",
+<<<<<<< HEAD
     "@types/luxon": "^2.0.9",
+=======
+    "@types/react-lottie": "^1.2.6",
+>>>>>>> dev
     "@types/react-redux": "^7.1.16",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",

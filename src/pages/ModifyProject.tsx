@@ -16,7 +16,7 @@ import {
 import WhitePannel from 'src/components/WhitePannel'
 import { useParams } from 'react-router-dom'
 import AddIcon from 'src/static/svg/AddIcon'
-import mainTheme from 'src/theme/mainTheme'
+import mainTheme from 'src/definitions/chakra/theme/mainTheme'
 import { FieldValues, useForm } from 'react-hook-form'
 import Edit from 'src/static/svg/Edit'
 import {

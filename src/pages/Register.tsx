@@ -3,7 +3,7 @@
 import { Button, Flex, FormControl, Input, Text } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import mainTheme from 'src/theme/mainTheme'
+import mainTheme from 'src/definitions/chakra/theme/mainTheme'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ErrorMessage } from '@hookform/error-message'
 import useAppState from 'src/hooks/useAppState'
@@ -121,7 +121,7 @@ export default function Register(): JSX.Element {
           <ErrorMessage
             errors={errors}
             name="email"
-            render={({ message }) => <p>{message}</p>}
+            render={({ message }) => <Text color="red">{message}</Text>}
           />
           <Input
             variant="flushed"

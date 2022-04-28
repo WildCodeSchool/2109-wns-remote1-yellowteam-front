@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Header from '../molecules/Header'
+import Header from '../components/molecules/Header'
 
 describe('Renders the header with the name', () => {
   it('Matches the name', () => {

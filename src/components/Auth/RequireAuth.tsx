@@ -1,10 +1,10 @@
-import { Spinner } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import { useRoutes } from 'react-router-dom'
 import { useMutateMeMutation } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
 
-import authRoutes from 'src/config/authConfig'
+import authRoutes from 'src/config/auth.routes'
+import LoadingScreen from '../Lotties/Loader/Loader.animation'
 
 const AuthRoutes = () => useRoutes(authRoutes)
 
@@ -29,7 +29,7 @@ export default function RequireAuth({
     me()
   }, [])
 
-  if (!isAuth && loading) return <Spinner />
+  if (loading) return <LoadingScreen />
 
   if (!isAuth || !user) {
     return <AuthRoutes />

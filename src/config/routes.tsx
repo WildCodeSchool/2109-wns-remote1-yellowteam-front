@@ -1,4 +1,4 @@
-import { RouteObject } from 'react-router-dom'
+import { Navigate, RouteObject } from 'react-router-dom'
 import Layout from 'src/components/Layout'
 import Board from 'src/pages/Board'
 import ModifyProject from 'src/pages/ModifyProject'
@@ -26,6 +26,10 @@ const routes: RouteObject[] = [
       { path: '/profile', element: <Profile /> },
       { path: '/notifications', element: <Notifications /> },
     ],
+  },
+  {
+    path: '*',
+    element: <Navigate to="/board" />,
   },
 ]
 export default routes

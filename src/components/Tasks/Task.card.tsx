@@ -62,6 +62,7 @@ const Card = ({
         status: 'error',
         title: 'Error',
         description: "Error while updating task's status",
+        isClosable: true,
       })
     },
   })

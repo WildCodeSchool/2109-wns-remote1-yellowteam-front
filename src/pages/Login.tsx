@@ -10,7 +10,7 @@ import {
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
-import mainTheme from 'src/theme/mainTheme'
+import mainTheme from 'src/definitions/chakra/theme/mainTheme'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ErrorMessage } from '@hookform/error-message'
 import { validationsLogin } from '../formResolvers/yupResolver'
@@ -91,7 +91,7 @@ export default function Login(): JSX.Element {
           <ErrorMessage
             errors={errors}
             name="email"
-            render={({ message }) => <p>{message}</p>}
+            render={({ message }) => <Text color="red">{message}</Text>}
           />
           <Input
             variant="flushed"
@@ -104,7 +104,7 @@ export default function Login(): JSX.Element {
           <ErrorMessage
             errors={errors}
             name="password"
-            render={({ message }) => <p>{message}</p>}
+            render={({ message }) => <Text color="red">{message}</Text>}
           />
         </FormControl>
         <Button
