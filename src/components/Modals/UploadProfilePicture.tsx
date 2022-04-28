@@ -55,7 +55,12 @@ export default function UploadProfilePictureModal({
           {file.length && (
             <Image src={URL.createObjectURL(file[0].file as File)} />
           )}
-          <Button onClick={() => buttonRef.current?.click()} variant="solid">
+          <Button
+            onClick={() => buttonRef.current?.click()}
+            variant="action"
+            w="full"
+            my={2}
+          >
             UPLOAD
           </Button>
         </ModalBody>
