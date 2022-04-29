@@ -19,3 +19,8 @@ export const validationsProfilUpdate = Yup.object({
   email: Yup.string().email().required(),
   // avatar: Yup.string().required(),
 })
+export const validationsTaskUpdate = Yup.object({
+  title: Yup.string().required(),
+  description: Yup.string().required(),
+  //  ? à venir time estimee et total time
+})

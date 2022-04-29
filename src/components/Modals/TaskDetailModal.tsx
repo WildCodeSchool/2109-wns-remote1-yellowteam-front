@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -15,16 +14,12 @@ import {
   Box,
   Image,
   ModalBody,
-  IconButton,
-  Textarea,
-  CircularProgress,
-  CircularProgressLabel,
   ModalFooter,
   Button,
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
 import React, { ReactElement } from 'react'
-import { useForm } from 'react-hook-form'
+import { FieldValue, FieldValues, useForm } from 'react-hook-form'
 import customProperties from 'src/definitions/chakra/theme/mainTheme'
 import {
   TaskUpdateInput,
@@ -32,8 +27,11 @@ import {
   useGetSingleSelfTasksQuery,
   Status,
 } from 'src/generated/graphql'
-import { Duration } from 'luxon'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { validationsTaskUpdate } from 'src/formResolvers/yupResolver'
+
 import Tag, { TagColor } from '../molecules/Tags'
+import InputWithError from '../forms/InputWithError'
 
 export interface IProps {
   isOpen: boolean
@@ -70,15 +68,16 @@ const TaskeDetailModal = ({
   taskId,
 }: IProps): ReactElement => {
   console.log('task id:', taskId)
-  // todo resolver pour les tasks
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<FormData>()
+  } = useForm({
+    resolver: yupResolver(validationsTaskUpdate),
+  })
 
-  const [isEditActive, setIsEditActive] = React.useState<boolean>(false)
+  const [isEditable, setIsEditable] = React.useState<boolean>(false)
 
   const [sendUpdate] = useUpdateTaskMutation({
     onError: (err) => {
@@ -118,22 +117,33 @@ const TaskeDetailModal = ({
       }),
       initialValue
     )
+  }
 
-    sendUpdate({
+  // const onSubmit = async (formData: FormData) => {
+  //   saveCardToDB(formData)
+  //   // test
+  //   onClose()
+  //   console.log('formData => ', formData)
+  // }
+
+  const onSubmit = async ({
+    title,
+    description,
+  }: FieldValues): Promise<void> => {
+    await sendUpdate({
       variables: {
         where: {
           id: taskId,
         },
         data: {
-          ...updateCard,
+          title: { set: !title ? data.task.title : title },
+          description: {
+            set: !description ? data.task.description : description,
+          },
         },
       },
     })
-  }
-
-  const onSubmit = async (formData: FormData) => {
-    saveCardToDB(formData)
-    console.log('formData => ', formData)
+    setIsEditable(false)
   }
 
   const tagText = {
@@ -163,12 +173,18 @@ const TaskeDetailModal = ({
             <Flex display="flex" flexDirection="row">
               <Box flexDirection="column">
                 <Text flexDirection="row" textStyle="h4">
-                  {isEditActive ? (
+                  {isEditable ? (
                     <>
-                      <Textarea
+                      {/* <Textarea
                         // onFocus={}
                         textStyle="body"
                         {...register('title')}
+                      /> */}
+                      <InputWithError
+                        errors={errors}
+                        name="title"
+                        isEditable={isEditable}
+                        register={register}
                       />
                     </>
                   ) : (
@@ -214,18 +230,28 @@ const TaskeDetailModal = ({
               </Flex>
             </Flex>
             <Flex display="flex" flexDirection="row">
-              {isEditActive ? (
+              {isEditable ? (
                 <>
-                  <Textarea
+                  {/* <Textarea
                     // onFocus={}
                     textStyle="body"
                     mt="12px"
                     placeholder="Add a new description"
                     {...register('description')}
+                  /> */}
+                  <InputWithError
+                    errors={errors}
+                    name="description"
+                    isEditable={isEditable}
+                    register={register}
                   />
                 </>
               ) : (
-                <Text textStyle="body" color={customProperties.colors.greyText}>
+                <Text
+                  textStyle="body"
+                  overflowY="scroll"
+                  color={customProperties.colors.greyText}
+                >
                   {data?.task.description}
                 </Text>
               )}
@@ -280,7 +306,7 @@ const TaskeDetailModal = ({
           <ModalFooter>
             <Button
               mx={5}
-              onClick={() => setIsEditActive((c) => !c)}
+              onClick={() => setIsEditable((c) => !c)}
               variant="action"
             >
               EDIT
