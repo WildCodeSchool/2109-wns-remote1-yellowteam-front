@@ -9,15 +9,17 @@ interface ITag {
 }
 
 export enum TagColor {
+  dimgray = 'dimgray',
+  green = 'green',
   lightRed = 'lightRed',
   lightGreen = 'lightGreen',
   lightBrown = 'lightBrown',
   orange = 'orange',
 }
 export const tagColorSwitch = {
-  [Status.Fihished]: TagColor.lightGreen,
+  [Status.Fihished]: TagColor.green,
   [Status.InProgress]: TagColor.orange,
-  [Status.NotStarted]: TagColor.lightRed,
+  [Status.NotStarted]: TagColor.dimgray,
 }
 
 const Tag = ({ text, textColor, tagColor }: ITag): JSX.Element => (

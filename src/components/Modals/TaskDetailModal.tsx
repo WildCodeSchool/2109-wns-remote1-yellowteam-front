@@ -19,6 +19,8 @@ import {
   Textarea,
   CircularProgress,
   CircularProgressLabel,
+  ModalFooter,
+  Button,
 } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
 import React, { ReactElement } from 'react'
@@ -68,7 +70,7 @@ const TaskeDetailModal = ({
   taskId,
 }: IProps): ReactElement => {
   console.log('task id:', taskId)
-
+  // todo resolver pour les tasks
   const {
     register,
     handleSubmit,
@@ -76,14 +78,7 @@ const TaskeDetailModal = ({
     formState: { errors },
   } = useForm<FormData>()
 
-  const [isEditDescriptionActive, setIsEditDescriptionActive] =
-    React.useState<boolean>(false)
-
-  const [isEditTitleActive, setIsEditTitleActive] =
-    React.useState<boolean>(false)
-
-  const [isEditTotalTimeSpentActive, setIsEditTotalTimeSpentActive] =
-    React.useState<boolean>(false)
+  const [isEditActive, setIsEditActive] = React.useState<boolean>(false)
 
   const [sendUpdate] = useUpdateTaskMutation({
     onError: (err) => {
@@ -148,9 +143,9 @@ const TaskeDetailModal = ({
   }
 
   const tagColor = {
-    [Status.Fihished]: TagColor.lightGreen,
+    [Status.Fihished]: TagColor.green,
     [Status.InProgress]: TagColor.orange,
-    [Status.NotStarted]: TagColor.lightRed,
+    [Status.NotStarted]: TagColor.dimgray,
   }
 
   return (
@@ -168,7 +163,17 @@ const TaskeDetailModal = ({
             <Flex display="flex" flexDirection="row">
               <Box flexDirection="column">
                 <Text flexDirection="row" textStyle="h4">
-                  {data?.task.title}
+                  {isEditActive ? (
+                    <>
+                      <Textarea
+                        // onFocus={}
+                        textStyle="body"
+                        {...register('title')}
+                      />
+                    </>
+                  ) : (
+                    <>{data?.task.title}</>
+                  )}
                 </Text>
                 <Box flexDirection="row" marginTop="5px">
                   <Flex alignItems="center">
@@ -177,7 +182,7 @@ const TaskeDetailModal = ({
                       textColor="white"
                       tagColor={tagColor[data.task.status_task]}
                     />
-                    <Box marginLeft="15px" width="24px" height="24px">
+                    <Box marginLeft="15px" width="25px" height="25px">
                       <Image
                         objectFit="cover"
                         width="full"
@@ -206,20 +211,10 @@ const TaskeDetailModal = ({
             <Flex display="flex" flexDirection="row">
               <Flex alignItems="center">
                 <Text textStyle="h3"> Task description</Text>
-                <IconButton
-                  variant="unstyled"
-                  aria-label=""
-                  icon={<EditIcon />}
-                  onClick={() =>
-                    !isEditDescriptionActive
-                      ? setIsEditDescriptionActive(true)
-                      : setIsEditDescriptionActive(false)
-                  }
-                />
               </Flex>
             </Flex>
             <Flex display="flex" flexDirection="row">
-              {isEditDescriptionActive ? (
+              {isEditActive ? (
                 <>
                   <Textarea
                     // onFocus={}
@@ -236,7 +231,7 @@ const TaskeDetailModal = ({
               )}
             </Flex>
             {/* Task Progress & Attachments */}
-            <Flex
+            {/* <Flex
               display="flex"
               flexDirection="row"
               marginY="30px"
@@ -256,11 +251,6 @@ const TaskeDetailModal = ({
                 <Text textStyle="h3"> Task progress details</Text>
                 <Box marginTop="10px">
                   <Flex flexDirection="row">
-                    {/* 
-                      todo aurelien
-                      peut se modifier
-                      
-                    */}
                     <Text textStyle="body">Initial time spent estimee</Text>
                   </Flex>
                   <Flex flexDirection="row">
@@ -277,12 +267,7 @@ const TaskeDetailModal = ({
                 <Text textStyle="h3"> Attachements See all</Text>
                 <Box marginTop="10px">
                   <Flex flexDirection="row">
-                    <Text textStyle="body">total_time_spent</Text>
-                    <Text>{data?.task.total_time_spent.toString()}</Text>
-                  </Flex>
-                  <Flex flexDirection="row">
-                    <Text textStyle="body">start date</Text>
-                    <Text>{data?.task.start_date.toString()}</Text>
+                    <Text>Todo</Text>
                   </Flex>
                   <Flex flexDirection="row">
                     <Text textStyle="body">end date</Text>
@@ -290,8 +275,24 @@ const TaskeDetailModal = ({
                   </Flex>
                 </Box>
               </Flex>
-            </Flex>
+            </Flex> */}
           </ModalBody>
+          <ModalFooter>
+            <Button
+              mx={5}
+              onClick={() => setIsEditActive((c) => !c)}
+              variant="action"
+            >
+              EDIT
+            </Button>
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              isLoading={loading}
+              variant="action"
+            >
+              SAVE
+            </Button>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
