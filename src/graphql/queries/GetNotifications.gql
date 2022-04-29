@@ -1,0 +1,20 @@
+query GetAllNotifications(
+  $where: NotificationWhereInput!
+  $orderBy: [NotificationOrderByWithRelationInput!]
+) {
+  notifications(orderBy: $orderBy, where: $where) {
+    id
+    title
+    status
+    sender {
+      id
+      first_name
+      last_name
+      email
+      avatar
+    }
+    content
+    created_at
+    updated_at
+  }
+}

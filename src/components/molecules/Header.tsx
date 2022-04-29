@@ -1,5 +1,6 @@
 import React from 'react'
 import { Flex, Text, Input } from '@chakra-ui/react'
+import NotificationsHOC from '../Notifications/NotificationsHOC'
 
 interface IHeader {
   userName: string
@@ -13,7 +14,10 @@ const Header = ({ userName }: IHeader): JSX.Element => (
         &nbsp; &nbsp; Welcome {userName}
       </Text>
     </Flex>
-    <Input width="220px" variant="filled" placeholder="Search" />
+    <Flex alignItems="center" as="button" data-testid="notifications-button">
+      <Input ml={4} width="220px" variant="filled" placeholder="Search" />
+      <NotificationsHOC />
+    </Flex>
   </Flex>
 )
 

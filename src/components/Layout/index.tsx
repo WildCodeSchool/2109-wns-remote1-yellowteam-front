@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import Header from 'src/components/molecules/Header'
 
-import UserNavBar from '../UserNavBar'
+import UserNavBar from './UserNavBar'
 
 export default function Layout(): JSX.Element {
   const { user } = useAppState()

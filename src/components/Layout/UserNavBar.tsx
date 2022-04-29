@@ -4,11 +4,10 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import ProjectIcon from 'src/static/svg/ProjectIcon'
 import { useMutateLogoutMutation } from 'src/generated/graphql'
-import TasksIcon from '../static/svg/TasksIcon'
-import mainTheme from '../definitions/chakra/theme/mainTheme'
-import UserIcon from '../static/svg/UserIcon'
-import BellIcon from '../static/svg/BellIcon'
-import SignOutIcon from '../static/svg/SignOutIcon'
+import TasksIcon from '../../static/svg/TasksIcon'
+import mainTheme from '../../definitions/chakra/theme/mainTheme'
+import UserIcon from '../../static/svg/UserIcon'
+import SignOutIcon from '../../static/svg/SignOutIcon'
 
 const UserNavBar = (): JSX.Element => {
   const navigate = useNavigate()
@@ -67,19 +66,6 @@ const UserNavBar = (): JSX.Element => {
         <UserIcon
           color={
             location.pathname.includes('profile')
-              ? mainTheme.colors.orange
-              : mainTheme.colors.deactivatedGrey
-          }
-        />
-      </Box>
-      <Box
-        as="button"
-        data-testid="notifications-button"
-        onClick={() => setTab('notifications')}
-      >
-        <BellIcon
-          color={
-            location.pathname.includes('notifications')
               ? mainTheme.colors.orange
               : mainTheme.colors.deactivatedGrey
           }

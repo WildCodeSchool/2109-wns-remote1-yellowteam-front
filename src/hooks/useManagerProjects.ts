@@ -5,7 +5,20 @@ import { useGetManagerProjectsQuery } from '../generated/graphql'
 const useManagerProjects = () => {
   const { userId } = useAppState()
   const { data, loading, error, refetch } = useGetManagerProjectsQuery({
-    variables: { userId },
+    variables: {
+      where: {
+        owner: {
+          is: {
+            id: {
+              equals: userId,
+            },
+          },
+        },
+        is_disabled: {
+          equals: false,
+        },
+      },
+    },
     skip: !userId,
   })
   return {

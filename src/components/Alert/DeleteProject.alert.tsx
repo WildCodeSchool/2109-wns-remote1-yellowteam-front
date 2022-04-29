@@ -9,6 +9,9 @@ import {
   Text,
   Input,
 } from '@chakra-ui/react'
+import Delete from 'src/static/svg/Delete'
+import mainTheme from 'src/definitions/chakra/theme/mainTheme'
+
 import { ChangeEvent, useState } from 'react'
 
 type Props = {
@@ -36,24 +39,18 @@ export default function DeleteProjectAlert({
   }
 
   const handleDelete = async () => {
-    if (verificationText === 'Delete websites now') {
+    if (verificationText === 'Delete project now') {
       onSubmit()
       await setVerificationText('')
       return onClose()
     }
-    return setError('Please type "Delete websites now" to confirm')
+    return setError('Please type "Delete project now" to confirm')
   }
 
   return (
     <>
-      <Button
-        backgroundColor="#24323F"
-        color="white"
-        w="full"
-        my={2}
-        onClick={onOpen}
-      >
-        Delete Websites
+      <Button onClick={onOpen} variant="ghost">
+        <Delete color={mainTheme.colors.mediumGreyText} />
       </Button>
 
       <AlertDialog
