@@ -13,7 +13,14 @@ import {
   Flex,
   Text,
   Box,
+  Image,
+  ModalBody,
+  IconButton,
+  Textarea,
+  CircularProgress,
+  CircularProgressLabel,
 } from '@chakra-ui/react'
+import { EditIcon } from '@chakra-ui/icons'
 import React, { ReactElement } from 'react'
 import { useForm } from 'react-hook-form'
 import customProperties from 'src/definitions/chakra/theme/mainTheme'
@@ -23,6 +30,7 @@ import {
   useGetSingleSelfTasksQuery,
   Status,
 } from 'src/generated/graphql'
+import { Duration } from 'luxon'
 import Tag, { TagColor } from '../molecules/Tags'
 
 export interface IProps {
@@ -155,19 +163,33 @@ const TaskeDetailModal = ({
       >
         <ModalOverlay />
         <ModalContent backgroundColor="#FFFFFF" borderRadius="10">
+          {/* Header */}
           <ModalHeader>
             <Flex display="flex" flexDirection="row">
               <Box flexDirection="column">
                 <Text flexDirection="row" textStyle="h4">
                   {data?.task.title}
                 </Text>
-                <Box flexDirection="row" marginTop="10px">
-                  <Flex>
+                <Box flexDirection="row" marginTop="5px">
+                  <Flex alignItems="center">
                     <Tag
                       text={tagText[data.task.status_task]}
                       textColor="white"
                       tagColor={tagColor[data.task.status_task]}
                     />
+                    <Box marginLeft="15px" width="24px" height="24px">
+                      <Image
+                        objectFit="cover"
+                        width="full"
+                        h="full"
+                        borderRadius="100%"
+                        src={
+                          data?.task &&
+                          data?.task.user &&
+                          data?.task.user.avatar
+                        }
+                      />
+                    </Box>
                   </Flex>
                 </Box>
               </Box>
@@ -178,6 +200,98 @@ const TaskeDetailModal = ({
               size="lg"
             />
           </ModalHeader>
+
+          <ModalBody>
+            {/* Description */}
+            <Flex display="flex" flexDirection="row">
+              <Flex alignItems="center">
+                <Text textStyle="h3"> Task description</Text>
+                <IconButton
+                  variant="unstyled"
+                  aria-label=""
+                  icon={<EditIcon />}
+                  onClick={() =>
+                    !isEditDescriptionActive
+                      ? setIsEditDescriptionActive(true)
+                      : setIsEditDescriptionActive(false)
+                  }
+                />
+              </Flex>
+            </Flex>
+            <Flex display="flex" flexDirection="row">
+              {isEditDescriptionActive ? (
+                <>
+                  <Textarea
+                    // onFocus={}
+                    textStyle="body"
+                    mt="12px"
+                    placeholder="Add a new description"
+                    {...register('description')}
+                  />
+                </>
+              ) : (
+                <Text textStyle="body" color={customProperties.colors.greyText}>
+                  {data?.task.description}
+                </Text>
+              )}
+            </Flex>
+            {/* Task Progress & Attachments */}
+            <Flex
+              display="flex"
+              flexDirection="row"
+              marginY="30px"
+              justifyContent="space-between"
+            >
+              <Flex flexDirection="column" align="center">
+                <Text textStyle="h3"> Task progress</Text>
+                <Box marginTop="10px">
+                  <CircularProgress value={40} color="orange" size="100px">
+                    <CircularProgressLabel fontSize="20px">
+                      40%
+                    </CircularProgressLabel>
+                  </CircularProgress>
+                </Box>
+              </Flex>
+              <Flex flexDirection="column" align="flex-start">
+                <Text textStyle="h3"> Task progress details</Text>
+                <Box marginTop="10px">
+                  <Flex flexDirection="row">
+                    {/* 
+                      todo aurelien
+                      peut se modifier
+                      
+                    */}
+                    <Text textStyle="body">Initial time spent estimee</Text>
+                  </Flex>
+                  <Flex flexDirection="row">
+                    <Text textStyle="body">Total time spent estimee</Text>
+                    <Text>
+                      {Duration.fromMillis(
+                        data?.task.total_time_spent
+                      ).toFormat("hh'h' mm'm' ss's'")}
+                    </Text>
+                  </Flex>
+                </Box>
+              </Flex>
+              <Flex flexDirection="column" align="flex-start">
+                <Text textStyle="h3"> Attachements See all</Text>
+                <Box marginTop="10px">
+                  <Flex flexDirection="row">
+                    <Text textStyle="body">total_time_spent</Text>
+                    <Text>{data?.task.total_time_spent.toString()}</Text>
+                  </Flex>
+                  <Flex flexDirection="row">
+                    <Text textStyle="body">start date</Text>
+                    <Text>{data?.task.start_date.toString()}</Text>
+                  </Flex>
+                  <Flex flexDirection="row">
+                    <Text textStyle="body">end date</Text>
+                    <Text>{data?.task.end_date.toString()}</Text>
+                  </Flex>
+                </Box>
+              </Flex>
+            </Flex>
+          </ModalBody>
         </ModalContent>
       </Modal>
     </>
