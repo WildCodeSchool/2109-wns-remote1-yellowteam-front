@@ -9,9 +9,6 @@ import {
   Text,
   Input,
 } from '@chakra-ui/react'
-import Delete from 'src/static/svg/Delete'
-import mainTheme from 'src/definitions/chakra/theme/mainTheme'
-
 import { ChangeEvent, useState } from 'react'
 
 type Props = {
@@ -21,10 +18,12 @@ type Props = {
   onOpen: () => void
   onSubmit: () => void
   loading: boolean
+  DeleteButton: ({ onClick }: { onClick: () => void }) => JSX.Element
 }
 
 export default function DeleteProjectAlert({
   onOpen,
+  DeleteButton,
   onSubmit,
   loading,
   isOpen,
@@ -49,9 +48,7 @@ export default function DeleteProjectAlert({
 
   return (
     <>
-      <Button onClick={onOpen} variant="ghost">
-        <Delete color={mainTheme.colors.mediumGreyText} />
-      </Button>
+      <DeleteButton onClick={onOpen} />
 
       <AlertDialog
         isOpen={isOpen}

@@ -13,7 +13,8 @@ const WhitePannel = ({ children, close, title }: IProps): ReactElement => {
   const navigate = useNavigate()
 
   return (
-    <Box
+    <Flex
+      direction="column"
       w="full"
       h="full"
       backgroundColor="white"
@@ -21,20 +22,20 @@ const WhitePannel = ({ children, close, title }: IProps): ReactElement => {
       mt={10}
       borderRadius={12}
     >
-      <Flex flexDirection="column">
+      <Flex flexDirection="column" flexGrow={1}>
         {close ? (
           <Flex justifyContent="flex-end" onClick={() => navigate(-1)}>
             <CloseButton />
           </Flex>
         ) : (
-          <Box paddingTop={30} data-testid="box-with-padding" />
+          <Box data-testid="box-with-padding" />
         )}
-        <Text textStyle="h2" pb="10px">
+        <Text textStyle="h2" mb="10px">
           {title}
         </Text>
         {children}
       </Flex>
-    </Box>
+    </Flex>
   )
 }
 
