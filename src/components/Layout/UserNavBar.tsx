@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Box, Switch } from '@chakra-ui/react'
+import { Flex, Box, Switch, useColorMode } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import ProjectIcon from 'src/static/svg/ProjectIcon'
@@ -12,6 +12,7 @@ import SignOutIcon from '../../static/svg/SignOutIcon'
 const UserNavBar = (): JSX.Element => {
   const navigate = useNavigate()
   const { dispatchLogout } = useAppState()
+  const { colorMode, toggleColorMode } = useColorMode()
 
   const [mutateLogout] = useMutateLogoutMutation({
     onCompleted: () => dispatchLogout(),
@@ -78,7 +79,7 @@ const UserNavBar = (): JSX.Element => {
       >
         <SignOutIcon color={mainTheme.colors.deactivatedGrey} />
       </Box>
-      <Switch />
+      <Switch onChange={toggleColorMode} />
     </Flex>
   )
 }
