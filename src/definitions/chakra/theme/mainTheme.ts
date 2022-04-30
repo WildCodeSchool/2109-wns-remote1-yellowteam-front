@@ -28,13 +28,13 @@ const customProperties = {
       marginRight: '10px',
     },
     h1: {
-      fontSize: ['32', '36'],
+      fontSize: ['15', '15', '32', '36'],
       fontWeight: '800',
       color: '#38383A',
       fontFamily: 'Avenir',
     },
     h2: {
-      fontSize: ['22', '24'],
+      fontSize: ['12', '15', '22', '24'],
       fontWeight: '800',
       color: '#38383A',
       fontFamily: 'Avenir',

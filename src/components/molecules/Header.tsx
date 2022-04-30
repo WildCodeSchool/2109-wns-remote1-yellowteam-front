@@ -7,15 +7,39 @@ interface IHeader {
 }
 
 const Header = ({ userName }: IHeader): JSX.Element => (
-  <Flex width="full" alignItems="center" justifyContent="space-between">
-    <Flex>
-      <Text fontSize="36px">👋🏻</Text>
-      <Text textStyle="h1" height="fit-content">
-        &nbsp; &nbsp; Welcome {userName}
-      </Text>
+  <Flex
+    direction={['column-reverse', 'column-reverse', 'row', 'row']}
+    width="full"
+    alignItems={['justify-between', 'justify-between', 'center', 'center']}
+    justifyContent={[
+      'flex-start',
+      'flex-start',
+      'space-between',
+      'space-between',
+    ]}
+  >
+    <Flex w="50%" my={[2, 2, 0, 0]}>
+      <Text fontSize={['12px', '18px', '24px', '36px']}>👋🏻</Text>
+      <Text textStyle="h1">&nbsp; &nbsp; Welcome {userName}</Text>
     </Flex>
-    <Flex alignItems="center" as="button" data-testid="notifications-button">
-      <Input ml={4} width="220px" variant="filled" placeholder="Search" />
+    <Flex
+      w={['100%']}
+      alignItems="center"
+      justifyContent={[
+        'space-between',
+        'space-between',
+        'flex-end',
+        'flex-end',
+      ]}
+      as="button"
+      data-testid="notifications-button"
+    >
+      <Input
+        ml={[0, 0, 4, 4]}
+        width="220px"
+        variant="filled"
+        placeholder="Search"
+      />
       <NotificationsHOC />
     </Flex>
   </Flex>

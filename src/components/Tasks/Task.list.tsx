@@ -1,10 +1,9 @@
 import { Spinner } from '@chakra-ui/react'
-import React from 'react'
 import { GetTasksByProjectQuery, Status } from 'src/generated/graphql'
 import useBoardState from 'src/hooks/useBoardState'
 import BoardTicketsStatus from 'src/components/molecules/BoardTicketsStatus'
 import Tag from '../molecules/Tags'
-import MotionFlex from '../Motion/MotionFlex'
+import { MotionFlex } from '../Motion'
 import Card from './Task.card'
 
 type Props = {
@@ -23,9 +22,12 @@ export default function TaskList({ tasks, name, status }: Props): JSX.Element {
     <MotionFlex
       border={2}
       p={5}
+      w={['full', 'full', '30%']}
+      minWidth="-webkit-fit-content"
       borderColor="gray.400"
       borderStyle="dashed"
       onMouseEnter={handleHover}
+      my={[5, 5, 0, 0]}
       flexDirection="column"
       height="full"
       rounded={10}

@@ -89,7 +89,7 @@ const Card = ({
         boxShadow: '0px 5px 5px rgba(0,0,0,0.1)',
       }}
       backgroundColor="#FFFFFF"
-      width="218px"
+      minWidth="218px"
       borderRadius="10"
       padding="9px 14px 9px 14px"
       marginBottom="10px"
