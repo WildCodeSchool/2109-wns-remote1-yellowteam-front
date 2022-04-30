@@ -11,7 +11,14 @@ export default function Layout(): JSX.Element {
   return (
     <Box height="100vh" display="flex" position="fixed" w="100vw">
       <UserNavBar />
-      <Box p={10} display="flex" flexDirection="column" w="full" h="full">
+      <Box
+        p={[2, 4, 8, 10]}
+        display="flex"
+        flexDirection="column"
+        overflowY="scroll"
+        overflowX="hidden"
+        w="full"
+      >
         <Header userName={user?.first_name ?? ''} />
         <Outlet />
       </Box>
