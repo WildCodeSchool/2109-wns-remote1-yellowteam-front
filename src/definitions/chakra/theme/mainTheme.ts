@@ -4,7 +4,7 @@ const customProperties = {
   textStyles: {
     // you can also use responsive styles
     titleLogin: {
-      fontSize: ['42', '56', '72'],
+      fontSize: ['32', '42', '56', '72'],
       fontWeight: '800',
       color: '#38383A',
       fontFamily: 'Avenir',
