@@ -85,7 +85,17 @@ declare module 'react-table' {
       UsePaginationInstanceProps<D>,
       UseRowSelectInstanceProps<D>,
       UseRowStateInstanceProps<D>,
-      UseSortByInstanceProps<D> {}
+      UseSortByInstanceProps<D> {
+    page: Array<Row<D>>
+    pageCount: number
+    pageOptions: number[]
+    canPreviousPage: boolean
+    canNextPage: boolean
+    gotoPage: (updater: ((pageIndex: number) => number) | number) => void
+    previousPage: () => void
+    nextPage: () => void
+    setPageSize: (pageSize: number) => void
+  }
 
   export interface TableState<
     D extends Record<string, unknown> = Record<string, unknown>

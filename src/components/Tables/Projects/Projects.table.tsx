@@ -16,7 +16,7 @@ import {
 import { useTable, useSortBy, useRowSelect, usePagination } from 'react-table'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
 import ProjectsTableFilters from './Projects.table.filters'
-import TableFooter from '../Table.footer'
+import TableFooter from './Table.footer'
 import useProjectTableData from './ProjectTable.data'
 import IndeterminateCheckbox from '../TableCheckbox'
 

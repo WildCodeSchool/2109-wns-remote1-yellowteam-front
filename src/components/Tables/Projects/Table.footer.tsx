@@ -1,22 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Button, HStack, useDisclosure } from '@chakra-ui/react'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { client } from 'src/App'
 import {
   GetManagerProjectsDocument,
   useUpdateManyProjectsMutation,
 } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
-import DeleteProjectAlert from '../Alert/DeleteProject.alert'
-import ProjectsDeleteButton from './Projects/Projects.delete.button'
+import DeleteProjectAlert from '../../Alert/DeleteProject.alert'
+import ProjectsDeleteButton from './Projects.delete.button'
 
 type Props = {
   pageOptions: any
-  pageIndex: any
+  pageIndex: number
   pageSize: any
   canPreviousPage: any
   canNextPage: any
-  pageCount: any
+  pageCount: number
   setPageSize: any
   gotoPage: any
   previousPage: any
