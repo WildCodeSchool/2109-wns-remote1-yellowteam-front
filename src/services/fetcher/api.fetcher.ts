@@ -20,7 +20,6 @@ export const avatar = {
       await axiosInstance.post(`?userId=${userId}&size=${size}`, formData, {
         onUploadProgress: (progressEvent) => {
           const { loaded, total } = progressEvent
-
           setProgress((loaded / total) * 100)
         },
       })
