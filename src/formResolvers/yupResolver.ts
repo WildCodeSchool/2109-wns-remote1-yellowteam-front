@@ -19,3 +19,8 @@ export const validationsProfilUpdate = Yup.object({
   email: Yup.string().email().required(),
   // avatar: Yup.string().required(),
 })
+
+export const validationsCreateProject = Yup.object({
+  title: Yup.string().required().min(4),
+  description: Yup.string().required().min(10),
+})

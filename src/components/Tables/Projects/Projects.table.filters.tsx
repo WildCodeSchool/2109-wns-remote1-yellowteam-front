@@ -1,6 +1,7 @@
 import { Flex, RadioGroup, Stack, Radio, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Status } from 'src/generated/graphql'
+import AddProjectButton from 'src/components/Projects/AddProject.button'
 
 export default function ProjectsTableFilters(): JSX.Element {
   const [value, setValue] = useState('1')
@@ -17,6 +18,7 @@ export default function ProjectsTableFilters(): JSX.Element {
           </Stack>
         </RadioGroup>
       </Flex>
+      <AddProjectButton />
     </Flex>
   )
 }
