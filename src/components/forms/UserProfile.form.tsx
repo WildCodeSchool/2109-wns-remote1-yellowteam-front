@@ -69,6 +69,7 @@ export default function UserProfileForm(): JSX.Element {
         <VStack justifyContent="flex-start" alignItems="start" spacing={2}>
           <FormLabel>First Name</FormLabel>
           <InputWithError
+            type="text"
             errors={errors}
             name="first_name"
             isEditable={isEditable}
@@ -77,6 +78,7 @@ export default function UserProfileForm(): JSX.Element {
 
           <FormLabel>Last Name</FormLabel>
           <InputWithError
+            type="text"
             errors={errors}
             name="last_name"
             isEditable={isEditable}
@@ -87,6 +89,7 @@ export default function UserProfileForm(): JSX.Element {
         <VStack justifyContent="flex-start" alignItems="start" spacing={2}>
           <FormLabel>Phone number</FormLabel>
           <InputWithError
+            type="text"
             errors={errors}
             name="phone_number"
             isEditable={false}
@@ -95,6 +98,7 @@ export default function UserProfileForm(): JSX.Element {
 
           <FormLabel>Email</FormLabel>
           <InputWithError
+            type="text"
             errors={errors}
             name="email"
             isEditable={isEditable}
