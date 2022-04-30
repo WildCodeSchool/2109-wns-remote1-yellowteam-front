@@ -4907,6 +4907,7 @@ export type User = {
   notifications_sent: Array<Notification>;
   owned_projects: Array<Project>;
   password: Scalars['String'];
+  phone_number: Maybe<Scalars['String']>;
   project_comments: Array<Comment>;
   projects: Array<Project>;
   role: Array<Role>;
@@ -5029,6 +5030,7 @@ export type UserCountAggregate = {
   is_disabled: Scalars['Int'];
   last_name: Scalars['Int'];
   password: Scalars['Int'];
+  phone_number: Scalars['Int'];
   role: Scalars['Int'];
   updated_at: Scalars['Int'];
 };
@@ -5042,6 +5044,7 @@ export type UserCountOrderByAggregateInput = {
   is_disabled?: InputMaybe<SortOrder>;
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
+  phone_number?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
   updated_at?: InputMaybe<SortOrder>;
 };
@@ -5060,6 +5063,7 @@ export type UserCreateInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5077,6 +5081,7 @@ export type UserCreateManyInput = {
   is_disabled: Scalars['Boolean'];
   last_name: Scalars['String'];
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<UserCreateroleInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
 };
@@ -5193,6 +5198,7 @@ export type UserCreateWithoutFilesInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5214,6 +5220,7 @@ export type UserCreateWithoutInvitationsInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5235,6 +5242,7 @@ export type UserCreateWithoutNotificationsInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5256,6 +5264,7 @@ export type UserCreateWithoutNotifications_SentInput = {
   notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5277,6 +5286,7 @@ export type UserCreateWithoutOwned_ProjectsInput = {
   notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5299,6 +5309,7 @@ export type UserCreateWithoutProject_CommentsInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
@@ -5320,6 +5331,7 @@ export type UserCreateWithoutProjectsInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   role?: InputMaybe<UserCreateroleInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
@@ -5341,6 +5353,7 @@ export type UserCreateWithoutTask_CommentsInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5362,6 +5375,7 @@ export type UserCreateWithoutTasksInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5386,6 +5400,7 @@ export type UserGroupBy = {
   is_disabled: Scalars['Boolean'];
   last_name: Scalars['String'];
   password: Scalars['String'];
+  phone_number: Maybe<Scalars['String']>;
   role: Maybe<Array<Role>>;
   updated_at: Scalars['DateTime'];
 };
@@ -5406,6 +5421,7 @@ export type UserMaxAggregate = {
   is_disabled: Maybe<Scalars['Boolean']>;
   last_name: Maybe<Scalars['String']>;
   password: Maybe<Scalars['String']>;
+  phone_number: Maybe<Scalars['String']>;
   updated_at: Maybe<Scalars['DateTime']>;
 };
 
@@ -5418,6 +5434,7 @@ export type UserMaxOrderByAggregateInput = {
   is_disabled?: InputMaybe<SortOrder>;
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
+  phone_number?: InputMaybe<SortOrder>;
   updated_at?: InputMaybe<SortOrder>;
 };
 
@@ -5431,6 +5448,7 @@ export type UserMinAggregate = {
   is_disabled: Maybe<Scalars['Boolean']>;
   last_name: Maybe<Scalars['String']>;
   password: Maybe<Scalars['String']>;
+  phone_number: Maybe<Scalars['String']>;
   updated_at: Maybe<Scalars['DateTime']>;
 };
 
@@ -5443,6 +5461,7 @@ export type UserMinOrderByAggregateInput = {
   is_disabled?: InputMaybe<SortOrder>;
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
+  phone_number?: InputMaybe<SortOrder>;
   updated_at?: InputMaybe<SortOrder>;
 };
 
@@ -5462,6 +5481,7 @@ export type UserOrderByWithAggregationInput = {
   is_disabled?: InputMaybe<SortOrder>;
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
+  phone_number?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
   updated_at?: InputMaybe<SortOrder>;
 };
@@ -5480,6 +5500,7 @@ export type UserOrderByWithRelationInput = {
   notifications_sent?: InputMaybe<NotificationOrderByRelationAggregateInput>;
   owned_projects?: InputMaybe<ProjectOrderByRelationAggregateInput>;
   password?: InputMaybe<SortOrder>;
+  phone_number?: InputMaybe<SortOrder>;
   project_comments?: InputMaybe<CommentOrderByRelationAggregateInput>;
   projects?: InputMaybe<ProjectOrderByRelationAggregateInput>;
   role?: InputMaybe<SortOrder>;
@@ -5502,6 +5523,7 @@ export enum UserScalarFieldEnum {
   IsDisabled = 'is_disabled',
   LastName = 'last_name',
   Password = 'password',
+  PhoneNumber = 'phone_number',
   Role = 'role',
   UpdatedAt = 'updated_at'
 }
@@ -5518,6 +5540,7 @@ export type UserScalarWhereInput = {
   is_disabled?: InputMaybe<BoolFilter>;
   last_name?: InputMaybe<StringFilter>;
   password?: InputMaybe<StringFilter>;
+  phone_number?: InputMaybe<StringNullableFilter>;
   role?: InputMaybe<EnumRoleNullableListFilter>;
   updated_at?: InputMaybe<DateTimeFilter>;
 };
@@ -5534,6 +5557,7 @@ export type UserScalarWhereWithAggregatesInput = {
   is_disabled?: InputMaybe<BoolWithAggregatesFilter>;
   last_name?: InputMaybe<StringWithAggregatesFilter>;
   password?: InputMaybe<StringWithAggregatesFilter>;
+  phone_number?: InputMaybe<StringNullableWithAggregatesFilter>;
   role?: InputMaybe<EnumRoleNullableListFilter>;
   updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
 };
@@ -5552,6 +5576,7 @@ export type UserUpdateInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5569,6 +5594,7 @@ export type UserUpdateManyMutationInput = {
   is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
   last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -5685,6 +5711,7 @@ export type UserUpdateWithoutFilesInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5706,6 +5733,7 @@ export type UserUpdateWithoutInvitationsInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5727,6 +5755,7 @@ export type UserUpdateWithoutNotificationsInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5748,6 +5777,7 @@ export type UserUpdateWithoutNotifications_SentInput = {
   notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5769,6 +5799,7 @@ export type UserUpdateWithoutOwned_ProjectsInput = {
   notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5791,6 +5822,7 @@ export type UserUpdateWithoutProject_CommentsInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
@@ -5812,6 +5844,7 @@ export type UserUpdateWithoutProjectsInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
@@ -5833,6 +5866,7 @@ export type UserUpdateWithoutTask_CommentsInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5854,6 +5888,7 @@ export type UserUpdateWithoutTasksInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5929,6 +5964,7 @@ export type UserWhereInput = {
   notifications_sent?: InputMaybe<NotificationListRelationFilter>;
   owned_projects?: InputMaybe<ProjectListRelationFilter>;
   password?: InputMaybe<StringFilter>;
+  phone_number?: InputMaybe<StringNullableFilter>;
   project_comments?: InputMaybe<CommentListRelationFilter>;
   projects?: InputMaybe<ProjectListRelationFilter>;
   role?: InputMaybe<EnumRoleNullableListFilter>;
@@ -5994,6 +6030,14 @@ export type SetNotificationReadMutationVariables = Exact<{
 
 
 export type SetNotificationReadMutation = { __typename?: 'Mutation', updateNotification: { __typename?: 'Notification', id: string, status: Status_Notification } };
+
+export type UpdateManyProjectsMutationVariables = Exact<{
+  where: InputMaybe<ProjectWhereInput>;
+  data: ProjectUpdateManyMutationInput;
+}>;
+
+
+export type UpdateManyProjectsMutation = { __typename?: 'Mutation', updateManyProject: { __typename?: 'AffectedRowsOutput', count: number } };
 
 export type UpdateProjectMutationVariables = Exact<{
   data: ProjectUpdateInput;
@@ -6344,6 +6388,40 @@ export function useSetNotificationReadMutation(baseOptions?: Apollo.MutationHook
 export type SetNotificationReadMutationHookResult = ReturnType<typeof useSetNotificationReadMutation>;
 export type SetNotificationReadMutationResult = Apollo.MutationResult<SetNotificationReadMutation>;
 export type SetNotificationReadMutationOptions = Apollo.BaseMutationOptions<SetNotificationReadMutation, SetNotificationReadMutationVariables>;
+export const UpdateManyProjectsDocument = gql`
+    mutation updateManyProjects($where: ProjectWhereInput, $data: ProjectUpdateManyMutationInput!) {
+  updateManyProject(where: $where, data: $data) {
+    count
+  }
+}
+    `;
+export type UpdateManyProjectsMutationFn = Apollo.MutationFunction<UpdateManyProjectsMutation, UpdateManyProjectsMutationVariables>;
+
+/**
+ * __useUpdateManyProjectsMutation__
+ *
+ * To run a mutation, you first call `useUpdateManyProjectsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateManyProjectsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateManyProjectsMutation, { data, loading, error }] = useUpdateManyProjectsMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useUpdateManyProjectsMutation(baseOptions?: Apollo.MutationHookOptions<UpdateManyProjectsMutation, UpdateManyProjectsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateManyProjectsMutation, UpdateManyProjectsMutationVariables>(UpdateManyProjectsDocument, options);
+      }
+export type UpdateManyProjectsMutationHookResult = ReturnType<typeof useUpdateManyProjectsMutation>;
+export type UpdateManyProjectsMutationResult = Apollo.MutationResult<UpdateManyProjectsMutation>;
+export type UpdateManyProjectsMutationOptions = Apollo.BaseMutationOptions<UpdateManyProjectsMutation, UpdateManyProjectsMutationVariables>;
 export const UpdateProjectDocument = gql`
     mutation UpdateProject($data: ProjectUpdateInput!, $projectId: ProjectWhereUniqueInput!) {
   updateProject(data: $data, where: $projectId) {

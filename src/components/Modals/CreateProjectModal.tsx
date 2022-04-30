@@ -128,7 +128,13 @@ const CreateProjectModal = ({
             {...register('is_disabled', {
               required: 'Project visibility is required',
             })}
-            onChange={setIsDisabled.toggle}
+            onChange={(e) => {
+              if (e === 'true') {
+                setIsDisabled.on()
+              } else {
+                setIsDisabled.off()
+              }
+            }}
           >
             <Stack direction="column">
               <Radio value="true">Visible</Radio>
