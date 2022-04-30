@@ -40,7 +40,11 @@ const useProjectTableData = () => {
                 <Text textDecor="underline">{item.title}</Text>
               </Link>
             ),
-            description: item.description,
+            description: (
+              <Text isTruncated minW="50px" maxW="150px">
+                {item.description}
+              </Text>
+            ),
             status: <ProjectStatusChip status={item.status_project} />,
           }))
         : [],
@@ -55,7 +59,7 @@ const useProjectTableData = () => {
       },
       {
         Header: 'DESCRIPTION',
-        accessor: 'desctiption',
+        accessor: 'description',
       },
       {
         Header: 'STATUS',
