@@ -1,0 +1,8 @@
+mutation updateManyProjects(
+  $where: ProjectWhereInput
+  $data: ProjectUpdateManyMutationInput!
+) {
+  updateManyProject(where: $where, data: $data) {
+    count
+  }
+}
