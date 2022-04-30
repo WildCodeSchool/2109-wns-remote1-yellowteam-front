@@ -1,7 +1,8 @@
 import React from 'react'
-import { screen, render, fireEvent } from '@testing-library/react'
+import { screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import CreateProjectModal from '../components/Modals/CreateProjectModal'
+import { render } from './test-utils'
 
 describe('CreateProjectModalForm', () => {
   let mocks: any

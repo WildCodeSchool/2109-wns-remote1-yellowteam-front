@@ -146,6 +146,7 @@ const CreateProjectModal = ({ isOpen, onClose }: IProps): ReactElement => {
               my={2}
               errors={errors}
               name="description"
+              aria-label="description"
               isEditable
               register={register}
               type="text"
