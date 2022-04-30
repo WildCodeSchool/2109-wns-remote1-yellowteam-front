@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Box, Button, HStack, useDisclosure } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Text,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { useRef } from 'react'
 import { client } from 'src/App'
 import {
@@ -90,13 +97,13 @@ export default function TableFooter({
       alignItems="center"
       className="pagination"
     >
-      <Box>
-        <span>
+      <Flex w="full">
+        <Text mr={2}>
           Page{' '}
           <strong>
             {pageIndex + 1} of {pageOptions.length}
           </strong>{' '}
-        </span>
+        </Text>
 
         <select
           value={pageSize}
@@ -110,45 +117,49 @@ export default function TableFooter({
             </option>
           ))}
         </select>
-      </Box>
-      <HStack>
-        <DeleteProjectAlert
-          DeleteButton={ProjectsDeleteButton}
-          cancelRef={cancelRef}
-          isOpen={isOpen}
-          onClose={onClose}
-          onOpen={onOpen}
-          loading={loading}
-          onSubmit={handleDeleteProject}
-        />
+      </Flex>
+      <DeleteProjectAlert
+        DeleteButton={ProjectsDeleteButton}
+        cancelRef={cancelRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        onOpen={onOpen}
+        loading={loading}
+        onSubmit={handleDeleteProject}
+      />
+      <HStack ml={2} rounded={5} spacing={0} bg="white">
         <Button
+          rounded={0}
           type="button"
           onClick={() => gotoPage(0)}
           disabled={!canPreviousPage}
         >
           {'<<'}
-        </Button>{' '}
+        </Button>
         <Button
+          rounded={0}
           type="button"
           onClick={() => previousPage()}
           disabled={!canPreviousPage}
         >
           {'<'}
-        </Button>{' '}
+        </Button>
         <Button
+          rounded={0}
           type="button"
           onClick={() => nextPage()}
           disabled={!canNextPage}
         >
           {'>'}
-        </Button>{' '}
+        </Button>
         <Button
+          rounded={0}
           type="button"
           onClick={() => gotoPage(pageCount - 1)}
           disabled={!canNextPage}
         >
           {'>>'}
-        </Button>{' '}
+        </Button>
       </HStack>
     </Box>
   )
