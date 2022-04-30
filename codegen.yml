@@ -1,5 +1,8 @@
 overwrite: true
-schema: ${REACT_APP_SERVER_URL}
+schema:
+  - ${REACT_APP_SERVER_URL}:
+      headers:
+        Origin: 'http://localhost:3000'
 documents: 'src/**/*.gql'
 generates:
   src/generated/graphql.ts:

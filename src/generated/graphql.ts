@@ -5982,7 +5982,7 @@ export type ProjectFragment = { __typename?: 'Project', id: string, title: strin
 
 export type TaskFragment = { __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } };
 
-export type UserFragment = { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> };
+export type UserFragment = { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> };
 
 export type CreateProjectMutationVariables = Exact<{
   data: ProjectCreateInput;
@@ -5996,7 +5996,7 @@ export type MutateLoginMutationVariables = Exact<{
 }>;
 
 
-export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type MutateLogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -6006,14 +6006,14 @@ export type MutateLogoutMutation = { __typename?: 'Mutation', logout: string };
 export type MutateMeMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type MutateRegisterMutationVariables = Exact<{
   data: RegisterInput;
 }>;
 
 
-export type MutateRegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutateRegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type MutationUpdateUserArgsMutationVariables = Exact<{
   data: UserUpdateInput;
@@ -6021,7 +6021,7 @@ export type MutationUpdateUserArgsMutationVariables = Exact<{
 }>;
 
 
-export type MutationUpdateUserArgsMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutationUpdateUserArgsMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type SetNotificationReadMutationVariables = Exact<{
   where: NotificationWhereUniqueInput;
@@ -6088,7 +6088,7 @@ export type GetUserInfosQueryVariables = Exact<{
 }>;
 
 
-export type GetUserInfosQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type GetUserInfosQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type GetUserProjectsQueryVariables = Exact<{
   where: ProjectWhereInput;
@@ -6150,6 +6150,7 @@ export const UserFragmentDoc = gql`
     fragment User on User {
   id
   first_name
+  phone_number
   last_name
   email
   avatar

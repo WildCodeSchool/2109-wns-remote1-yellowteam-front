@@ -14,6 +14,7 @@ const initialState: IAppState = {
     first_name: '',
     avatar: '',
     last_name: '',
+    phone_number: '',
     role: [],
   },
   isAuth: false,
