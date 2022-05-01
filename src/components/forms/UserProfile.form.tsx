@@ -34,6 +34,7 @@ export default function UserProfileForm(): JSX.Element {
     last_name,
     email,
     avatar,
+    phone_number,
   }: FieldValues): Promise<void> => {
     await userUpdate({
       variables: {
@@ -42,6 +43,9 @@ export default function UserProfileForm(): JSX.Element {
           last_name: { set: !last_name ? user?.last_name : last_name },
           email: { set: !email ? user?.email : email },
           avatar: { set: !avatar ? user?.avatar : avatar },
+          phone_number: {
+            set: !phone_number ? user?.phone_number : phone_number,
+          },
         },
         where: { id: user?.id },
       },
@@ -54,7 +58,7 @@ export default function UserProfileForm(): JSX.Element {
     setValue('first_name', user?.first_name)
     setValue('last_name', user?.last_name)
     setValue('email', user?.email)
-    // setValue('avatar', user?.avatar)
+    setValue('phone_number', user?.phone_number)
   }, [user])
 
   return (
@@ -92,7 +96,7 @@ export default function UserProfileForm(): JSX.Element {
             type="text"
             errors={errors}
             name="phone_number"
-            isEditable={false}
+            isEditable={isEditable}
             register={register}
           />
 

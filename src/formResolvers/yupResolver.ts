@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable import/prefer-default-export */
 import * as Yup from 'yup'
 
@@ -17,5 +18,7 @@ export const validationsProfilUpdate = Yup.object({
   first_name: Yup.string().required(),
   last_name: Yup.string().required(),
   email: Yup.string().email().required(),
-  // avatar: Yup.string().required(),
+  phone_number: Yup.string().matches(
+    /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
+  ),
 })
