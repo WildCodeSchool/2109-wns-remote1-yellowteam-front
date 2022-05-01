@@ -1809,6 +1809,9 @@ export type Mutation = {
   login: User;
   logout: Scalars['String'];
   me: User;
+  pubSubMutation: Scalars['Boolean'];
+  pubSubMutationToDynamicTopic: Scalars['Boolean'];
+  publisherMutation: Scalars['Boolean'];
   register: User;
   updateComment: Maybe<Comment>;
   updateFile: Maybe<File>;
@@ -1986,6 +1989,22 @@ export type MutationDeleteUserArgs = {
 
 export type MutationLoginArgs = {
   data: LoginInput;
+};
+
+
+export type MutationPubSubMutationArgs = {
+  message: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationPubSubMutationToDynamicTopicArgs = {
+  message: InputMaybe<Scalars['String']>;
+  topic: Scalars['String'];
+};
+
+
+export type MutationPublisherMutationArgs = {
+  message: InputMaybe<Scalars['String']>;
 };
 
 
@@ -2684,6 +2703,13 @@ export type NotificationScalarWhereWithAggregatesInput = {
   type?: InputMaybe<EnumType_NotificationWithAggregatesFilter>;
   updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   user_id?: InputMaybe<StringNullableWithAggregatesFilter>;
+};
+
+export type NotificationType = {
+  __typename?: 'NotificationType';
+  date: Scalars['DateTime'];
+  id: Scalars['ID'];
+  message: Maybe<Scalars['String']>;
 };
 
 export type NotificationUpdateInput = {
@@ -3713,6 +3739,7 @@ export type Query = {
   aggregateUser: AggregateUser;
   comment: Maybe<Comment>;
   comments: Array<Comment>;
+  currentDate: Scalars['DateTime'];
   file: Maybe<File>;
   files: Array<File>;
   findFirstComment: Maybe<Comment>;
@@ -4176,6 +4203,18 @@ export type StringWithAggregatesFilter = {
   not?: InputMaybe<NestedStringWithAggregatesFilter>;
   notIn?: InputMaybe<Array<Scalars['String']>>;
   startsWith?: InputMaybe<Scalars['String']>;
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  normalSubscription: NotificationType;
+  subscriptionWithFilter: NotificationType;
+  subscriptionWithFilterToDynamicTopic: NotificationType;
+};
+
+
+export type SubscriptionSubscriptionWithFilterToDynamicTopicArgs = {
+  topic: Scalars['String'];
 };
 
 export type Task = {
@@ -6097,6 +6136,21 @@ export type GetUserProjectsQueryVariables = Exact<{
 
 export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean }> };
 
+export type AllNotificationsSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllNotificationsSubscription = { __typename?: 'Subscription', normalSubscription: { __typename?: 'NotificationType', id: string, message: string, date: any } };
+
+export type DynamicTopicSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DynamicTopicSubscription = { __typename?: 'Subscription', subscriptionWithFilterToDynamicTopic: { __typename?: 'NotificationType', id: string, message: string } };
+
+export type EvenNotificationsSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type EvenNotificationsSubscription = { __typename?: 'Subscription', subscriptionWithFilter: { __typename?: 'NotificationType', id: string, message: string, date: any } };
+
 export const ProjectFragmentDoc = gql`
     fragment Project on Project {
   id
@@ -6732,3 +6786,95 @@ export function useGetUserProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type GetUserProjectsQueryHookResult = ReturnType<typeof useGetUserProjectsQuery>;
 export type GetUserProjectsLazyQueryHookResult = ReturnType<typeof useGetUserProjectsLazyQuery>;
 export type GetUserProjectsQueryResult = Apollo.QueryResult<GetUserProjectsQuery, GetUserProjectsQueryVariables>;
+export const AllNotificationsDocument = gql`
+    subscription AllNotifications {
+  normalSubscription {
+    id
+    message
+    date
+  }
+}
+    `;
+
+/**
+ * __useAllNotificationsSubscription__
+ *
+ * To run a query within a React component, call `useAllNotificationsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useAllNotificationsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllNotificationsSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllNotificationsSubscription(baseOptions?: Apollo.SubscriptionHookOptions<AllNotificationsSubscription, AllNotificationsSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<AllNotificationsSubscription, AllNotificationsSubscriptionVariables>(AllNotificationsDocument, options);
+      }
+export type AllNotificationsSubscriptionHookResult = ReturnType<typeof useAllNotificationsSubscription>;
+export type AllNotificationsSubscriptionResult = Apollo.SubscriptionResult<AllNotificationsSubscription>;
+export const DynamicTopicDocument = gql`
+    subscription DynamicTopic {
+  subscriptionWithFilterToDynamicTopic(topic: "FOO_MESSAGES") {
+    id
+    message
+  }
+}
+    `;
+
+/**
+ * __useDynamicTopicSubscription__
+ *
+ * To run a query within a React component, call `useDynamicTopicSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useDynamicTopicSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDynamicTopicSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useDynamicTopicSubscription(baseOptions?: Apollo.SubscriptionHookOptions<DynamicTopicSubscription, DynamicTopicSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<DynamicTopicSubscription, DynamicTopicSubscriptionVariables>(DynamicTopicDocument, options);
+      }
+export type DynamicTopicSubscriptionHookResult = ReturnType<typeof useDynamicTopicSubscription>;
+export type DynamicTopicSubscriptionResult = Apollo.SubscriptionResult<DynamicTopicSubscription>;
+export const EvenNotificationsDocument = gql`
+    subscription EvenNotifications {
+  subscriptionWithFilter {
+    id
+    message
+    date
+  }
+}
+    `;
+
+/**
+ * __useEvenNotificationsSubscription__
+ *
+ * To run a query within a React component, call `useEvenNotificationsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useEvenNotificationsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEvenNotificationsSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useEvenNotificationsSubscription(baseOptions?: Apollo.SubscriptionHookOptions<EvenNotificationsSubscription, EvenNotificationsSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<EvenNotificationsSubscription, EvenNotificationsSubscriptionVariables>(EvenNotificationsDocument, options);
+      }
+export type EvenNotificationsSubscriptionHookResult = ReturnType<typeof useEvenNotificationsSubscription>;
+export type EvenNotificationsSubscriptionResult = Apollo.SubscriptionResult<EvenNotificationsSubscription>;
