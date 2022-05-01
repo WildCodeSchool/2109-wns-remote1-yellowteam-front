@@ -9,12 +9,14 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { FileValidated } from '@dropzone-ui/react'
+import UploadButton from '../Motion/UploadButton'
 
 interface IProps {
   isOpen: boolean
   onClose: () => void
   file: FileValidated[]
   buttonRef: React.RefObject<HTMLButtonElement>
+  progress: number
 }
 
 export default function UploadProfilePictureModal({
@@ -22,6 +24,7 @@ export default function UploadProfilePictureModal({
   onClose,
   file,
   buttonRef,
+  progress,
 }: IProps): JSX.Element {
   return (
     <Modal
@@ -55,14 +58,10 @@ export default function UploadProfilePictureModal({
           {file.length && (
             <Image src={URL.createObjectURL(file[0].file as File)} />
           )}
-          <Button
+          <UploadButton
             onClick={() => buttonRef.current?.click()}
-            variant="action"
-            w="full"
-            my={2}
-          >
-            UPLOAD
-          </Button>
+            progress={progress}
+          />
         </ModalBody>
       </ModalContent>
     </Modal>

@@ -54,7 +54,7 @@ const useUpload = () => {
         ...user,
         avatar: response.uploadProfilePicture.avatar,
       })
-      setProgress(0)
+      await setProgress(0)
       setFile([])
       onClose()
       return toast({
