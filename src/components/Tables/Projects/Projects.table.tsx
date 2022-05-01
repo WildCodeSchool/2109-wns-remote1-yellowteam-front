@@ -12,6 +12,7 @@ import {
   chakra,
   Flex,
   Spinner,
+  Box,
 } from '@chakra-ui/react'
 import { useTable, useSortBy, useRowSelect, usePagination } from 'react-table'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
@@ -66,61 +67,65 @@ export const ProjectTable = (): JSX.Element => {
 
   return (
     <Flex
+      mt={5}
       w="full"
       display="flex"
-      justifyContent="space-between"
+      justifyContent="center"
       flexDirection="column"
       flexGrow={1}
     >
-      <Flex my={2} w="full" justifyContent="space-between" alignItems="center">
-        <ProjectsTableFilters />
-      </Flex>
-      <Table
-        position="relative"
-        {...getTableProps()}
-        overflow="hidden"
-        roundedTop={5}
-        h="full"
-      >
-        <Thead bg="gray.200">
-          {headerGroups.map((headerGroup) => (
-            <Tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <Th
-                  p={2}
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                >
-                  {column.render('Header')}
-                  <chakra.span pl="4">
-                    {column.isSorted ? (
-                      column.isSortedDesc ? (
-                        <TriangleDownIcon aria-label="sorted descending" />
-                      ) : (
-                        <TriangleUpIcon aria-label="sorted ascending" />
-                      )
-                    ) : null}
-                  </chakra.span>
-                </Th>
-              ))}
-            </Tr>
-          ))}
-        </Thead>
+      <ProjectsTableFilters />
 
-        <Tbody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row)
-            return (
-              <Tr {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <Td p={2} {...cell.getCellProps()}>
-                    {cell.render('Cell')}
-                  </Td>
+      <Box w="full" h="full">
+        {' '}
+        <Table
+          bg="white"
+          position="relative"
+          {...getTableProps()}
+          overflow="hidden"
+          rounded={12}
+        >
+          <Thead bg="gray.200">
+            {headerGroups.map((headerGroup) => (
+              <Tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <Th
+                    py={5}
+                    px={4}
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                  >
+                    {column.render('Header')}
+                    <chakra.span pl="4">
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <TriangleDownIcon aria-label="sorted descending" />
+                        ) : (
+                          <TriangleUpIcon aria-label="sorted ascending" />
+                        )
+                      ) : null}
+                    </chakra.span>
+                  </Th>
                 ))}
               </Tr>
-            )
-          })}
-        </Tbody>
-      </Table>
+            ))}
+          </Thead>
+
+          <Tbody h="full" {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row)
+              return (
+                <Tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => (
+                    <Td px={4} {...cell.getCellProps()}>
+                      {cell.render('Cell')}
+                    </Td>
+                  ))}
+                </Tr>
+              )
+            })}
+          </Tbody>
+        </Table>
+      </Box>
 
       <TableFooter
         selectedFlatRows={selectedFlatRows}
