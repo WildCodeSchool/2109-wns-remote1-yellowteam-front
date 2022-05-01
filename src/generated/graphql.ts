@@ -1792,6 +1792,7 @@ export type Mutation = {
   createProject: Project;
   createTask: Task;
   createUser: User;
+  customCreateInvitation: Invitation;
   deleteComment: Maybe<Comment>;
   deleteFile: Maybe<File>;
   deleteInvitation: Maybe<Invitation>;
@@ -1914,6 +1915,11 @@ export type MutationCreateTaskArgs = {
 
 export type MutationCreateUserArgs = {
   data: UserCreateInput;
+};
+
+
+export type MutationCustomCreateInvitationArgs = {
+  data: InvitationCreateInput;
 };
 
 
@@ -6134,7 +6140,7 @@ export type GetUserQueryVariables = Exact<{
 }>;
 
 
-export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type GetUserInfosQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
