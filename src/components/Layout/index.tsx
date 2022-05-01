@@ -2,7 +2,11 @@ import { Box, Flex, useToast } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import Header from 'src/components/molecules/Header'
-import { useAllNotificationsSubscription } from 'src/generated/graphql'
+import {
+  GetAllNotificationsDocument,
+  useAllNotificationsSubscription,
+} from 'src/generated/graphql'
+import { client } from 'src/App'
 import UserNavBar from './UserNavBar'
 
 export default function Layout(): JSX.Element {
@@ -19,8 +23,11 @@ export default function Layout(): JSX.Element {
 
     shouldResubscribe: true,
     onSubscriptionData: async (r) => {
+      await client.refetchQueries({
+        include: [GetAllNotificationsDocument],
+      })
       toast({
-        title: `${r.subscriptionData.data?.normalSubscription.message}`,
+        title: `${r.subscriptionData.data?.subscriptionWithFilter.message}`,
         status: 'info',
       })
     },

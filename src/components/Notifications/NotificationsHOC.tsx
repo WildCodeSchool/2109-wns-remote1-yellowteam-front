@@ -8,15 +8,20 @@ import {
   Text,
   Image,
   Box,
+  Button,
+  VStack,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { client } from 'src/App'
 import {
   GetAllNotificationsDocument,
+  GetUserProjectsDocument,
   SortOrder,
   Status_Notification,
+  Type_Notification,
   useGetAllNotificationsQuery,
   useSetNotificationReadMutation,
+  useUpdateProjectMutation,
 } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
 
@@ -24,6 +29,7 @@ export default function NotificationsHOC(): JSX.Element {
   const { userId } = useAppState()
 
   const { data, loading } = useGetAllNotificationsQuery({
+    notifyOnNetworkStatusChange: true,
     variables: {
       where: {
         user_id: {
@@ -57,6 +63,29 @@ export default function NotificationsHOC(): JSX.Element {
       }`
     )
   }, [loading, data, notificationsMutationResponse])
+
+  const [updateProject] = useUpdateProjectMutation({
+    onCompleted: async () => {
+      await client.refetchQueries({
+        include: [GetUserProjectsDocument],
+      })
+    },
+  })
+
+  const handleAddUser = (projectId: string) => {
+    updateProject({
+      variables: {
+        data: {
+          users: {
+            connect: [{ id: userId }],
+          },
+        },
+        projectId: {
+          id: projectId,
+        },
+      },
+    })
+  }
 
   return (
     <Menu>
@@ -117,7 +146,9 @@ export default function NotificationsHOC(): JSX.Element {
           .map((notification) => (
             <MenuItem
               display="flex"
-              justifyContent="space-between"
+              flexDirection="column"
+              justifyContent="flex-start"
+              alignItems="start"
               backgroundColor={
                 notification.status === Status_Notification.Read
                   ? 'gray.200'
@@ -153,9 +184,21 @@ export default function NotificationsHOC(): JSX.Element {
                 h={10}
                 src={notification.sender.avatar}
               />
-              <Text color="gray" fontWeight="bold">
-                {notification.title}
-              </Text>
+              <VStack>
+                <Text color="gray" fontWeight="bold">
+                  {notification.title}
+                </Text>
+                <Text color="gray" fontWeight="bold">
+                  {notification.content}
+                </Text>
+                {notification.type === Type_Notification.Invitation && (
+                  <Button
+                    onClick={() => handleAddUser(notification.reference_id)}
+                  >
+                    ACCEPT
+                  </Button>
+                )}
+              </VStack>
             </MenuItem>
           ))}
       </MenuList>
