@@ -6023,6 +6023,13 @@ export type TaskFragment = { __typename?: 'Task', id: string, title: string, sta
 
 export type UserFragment = { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> };
 
+export type CreateInvitationMutationVariables = Exact<{
+  data: InvitationCreateInput;
+}>;
+
+
+export type CreateInvitationMutation = { __typename?: 'Mutation', createInvitation: { __typename?: 'Invitation', id: string, user_id: string } };
+
 export type CreateProjectMutationVariables = Exact<{
   data: ProjectCreateInput;
 }>;
@@ -6122,6 +6129,13 @@ export type GetTasksByProjectQueryVariables = Exact<{
 
 export type GetTasksByProjectQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }> };
 
+export type GetUserQueryVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+
 export type GetUserInfosQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
 }>;
@@ -6211,6 +6225,40 @@ export const UserFragmentDoc = gql`
   role
 }
     `;
+export const CreateInvitationDocument = gql`
+    mutation createInvitation($data: InvitationCreateInput!) {
+  createInvitation(data: $data) {
+    id
+    user_id
+  }
+}
+    `;
+export type CreateInvitationMutationFn = Apollo.MutationFunction<CreateInvitationMutation, CreateInvitationMutationVariables>;
+
+/**
+ * __useCreateInvitationMutation__
+ *
+ * To run a mutation, you first call `useCreateInvitationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateInvitationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createInvitationMutation, { data, loading, error }] = useCreateInvitationMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateInvitationMutation(baseOptions?: Apollo.MutationHookOptions<CreateInvitationMutation, CreateInvitationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateInvitationMutation, CreateInvitationMutationVariables>(CreateInvitationDocument, options);
+      }
+export type CreateInvitationMutationHookResult = ReturnType<typeof useCreateInvitationMutation>;
+export type CreateInvitationMutationResult = Apollo.MutationResult<CreateInvitationMutation>;
+export type CreateInvitationMutationOptions = Apollo.BaseMutationOptions<CreateInvitationMutation, CreateInvitationMutationVariables>;
 export const CreateProjectDocument = gql`
     mutation CreateProject($data: ProjectCreateInput!) {
   createProject(data: $data) {
@@ -6708,6 +6756,41 @@ export function useGetTasksByProjectLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type GetTasksByProjectQueryHookResult = ReturnType<typeof useGetTasksByProjectQuery>;
 export type GetTasksByProjectLazyQueryHookResult = ReturnType<typeof useGetTasksByProjectLazyQuery>;
 export type GetTasksByProjectQueryResult = Apollo.QueryResult<GetTasksByProjectQuery, GetTasksByProjectQueryVariables>;
+export const GetUserDocument = gql`
+    query GetUser($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    ...User
+  }
+}
+    ${UserFragmentDoc}`;
+
+/**
+ * __useGetUserQuery__
+ *
+ * To run a query within a React component, call `useGetUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetUserQuery(baseOptions: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
+      }
+export function useGetUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
+        }
+export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
+export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
+export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
 export const GetUserInfosDocument = gql`
     query GetUserInfos($id: String) {
   user(where: {id: $id}) {

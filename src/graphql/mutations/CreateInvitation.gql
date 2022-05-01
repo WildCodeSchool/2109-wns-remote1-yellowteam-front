@@ -1,0 +1,6 @@
+mutation createInvitation($data: InvitationCreateInput!) {
+  createInvitation(data: $data) {
+    id
+    user_id
+  }
+}
