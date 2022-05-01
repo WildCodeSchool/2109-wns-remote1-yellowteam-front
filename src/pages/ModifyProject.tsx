@@ -24,6 +24,8 @@ import {
   useUpdateProjectMutation,
 } from 'src/generated/graphql'
 import convertHoursToDays from 'src/utils/convertHoursToDays'
+import EditPannelPortal from 'src/Portals/EditPannelPortal'
+import EditProjectFormEditor from 'src/components/forms/Editor/EditProjectForm.editor'
 
 const ModifyProject = (): ReactElement => {
   const toast = useToast()
@@ -117,6 +119,10 @@ const ModifyProject = (): ReactElement => {
 
   return (
     <WhitePannel close title={`Modify: ${data.project?.title}`}>
+      <EditPannelPortal>
+        <EditProjectFormEditor />
+      </EditPannelPortal>
+
       <Box overflow="auto" height="22rem">
         <Box pt={5} pr={5} maxWidth="90%">
           <Flex alignItems="center">

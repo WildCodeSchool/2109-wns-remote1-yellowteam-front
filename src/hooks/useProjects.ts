@@ -23,6 +23,9 @@ const useProjects = (): UseProjectsHook => {
             },
           },
         },
+        is_disabled: {
+          equals: false,
+        },
       },
     },
     skip: !userId,

@@ -10,6 +10,7 @@ import { Doughnut } from 'react-chartjs-2'
 import convertMillisecondsToHours from 'src/utils/convertMillisecondsToHours'
 import getActualTimeAvailable from 'src/utils/getActualTimeAvailable'
 import { useGetProjectQuery } from 'src/generated/graphql'
+import EditPannelPortal from 'src/Portals/EditPannelPortal'
 
 const ProjectDetails = (): ReactElement => {
   const { projectId } = useParams()
