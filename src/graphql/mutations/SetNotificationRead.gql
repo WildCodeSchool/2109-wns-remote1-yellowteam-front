@@ -1,0 +1,9 @@
+mutation SetNotificationRead(
+  $where: NotificationWhereUniqueInput!
+  $data: NotificationUpdateInput!
+) {
+  updateNotification(where: $where, data: $data) {
+    id
+    status
+  }
+}

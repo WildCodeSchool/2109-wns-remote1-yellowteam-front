@@ -1,0 +1,7 @@
+subscription AllNotifications {
+  normalSubscription {
+    id
+    message
+    date
+  }
+}

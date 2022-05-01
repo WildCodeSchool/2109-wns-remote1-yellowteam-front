@@ -3,13 +3,21 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { UserFragment } from 'src/generated/graphql'
 
 interface IAppState {
-  user: UserFragment | undefined
+  user: UserFragment
   isAuth: boolean
 }
 
 const initialState: IAppState = {
-  user: undefined,
-  isAuth: !!document.cookie,
+  user: {
+    id: '',
+    email: '',
+    first_name: '',
+    avatar: '',
+    last_name: '',
+    phone_number: '',
+    role: [],
+  },
+  isAuth: false,
 }
 
 const appSlice = createSlice({
@@ -21,7 +29,7 @@ const appSlice = createSlice({
       state.user = action.payload
     },
     logout: (state) => {
-      state.user = undefined
+      state.user = initialState.user
       state.isAuth = false
     },
     updateUser: (state, action: PayloadAction<UserFragment>) => {

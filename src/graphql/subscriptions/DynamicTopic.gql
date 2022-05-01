@@ -1,0 +1,6 @@
+subscription DynamicTopic {
+  subscriptionWithFilterToDynamicTopic(topic: "FOO_MESSAGES") {
+    id
+    message
+  }
+}

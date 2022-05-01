@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import {
   Box,
   Button,
@@ -15,7 +15,6 @@ import {
 } from '@chakra-ui/react'
 import WhitePannel from 'src/components/WhitePannel'
 import { useParams } from 'react-router-dom'
-import AddIcon from 'src/static/svg/AddIcon'
 import mainTheme from 'src/definitions/chakra/theme/mainTheme'
 import { FieldValues, useForm } from 'react-hook-form'
 import Edit from 'src/static/svg/Edit'
@@ -24,16 +23,16 @@ import {
   useUpdateProjectMutation,
 } from 'src/generated/graphql'
 import convertHoursToDays from 'src/utils/convertHoursToDays'
+import InvitePeopleModal from 'src/components/Modals/InvitePeopleModal'
 
 const ModifyProject = (): ReactElement => {
   const toast = useToast()
 
   const { projectId } = useParams()
-  const { data, refetch, loading } = useGetProjectQuery({
+  const { data, loading } = useGetProjectQuery({
     variables: { id: projectId || '' },
     skip: projectId === undefined,
   })
-  const [isFormAddUserVisible, setIsFormAddUserVisible] = useState(false)
   const [
     isDescriptionModificationVisible,
     setIsDescriptionModificationVisible,
@@ -45,23 +44,6 @@ const ModifyProject = (): ReactElement => {
   const { handleSubmit, register, reset } = useForm()
   const [updateproject, { loading: updateProjectLoading }] =
     useUpdateProjectMutation()
-
-  const onSubmitAddUser = async ({ email }: FieldValues): Promise<void> => {
-    try {
-      await updateproject({
-        variables: {
-          data: { users: { connect: [{ email: email as string }] } },
-          projectId: { id: projectId },
-        },
-      })
-    } catch (e) {
-      toast({
-        title: 'error adding user to project',
-      })
-    }
-    setIsFormAddUserVisible(false)
-    reset()
-  }
 
   const onSubmitDescription = async ({
     description,
@@ -102,10 +84,6 @@ const ModifyProject = (): ReactElement => {
     reset()
   }
 
-  useEffect(() => {
-    refetch()
-  }, [onSubmitAddUser, onSubmitDescription, onSubmitChangeTimeSpent])
-
   if (loading)
     return (
       <WhitePannel close={false}>
@@ -117,16 +95,19 @@ const ModifyProject = (): ReactElement => {
 
   return (
     <WhitePannel close title={`Modify: ${data.project?.title}`}>
-      <Box overflow="auto" height="22rem">
-        <Box pt={5} pr={5} maxWidth="90%">
-          <Flex alignItems="center">
-            <Text textStyle="titleWhiteBoard">Project description</Text>
-            <Button
-              variant="ghost "
-              onClick={() => setIsDescriptionModificationVisible(true)}
-            >
-              <Edit />
-            </Button>
+      <Box overflow="auto" height="full">
+        <Box pt={5} pr={5} w="full">
+          <Flex alignItems="center" justifyContent="space-between" w="full">
+            <Flex alignItems="center">
+              <Text textStyle="titleWhiteBoard">Project description</Text>
+              <Button
+                variant="ghost "
+                onClick={() => setIsDescriptionModificationVisible(true)}
+              >
+                <Edit />
+              </Button>
+            </Flex>
+            <InvitePeopleModal />
           </Flex>
           {isDescriptionModificationVisible ? (
             <FormControl>
@@ -176,47 +157,6 @@ const ModifyProject = (): ReactElement => {
                   </Flex>
                 ))}
               </Box>
-              {isFormAddUserVisible ? (
-                <FormControl>
-                  <Flex paddingTop={3}>
-                    <FormLabel htmlFor="email" />
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="Enter email address"
-                      height="30px"
-                      width="60%"
-                      {...register('email')}
-                    />
-                    <Button
-                      ml={3}
-                      backgroundColor={mainTheme.colors.orange}
-                      color="white"
-                      isLoading={updateProjectLoading}
-                      type="submit"
-                      height="30px"
-                      width="auto"
-                      onClick={handleSubmit(onSubmitAddUser)}
-                    >
-                      Add
-                    </Button>
-                  </Flex>
-                </FormControl>
-              ) : null}
-              {!isFormAddUserVisible ? (
-                <Flex justifyContent="center">
-                  <Button
-                    variant="unstyled"
-                    onClick={() => setIsFormAddUserVisible(true)}
-                  >
-                    <AddIcon
-                      width="30"
-                      height="32"
-                      color={mainTheme.colors.mediumGreyText}
-                    />
-                  </Button>
-                </Flex>
-              ) : null}
             </Box>
             <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
               <Flex alignItems="center">

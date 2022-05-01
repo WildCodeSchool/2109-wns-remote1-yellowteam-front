@@ -1,5 +1,4 @@
 import { Center } from '@chakra-ui/react'
-import React from 'react'
 import Lottie from 'react-lottie'
 import animationData from './Loading.json'
 

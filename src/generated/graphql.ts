@@ -1792,6 +1792,7 @@ export type Mutation = {
   createProject: Project;
   createTask: Task;
   createUser: User;
+  customCreateInvitation: Invitation;
   deleteComment: Maybe<Comment>;
   deleteFile: Maybe<File>;
   deleteInvitation: Maybe<Invitation>;
@@ -1809,6 +1810,9 @@ export type Mutation = {
   login: User;
   logout: Scalars['String'];
   me: User;
+  pubSubMutation: Scalars['Boolean'];
+  pubSubMutationToDynamicTopic: Scalars['Boolean'];
+  publisherMutation: Scalars['Boolean'];
   register: User;
   updateComment: Maybe<Comment>;
   updateFile: Maybe<File>;
@@ -1826,6 +1830,7 @@ export type Mutation = {
   updateTaskStatus: Task;
   updateUser: Maybe<User>;
   uploadFile: File;
+  uploadProfilePicture: User;
   upsertComment: Comment;
   upsertFile: File;
   upsertInvitation: Invitation;
@@ -1913,6 +1918,11 @@ export type MutationCreateUserArgs = {
 };
 
 
+export type MutationCustomCreateInvitationArgs = {
+  data: InvitationCreateInput;
+};
+
+
 export type MutationDeleteCommentArgs = {
   where: CommentWhereUniqueInput;
 };
@@ -1985,6 +1995,22 @@ export type MutationDeleteUserArgs = {
 
 export type MutationLoginArgs = {
   data: LoginInput;
+};
+
+
+export type MutationPubSubMutationArgs = {
+  message: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationPubSubMutationToDynamicTopicArgs = {
+  message: InputMaybe<Scalars['String']>;
+  topic: Scalars['String'];
+};
+
+
+export type MutationPublisherMutationArgs = {
+  message: InputMaybe<Scalars['String']>;
 };
 
 
@@ -2083,6 +2109,11 @@ export type MutationUpdateUserArgs = {
 
 
 export type MutationUploadFileArgs = {
+  file: Scalars['Upload'];
+};
+
+
+export type MutationUploadProfilePictureArgs = {
   file: Scalars['Upload'];
 };
 
@@ -2678,6 +2709,13 @@ export type NotificationScalarWhereWithAggregatesInput = {
   type?: InputMaybe<EnumType_NotificationWithAggregatesFilter>;
   updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   user_id?: InputMaybe<StringNullableWithAggregatesFilter>;
+};
+
+export type NotificationType = {
+  __typename?: 'NotificationType';
+  date: Scalars['DateTime'];
+  id: Scalars['ID'];
+  message: Maybe<Scalars['String']>;
 };
 
 export type NotificationUpdateInput = {
@@ -3707,6 +3745,7 @@ export type Query = {
   aggregateUser: AggregateUser;
   comment: Maybe<Comment>;
   comments: Array<Comment>;
+  currentDate: Scalars['DateTime'];
   file: Maybe<File>;
   files: Array<File>;
   findFirstComment: Maybe<Comment>;
@@ -3729,6 +3768,7 @@ export type Query = {
   notifications: Array<Notification>;
   project: Maybe<Project>;
   projects: Array<Project>;
+  search: Maybe<Array<SearchResult>>;
   task: Maybe<Task>;
   tasks: Array<Task>;
   user: Maybe<User>;
@@ -4014,6 +4054,11 @@ export type QueryProjectsArgs = {
 };
 
 
+export type QuerySearchArgs = {
+  data: SearchInput;
+};
+
+
 export type QueryTaskArgs = {
   where: TaskWhereUniqueInput;
 };
@@ -4061,6 +4106,18 @@ export enum Role {
   SuperAdmin = 'SUPER_ADMIN',
   User = 'USER'
 }
+
+export type SearchInput = {
+  searchValue: Scalars['String'];
+};
+
+export type SearchResult = {
+  __typename?: 'SearchResult';
+  description: Scalars['String'];
+  id: Scalars['String'];
+  title: Scalars['String'];
+  type: Scalars['String'];
+};
 
 export enum SortOrder {
   Asc = 'asc',
@@ -4152,6 +4209,18 @@ export type StringWithAggregatesFilter = {
   not?: InputMaybe<NestedStringWithAggregatesFilter>;
   notIn?: InputMaybe<Array<Scalars['String']>>;
   startsWith?: InputMaybe<Scalars['String']>;
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  normalSubscription: NotificationType;
+  subscriptionWithFilter: NotificationType;
+  subscriptionWithFilterToDynamicTopic: NotificationType;
+};
+
+
+export type SubscriptionSubscriptionWithFilterToDynamicTopicArgs = {
+  topic: Scalars['String'];
 };
 
 export type Task = {
@@ -4883,6 +4952,7 @@ export type User = {
   notifications_sent: Array<Notification>;
   owned_projects: Array<Project>;
   password: Scalars['String'];
+  phone_number: Maybe<Scalars['String']>;
   project_comments: Array<Comment>;
   projects: Array<Project>;
   role: Array<Role>;
@@ -5005,6 +5075,7 @@ export type UserCountAggregate = {
   is_disabled: Scalars['Int'];
   last_name: Scalars['Int'];
   password: Scalars['Int'];
+  phone_number: Scalars['Int'];
   role: Scalars['Int'];
   updated_at: Scalars['Int'];
 };
@@ -5018,6 +5089,7 @@ export type UserCountOrderByAggregateInput = {
   is_disabled?: InputMaybe<SortOrder>;
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
+  phone_number?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
   updated_at?: InputMaybe<SortOrder>;
 };
@@ -5036,6 +5108,7 @@ export type UserCreateInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5053,12 +5126,9 @@ export type UserCreateManyInput = {
   is_disabled: Scalars['Boolean'];
   last_name: Scalars['String'];
   password: Scalars['String'];
-  role?: InputMaybe<UserCreateManyroleInput>;
+  phone_number?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<UserCreateroleInput>;
   updated_at?: InputMaybe<Scalars['DateTime']>;
-};
-
-export type UserCreateManyroleInput = {
-  set: Array<Role>;
 };
 
 export type UserCreateNestedManyWithoutProjectsInput = {
@@ -5173,6 +5243,7 @@ export type UserCreateWithoutFilesInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5194,6 +5265,7 @@ export type UserCreateWithoutInvitationsInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5215,6 +5287,7 @@ export type UserCreateWithoutNotificationsInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5236,6 +5309,7 @@ export type UserCreateWithoutNotifications_SentInput = {
   notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5257,6 +5331,7 @@ export type UserCreateWithoutOwned_ProjectsInput = {
   notifications?: InputMaybe<NotificationCreateNestedManyWithoutUserInput>;
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5279,6 +5354,7 @@ export type UserCreateWithoutProject_CommentsInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
@@ -5300,6 +5376,7 @@ export type UserCreateWithoutProjectsInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   role?: InputMaybe<UserCreateroleInput>;
   task_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Task_CommentsInput>;
@@ -5321,6 +5398,7 @@ export type UserCreateWithoutTask_CommentsInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5342,6 +5420,7 @@ export type UserCreateWithoutTasksInput = {
   notifications_sent?: InputMaybe<NotificationCreateNestedManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectCreateNestedManyWithoutOwnerInput>;
   password: Scalars['String'];
+  phone_number?: InputMaybe<Scalars['String']>;
   project_comments?: InputMaybe<CommentCreateNestedManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectCreateNestedManyWithoutUsersInput>;
   role?: InputMaybe<UserCreateroleInput>;
@@ -5366,6 +5445,7 @@ export type UserGroupBy = {
   is_disabled: Scalars['Boolean'];
   last_name: Scalars['String'];
   password: Scalars['String'];
+  phone_number: Maybe<Scalars['String']>;
   role: Maybe<Array<Role>>;
   updated_at: Scalars['DateTime'];
 };
@@ -5386,6 +5466,7 @@ export type UserMaxAggregate = {
   is_disabled: Maybe<Scalars['Boolean']>;
   last_name: Maybe<Scalars['String']>;
   password: Maybe<Scalars['String']>;
+  phone_number: Maybe<Scalars['String']>;
   updated_at: Maybe<Scalars['DateTime']>;
 };
 
@@ -5398,6 +5479,7 @@ export type UserMaxOrderByAggregateInput = {
   is_disabled?: InputMaybe<SortOrder>;
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
+  phone_number?: InputMaybe<SortOrder>;
   updated_at?: InputMaybe<SortOrder>;
 };
 
@@ -5411,6 +5493,7 @@ export type UserMinAggregate = {
   is_disabled: Maybe<Scalars['Boolean']>;
   last_name: Maybe<Scalars['String']>;
   password: Maybe<Scalars['String']>;
+  phone_number: Maybe<Scalars['String']>;
   updated_at: Maybe<Scalars['DateTime']>;
 };
 
@@ -5423,6 +5506,7 @@ export type UserMinOrderByAggregateInput = {
   is_disabled?: InputMaybe<SortOrder>;
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
+  phone_number?: InputMaybe<SortOrder>;
   updated_at?: InputMaybe<SortOrder>;
 };
 
@@ -5442,6 +5526,7 @@ export type UserOrderByWithAggregationInput = {
   is_disabled?: InputMaybe<SortOrder>;
   last_name?: InputMaybe<SortOrder>;
   password?: InputMaybe<SortOrder>;
+  phone_number?: InputMaybe<SortOrder>;
   role?: InputMaybe<SortOrder>;
   updated_at?: InputMaybe<SortOrder>;
 };
@@ -5460,6 +5545,7 @@ export type UserOrderByWithRelationInput = {
   notifications_sent?: InputMaybe<NotificationOrderByRelationAggregateInput>;
   owned_projects?: InputMaybe<ProjectOrderByRelationAggregateInput>;
   password?: InputMaybe<SortOrder>;
+  phone_number?: InputMaybe<SortOrder>;
   project_comments?: InputMaybe<CommentOrderByRelationAggregateInput>;
   projects?: InputMaybe<ProjectOrderByRelationAggregateInput>;
   role?: InputMaybe<SortOrder>;
@@ -5482,6 +5568,7 @@ export enum UserScalarFieldEnum {
   IsDisabled = 'is_disabled',
   LastName = 'last_name',
   Password = 'password',
+  PhoneNumber = 'phone_number',
   Role = 'role',
   UpdatedAt = 'updated_at'
 }
@@ -5498,6 +5585,7 @@ export type UserScalarWhereInput = {
   is_disabled?: InputMaybe<BoolFilter>;
   last_name?: InputMaybe<StringFilter>;
   password?: InputMaybe<StringFilter>;
+  phone_number?: InputMaybe<StringNullableFilter>;
   role?: InputMaybe<EnumRoleNullableListFilter>;
   updated_at?: InputMaybe<DateTimeFilter>;
 };
@@ -5514,6 +5602,7 @@ export type UserScalarWhereWithAggregatesInput = {
   is_disabled?: InputMaybe<BoolWithAggregatesFilter>;
   last_name?: InputMaybe<StringWithAggregatesFilter>;
   password?: InputMaybe<StringWithAggregatesFilter>;
+  phone_number?: InputMaybe<StringNullableWithAggregatesFilter>;
   role?: InputMaybe<EnumRoleNullableListFilter>;
   updated_at?: InputMaybe<DateTimeWithAggregatesFilter>;
 };
@@ -5532,6 +5621,7 @@ export type UserUpdateInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5549,6 +5639,7 @@ export type UserUpdateManyMutationInput = {
   is_disabled?: InputMaybe<BoolFieldUpdateOperationsInput>;
   last_name?: InputMaybe<StringFieldUpdateOperationsInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   updated_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -5665,6 +5756,7 @@ export type UserUpdateWithoutFilesInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5686,6 +5778,7 @@ export type UserUpdateWithoutInvitationsInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5707,6 +5800,7 @@ export type UserUpdateWithoutNotificationsInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5728,6 +5822,7 @@ export type UserUpdateWithoutNotifications_SentInput = {
   notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5749,6 +5844,7 @@ export type UserUpdateWithoutOwned_ProjectsInput = {
   notifications?: InputMaybe<NotificationUpdateManyWithoutUserInput>;
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5771,6 +5867,7 @@ export type UserUpdateWithoutProject_CommentsInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
@@ -5792,6 +5889,7 @@ export type UserUpdateWithoutProjectsInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   role?: InputMaybe<UserUpdateroleInput>;
   task_comments?: InputMaybe<CommentUpdateManyWithoutUser_Task_CommentsInput>;
@@ -5813,6 +5911,7 @@ export type UserUpdateWithoutTask_CommentsInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5834,6 +5933,7 @@ export type UserUpdateWithoutTasksInput = {
   notifications_sent?: InputMaybe<NotificationUpdateManyWithoutSenderInput>;
   owned_projects?: InputMaybe<ProjectUpdateManyWithoutOwnerInput>;
   password?: InputMaybe<StringFieldUpdateOperationsInput>;
+  phone_number?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   project_comments?: InputMaybe<CommentUpdateManyWithoutUser_Project_CommentsInput>;
   projects?: InputMaybe<ProjectUpdateManyWithoutUsersInput>;
   role?: InputMaybe<UserUpdateroleInput>;
@@ -5909,6 +6009,7 @@ export type UserWhereInput = {
   notifications_sent?: InputMaybe<NotificationListRelationFilter>;
   owned_projects?: InputMaybe<ProjectListRelationFilter>;
   password?: InputMaybe<StringFilter>;
+  phone_number?: InputMaybe<StringNullableFilter>;
   project_comments?: InputMaybe<CommentListRelationFilter>;
   projects?: InputMaybe<ProjectListRelationFilter>;
   role?: InputMaybe<EnumRoleNullableListFilter>;
@@ -5922,11 +6023,18 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
-export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> };
+export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> };
 
 export type TaskFragment = { __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } };
 
-export type UserFragment = { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> };
+export type UserFragment = { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> };
+
+export type CreateInvitationMutationVariables = Exact<{
+  data: InvitationCreateInput;
+}>;
+
+
+export type CreateInvitationMutation = { __typename?: 'Mutation', createInvitation: { __typename?: 'Invitation', id: string, user_id: string } };
 
 export type CreateProjectMutationVariables = Exact<{
   data: ProjectCreateInput;
@@ -5940,7 +6048,7 @@ export type MutateLoginMutationVariables = Exact<{
 }>;
 
 
-export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type MutateLogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -5950,14 +6058,14 @@ export type MutateLogoutMutation = { __typename?: 'Mutation', logout: string };
 export type MutateMeMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type MutateRegisterMutationVariables = Exact<{
   data: RegisterInput;
 }>;
 
 
-export type MutateRegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutateRegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type MutationUpdateUserArgsMutationVariables = Exact<{
   data: UserUpdateInput;
@@ -5965,7 +6073,23 @@ export type MutationUpdateUserArgsMutationVariables = Exact<{
 }>;
 
 
-export type MutationUpdateUserArgsMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutationUpdateUserArgsMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+
+export type SetNotificationReadMutationVariables = Exact<{
+  where: NotificationWhereUniqueInput;
+  data: NotificationUpdateInput;
+}>;
+
+
+export type SetNotificationReadMutation = { __typename?: 'Mutation', updateNotification: { __typename?: 'Notification', id: string, status: Status_Notification } };
+
+export type UpdateManyProjectsMutationVariables = Exact<{
+  where: InputMaybe<ProjectWhereInput>;
+  data: ProjectUpdateManyMutationInput;
+}>;
+
+
+export type UpdateManyProjectsMutation = { __typename?: 'Mutation', updateManyProject: { __typename?: 'AffectedRowsOutput', count: number } };
 
 export type UpdateProjectMutationVariables = Exact<{
   data: ProjectUpdateInput;
@@ -5983,18 +6107,26 @@ export type UpdateTaskStatusMutationVariables = Exact<{
 export type UpdateTaskStatusMutation = { __typename?: 'Mutation', updateTaskStatus: { __typename?: 'Task', id: string, title: string, status_task: Status } };
 
 export type GetManagerProjectsQueryVariables = Exact<{
-  userId: InputMaybe<Scalars['String']>;
+  where: InputMaybe<ProjectWhereInput>;
 }>;
 
 
-export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> }> };
+export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean }> };
+
+export type GetAllNotificationsQueryVariables = Exact<{
+  where: NotificationWhereInput;
+  orderBy: InputMaybe<Array<NotificationOrderByWithRelationInput> | NotificationOrderByWithRelationInput>;
+}>;
+
+
+export type GetAllNotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: string, title: string, status: Status_Notification, content: string, created_at: any, updated_at: any, sender: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string } }> };
 
 export type GetProjectQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetProjectQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> } };
+export type GetProjectQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> } };
 
 export type GetTasksByProjectQueryVariables = Exact<{
   where: TaskWhereInput;
@@ -6003,19 +6135,41 @@ export type GetTasksByProjectQueryVariables = Exact<{
 
 export type GetTasksByProjectQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }> };
 
+export type GetUserQueryVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+
 export type GetUserInfosQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetUserInfosQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type GetUserInfosQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
 
 export type GetUserProjectsQueryVariables = Exact<{
-  userId: InputMaybe<Scalars['String']>;
+  where: ProjectWhereInput;
 }>;
 
 
-export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> }> };
+export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean }> };
+
+export type AllNotificationsSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllNotificationsSubscription = { __typename?: 'Subscription', normalSubscription: { __typename?: 'NotificationType', id: string, message: string, date: any } };
+
+export type DynamicTopicSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DynamicTopicSubscription = { __typename?: 'Subscription', subscriptionWithFilterToDynamicTopic: { __typename?: 'NotificationType', id: string, message: string } };
+
+export type EvenNotificationsSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type EvenNotificationsSubscription = { __typename?: 'Subscription', subscriptionWithFilter: { __typename?: 'NotificationType', id: string, message: string, date: any } };
 
 export const ProjectFragmentDoc = gql`
     fragment Project on Project {
@@ -6027,6 +6181,7 @@ export const ProjectFragmentDoc = gql`
   total_time_spent
   start_date
   end_date
+  is_disabled
   due_date
   owner {
     id
@@ -6069,12 +6224,47 @@ export const UserFragmentDoc = gql`
     fragment User on User {
   id
   first_name
+  phone_number
   last_name
   email
   avatar
   role
 }
     `;
+export const CreateInvitationDocument = gql`
+    mutation createInvitation($data: InvitationCreateInput!) {
+  createInvitation(data: $data) {
+    id
+    user_id
+  }
+}
+    `;
+export type CreateInvitationMutationFn = Apollo.MutationFunction<CreateInvitationMutation, CreateInvitationMutationVariables>;
+
+/**
+ * __useCreateInvitationMutation__
+ *
+ * To run a mutation, you first call `useCreateInvitationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateInvitationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createInvitationMutation, { data, loading, error }] = useCreateInvitationMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateInvitationMutation(baseOptions?: Apollo.MutationHookOptions<CreateInvitationMutation, CreateInvitationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateInvitationMutation, CreateInvitationMutationVariables>(CreateInvitationDocument, options);
+      }
+export type CreateInvitationMutationHookResult = ReturnType<typeof useCreateInvitationMutation>;
+export type CreateInvitationMutationResult = Apollo.MutationResult<CreateInvitationMutation>;
+export type CreateInvitationMutationOptions = Apollo.BaseMutationOptions<CreateInvitationMutation, CreateInvitationMutationVariables>;
 export const CreateProjectDocument = gql`
     mutation CreateProject($data: ProjectCreateInput!) {
   createProject(data: $data) {
@@ -6272,6 +6462,75 @@ export function useMutationUpdateUserArgsMutation(baseOptions?: Apollo.MutationH
 export type MutationUpdateUserArgsMutationHookResult = ReturnType<typeof useMutationUpdateUserArgsMutation>;
 export type MutationUpdateUserArgsMutationResult = Apollo.MutationResult<MutationUpdateUserArgsMutation>;
 export type MutationUpdateUserArgsMutationOptions = Apollo.BaseMutationOptions<MutationUpdateUserArgsMutation, MutationUpdateUserArgsMutationVariables>;
+export const SetNotificationReadDocument = gql`
+    mutation SetNotificationRead($where: NotificationWhereUniqueInput!, $data: NotificationUpdateInput!) {
+  updateNotification(where: $where, data: $data) {
+    id
+    status
+  }
+}
+    `;
+export type SetNotificationReadMutationFn = Apollo.MutationFunction<SetNotificationReadMutation, SetNotificationReadMutationVariables>;
+
+/**
+ * __useSetNotificationReadMutation__
+ *
+ * To run a mutation, you first call `useSetNotificationReadMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSetNotificationReadMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [setNotificationReadMutation, { data, loading, error }] = useSetNotificationReadMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useSetNotificationReadMutation(baseOptions?: Apollo.MutationHookOptions<SetNotificationReadMutation, SetNotificationReadMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SetNotificationReadMutation, SetNotificationReadMutationVariables>(SetNotificationReadDocument, options);
+      }
+export type SetNotificationReadMutationHookResult = ReturnType<typeof useSetNotificationReadMutation>;
+export type SetNotificationReadMutationResult = Apollo.MutationResult<SetNotificationReadMutation>;
+export type SetNotificationReadMutationOptions = Apollo.BaseMutationOptions<SetNotificationReadMutation, SetNotificationReadMutationVariables>;
+export const UpdateManyProjectsDocument = gql`
+    mutation updateManyProjects($where: ProjectWhereInput, $data: ProjectUpdateManyMutationInput!) {
+  updateManyProject(where: $where, data: $data) {
+    count
+  }
+}
+    `;
+export type UpdateManyProjectsMutationFn = Apollo.MutationFunction<UpdateManyProjectsMutation, UpdateManyProjectsMutationVariables>;
+
+/**
+ * __useUpdateManyProjectsMutation__
+ *
+ * To run a mutation, you first call `useUpdateManyProjectsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateManyProjectsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateManyProjectsMutation, { data, loading, error }] = useUpdateManyProjectsMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useUpdateManyProjectsMutation(baseOptions?: Apollo.MutationHookOptions<UpdateManyProjectsMutation, UpdateManyProjectsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateManyProjectsMutation, UpdateManyProjectsMutationVariables>(UpdateManyProjectsDocument, options);
+      }
+export type UpdateManyProjectsMutationHookResult = ReturnType<typeof useUpdateManyProjectsMutation>;
+export type UpdateManyProjectsMutationResult = Apollo.MutationResult<UpdateManyProjectsMutation>;
+export type UpdateManyProjectsMutationOptions = Apollo.BaseMutationOptions<UpdateManyProjectsMutation, UpdateManyProjectsMutationVariables>;
 export const UpdateProjectDocument = gql`
     mutation UpdateProject($data: ProjectUpdateInput!, $projectId: ProjectWhereUniqueInput!) {
   updateProject(data: $data, where: $projectId) {
@@ -6342,12 +6601,21 @@ export type UpdateTaskStatusMutationHookResult = ReturnType<typeof useUpdateTask
 export type UpdateTaskStatusMutationResult = Apollo.MutationResult<UpdateTaskStatusMutation>;
 export type UpdateTaskStatusMutationOptions = Apollo.BaseMutationOptions<UpdateTaskStatusMutation, UpdateTaskStatusMutationVariables>;
 export const GetManagerProjectsDocument = gql`
-    query GetManagerProjects($userId: String) {
-  projects(where: {owner: {is: {id: {equals: $userId}}}}) {
-    ...Project
+    query GetManagerProjects($where: ProjectWhereInput) {
+  projects(where: $where) {
+    id
+    title
+    status_project
+    due_date
+    description
+    total_time_spent
+    start_date
+    end_date
+    is_disabled
+    due_date
   }
 }
-    ${ProjectFragmentDoc}`;
+    `;
 
 /**
  * __useGetManagerProjectsQuery__
@@ -6361,7 +6629,7 @@ export const GetManagerProjectsDocument = gql`
  * @example
  * const { data, loading, error } = useGetManagerProjectsQuery({
  *   variables: {
- *      userId: // value for 'userId'
+ *      where: // value for 'where'
  *   },
  * });
  */
@@ -6376,6 +6644,54 @@ export function useGetManagerProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type GetManagerProjectsQueryHookResult = ReturnType<typeof useGetManagerProjectsQuery>;
 export type GetManagerProjectsLazyQueryHookResult = ReturnType<typeof useGetManagerProjectsLazyQuery>;
 export type GetManagerProjectsQueryResult = Apollo.QueryResult<GetManagerProjectsQuery, GetManagerProjectsQueryVariables>;
+export const GetAllNotificationsDocument = gql`
+    query GetAllNotifications($where: NotificationWhereInput!, $orderBy: [NotificationOrderByWithRelationInput!]) {
+  notifications(orderBy: $orderBy, where: $where) {
+    id
+    title
+    status
+    sender {
+      id
+      first_name
+      last_name
+      email
+      avatar
+    }
+    content
+    created_at
+    updated_at
+  }
+}
+    `;
+
+/**
+ * __useGetAllNotificationsQuery__
+ *
+ * To run a query within a React component, call `useGetAllNotificationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllNotificationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllNotificationsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function useGetAllNotificationsQuery(baseOptions: Apollo.QueryHookOptions<GetAllNotificationsQuery, GetAllNotificationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllNotificationsQuery, GetAllNotificationsQueryVariables>(GetAllNotificationsDocument, options);
+      }
+export function useGetAllNotificationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllNotificationsQuery, GetAllNotificationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllNotificationsQuery, GetAllNotificationsQueryVariables>(GetAllNotificationsDocument, options);
+        }
+export type GetAllNotificationsQueryHookResult = ReturnType<typeof useGetAllNotificationsQuery>;
+export type GetAllNotificationsLazyQueryHookResult = ReturnType<typeof useGetAllNotificationsLazyQuery>;
+export type GetAllNotificationsQueryResult = Apollo.QueryResult<GetAllNotificationsQuery, GetAllNotificationsQueryVariables>;
 export const GetProjectDocument = gql`
     query GetProject($id: String) {
   project(where: {id: $id}) {
@@ -6446,6 +6762,41 @@ export function useGetTasksByProjectLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type GetTasksByProjectQueryHookResult = ReturnType<typeof useGetTasksByProjectQuery>;
 export type GetTasksByProjectLazyQueryHookResult = ReturnType<typeof useGetTasksByProjectLazyQuery>;
 export type GetTasksByProjectQueryResult = Apollo.QueryResult<GetTasksByProjectQuery, GetTasksByProjectQueryVariables>;
+export const GetUserDocument = gql`
+    query GetUser($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    ...User
+  }
+}
+    ${UserFragmentDoc}`;
+
+/**
+ * __useGetUserQuery__
+ *
+ * To run a query within a React component, call `useGetUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetUserQuery(baseOptions: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
+      }
+export function useGetUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
+        }
+export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
+export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
+export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
 export const GetUserInfosDocument = gql`
     query GetUserInfos($id: String) {
   user(where: {id: $id}) {
@@ -6482,12 +6833,21 @@ export type GetUserInfosQueryHookResult = ReturnType<typeof useGetUserInfosQuery
 export type GetUserInfosLazyQueryHookResult = ReturnType<typeof useGetUserInfosLazyQuery>;
 export type GetUserInfosQueryResult = Apollo.QueryResult<GetUserInfosQuery, GetUserInfosQueryVariables>;
 export const GetUserProjectsDocument = gql`
-    query GetUserProjects($userId: String) {
-  projects(where: {users: {some: {id: {equals: $userId}}}}) {
-    ...Project
+    query GetUserProjects($where: ProjectWhereInput!) {
+  projects(where: $where) {
+    id
+    title
+    status_project
+    due_date
+    description
+    total_time_spent
+    start_date
+    end_date
+    is_disabled
+    due_date
   }
 }
-    ${ProjectFragmentDoc}`;
+    `;
 
 /**
  * __useGetUserProjectsQuery__
@@ -6501,11 +6861,11 @@ export const GetUserProjectsDocument = gql`
  * @example
  * const { data, loading, error } = useGetUserProjectsQuery({
  *   variables: {
- *      userId: // value for 'userId'
+ *      where: // value for 'where'
  *   },
  * });
  */
-export function useGetUserProjectsQuery(baseOptions?: Apollo.QueryHookOptions<GetUserProjectsQuery, GetUserProjectsQueryVariables>) {
+export function useGetUserProjectsQuery(baseOptions: Apollo.QueryHookOptions<GetUserProjectsQuery, GetUserProjectsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetUserProjectsQuery, GetUserProjectsQueryVariables>(GetUserProjectsDocument, options);
       }
@@ -6516,3 +6876,95 @@ export function useGetUserProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type GetUserProjectsQueryHookResult = ReturnType<typeof useGetUserProjectsQuery>;
 export type GetUserProjectsLazyQueryHookResult = ReturnType<typeof useGetUserProjectsLazyQuery>;
 export type GetUserProjectsQueryResult = Apollo.QueryResult<GetUserProjectsQuery, GetUserProjectsQueryVariables>;
+export const AllNotificationsDocument = gql`
+    subscription AllNotifications {
+  normalSubscription {
+    id
+    message
+    date
+  }
+}
+    `;
+
+/**
+ * __useAllNotificationsSubscription__
+ *
+ * To run a query within a React component, call `useAllNotificationsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useAllNotificationsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllNotificationsSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllNotificationsSubscription(baseOptions?: Apollo.SubscriptionHookOptions<AllNotificationsSubscription, AllNotificationsSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<AllNotificationsSubscription, AllNotificationsSubscriptionVariables>(AllNotificationsDocument, options);
+      }
+export type AllNotificationsSubscriptionHookResult = ReturnType<typeof useAllNotificationsSubscription>;
+export type AllNotificationsSubscriptionResult = Apollo.SubscriptionResult<AllNotificationsSubscription>;
+export const DynamicTopicDocument = gql`
+    subscription DynamicTopic {
+  subscriptionWithFilterToDynamicTopic(topic: "FOO_MESSAGES") {
+    id
+    message
+  }
+}
+    `;
+
+/**
+ * __useDynamicTopicSubscription__
+ *
+ * To run a query within a React component, call `useDynamicTopicSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useDynamicTopicSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDynamicTopicSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useDynamicTopicSubscription(baseOptions?: Apollo.SubscriptionHookOptions<DynamicTopicSubscription, DynamicTopicSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<DynamicTopicSubscription, DynamicTopicSubscriptionVariables>(DynamicTopicDocument, options);
+      }
+export type DynamicTopicSubscriptionHookResult = ReturnType<typeof useDynamicTopicSubscription>;
+export type DynamicTopicSubscriptionResult = Apollo.SubscriptionResult<DynamicTopicSubscription>;
+export const EvenNotificationsDocument = gql`
+    subscription EvenNotifications {
+  subscriptionWithFilter {
+    id
+    message
+    date
+  }
+}
+    `;
+
+/**
+ * __useEvenNotificationsSubscription__
+ *
+ * To run a query within a React component, call `useEvenNotificationsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useEvenNotificationsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEvenNotificationsSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useEvenNotificationsSubscription(baseOptions?: Apollo.SubscriptionHookOptions<EvenNotificationsSubscription, EvenNotificationsSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<EvenNotificationsSubscription, EvenNotificationsSubscriptionVariables>(EvenNotificationsDocument, options);
+      }
+export type EvenNotificationsSubscriptionHookResult = ReturnType<typeof useEvenNotificationsSubscription>;
+export type EvenNotificationsSubscriptionResult = Apollo.SubscriptionResult<EvenNotificationsSubscription>;
