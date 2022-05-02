@@ -22,11 +22,13 @@ import {
   useGetUserLazyQuery,
   UserFragment,
 } from 'src/generated/graphql'
+import useAppState from 'src/hooks/useAppState'
 import InputWithError from '../forms/InputWithError'
 import UserInvitationCard from '../molecules/UserInvitationCard'
 
 export default function InvitePeopleModal(): JSX.Element {
   const { projectId } = useParams()
+  const { user } = useAppState()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
   const {
@@ -45,9 +47,9 @@ export default function InvitePeopleModal(): JSX.Element {
   ] = useCreateInvitationMutation({
     notifyOnNetworkStatusChange: true,
     onCompleted: async (data) => {
-      if (data.createInvitation) {
+      if (data.customCreateInvitation) {
         setInvitedUsers((c) =>
-          c.filter((u) => u.id !== data.createInvitation.user_id)
+          c.filter((u) => u.id !== data.customCreateInvitation.user_id)
         )
         toast({
           status: 'success',
@@ -89,12 +91,12 @@ export default function InvitePeopleModal(): JSX.Element {
 
   const handleSendInvitations = async () => {
     await Promise.all(
-      invitedUsers.map((user) => {
+      invitedUsers.map((usr) => {
         return createInvitation({
           variables: {
             data: {
               status: Status_Invitation.Pending,
-              email: 'doe@gmail.com',
+              email: user.email,
               project: {
                 connect: {
                   id: projectId,
@@ -102,7 +104,7 @@ export default function InvitePeopleModal(): JSX.Element {
               },
               user: {
                 connect: {
-                  email: user.email,
+                  email: usr.email,
                 },
               },
             },
@@ -158,11 +160,11 @@ export default function InvitePeopleModal(): JSX.Element {
               </Button>
             </HStack>
             <VStack>
-              {invitedUsers.map((user) => (
+              {invitedUsers.map((item) => (
                 <UserInvitationCard
                   setInvitedUsers={setInvitedUsers}
-                  user={user}
-                  key={user.id}
+                  user={item}
+                  key={item.id}
                 />
               ))}
             </VStack>
