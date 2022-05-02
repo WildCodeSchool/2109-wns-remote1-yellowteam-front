@@ -1,5 +1,5 @@
 mutation createInvitation($data: InvitationCreateInput!) {
-  createInvitation(data: $data) {
+  customCreateInvitation(data: $data) {
     id
     user_id
   }

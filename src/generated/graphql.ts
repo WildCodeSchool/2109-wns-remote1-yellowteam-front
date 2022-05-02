@@ -4932,6 +4932,7 @@ export type TaskWhereUniqueInput = {
 };
 
 export enum Type_Notification {
+  Invitation = 'INVITATION',
   Project = 'PROJECT',
   Task = 'TASK'
 }
@@ -6034,7 +6035,7 @@ export type CreateInvitationMutationVariables = Exact<{
 }>;
 
 
-export type CreateInvitationMutation = { __typename?: 'Mutation', createInvitation: { __typename?: 'Invitation', id: string, user_id: string } };
+export type CreateInvitationMutation = { __typename?: 'Mutation', customCreateInvitation: { __typename?: 'Invitation', id: string, user_id: string } };
 
 export type CreateProjectMutationVariables = Exact<{
   data: ProjectCreateInput;
@@ -6119,7 +6120,7 @@ export type GetAllNotificationsQueryVariables = Exact<{
 }>;
 
 
-export type GetAllNotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: string, title: string, status: Status_Notification, content: string, created_at: any, updated_at: any, sender: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string } }> };
+export type GetAllNotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: string, title: string, status: Status_Notification, type: Type_Notification, reference_id: string, content: string, created_at: any, updated_at: any, sender: { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string } }> };
 
 export type GetProjectQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
@@ -6159,7 +6160,7 @@ export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __t
 export type AllNotificationsSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllNotificationsSubscription = { __typename?: 'Subscription', normalSubscription: { __typename?: 'NotificationType', id: string, message: string, date: any } };
+export type AllNotificationsSubscription = { __typename?: 'Subscription', subscriptionWithFilter: { __typename?: 'NotificationType', id: string, message: string, date: any } };
 
 export type DynamicTopicSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -6233,7 +6234,7 @@ export const UserFragmentDoc = gql`
     `;
 export const CreateInvitationDocument = gql`
     mutation createInvitation($data: InvitationCreateInput!) {
-  createInvitation(data: $data) {
+  customCreateInvitation(data: $data) {
     id
     user_id
   }
@@ -6650,6 +6651,8 @@ export const GetAllNotificationsDocument = gql`
     id
     title
     status
+    type
+    reference_id
     sender {
       id
       first_name
@@ -6878,7 +6881,7 @@ export type GetUserProjectsLazyQueryHookResult = ReturnType<typeof useGetUserPro
 export type GetUserProjectsQueryResult = Apollo.QueryResult<GetUserProjectsQuery, GetUserProjectsQueryVariables>;
 export const AllNotificationsDocument = gql`
     subscription AllNotifications {
-  normalSubscription {
+  subscriptionWithFilter {
     id
     message
     date

@@ -6,6 +6,8 @@ query GetAllNotifications(
     id
     title
     status
+    type
+    reference_id
     sender {
       id
       first_name

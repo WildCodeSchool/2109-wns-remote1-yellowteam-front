@@ -49884,6 +49884,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "INVITATION",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "PROJECT",
             "description": null,
             "isDeprecated": false,
