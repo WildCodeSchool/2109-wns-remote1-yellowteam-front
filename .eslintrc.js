@@ -23,6 +23,10 @@ module.exports = {
   rules: {
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
     'react/react-in-jsx-scope': 'off',
+    'react/forbid-prop-types': 0,
+    'react/prop-types': 0,
+    'react/require-default-props': 0,
+    'react/no-fc-default-props': 0,
   },
   ignorePatterns: ['.eslintrc.js'],
-};
+}

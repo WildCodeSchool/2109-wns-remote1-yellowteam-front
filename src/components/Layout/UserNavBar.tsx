@@ -1,6 +1,7 @@
-import { Flex, Box, Switch, useColorMode } from '@chakra-ui/react'
+import { Box, Switch, useColorMode } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import navLinks from 'src/config/navLinks.config'
+import navLinks from 'src/config/navLinks'
+import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
 import mainTheme from '../../definitions/chakra/theme/mainTheme'
 import SignOutButton from '../Assets/SignOutButton'
 
@@ -11,9 +12,10 @@ const UserNavBar = (): JSX.Element => {
   const location = useLocation()
 
   return (
-    <Flex
+    <CustomBox
       width="66px"
-      backgroundColor="white"
+      display="flex"
+      variant="navBar"
       height="100vh"
       flexDirection="column"
       alignItems="center"
@@ -37,7 +39,7 @@ const UserNavBar = (): JSX.Element => {
       ))}
       <SignOutButton />
       <Switch onChange={toggleColorMode} />
-    </Flex>
+    </CustomBox>
   )
 }
 

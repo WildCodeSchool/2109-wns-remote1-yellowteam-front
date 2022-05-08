@@ -30,7 +30,6 @@ const customProperties = {
     h1: {
       fontSize: ['15', '15', '32', '36'],
       fontWeight: '800',
-      color: '#38383A',
       fontFamily: 'Avenir',
     },
     h2: {
