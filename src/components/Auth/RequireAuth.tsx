@@ -32,8 +32,7 @@ export default function RequireAuth({
     me()
   }, [])
 
-  if (loading) return <LoadingScreen />
-  if (isCheckingCookie) return <LoadingScreen />
+  if (isCheckingCookie || loading) return <LoadingScreen />
 
   if (!isAuth) {
     return <AuthRoutes />
