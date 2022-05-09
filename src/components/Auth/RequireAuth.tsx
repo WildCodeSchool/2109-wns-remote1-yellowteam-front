@@ -13,7 +13,7 @@ export default function RequireAuth({
 }: {
   children: JSX.Element
 }): JSX.Element {
-  const { isAuth, user } = useAppState()
+  const { isAuth } = useAppState()
   const { dispatchLogin, dispatchLogout } = useAppState()
   const [isCheckingCookie, setIsCheckingCookie] = useState(true)
 
