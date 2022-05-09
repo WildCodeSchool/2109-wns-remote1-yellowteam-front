@@ -16,6 +16,7 @@ import {
 import { useTable, useSortBy, useRowSelect, usePagination } from 'react-table'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
 import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
+import customScrollbar from 'src/styles/customScrollbar'
 import ProjectsTableFilters from './Projects.table.filters'
 import TableFooter from './Table.footer'
 import useProjectTableData from './ProjectTable.data'
@@ -73,13 +74,21 @@ export const ProjectTable = (): JSX.Element => {
       mt={5}
       w="full"
       display="flex"
-      justifyContent="center"
+      justifyContent="flex-start"
       flexDirection="column"
       flexGrow={1}
     >
       <ProjectsTableFilters />
 
-      <CustomBox variant="rounded" w="full" h="full">
+      <CustomBox
+        sx={customScrollbar}
+        variant="rounded"
+        w="full"
+        h="-webkit-fit-content"
+        minH="670px"
+        maxH="670px"
+        overflowY="auto"
+      >
         <Table
           position="relative"
           {...getTableProps()}
@@ -120,7 +129,7 @@ export const ProjectTable = (): JSX.Element => {
             ))}
           </Thead>
 
-          <Tbody h="full" {...getTableBodyProps()}>
+          <Tbody {...getTableBodyProps()}>
             {page.map((row) => {
               prepareRow(row)
               return (
