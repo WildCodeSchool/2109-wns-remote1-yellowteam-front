@@ -45,7 +45,7 @@ const customProperties = {
       fontFamily: 'Avenir',
     },
     h4: {
-      fontSize: ['16', '18'],
+      fontSize: ['12', '16', '18'],
       color: '#38383A',
       fontFamily: 'Avenir',
     },
@@ -77,7 +77,7 @@ const customProperties = {
   colors: {
     orange: '#F69826',
     textPrimary: '#38383A',
-    mediumGreyText: '#4E4F54',
+    darkGrey: '#4E4F54',
     greyText: '#9FA1A5',
     deactivatedGrey: '#BEBDC0',
     superLightGrey: '#EBECF0',

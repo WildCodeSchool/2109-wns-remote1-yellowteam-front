@@ -126,7 +126,15 @@ export default function InvitePeopleModal(): JSX.Element {
 
   return (
     <>
-      <Button variant="action" fontSize={12} px={2} py={1} onClick={onOpen}>
+      <Button
+        my={2}
+        variant="action"
+        w="full"
+        fontSize={12}
+        px={2}
+        py={1}
+        onClick={onOpen}
+      >
         INVITE PEOPLE
       </Button>
 

@@ -10,8 +10,8 @@ export type Dates = {
   dueDate: Date | null
 }
 
-const Project = (): ReactElement => {
+const Projects = (): ReactElement => {
   return <ProjectTable />
 }
 
-export default Project
+export default Projects
