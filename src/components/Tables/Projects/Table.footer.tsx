@@ -4,6 +4,7 @@ import {
   Button,
   Flex,
   HStack,
+  Select,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -15,7 +16,6 @@ import {
 } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
 import DeleteProjectAlert from '../../Alert/DeleteProject.alert'
-import ProjectsDeleteButton from './Projects.delete.button'
 
 type Props = {
   pageOptions: any
@@ -97,15 +97,15 @@ export default function TableFooter({
       alignItems="center"
       className="pagination"
     >
-      <Flex w="full">
+      <Flex alignItems="center" whiteSpace="nowrap" w="full">
         <Text mr={2}>
           Page{' '}
           <strong>
             {pageIndex + 1} of {pageOptions.length}
-          </strong>{' '}
+          </strong>
         </Text>
 
-        <select
+        <Select
           value={pageSize}
           onChange={(e) => {
             setPageSize(Number(e.target.value))
@@ -116,10 +116,9 @@ export default function TableFooter({
               Show {pSize}
             </option>
           ))}
-        </select>
+        </Select>
       </Flex>
       <DeleteProjectAlert
-        DeleteButton={ProjectsDeleteButton}
         cancelRef={cancelRef}
         isOpen={isOpen}
         onClose={onClose}
@@ -127,8 +126,10 @@ export default function TableFooter({
         loading={loading}
         onSubmit={handleDeleteProject}
       />
-      <HStack ml={2} rounded={5} spacing={0} bg="white">
+      <HStack ml={2} spacing={0}>
         <Button
+          roundedLeft={5}
+          variant="table"
           rounded={0}
           type="button"
           onClick={() => gotoPage(0)}
@@ -137,6 +138,7 @@ export default function TableFooter({
           {'<<'}
         </Button>
         <Button
+          variant="table"
           rounded={0}
           type="button"
           onClick={() => previousPage()}
@@ -145,6 +147,7 @@ export default function TableFooter({
           {'<'}
         </Button>
         <Button
+          variant="table"
           rounded={0}
           type="button"
           onClick={() => nextPage()}
@@ -153,6 +156,8 @@ export default function TableFooter({
           {'>'}
         </Button>
         <Button
+          roundedRight={5}
+          variant="table"
           rounded={0}
           type="button"
           onClick={() => gotoPage(pageCount - 1)}

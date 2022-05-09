@@ -10,6 +10,7 @@ import {
   Input,
 } from '@chakra-ui/react'
 import { ChangeEvent, useState } from 'react'
+import ProjectsDeleteButton from '../Tables/Projects/Projects.delete.button'
 
 type Props = {
   isOpen: boolean
@@ -18,12 +19,10 @@ type Props = {
   onOpen: () => void
   onSubmit: () => void
   loading: boolean
-  DeleteButton: ({ onClick }: { onClick: () => void }) => JSX.Element
 }
 
 export default function DeleteProjectAlert({
   onOpen,
-  DeleteButton,
   onSubmit,
   loading,
   isOpen,
@@ -48,7 +47,7 @@ export default function DeleteProjectAlert({
 
   return (
     <>
-      <DeleteButton onClick={onOpen} />
+      <ProjectsDeleteButton onClick={onOpen} />
 
       <AlertDialog
         isOpen={isOpen}

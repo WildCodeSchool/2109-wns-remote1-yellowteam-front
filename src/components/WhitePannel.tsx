@@ -2,6 +2,7 @@
 import { Box, Flex, CloseButton, Text } from '@chakra-ui/react'
 import { ReactElement, ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
+import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
 
 interface IProps {
   children: ReactNode
@@ -13,11 +14,12 @@ const WhitePannel = ({ children, close, title }: IProps): ReactElement => {
   const navigate = useNavigate()
 
   return (
-    <Flex
-      direction="column"
+    <CustomBox
+      flexDirection="column"
+      variant="rounded"
+      display="flex"
       w="full"
       h="full"
-      backgroundColor="white"
       p={10}
       mt={10}
       borderRadius={12}
@@ -35,7 +37,7 @@ const WhitePannel = ({ children, close, title }: IProps): ReactElement => {
         </Text>
         {children}
       </Flex>
-    </Flex>
+    </CustomBox>
   )
 }
 
