@@ -9,7 +9,6 @@ import {
   ModalBody,
   FormLabel,
   Box,
-  ModalFooter,
   Button,
   RadioGroup,
   Radio,
@@ -26,8 +25,6 @@ import {
   Status,
   useCreateProjectMutation,
 } from 'src/generated/graphql'
-import DateRangePicker from '@wojtekmaj/react-daterange-picker'
-
 import { ErrorMessage } from '@hookform/error-message'
 import { client } from 'src/App'
 import useAppState from 'src/hooks/useAppState'
@@ -48,10 +45,6 @@ const CreateProjectModal = ({ isOpen, onClose }: IProps): ReactElement => {
     endDate: new Date(),
     dueDate: new Date(),
   })
-  const [dateRange, setDateRange] = useState<[string | Date, string | Date]>([
-    new Date(),
-    new Date(),
-  ])
 
   const [isDisabled, setIsDisabled] = useBoolean()
   const [isPrivate, setIsPrivate] = useBoolean()
@@ -238,15 +231,6 @@ const CreateProjectModal = ({ isOpen, onClose }: IProps): ReactElement => {
                 onChange={(d) => setDates({ ...dates, dueDate: d })}
                 dateFormat="dd/MM/yyyy"
               />
-              {/* <DateRangePicker
-                isOpen
-                onChange={
-                  setDateRange as unknown as (
-                    value: string | Date
-                  ) => void | undefined
-                }
-                value={dateRange}
-              /> */}
             </Box>
 
             <Flex w="full" justifyContent="center">
