@@ -12,6 +12,7 @@ import {
   Td,
   chakra,
   Spinner,
+  Center,
 } from '@chakra-ui/react'
 import { useTable, useSortBy, useRowSelect, usePagination } from 'react-table'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
@@ -67,7 +68,12 @@ export const ProjectTable = (): JSX.Element => {
     }
   )
 
-  if (loadingProjects) return <Spinner />
+  if (loadingProjects)
+    return (
+      <Center w="full" h="full">
+        <Spinner />
+      </Center>
+    )
 
   return (
     <CustomBox
