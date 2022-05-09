@@ -22,3 +22,8 @@ export const validationsProfilUpdate = Yup.object({
     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
   ),
 })
+
+export const validationsCreateProject = Yup.object({
+  title: Yup.string().required().min(4),
+  description: Yup.string().required().min(10),
+})

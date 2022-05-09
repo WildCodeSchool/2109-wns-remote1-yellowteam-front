@@ -20,7 +20,6 @@ export default function TaskList({ tasks, name, status }: Props): JSX.Element {
   return (
     <Box
       display="flex"
-      zIndex="base"
       border={2}
       position="relative"
       p={5}

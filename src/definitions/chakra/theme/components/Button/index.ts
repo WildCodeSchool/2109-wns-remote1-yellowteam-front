@@ -3,7 +3,7 @@ import { ComponentStyleConfig } from '@chakra-ui/react'
 const Button: ComponentStyleConfig = {
   variants: {
     action: (props) => ({
-      bg: props.colorMode === 'dark' ? 'gray.600' : 'orange',
+      bg: props.colorMode === 'dark' ? 'orange' : 'orange',
       color: 'white',
       fontWeight: 'bold',
       _hover: {

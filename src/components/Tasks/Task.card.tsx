@@ -78,17 +78,13 @@ const Card = ({
       cursor="pointer"
       layout
       drag
-      zIndex="docked"
       position="relative"
       onDragStart={() => setDragging(true)}
       onDragEnd={handleDrop}
       whileHover={{
         scale: 1.03,
         boxShadow: '0px 3px 3px rgba(0,0,0,0.15)',
-      }}
-      whileTap={{
-        scale: 1.12,
-        boxShadow: '0px 5px 5px rgba(0,0,0,0.1)',
+        zIndex: 999,
       }}
       backgroundColor={colorMode === 'light' ? 'white' : 'gray.600'}
       minWidth="218px"
@@ -98,7 +94,6 @@ const Card = ({
     >
       <Flex
         position="relative"
-        zIndex="overlay"
         w="full"
         alignItems="center"
         justifyContent="space-between"

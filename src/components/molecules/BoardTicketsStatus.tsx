@@ -11,13 +11,8 @@ const BoardTicketsStatus = ({
   title,
   numberOfTickets,
 }: IBoardTicketsStatus): ReactElement => (
-  <Flex alignItems="flex-start" width="210px">
-    <Text
-      textStyle="body"
-      fontWeight="800"
-      marginRight="12px"
-      marginBottom="18px"
-    >
+  <Flex alignItems="center" justifyContent="flex-start" width="210px">
+    <Text mr={2} fontWeight="800">
       {title}
     </Text>
     <Text
@@ -27,7 +22,6 @@ const BoardTicketsStatus = ({
       height="20px"
       borderRadius="20px"
       textAlign="center"
-      paddingTop="1px"
     >
       {numberOfTickets}
     </Text>
