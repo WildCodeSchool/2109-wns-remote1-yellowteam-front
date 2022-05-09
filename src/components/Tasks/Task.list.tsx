@@ -1,9 +1,8 @@
-import { Spinner } from '@chakra-ui/react'
+import { Box, Spinner } from '@chakra-ui/react'
 import { GetTasksByProjectQuery, Status } from 'src/generated/graphql'
 import useBoardState from 'src/hooks/useBoardState'
 import BoardTicketsStatus from 'src/components/molecules/BoardTicketsStatus'
 import Tag from '../molecules/Tags'
-import { MotionFlex } from '../Motion'
 import Card from './Task.card'
 
 type Props = {
@@ -19,8 +18,10 @@ export default function TaskList({ tasks, name, status }: Props): JSX.Element {
   if (!tasks) return <Spinner />
 
   return (
-    <MotionFlex
+    <Box
+      display="flex"
       border={2}
+      position="relative"
       p={5}
       w={['full', 'full', '30%']}
       minWidth="-webkit-fit-content"
@@ -43,6 +44,6 @@ export default function TaskList({ tasks, name, status }: Props): JSX.Element {
           title={t.title}
         />
       ))}
-    </MotionFlex>
+    </Box>
   )
 }

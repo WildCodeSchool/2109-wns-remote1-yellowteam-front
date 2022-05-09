@@ -1810,9 +1810,6 @@ export type Mutation = {
   login: User;
   logout: Scalars['String'];
   me: User;
-  pubSubMutation: Scalars['Boolean'];
-  pubSubMutationToDynamicTopic: Scalars['Boolean'];
-  publisherMutation: Scalars['Boolean'];
   register: User;
   updateComment: Maybe<Comment>;
   updateFile: Maybe<File>;
@@ -1995,22 +1992,6 @@ export type MutationDeleteUserArgs = {
 
 export type MutationLoginArgs = {
   data: LoginInput;
-};
-
-
-export type MutationPubSubMutationArgs = {
-  message: InputMaybe<Scalars['String']>;
-};
-
-
-export type MutationPubSubMutationToDynamicTopicArgs = {
-  message: InputMaybe<Scalars['String']>;
-  topic: Scalars['String'];
-};
-
-
-export type MutationPublisherMutationArgs = {
-  message: InputMaybe<Scalars['String']>;
 };
 
 
@@ -3745,7 +3726,6 @@ export type Query = {
   aggregateUser: AggregateUser;
   comment: Maybe<Comment>;
   comments: Array<Comment>;
-  currentDate: Scalars['DateTime'];
   file: Maybe<File>;
   files: Array<File>;
   findFirstComment: Maybe<Comment>;
@@ -6155,7 +6135,7 @@ export type GetUserProjectsQueryVariables = Exact<{
 }>;
 
 
-export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean }> };
+export type GetUserProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, is_disabled: boolean }> };
 
 export type AllNotificationsSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -6841,13 +6821,7 @@ export const GetUserProjectsDocument = gql`
     id
     title
     status_project
-    due_date
-    description
-    total_time_spent
-    start_date
-    end_date
     is_disabled
-    due_date
   }
 }
     `;

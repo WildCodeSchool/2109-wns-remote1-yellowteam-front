@@ -1,3 +1,4 @@
+/* eslint-disable no-unneeded-ternary */
 /* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-nested-ternary */
@@ -10,16 +11,19 @@ import {
   Th,
   Td,
   chakra,
-  Flex,
   Spinner,
-  Box,
+  Center,
 } from '@chakra-ui/react'
 import { useTable, useSortBy, useRowSelect, usePagination } from 'react-table'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
+import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
+import customScrollbar from 'src/styles/customScrollbar'
 import ProjectsTableFilters from './Projects.table.filters'
 import TableFooter from './Table.footer'
 import useProjectTableData from './ProjectTable.data'
 import IndeterminateCheckbox from '../TableCheckbox'
+
+const sortBy = [{ id: 'title' }, { id: 'description' }, { id: 'status' }]
 
 export const ProjectTable = (): JSX.Element => {
   const { columns, loadingProjects, tableData } = useProjectTableData()
@@ -38,10 +42,11 @@ export const ProjectTable = (): JSX.Element => {
     pageCount,
     gotoPage,
     nextPage,
+    setSortBy,
     previousPage,
     setPageSize,
   } = useTable(
-    { columns, data: tableData },
+    { columns, data: tableData, initialState: { sortBy } },
     useSortBy,
     usePagination,
     useRowSelect,
@@ -63,33 +68,53 @@ export const ProjectTable = (): JSX.Element => {
     }
   )
 
-  if (loadingProjects) return <Spinner />
+  if (loadingProjects)
+    return (
+      <Center w="full" h="full">
+        <Spinner />
+      </Center>
+    )
 
   return (
-    <Flex
+    <CustomBox
       mt={5}
       w="full"
       display="flex"
-      justifyContent="center"
+      justifyContent="flex-start"
       flexDirection="column"
       flexGrow={1}
     >
       <ProjectsTableFilters />
 
-      <Box w="full" h="full">
-        {' '}
+      <CustomBox
+        sx={customScrollbar}
+        variant="rounded"
+        w="full"
+        h="-webkit-fit-content"
+        minH="670px"
+        maxH="670px"
+        overflowY="auto"
+      >
         <Table
-          bg="white"
           position="relative"
           {...getTableProps()}
           overflow="hidden"
           rounded={12}
         >
-          <Thead bg="gray.200">
+          <Thead>
             {headerGroups.map((headerGroup) => (
               <Tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
                   <Th
+                    onClick={() => {
+                      const desc =
+                        column.isSortedDesc === true
+                          ? undefined
+                          : column.isSortedDesc === false
+                          ? true
+                          : false
+                      setSortBy([{ id: column.id, desc }, ...sortBy])
+                    }}
                     py={5}
                     px={4}
                     {...column.getHeaderProps(column.getSortByToggleProps())}
@@ -110,7 +135,7 @@ export const ProjectTable = (): JSX.Element => {
             ))}
           </Thead>
 
-          <Tbody h="full" {...getTableBodyProps()}>
+          <Tbody {...getTableBodyProps()}>
             {page.map((row) => {
               prepareRow(row)
               return (
@@ -125,7 +150,7 @@ export const ProjectTable = (): JSX.Element => {
             })}
           </Tbody>
         </Table>
-      </Box>
+      </CustomBox>
 
       <TableFooter
         selectedFlatRows={selectedFlatRows}
@@ -140,7 +165,7 @@ export const ProjectTable = (): JSX.Element => {
         setPageSize={setPageSize}
         pageOptions={pageOptions}
       />
-    </Flex>
+    </CustomBox>
   )
 }
 

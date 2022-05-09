@@ -37,11 +37,13 @@ const useProjectTableData = () => {
             id: item.id,
             title: (
               <Link to={`/projects/${item.id}/modify`}>
-                <Text textDecor="underline">{item.title}</Text>
+                <Text w="150px" textDecor="underline">
+                  {item.title}
+                </Text>
               </Link>
             ),
             description: (
-              <Text isTruncated minW="50px" maxW="150px">
+              <Text isTruncated minW="150px" maxW="150px">
                 {item.description}
               </Text>
             ),

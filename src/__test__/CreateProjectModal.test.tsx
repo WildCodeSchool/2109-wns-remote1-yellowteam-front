@@ -1,7 +1,9 @@
 import React from 'react'
-import { screen, render, fireEvent } from '@testing-library/react'
+import { screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import CreateProjectModal from '../components/Modals/CreateProjectModal'
+import { render } from './test-utils'
+import { act } from 'react-dom/test-utils'
 
 describe('CreateProjectModalForm', () => {
   let mocks: any
@@ -9,39 +11,13 @@ describe('CreateProjectModalForm', () => {
 
   beforeEach(() => {
     mocks = {
-      mockSubmit: jest.fn(),
       mockHandleSubmit: jest.fn((fn) => () => fn()),
       close: jest.fn(),
       register: jest.fn(),
       changeDate: jest.fn(() => console.log('dates')),
       change: jest.fn(),
     }
-    form = render(
-      <CreateProjectModal
-        dates={{
-          startDate: new Date(),
-          endDate: new Date(),
-          dueDate: new Date(),
-        }}
-        isOpen
-        errors={['']}
-        onSubmit={mocks.mockSubmit}
-        handleSubmit={mocks.mockHandleSubmit}
-        onClose={mocks.close}
-        register={mocks.register}
-        setDates={mocks.changeDate}
-        setIsDisabled={{
-          on: () => mocks.change,
-          off: () => mocks.change,
-          toggle: () => mocks.change,
-        }}
-        setIsPrivate={{
-          on: () => mocks.change,
-          off: () => mocks.change,
-          toggle: () => mocks.change,
-        }}
-      />
-    )
+    form = render(<CreateProjectModal isOpen onClose={mocks.close} />)
   })
   it('should render the basic fields', () => {
     expect(
@@ -81,6 +57,7 @@ describe('CreateProjectModalForm', () => {
     fireEvent.change(labelPublic, { target: { value: 'true' } })
 
     const { getByTestId } = form
+
     fireEvent.submit(getByTestId('form'))
 
     expect(
@@ -93,7 +70,5 @@ describe('CreateProjectModalForm', () => {
     expect((labelVisible as HTMLInputElement).value).toBe('true')
     expect((labelInvisible as HTMLInputElement).value).toBe('false')
     expect((labelPublic as HTMLInputElement).value).toBe('true')
-
-    expect(mocks.mockSubmit).toBeCalled()
   })
 })
