@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { ReactElement, useState } from 'react'
+import { ReactElement, useState } from 'react'
 import {
   Box,
   Button,
@@ -11,6 +11,7 @@ import {
   Text,
   Image,
   useToast,
+  Center,
 } from '@chakra-ui/react'
 import WhitePannel from 'src/components/WhitePannel'
 import { useParams } from 'react-router-dom'
@@ -43,7 +44,7 @@ const ModifyProject = (): ReactElement => {
 
   const { data, loading } = useGetProjectQuery({
     variables: { id: projectId as string },
-    skip: projectId === undefined,
+    skip: !projectId,
   })
 
   const [isFormAddUserVisible, setIsFormAddUserVisible] = useState(false)
@@ -130,9 +131,9 @@ const ModifyProject = (): ReactElement => {
 
   if (loading)
     return (
-      <WhitePannel close={false}>
+      <Center w="full" h="full">
         <Spinner />
-      </WhitePannel>
+      </Center>
     )
 
   if (!data) return <WhitePannel close={false}>No project here</WhitePannel>
@@ -201,121 +202,111 @@ const ModifyProject = (): ReactElement => {
           style={mainTheme.section.userSmallAvatar}
         />
       </Box>
-      <Box overflow="auto" height="24rem">
-        <Box pt={5}>
-          <Flex justifyContent="space-between">
-            <ProjectDescription
-              data={data}
-              handleSubmit={handleSubmit}
-              isDescriptionModificationVisible={
-                isDescriptionModificationVisible
-              }
-              isError={isError.description}
-              onSubmitDescription={onSubmitDescription}
-              register={register}
-              showDescriptionModificationVisible={(value: boolean) =>
-                setIsDescriptionModificationVisible(value)
-              }
-              hideDescriptionModificationVisible={(value: boolean) =>
-                setIsDescriptionModificationVisible(value)
-              }
-              updateProjectLoading={updateProjectLoading}
-            />
-            <ProjectDetails
-              data={data}
-              handleSubmit={handleSubmit}
-              showTimeOnProjectModificationVisible={(value: boolean) =>
-                setIsTimeOnProjectModificationVisible(value)
-              }
-              isTimeOnProjectModificationVisible={
-                isTimeOnProjectModificationVisible
-              }
-              onSubmitChangeTimeSpent={onSubmitChangeTimeSpent}
-              register={register}
-              totalHoursAvailableOnProject={totalHoursAvailableOnProject}
-              updateProjectLoading={updateProjectLoading}
-              hideModifyTimeButton={(value: boolean) =>
-                setIsTimeOnProjectModificationVisible(value)
-              }
-              isError={isError.timeDetails}
-            />
-          </Flex>
-          <Flex
-            pt={5}
-            width="100%"
-            // minWidth={['5rem', '10rem', '20rem', '27rem']}
-            justifyContent="space-between"
-          >
-            <TeamMembers
-              data={data}
-              deleteUser={deleteUser}
-              handleSubmit={handleSubmit}
-              isError={isError.users}
-              isFormAddUserVisible={isFormAddUserVisible}
-              onSubmitAddUser={onSubmitAddUser}
-              register={register}
-              setIsFormAddUserVisible={setIsFormAddUserVisible}
-              updateProjectLoading={updateProjectLoading}
-              hideAddUserButton={(value: boolean) =>
-                setIsFormAddUserVisible(value)
-              }
-            />
-            {/* <InvitePeopleModal /> */}
-            <TimeSpentOnProject
-              dataDoughnutChart={dataDoughnutChart}
-              optionsDoughnutChart={optionsDoughnutChart}
-            />
-          </Flex>
-          <Flex>
-            <TasksAccomplished />
+      <Box overflow="auto" flexGrow={1}>
+        <Flex justifyContent="space-between">
+          <ProjectDescription
+            data={data}
+            handleSubmit={handleSubmit}
+            isDescriptionModificationVisible={isDescriptionModificationVisible}
+            isError={isError.description}
+            onSubmitDescription={onSubmitDescription}
+            register={register}
+            showDescriptionModificationVisible={(value: boolean) =>
+              setIsDescriptionModificationVisible(value)
+            }
+            hideDescriptionModificationVisible={(value: boolean) =>
+              setIsDescriptionModificationVisible(value)
+            }
+            updateProjectLoading={updateProjectLoading}
+          />
+          <ProjectDetails
+            data={data}
+            handleSubmit={handleSubmit}
+            showTimeOnProjectModificationVisible={(value: boolean) =>
+              setIsTimeOnProjectModificationVisible(value)
+            }
+            isTimeOnProjectModificationVisible={
+              isTimeOnProjectModificationVisible
+            }
+            onSubmitChangeTimeSpent={onSubmitChangeTimeSpent}
+            register={register}
+            totalHoursAvailableOnProject={totalHoursAvailableOnProject}
+            updateProjectLoading={updateProjectLoading}
+            hideModifyTimeButton={(value: boolean) =>
+              setIsTimeOnProjectModificationVisible(value)
+            }
+            isError={isError.timeDetails}
+          />
+        </Flex>
+        <Flex pt={5} width="100%" justifyContent="space-between">
+          <TeamMembers
+            data={data}
+            deleteUser={deleteUser}
+            handleSubmit={handleSubmit}
+            isError={isError.users}
+            isFormAddUserVisible={isFormAddUserVisible}
+            onSubmitAddUser={onSubmitAddUser}
+            register={register}
+            setIsFormAddUserVisible={setIsFormAddUserVisible}
+            updateProjectLoading={updateProjectLoading}
+            hideAddUserButton={(value: boolean) =>
+              setIsFormAddUserVisible(value)
+            }
+          />
+          <TimeSpentOnProject
+            dataDoughnutChart={dataDoughnutChart}
+            optionsDoughnutChart={optionsDoughnutChart}
+          />
+        </Flex>
+        <Flex>
+          <TasksAccomplished />
 
-            <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
-              <Flex alignItems="center">
-                <Text textStyle="titleWhiteBoard">Project details</Text>
-                <Button
-                  variant="ghost "
-                  onClick={() => setIsTimeOnProjectModificationVisible(true)}
-                >
-                  <EditIcon />
-                </Button>
-              </Flex>
-              {isTimeOnProjectModificationVisible ? (
-                <FormControl>
-                  <Flex paddingTop={3}>
-                    <FormLabel htmlFor="total_time_spent" />
-                    <Input
-                      id="total_time_spent"
-                      type="text"
-                      height="30px"
-                      width="40%"
-                      placeholder="Enter hours"
-                      {...register('total_time_spent')}
-                    />
-                    <Button
-                      ml={3}
-                      backgroundColor={mainTheme.colors.orange}
-                      color="white"
-                      isLoading={updateProjectLoading}
-                      type="submit"
-                      height="30px"
-                      width="auto"
-                      onClick={handleSubmit(onSubmitChangeTimeSpent)}
-                    >
-                      Ok
-                    </Button>
-                  </Flex>
-                </FormControl>
-              ) : (
-                <Flex alignItems="center">
-                  <Text textStyle="body">Total time spent:</Text>
-                  <Text textStyle="bodyGreenBold" ml={2}>
-                    {convertHoursToDays(data.project?.total_time_spent)}
-                  </Text>
+          <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
+            <Flex alignItems="center">
+              <Text textStyle="titleWhiteBoard">Project details</Text>
+              <Button
+                variant="ghost "
+                onClick={() => setIsTimeOnProjectModificationVisible(true)}
+              >
+                <EditIcon />
+              </Button>
+            </Flex>
+            {isTimeOnProjectModificationVisible ? (
+              <FormControl>
+                <Flex paddingTop={3}>
+                  <FormLabel htmlFor="total_time_spent" />
+                  <Input
+                    id="total_time_spent"
+                    type="text"
+                    height="30px"
+                    width="40%"
+                    placeholder="Enter hours"
+                    {...register('total_time_spent')}
+                  />
+                  <Button
+                    ml={3}
+                    backgroundColor={mainTheme.colors.orange}
+                    color="white"
+                    isLoading={updateProjectLoading}
+                    type="submit"
+                    height="30px"
+                    width="auto"
+                    onClick={handleSubmit(onSubmitChangeTimeSpent)}
+                  >
+                    Ok
+                  </Button>
                 </Flex>
-              )}
-            </Box>
-          </Flex>
-        </Box>
+              </FormControl>
+            ) : (
+              <Flex alignItems="center">
+                <Text textStyle="body">Total time spent:</Text>
+                <Text textStyle="bodyGreenBold" ml={2}>
+                  {convertHoursToDays(data.project?.total_time_spent)}
+                </Text>
+              </Flex>
+            )}
+          </Box>
+        </Flex>
       </Box>
     </WhitePannel>
   )
