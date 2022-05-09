@@ -1810,9 +1810,6 @@ export type Mutation = {
   login: User;
   logout: Scalars['String'];
   me: User;
-  pubSubMutation: Scalars['Boolean'];
-  pubSubMutationToDynamicTopic: Scalars['Boolean'];
-  publisherMutation: Scalars['Boolean'];
   register: User;
   updateComment: Maybe<Comment>;
   updateFile: Maybe<File>;
@@ -1995,22 +1992,6 @@ export type MutationDeleteUserArgs = {
 
 export type MutationLoginArgs = {
   data: LoginInput;
-};
-
-
-export type MutationPubSubMutationArgs = {
-  message: InputMaybe<Scalars['String']>;
-};
-
-
-export type MutationPubSubMutationToDynamicTopicArgs = {
-  message: InputMaybe<Scalars['String']>;
-  topic: Scalars['String'];
-};
-
-
-export type MutationPublisherMutationArgs = {
-  message: InputMaybe<Scalars['String']>;
 };
 
 
@@ -3745,7 +3726,6 @@ export type Query = {
   aggregateUser: AggregateUser;
   comment: Maybe<Comment>;
   comments: Array<Comment>;
-  currentDate: Scalars['DateTime'];
   file: Maybe<File>;
   files: Array<File>;
   findFirstComment: Maybe<Comment>;
@@ -6024,7 +6004,7 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
-export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> };
+export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string, email: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role>, email: string }> };
 
 export type TaskFragment = { __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } };
 
@@ -6127,7 +6107,7 @@ export type GetProjectQueryVariables = Exact<{
 }>;
 
 
-export type GetProjectQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> } };
+export type GetProjectQuery = { __typename?: 'Query', project: { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string, email: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role>, email: string }> } };
 
 export type GetTasksByProjectQueryVariables = Exact<{
   where: TaskWhereInput;
@@ -6198,6 +6178,7 @@ export const ProjectFragmentDoc = gql`
       id
       avatar
       first_name
+      email
     }
   }
   users {
@@ -6206,6 +6187,7 @@ export const ProjectFragmentDoc = gql`
     last_name
     avatar
     role
+    email
   }
 }
     `;

@@ -9,7 +9,6 @@ import {
   ModalBody,
   FormLabel,
   Box,
-  ModalFooter,
   Button,
   RadioGroup,
   Radio,
@@ -20,18 +19,16 @@ import {
 } from '@chakra-ui/react'
 import DatePicker from 'react-datepicker'
 import React, { ReactElement, useState } from 'react'
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm, FieldValues } from 'react-hook-form'
 import {
   GetManagerProjectsDocument,
   Status,
   useCreateProjectMutation,
 } from 'src/generated/graphql'
-import DateRangePicker from '@wojtekmaj/react-daterange-picker'
-
+import { Dates } from 'src/pages/Projects'
 import { ErrorMessage } from '@hookform/error-message'
 import { client } from 'src/App'
 import useAppState from 'src/hooks/useAppState'
-import { Dates } from 'src/pages/Project'
 import { validationsCreateProject } from 'src/formResolvers/yupResolver'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputWithError from '../forms/InputWithError'
@@ -48,10 +45,6 @@ const CreateProjectModal = ({ isOpen, onClose }: IProps): ReactElement => {
     endDate: new Date(),
     dueDate: new Date(),
   })
-  const [dateRange, setDateRange] = useState<[string | Date, string | Date]>([
-    new Date(),
-    new Date(),
-  ])
 
   const [isDisabled, setIsDisabled] = useBoolean()
   const [isPrivate, setIsPrivate] = useBoolean()
@@ -238,15 +231,6 @@ const CreateProjectModal = ({ isOpen, onClose }: IProps): ReactElement => {
                 onChange={(d) => setDates({ ...dates, dueDate: d })}
                 dateFormat="dd/MM/yyyy"
               />
-              {/* <DateRangePicker
-                isOpen
-                onChange={
-                  setDateRange as unknown as (
-                    value: string | Date
-                  ) => void | undefined
-                }
-                value={dateRange}
-              /> */}
             </Box>
 
             <Flex w="full" justifyContent="center">
