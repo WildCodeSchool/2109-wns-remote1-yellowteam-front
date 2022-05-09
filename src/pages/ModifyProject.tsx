@@ -1,6 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { ReactElement, useEffect, useState } from 'react'
-import { Box, Flex, Spinner, Image, useToast } from '@chakra-ui/react'
+import React, { ReactElement, useState } from 'react'
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Spinner,
+  Text,
+  Image,
+  useToast,
+} from '@chakra-ui/react'
 import WhitePannel from 'src/components/WhitePannel'
 import { useParams } from 'react-router-dom'
 import mainTheme from 'src/definitions/chakra/theme/mainTheme'
@@ -17,6 +28,8 @@ import TeamMembers from 'src/components/molecules/ProjectDetails/TeamMembers'
 import TimeSpentOnProject from 'src/components/molecules/ProjectDetails/TimeSpentOnProject'
 import convertMillisecondsToHours from 'src/utils/convertMillisecondsToHours'
 import getActualTimeAvailable from 'src/utils/getActualTimeAvailable'
+import convertHoursToDays from 'src/utils/convertHoursToDays'
+import EditIcon from 'src/static/svg/Edit'
 
 const ModifyProject = (): ReactElement => {
   ChartJS.register(ArcElement, Tooltip, Legend)
@@ -28,7 +41,7 @@ const ModifyProject = (): ReactElement => {
   })
   const toast = useToast()
 
-  const { data, loading, refetch } = useGetProjectQuery({
+  const { data, loading } = useGetProjectQuery({
     variables: { id: projectId as string },
     skip: projectId === undefined,
   })
@@ -48,34 +61,6 @@ const ModifyProject = (): ReactElement => {
   const [uptadeproject, { loading: updateProjectLoading }] =
     useUpdateProjectMutation({ notifyOnNetworkStatusChange: true })
 
-  const onSubmitAddUser = async ({ email }: FieldValues): Promise<void> => {
-    try {
-      await uptadeproject({
-        variables: {
-          data: { users: { connect: [{ email: email as string }] } },
-          projectId: { id: projectId },
-        },
-      })
-      toast({
-        title: 'User added to the project.',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      })
-      setIsFormAddUserVisible(false)
-    } catch (e) {
-      console.log('error adding user to project', e)
-      setIsError({ ...isError, users: true })
-      toast({
-        title: 'User could not be added to the project.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      })
-    }
-    reset()
-  }
-
   const onSubmitDescription = async ({
     description,
   }: FieldValues): Promise<void> => {
@@ -93,7 +78,6 @@ const ModifyProject = (): ReactElement => {
         isClosable: true,
       })
     } catch (e) {
-      console.log('error changing project description', e)
       setIsError({ ...isError, description: true })
     }
     setIsDescriptionModificationVisible(false)
@@ -119,39 +103,30 @@ const ModifyProject = (): ReactElement => {
       })
       setIsTimeOnProjectModificationVisible(false)
     } catch (e) {
-      console.log('error changing project description', e)
       setIsError({ ...isError, timeDetails: true })
     }
     reset()
   }
 
   const deleteUser = async (id: string): Promise<void> => {
-    try {
-      await uptadeproject({
-        variables: {
-          data: {
-            users: { disconnect: [{ id }] },
-          },
-          projectId: { id: projectId },
+    await uptadeproject({
+      variables: {
+        data: {
+          users: { disconnect: [{ id }] },
         },
-      })
-      toast({
-        title: 'User deleted from project.',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      })
-    } catch (e) {
-      console.log('error deleting user from project', e)
-    }
-    reset()
+        projectId: { id: projectId },
+      },
+      onCompleted: (): void => {
+        toast({
+          title: 'User deleted from project.',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        })
+        reset()
+      },
+    })
   }
-
-  const showAlert = () => {}
-
-  useEffect(() => {
-    refetch()
-  }, [onSubmitAddUser, onSubmitDescription, onSubmitChangeTimeSpent])
 
   if (loading)
     return (
@@ -188,6 +163,33 @@ const ModifyProject = (): ReactElement => {
     ],
   }
   const optionsDoughnutChart = { cutout: 60 }
+
+  const onSubmitAddUser = async ({ email }: FieldValues): Promise<void> => {
+    try {
+      await uptadeproject({
+        variables: {
+          data: { users: { connect: [{ email: email as string }] } },
+          projectId: { id: projectId },
+        },
+      })
+      toast({
+        title: 'User added to the project.',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      })
+      setIsFormAddUserVisible(false)
+    } catch (e) {
+      setIsError({ ...isError, users: true })
+      toast({
+        title: 'User could not be added to the project.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
+    reset()
+  }
 
   return (
     <WhitePannel close title={data.project?.title}>
@@ -258,6 +260,7 @@ const ModifyProject = (): ReactElement => {
                 setIsFormAddUserVisible(value)
               }
             />
+            {/* <InvitePeopleModal /> */}
             <TimeSpentOnProject
               dataDoughnutChart={dataDoughnutChart}
               optionsDoughnutChart={optionsDoughnutChart}
@@ -265,6 +268,52 @@ const ModifyProject = (): ReactElement => {
           </Flex>
           <Flex>
             <TasksAccomplished />
+
+            <Box pt={5} pr={5} minWidth={['5rem', '10rem', '20rem', '27rem']}>
+              <Flex alignItems="center">
+                <Text textStyle="titleWhiteBoard">Project details</Text>
+                <Button
+                  variant="ghost "
+                  onClick={() => setIsTimeOnProjectModificationVisible(true)}
+                >
+                  <EditIcon />
+                </Button>
+              </Flex>
+              {isTimeOnProjectModificationVisible ? (
+                <FormControl>
+                  <Flex paddingTop={3}>
+                    <FormLabel htmlFor="total_time_spent" />
+                    <Input
+                      id="total_time_spent"
+                      type="text"
+                      height="30px"
+                      width="40%"
+                      placeholder="Enter hours"
+                      {...register('total_time_spent')}
+                    />
+                    <Button
+                      ml={3}
+                      backgroundColor={mainTheme.colors.orange}
+                      color="white"
+                      isLoading={updateProjectLoading}
+                      type="submit"
+                      height="30px"
+                      width="auto"
+                      onClick={handleSubmit(onSubmitChangeTimeSpent)}
+                    >
+                      Ok
+                    </Button>
+                  </Flex>
+                </FormControl>
+              ) : (
+                <Flex alignItems="center">
+                  <Text textStyle="body">Total time spent:</Text>
+                  <Text textStyle="bodyGreenBold" ml={2}>
+                    {convertHoursToDays(data.project?.total_time_spent)}
+                  </Text>
+                </Flex>
+              )}
+            </Box>
           </Flex>
         </Box>
       </Box>

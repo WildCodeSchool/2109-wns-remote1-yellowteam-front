@@ -3,12 +3,14 @@ import { Box, Flex, Image } from '@chakra-ui/react'
 import { ReactElement } from 'react'
 import UserInfoCard from 'src/components/molecules/UserInfoCard'
 import UserProfileForm from 'src/components/forms/UserProfile.form'
+import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
 
 const Profile = (): ReactElement => {
   return (
-    <Flex
-      direction="column"
-      bg="white"
+    <CustomBox
+      variant="navBar"
+      flexDirection="column"
+      display="flex"
       overflow="hidden"
       rounded={12}
       mt={10}
@@ -25,7 +27,7 @@ const Profile = (): ReactElement => {
         <UserInfoCard />
         <UserProfileForm />
       </Flex>
-    </Flex>
+    </CustomBox>
   )
 }
 

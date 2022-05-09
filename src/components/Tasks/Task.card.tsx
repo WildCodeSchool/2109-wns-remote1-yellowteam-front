@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from 'react'
-import { Box, Text, Flex, useToast } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
+import { Box, Text, Flex, useToast, useColorMode } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 import useBoardState from 'src/hooks/useBoardState'
 import {
@@ -9,17 +8,17 @@ import {
   Status,
   useUpdateTaskStatusMutation,
 } from 'src/generated/graphql'
-import PlaceholderIcon from '../../static/svg/PlaceholderIcon'
 
-/* eslint-disable react/require-default-props */
+import PlaceholderIcon from '../../static/svg/PlaceholderIcon'
+import TaskMenu from './Task.menu'
+import { MotionCardBox } from '../Motion'
+
 interface ICard {
   title: string
   photo?: ReactElement
   tag: ReactElement
   task: GetTasksByProjectQuery['tasks'][number]
 }
-
-const MotionBox = motion(Box)
 
 const Card = ({
   photo = <PlaceholderIcon />,
@@ -31,6 +30,7 @@ const Card = ({
   const [isDragging, setDragging] = useState(false)
   const { projectId } = useParams()
   const { hoveredList } = useBoardState()
+  const { colorMode } = useColorMode()
 
   const [updateTaskStatus] = useUpdateTaskStatusMutation({
     variables: {
@@ -73,40 +73,44 @@ const Card = ({
   }
 
   return (
-    <MotionBox
+    <MotionCardBox
       pointerEvents={isDragging ? 'none' : 'all'}
       cursor="pointer"
       layout
       drag
+      position="relative"
       onDragStart={() => setDragging(true)}
       onDragEnd={handleDrop}
       whileHover={{
         scale: 1.03,
         boxShadow: '0px 3px 3px rgba(0,0,0,0.15)',
+        zIndex: 999,
       }}
-      whileTap={{
-        scale: 1.12,
-        boxShadow: '0px 5px 5px rgba(0,0,0,0.1)',
-      }}
-      backgroundColor="#FFFFFF"
-      width="218px"
+      backgroundColor={colorMode === 'light' ? 'white' : 'gray.600'}
+      minWidth="218px"
       borderRadius="10"
       padding="9px 14px 9px 14px"
       marginBottom="10px"
     >
-      <Text noOfLines={2} textStyle="h3">
-        {title}
-      </Text>
+      <Flex
+        position="relative"
+        w="full"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Text noOfLines={2}>{title}</Text>
+        <TaskMenu />
+      </Flex>
       <Flex
         alignItems="center"
         justifyContent="space-between"
         height="24px"
         mt="12px"
       >
-        <Box>{tag}</Box>
+        {tag}
         <Box m="12px 4px">{photo}</Box>
       </Flex>
-    </MotionBox>
+    </MotionCardBox>
   )
 }
 

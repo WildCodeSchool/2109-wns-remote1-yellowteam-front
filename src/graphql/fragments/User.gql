@@ -1,6 +1,7 @@
 fragment User on User {
   id
   first_name
+  phone_number
   last_name
   email
   avatar

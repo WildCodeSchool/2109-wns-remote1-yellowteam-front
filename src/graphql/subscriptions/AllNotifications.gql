@@ -1,0 +1,7 @@
+subscription AllNotifications {
+  subscriptionWithFilter {
+    id
+    message
+    date
+  }
+}

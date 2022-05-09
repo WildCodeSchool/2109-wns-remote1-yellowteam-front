@@ -16,9 +16,9 @@ import {
   FieldValues,
   UseFormHandleSubmit,
 } from 'react-hook-form'
+import InvitePeopleModal from 'src/components/Modals/InvitePeopleModal'
 import mainTheme from 'src/definitions/chakra/theme/mainTheme'
 import { GetProjectQuery } from 'src/generated/graphql'
-import AddIcon from 'src/static/svg/AddIcon'
 
 interface IProps {
   data: GetProjectQuery
@@ -39,10 +39,6 @@ const TeamMembers = ({
   isError,
   isFormAddUserVisible,
   register,
-  updateProjectLoading,
-  handleSubmit,
-  onSubmitAddUser,
-  setIsFormAddUserVisible,
   hideAddUserButton,
 }: IProps): React.ReactElement => {
   return (
@@ -74,6 +70,7 @@ const TeamMembers = ({
             </Button>
           </Flex>
         ))}
+        <InvitePeopleModal />
       </Box>
       {isFormAddUserVisible ? (
         <FormControl isInvalid={isError}>
@@ -92,18 +89,7 @@ const TeamMembers = ({
                 <FormErrorMessage>Invalid email address</FormErrorMessage>
               ) : null}
             </Box>
-            <Button
-              ml={3}
-              backgroundColor={mainTheme.colors.orange}
-              color="white"
-              isLoading={isError ? false : updateProjectLoading}
-              type="submit"
-              height="30px"
-              width="auto"
-              onClick={handleSubmit(onSubmitAddUser)}
-            >
-              Add
-            </Button>
+
             <Button
               ml={3}
               backgroundColor="white"
@@ -118,17 +104,6 @@ const TeamMembers = ({
             </Button>
           </Flex>
         </FormControl>
-      ) : null}
-      {!isFormAddUserVisible ? (
-        <Flex justifyContent="center">
-          <Button
-            height={0}
-            variant="unstyled"
-            onClick={() => setIsFormAddUserVisible(true)}
-          >
-            <AddIcon width="30" height="32" color={mainTheme.colors.darkGrey} />
-          </Button>
-        </Flex>
       ) : null}
     </Box>
   )

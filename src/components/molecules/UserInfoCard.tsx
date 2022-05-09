@@ -10,7 +10,7 @@ const MotionImage = motion(Image)
 
 export default function UserInfoCard(): JSX.Element {
   const { user } = useAppState()
-  const { uploadProfilePicture, setFile, file, modal } = useUpload()
+  const { uploadProfilePicture, setFile, file, modal, progress } = useUpload()
   const uploadButtonRef = useRef<HTMLButtonElement>(null)
 
   const handleUpload = async () => {
@@ -56,6 +56,7 @@ export default function UserInfoCard(): JSX.Element {
         />
       </Box>
       <UploadProfilePictureModal
+        progress={progress}
         buttonRef={uploadButtonRef}
         isOpen={modal.isOpen}
         onClose={modal.onClose}

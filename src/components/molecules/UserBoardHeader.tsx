@@ -13,16 +13,17 @@ const UserBoardHeader = ({
   setSelectedProjectId,
   projects,
 }: IProps): ReactElement => (
-  <Flex direction="row" my={10}>
-    <Text mr={5} textStyle="h2">
-      Select a project
-    </Text>
+  <Flex
+    alignItems="center"
+    direction={['column', 'column', 'row', 'row']}
+    my={10}
+  >
+    <Text mr={5}>Select a project</Text>
 
     <Select
-      fontFamily="Avenir"
-      fontWeight="800"
-      width="320px"
-      bg="white"
+      // fontFamily="Avenir"
+      // fontWeight={['normal', 'normal', 'bold']}
+      width={['100%', '100%', '200px']}
       value={selectedProjectId}
       onChange={(event) => setSelectedProjectId(event.target.value)}
     >
