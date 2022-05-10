@@ -168,7 +168,7 @@ const Card = ({ tag, title, task }: ICard): ReactElement => {
         mt="12px"
       >
         {tag}
-        {task.user ? (
+        {task.user && task.user.avatar ? (
           <Image
             rounded={100}
             w={10}

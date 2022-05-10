@@ -10,6 +10,11 @@ const Input: ComponentStyleConfig = {
         bg: 'gray.200',
       },
     }),
+    card: (props) => ({
+      bg: props.colorMode === 'dark' ? 'gray.800' : 'gray.200',
+      color: props.colorMode === 'dark' ? 'white' : 'black',
+      fontWeight: 'bold',
+    }),
   },
 }
 

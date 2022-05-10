@@ -12,7 +12,10 @@ const useBoardState = () => {
   const dispatchSetHoveredList = (status: Status) =>
     dispatch(setHoveredList(status))
 
-  return { hoveredList, dispatchSetHoveredList }
+  return {
+    hoveredList,
+    dispatchSetHoveredList,
+  }
 }
 
 export default useBoardState
