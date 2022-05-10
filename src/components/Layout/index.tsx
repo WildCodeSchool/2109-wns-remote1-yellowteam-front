@@ -41,8 +41,6 @@ export default function Layout(): JSX.Element {
       <CustomBox
         variant="solid"
         display="flex"
-        overflowY="auto"
-        overflowX="hidden"
         p={[2, 4, 8, 10]}
         flexDirection="column"
         w="full"
