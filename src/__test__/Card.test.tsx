@@ -22,18 +22,6 @@ const mockedTask = {
 }
 
 describe('renders the card with all the elements', () => {
-  it('renders the title of the card', () => {
-    render(
-      <Card
-        task={mockedTask}
-        title="Titre de la carte"
-        photo={<PlaceholderIcon />}
-        tag={<Tag text="fix" textColor="darkBrown" tagColor="lightBrown" />}
-      />
-    )
-    const title = screen.getByText('Titre de la carte')
-    expect(title).toBeInTheDocument()
-  })
   it('renders the avatar of the card', () => {
     render(
       <Card
