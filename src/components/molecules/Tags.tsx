@@ -12,7 +12,7 @@ const Tag = ({ text, textColor, tagColor }: ITag): JSX.Element => (
     backgroundColor={tagColor}
     height={['18px', '22px']}
     minWidth={['22px', '32px']}
-    borderRadius="15"
+    borderRadius="4"
     justifyContent="center"
     alignItems="center"
   >

@@ -25,6 +25,7 @@ import {
   useUpdateProjectMutation,
 } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
+import customScrollbar from 'src/styles/customScrollbar'
 
 export default function NotificationsHOC(): JSX.Element {
   const { userId } = useAppState()
@@ -105,24 +106,8 @@ export default function NotificationsHOC(): JSX.Element {
         {loading ? <Spinner /> : selectedNotification}
       </MenuButton>
 
-      <MenuList
-        maxHeight="500px"
-        overflow="auto"
-        css={{
-          '&::-webkit-scrollbar': {
-            width: '4px',
-          },
-          '&::-webkit-scrollbar-track': {
-            width: '6px',
-            background: '#DFDFDF',
-          },
-          '&::-webkit-scrollbar-thumb': {
-            background: 'gray',
-            borderRadius: '24px',
-          },
-        }}
-      >
-        <Center w="100%" h="10%">
+      <MenuList maxHeight="500px" overflow="auto" sx={customScrollbar}>
+        <Center w="full" h="10%">
           <Text fontWeight="bold" color="gray">
             NOTIFICATIONS
           </Text>
