@@ -16,6 +16,7 @@ const initialState: IAppState = {
     last_name: '',
     phone_number: '',
     role: [],
+    cover_picture: '',
   },
   isAuth: false,
 }
@@ -32,8 +33,11 @@ const appSlice = createSlice({
       state.user = initialState.user
       state.isAuth = false
     },
-    updateUser: (state, action: PayloadAction<UserFragment>) => {
-      state.user = action.payload
+    updateUser: (state, action: PayloadAction<Partial<UserFragment>>) => {
+      state.user = {
+        ...state.user,
+        ...action.payload,
+      }
     },
   },
 })

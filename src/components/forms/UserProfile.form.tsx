@@ -59,7 +59,7 @@ export default function UserProfileForm(): JSX.Element {
     setValue('last_name', user?.last_name)
     setValue('email', user?.email)
     setValue('phone_number', user?.phone_number)
-  }, [user])
+  }, [user, isEditable])
 
   return (
     <Box
@@ -120,9 +120,10 @@ export default function UserProfileForm(): JSX.Element {
           SAVE
         </Button>
         <Button
+          isDisabled={isEditable}
           my={5}
           onClick={() => setIsEditable((c) => !c)}
-          variant="action"
+          variant="info"
         >
           EDIT
         </Button>

@@ -1826,6 +1826,7 @@ export type Mutation = {
   updateTask: Maybe<Task>;
   updateTaskStatus: Task;
   updateUser: Maybe<User>;
+  uploadCoverPicture: User;
   uploadFile: File;
   uploadProfilePicture: User;
   upsertComment: Comment;
@@ -2086,6 +2087,11 @@ export type MutationUpdateTaskStatusArgs = {
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
+};
+
+
+export type MutationUploadCoverPictureArgs = {
+  file: Scalars['Upload'];
 };
 
 
@@ -4921,6 +4927,7 @@ export type User = {
   __typename?: 'User';
   _count: Maybe<UserCount>;
   avatar: Maybe<Scalars['String']>;
+  cover_picture: Maybe<Scalars['String']>;
   created_at: Scalars['DateTime'];
   email: Scalars['String'];
   files: Array<File>;
@@ -5049,6 +5056,7 @@ export type UserCountAggregate = {
   __typename?: 'UserCountAggregate';
   _all: Scalars['Int'];
   avatar: Scalars['Int'];
+  cover_picture: Scalars['Int'];
   created_at: Scalars['Int'];
   email: Scalars['Int'];
   first_name: Scalars['Int'];
@@ -5063,6 +5071,7 @@ export type UserCountAggregate = {
 
 export type UserCountOrderByAggregateInput = {
   avatar?: InputMaybe<SortOrder>;
+  cover_picture?: InputMaybe<SortOrder>;
   created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
@@ -5077,6 +5086,7 @@ export type UserCountOrderByAggregateInput = {
 
 export type UserCreateInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
@@ -5100,6 +5110,7 @@ export type UserCreateInput = {
 
 export type UserCreateManyInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   first_name: Scalars['String'];
@@ -5213,6 +5224,7 @@ export type UserCreateOrConnectWithoutTasksInput = {
 
 export type UserCreateWithoutFilesInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   first_name: Scalars['String'];
@@ -5235,6 +5247,7 @@ export type UserCreateWithoutFilesInput = {
 
 export type UserCreateWithoutInvitationsInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
@@ -5257,6 +5270,7 @@ export type UserCreateWithoutInvitationsInput = {
 
 export type UserCreateWithoutNotificationsInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
@@ -5279,6 +5293,7 @@ export type UserCreateWithoutNotificationsInput = {
 
 export type UserCreateWithoutNotifications_SentInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
@@ -5301,6 +5316,7 @@ export type UserCreateWithoutNotifications_SentInput = {
 
 export type UserCreateWithoutOwned_ProjectsInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
@@ -5323,6 +5339,7 @@ export type UserCreateWithoutOwned_ProjectsInput = {
 
 export type UserCreateWithoutProject_CommentsInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
@@ -5345,6 +5362,7 @@ export type UserCreateWithoutProject_CommentsInput = {
 
 export type UserCreateWithoutProjectsInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
@@ -5367,6 +5385,7 @@ export type UserCreateWithoutProjectsInput = {
 
 export type UserCreateWithoutTask_CommentsInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
@@ -5389,6 +5408,7 @@ export type UserCreateWithoutTask_CommentsInput = {
 
 export type UserCreateWithoutTasksInput = {
   avatar?: InputMaybe<Scalars['String']>;
+  cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   files?: InputMaybe<FileCreateNestedManyWithoutUserInput>;
@@ -5419,6 +5439,7 @@ export type UserGroupBy = {
   _max: Maybe<UserMaxAggregate>;
   _min: Maybe<UserMinAggregate>;
   avatar: Maybe<Scalars['String']>;
+  cover_picture: Maybe<Scalars['String']>;
   created_at: Scalars['DateTime'];
   email: Scalars['String'];
   first_name: Scalars['String'];
@@ -5440,6 +5461,7 @@ export type UserListRelationFilter = {
 export type UserMaxAggregate = {
   __typename?: 'UserMaxAggregate';
   avatar: Maybe<Scalars['String']>;
+  cover_picture: Maybe<Scalars['String']>;
   created_at: Maybe<Scalars['DateTime']>;
   email: Maybe<Scalars['String']>;
   first_name: Maybe<Scalars['String']>;
@@ -5453,6 +5475,7 @@ export type UserMaxAggregate = {
 
 export type UserMaxOrderByAggregateInput = {
   avatar?: InputMaybe<SortOrder>;
+  cover_picture?: InputMaybe<SortOrder>;
   created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
@@ -5467,6 +5490,7 @@ export type UserMaxOrderByAggregateInput = {
 export type UserMinAggregate = {
   __typename?: 'UserMinAggregate';
   avatar: Maybe<Scalars['String']>;
+  cover_picture: Maybe<Scalars['String']>;
   created_at: Maybe<Scalars['DateTime']>;
   email: Maybe<Scalars['String']>;
   first_name: Maybe<Scalars['String']>;
@@ -5480,6 +5504,7 @@ export type UserMinAggregate = {
 
 export type UserMinOrderByAggregateInput = {
   avatar?: InputMaybe<SortOrder>;
+  cover_picture?: InputMaybe<SortOrder>;
   created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
@@ -5500,6 +5525,7 @@ export type UserOrderByWithAggregationInput = {
   _max?: InputMaybe<UserMaxOrderByAggregateInput>;
   _min?: InputMaybe<UserMinOrderByAggregateInput>;
   avatar?: InputMaybe<SortOrder>;
+  cover_picture?: InputMaybe<SortOrder>;
   created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   first_name?: InputMaybe<SortOrder>;
@@ -5514,6 +5540,7 @@ export type UserOrderByWithAggregationInput = {
 
 export type UserOrderByWithRelationInput = {
   avatar?: InputMaybe<SortOrder>;
+  cover_picture?: InputMaybe<SortOrder>;
   created_at?: InputMaybe<SortOrder>;
   email?: InputMaybe<SortOrder>;
   files?: InputMaybe<FileOrderByRelationAggregateInput>;
@@ -5542,6 +5569,7 @@ export type UserRelationFilter = {
 
 export enum UserScalarFieldEnum {
   Avatar = 'avatar',
+  CoverPicture = 'cover_picture',
   CreatedAt = 'created_at',
   Email = 'email',
   FirstName = 'first_name',
@@ -5559,6 +5587,7 @@ export type UserScalarWhereInput = {
   NOT?: InputMaybe<Array<UserScalarWhereInput>>;
   OR?: InputMaybe<Array<UserScalarWhereInput>>;
   avatar?: InputMaybe<StringNullableFilter>;
+  cover_picture?: InputMaybe<StringNullableFilter>;
   created_at?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   first_name?: InputMaybe<StringFilter>;
@@ -5576,6 +5605,7 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<UserScalarWhereWithAggregatesInput>>;
   avatar?: InputMaybe<StringNullableWithAggregatesFilter>;
+  cover_picture?: InputMaybe<StringNullableWithAggregatesFilter>;
   created_at?: InputMaybe<DateTimeWithAggregatesFilter>;
   email?: InputMaybe<StringWithAggregatesFilter>;
   first_name?: InputMaybe<StringWithAggregatesFilter>;
@@ -5590,6 +5620,7 @@ export type UserScalarWhereWithAggregatesInput = {
 
 export type UserUpdateInput = {
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
@@ -5613,6 +5644,7 @@ export type UserUpdateInput = {
 
 export type UserUpdateManyMutationInput = {
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5726,6 +5758,7 @@ export type UserUpdateWithWhereUniqueWithoutProjectsInput = {
 
 export type UserUpdateWithoutFilesInput = {
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   first_name?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -5748,6 +5781,7 @@ export type UserUpdateWithoutFilesInput = {
 
 export type UserUpdateWithoutInvitationsInput = {
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
@@ -5770,6 +5804,7 @@ export type UserUpdateWithoutInvitationsInput = {
 
 export type UserUpdateWithoutNotificationsInput = {
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
@@ -5792,6 +5827,7 @@ export type UserUpdateWithoutNotificationsInput = {
 
 export type UserUpdateWithoutNotifications_SentInput = {
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
@@ -5814,6 +5850,7 @@ export type UserUpdateWithoutNotifications_SentInput = {
 
 export type UserUpdateWithoutOwned_ProjectsInput = {
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
@@ -5836,6 +5873,7 @@ export type UserUpdateWithoutOwned_ProjectsInput = {
 
 export type UserUpdateWithoutProject_CommentsInput = {
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
@@ -5858,6 +5896,7 @@ export type UserUpdateWithoutProject_CommentsInput = {
 
 export type UserUpdateWithoutProjectsInput = {
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
@@ -5880,6 +5919,7 @@ export type UserUpdateWithoutProjectsInput = {
 
 export type UserUpdateWithoutTask_CommentsInput = {
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
@@ -5902,6 +5942,7 @@ export type UserUpdateWithoutTask_CommentsInput = {
 
 export type UserUpdateWithoutTasksInput = {
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<StringFieldUpdateOperationsInput>;
   files?: InputMaybe<FileUpdateManyWithoutUserInput>;
@@ -5978,6 +6019,7 @@ export type UserWhereInput = {
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
   avatar?: InputMaybe<StringNullableFilter>;
+  cover_picture?: InputMaybe<StringNullableFilter>;
   created_at?: InputMaybe<DateTimeFilter>;
   email?: InputMaybe<StringFilter>;
   files?: InputMaybe<FileListRelationFilter>;
@@ -6008,7 +6050,15 @@ export type ProjectFragment = { __typename?: 'Project', id: string, title: strin
 
 export type TaskFragment = { __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } };
 
-export type UserFragment = { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> };
+export type UserFragment = { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role>, cover_picture: string };
+
+export type AssignUserToTaskMutationVariables = Exact<{
+  where: TaskWhereUniqueInput;
+  data: TaskUpdateInput;
+}>;
+
+
+export type AssignUserToTaskMutation = { __typename?: 'Mutation', updateTask: { __typename?: 'Task', id: string, user_id: string, user: { __typename?: 'User', avatar: string } } };
 
 export type CreateInvitationMutationVariables = Exact<{
   data: InvitationCreateInput;
@@ -6024,12 +6074,19 @@ export type CreateProjectMutationVariables = Exact<{
 
 export type CreateProjectMutation = { __typename?: 'Mutation', createProject: { __typename?: 'Project', id: string, title: string, due_date: any } };
 
+export type CreateTaskMutationVariables = Exact<{
+  data: TaskCreateInput;
+}>;
+
+
+export type CreateTaskMutation = { __typename?: 'Mutation', createTask: { __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } } };
+
 export type MutateLoginMutationVariables = Exact<{
   data: LoginInput;
 }>;
 
 
-export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutateLoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role>, cover_picture: string } };
 
 export type MutateLogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -6039,14 +6096,14 @@ export type MutateLogoutMutation = { __typename?: 'Mutation', logout: string };
 export type MutateMeMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutateMeMutation = { __typename?: 'Mutation', me: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role>, cover_picture: string } };
 
 export type MutateRegisterMutationVariables = Exact<{
   data: RegisterInput;
 }>;
 
 
-export type MutateRegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutateRegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role>, cover_picture: string } };
 
 export type MutationUpdateUserArgsMutationVariables = Exact<{
   data: UserUpdateInput;
@@ -6054,7 +6111,7 @@ export type MutationUpdateUserArgsMutationVariables = Exact<{
 }>;
 
 
-export type MutationUpdateUserArgsMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type MutationUpdateUserArgsMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role>, cover_picture: string } };
 
 export type SetNotificationReadMutationVariables = Exact<{
   where: NotificationWhereUniqueInput;
@@ -6079,6 +6136,14 @@ export type UpdateProjectMutationVariables = Exact<{
 
 
 export type UpdateProjectMutation = { __typename?: 'Mutation', updateProject: { __typename?: 'Project', id: string } };
+
+export type UpdateTaskMutationVariables = Exact<{
+  where: TaskWhereUniqueInput;
+  data: TaskUpdateInput;
+}>;
+
+
+export type UpdateTaskMutation = { __typename?: 'Mutation', updateTask: { __typename?: 'Task', id: string, title: string } };
 
 export type UpdateTaskStatusMutationVariables = Exact<{
   data: TaskStatusInput;
@@ -6121,14 +6186,14 @@ export type GetUserQueryVariables = Exact<{
 }>;
 
 
-export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role>, cover_picture: string } };
 
 export type GetUserInfosQueryVariables = Exact<{
   id: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetUserInfosQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role> } };
+export type GetUserInfosQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role>, cover_picture: string } };
 
 export type GetUserProjectsQueryVariables = Exact<{
   where: ProjectWhereInput;
@@ -6210,8 +6275,47 @@ export const UserFragmentDoc = gql`
   email
   avatar
   role
+  cover_picture
 }
     `;
+export const AssignUserToTaskDocument = gql`
+    mutation assignUserToTask($where: TaskWhereUniqueInput!, $data: TaskUpdateInput!) {
+  updateTask(where: $where, data: $data) {
+    id
+    user_id
+    user {
+      avatar
+    }
+  }
+}
+    `;
+export type AssignUserToTaskMutationFn = Apollo.MutationFunction<AssignUserToTaskMutation, AssignUserToTaskMutationVariables>;
+
+/**
+ * __useAssignUserToTaskMutation__
+ *
+ * To run a mutation, you first call `useAssignUserToTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAssignUserToTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [assignUserToTaskMutation, { data, loading, error }] = useAssignUserToTaskMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useAssignUserToTaskMutation(baseOptions?: Apollo.MutationHookOptions<AssignUserToTaskMutation, AssignUserToTaskMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AssignUserToTaskMutation, AssignUserToTaskMutationVariables>(AssignUserToTaskDocument, options);
+      }
+export type AssignUserToTaskMutationHookResult = ReturnType<typeof useAssignUserToTaskMutation>;
+export type AssignUserToTaskMutationResult = Apollo.MutationResult<AssignUserToTaskMutation>;
+export type AssignUserToTaskMutationOptions = Apollo.BaseMutationOptions<AssignUserToTaskMutation, AssignUserToTaskMutationVariables>;
 export const CreateInvitationDocument = gql`
     mutation createInvitation($data: InvitationCreateInput!) {
   customCreateInvitation(data: $data) {
@@ -6281,6 +6385,39 @@ export function useCreateProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateProjectMutationHookResult = ReturnType<typeof useCreateProjectMutation>;
 export type CreateProjectMutationResult = Apollo.MutationResult<CreateProjectMutation>;
 export type CreateProjectMutationOptions = Apollo.BaseMutationOptions<CreateProjectMutation, CreateProjectMutationVariables>;
+export const CreateTaskDocument = gql`
+    mutation CreateTask($data: TaskCreateInput!) {
+  createTask(data: $data) {
+    ...Task
+  }
+}
+    ${TaskFragmentDoc}`;
+export type CreateTaskMutationFn = Apollo.MutationFunction<CreateTaskMutation, CreateTaskMutationVariables>;
+
+/**
+ * __useCreateTaskMutation__
+ *
+ * To run a mutation, you first call `useCreateTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTaskMutation, { data, loading, error }] = useCreateTaskMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateTaskMutation(baseOptions?: Apollo.MutationHookOptions<CreateTaskMutation, CreateTaskMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTaskMutation, CreateTaskMutationVariables>(CreateTaskDocument, options);
+      }
+export type CreateTaskMutationHookResult = ReturnType<typeof useCreateTaskMutation>;
+export type CreateTaskMutationResult = Apollo.MutationResult<CreateTaskMutation>;
+export type CreateTaskMutationOptions = Apollo.BaseMutationOptions<CreateTaskMutation, CreateTaskMutationVariables>;
 export const MutateLoginDocument = gql`
     mutation MutateLogin($data: LoginInput!) {
   login(data: $data) {
@@ -6546,6 +6683,41 @@ export function useUpdateProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateProjectMutationHookResult = ReturnType<typeof useUpdateProjectMutation>;
 export type UpdateProjectMutationResult = Apollo.MutationResult<UpdateProjectMutation>;
 export type UpdateProjectMutationOptions = Apollo.BaseMutationOptions<UpdateProjectMutation, UpdateProjectMutationVariables>;
+export const UpdateTaskDocument = gql`
+    mutation updateTask($where: TaskWhereUniqueInput!, $data: TaskUpdateInput!) {
+  updateTask(where: $where, data: $data) {
+    id
+    title
+  }
+}
+    `;
+export type UpdateTaskMutationFn = Apollo.MutationFunction<UpdateTaskMutation, UpdateTaskMutationVariables>;
+
+/**
+ * __useUpdateTaskMutation__
+ *
+ * To run a mutation, you first call `useUpdateTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTaskMutation, { data, loading, error }] = useUpdateTaskMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useUpdateTaskMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTaskMutation, UpdateTaskMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTaskMutation, UpdateTaskMutationVariables>(UpdateTaskDocument, options);
+      }
+export type UpdateTaskMutationHookResult = ReturnType<typeof useUpdateTaskMutation>;
+export type UpdateTaskMutationResult = Apollo.MutationResult<UpdateTaskMutation>;
+export type UpdateTaskMutationOptions = Apollo.BaseMutationOptions<UpdateTaskMutation, UpdateTaskMutationVariables>;
 export const UpdateTaskStatusDocument = gql`
     mutation updateTaskStatus($data: TaskStatusInput!) {
   updateTaskStatus(data: $data) {

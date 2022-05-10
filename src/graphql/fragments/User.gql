@@ -6,4 +6,5 @@ fragment User on User {
   email
   avatar
   role
+  cover_picture
 }

@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { Box, Flex, Image } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import { ReactElement } from 'react'
 import UserInfoCard from 'src/components/molecules/UserInfoCard'
 import UserProfileForm from 'src/components/forms/UserProfile.form'
 import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
+import CoverPicture from 'src/components/CoverPicture'
 
 const Profile = (): ReactElement => {
   return (
@@ -16,13 +17,8 @@ const Profile = (): ReactElement => {
       mt={10}
       flexGrow={1}
     >
-      <Box bg="black" w="full" h="25%">
-        <Image
-          src="https://cdn.downtoearth.org.in/library/large/2018-12-31/0.42789400_1546247995_for-carousel.jpg"
-          width="full"
-          h="full"
-        />
-      </Box>
+      <CoverPicture />
+
       <Flex direction="column" flexGrow={1} px={50}>
         <UserInfoCard />
         <UserProfileForm />

@@ -16,6 +16,8 @@ export default function MyDropzone({ file, setFile }: IProps): JSX.Element {
         position: 'absolute',
         top: 0,
         left: 0,
+        width: '100%',
+        height: '100%',
       }}
       onChange={(img) => {
         setFile(img)

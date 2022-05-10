@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 const EditIcon = (): JSX.Element => (
   <svg
     width="20"

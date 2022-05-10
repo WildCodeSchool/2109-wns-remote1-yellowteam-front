@@ -54,7 +54,12 @@ export default function UploadProfilePictureModal({
             Close
           </Button>
         </ModalHeader>
-        <ModalBody>
+        <ModalBody
+          flexDirection="column"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
           {file.length && (
             <Image src={URL.createObjectURL(file[0].file as File)} />
           )}
