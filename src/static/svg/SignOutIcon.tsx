@@ -6,8 +6,8 @@ interface ISignOut {
 
 const SignOutIcon = ({ color }: ISignOut): JSX.Element => (
   <svg
-    width="29"
-    height="30"
+    width="40"
+    height="45"
     viewBox="0 0 29 30"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
