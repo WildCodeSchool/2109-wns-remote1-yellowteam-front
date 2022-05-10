@@ -3,7 +3,7 @@ import { GetTasksByProjectQuery, Status } from 'src/generated/graphql'
 import useBoardState from 'src/hooks/useBoardState'
 import BoardTicketsStatus from 'src/components/molecules/BoardTicketsStatus'
 import { AddIcon } from '@chakra-ui/icons'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import Tag from '../molecules/Tags'
 import Card from './Task.card'
 import NewTaskCard from './NewTask.card'
@@ -20,6 +20,13 @@ export default function TaskList({ tasks, name, status }: Props): JSX.Element {
   const handleHover = () => dispatchSetHoveredList(status)
 
   if (!tasks) return <Spinner />
+
+  const taskStatusName = useCallback((taskStatus: Status): string => {
+    return (
+      taskStatus.charAt(0).toUpperCase() +
+      taskStatus.slice(1).split('_').join(' ').toLowerCase()
+    )
+  }, [])
 
   return (
     <Box w="full" h="full">
@@ -59,7 +66,11 @@ export default function TaskList({ tasks, name, status }: Props): JSX.Element {
             task={t}
             key={t.id}
             tag={
-              <Tag textColor="darkGreen" tagColor="lightGreen" text="feature" />
+              <Tag
+                textColor="darkGreen"
+                tagColor="lightGreen"
+                text={taskStatusName(t.status_task)}
+              />
             }
             title={t.title}
           />
