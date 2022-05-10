@@ -8,9 +8,18 @@ import { configureStore } from '@reduxjs/toolkit'
 import { ApolloProvider } from '@apollo/client'
 import { Provider } from 'react-redux'
 // Import your own reducer
+import * as reactRouter from 'react-router-dom'
 import app from '../redux/slices/app'
 import board from '../redux/slices/board'
 import apolloClient from '../services/graphql'
+
+const { MemoryRouter } = reactRouter
+
+const MockBrowserRouter = ({ children }) => (
+  <MemoryRouter initialEntries={['/']}>{children}</MemoryRouter>
+)
+
+reactRouter.BrowserRouter = MockBrowserRouter
 
 const client = apolloClient()
 
@@ -24,9 +33,11 @@ function render(
 ) {
   function Wrapper({ children }) {
     return (
-      <Provider store={store}>
-        <ApolloProvider client={client}>{children}</ApolloProvider>
-      </Provider>
+      <MockBrowserRouter>
+        <Provider store={store}>
+          <ApolloProvider client={client}>{children}</ApolloProvider>
+        </Provider>
+      </MockBrowserRouter>
     )
   }
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
