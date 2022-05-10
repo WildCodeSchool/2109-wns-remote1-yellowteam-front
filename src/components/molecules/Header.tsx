@@ -39,7 +39,7 @@ const Header = ({ userName }: IHeader): JSX.Element => {
         as="button"
         data-testid="notifications-button"
       >
-        {/* <SearchInput /> */}
+        <SearchInput />
         <DarkModeToggle
           className="switch"
           onChange={toggleColorMode}
