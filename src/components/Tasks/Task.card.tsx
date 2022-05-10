@@ -87,10 +87,10 @@ const Card = ({
         zIndex: 999,
       }}
       backgroundColor={colorMode === 'light' ? 'white' : 'gray.600'}
-      minWidth="218px"
+      minWidth={['150px', '110px', '120px', '130px', '150px']}
       borderRadius="10"
       padding="9px 14px 9px 14px"
-      marginBottom="10px"
+      marginY="10px"
     >
       <Flex
         position="relative"

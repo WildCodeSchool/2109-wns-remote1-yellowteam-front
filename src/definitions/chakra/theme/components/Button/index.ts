@@ -10,6 +10,14 @@ const Button: ComponentStyleConfig = {
         bg: 'gray.200',
       },
     }),
+    info: (props) => ({
+      bg: props.colorMode === 'dark' ? '#00BDF7' : '#4695FC',
+      color: 'white',
+      fontWeight: 'bold',
+      _hover: {
+        bg: 'gray.200',
+      },
+    }),
     _disabled: (props) => ({
       bg: 'black',
       color: props.colorMode === 'dark' ? 'white' : 'black',

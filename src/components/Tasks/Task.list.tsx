@@ -23,12 +23,11 @@ export default function TaskList({ tasks, name, status }: Props): JSX.Element {
       border={2}
       position="relative"
       p={5}
-      w={['full', 'full', '30%']}
-      minWidth="-webkit-fit-content"
       borderColor="gray.400"
       borderStyle="dashed"
       onMouseEnter={handleHover}
       my={[5, 5, 0, 0]}
+      mx={[0, 0, 2, 2]}
       flexDirection="column"
       height="full"
       rounded={10}

@@ -51,7 +51,6 @@ const useUpload = () => {
 
     if (response.uploadProfilePicture) {
       dispatchUpdateUser({
-        ...user,
         avatar: response.uploadProfilePicture.avatar,
       })
       await setProgress(0)
@@ -67,8 +66,47 @@ const useUpload = () => {
     throw new Error('Error updating avatar')
   }
 
+  const uploadCoverPicture = async (oneFile: FileValidated) => {
+    const formData = new FormData()
+
+    formData.append(
+      'operations',
+      JSON.stringify({
+        query:
+          'mutation upload($file: Upload!){\n uploadCoverPicture(file: $file){\n  cover_picture\n }\n}\n',
+      })
+    )
+    formData.append('map', JSON.stringify({ '0': ['variables.file'] }))
+    formData.append('0', file[0].file)
+
+    const response = await avatar.upload({
+      formData,
+      userId: user.id,
+      setProgress,
+      size: oneFile.file.size,
+    })
+
+    if (response.uploadCoverPicture) {
+      console.log(response.uploadCoverPicture)
+      dispatchUpdateUser({
+        cover_picture: response.uploadCoverPicture.cover_picture,
+      })
+      await setProgress(0)
+      setFile([])
+      onClose()
+      return toast({
+        description: 'Cover picture updated',
+        position: 'bottom',
+        status: 'success',
+        title: 'Success',
+      })
+    }
+    throw new Error('Error updating cover picture')
+  }
+
   return {
     uploadProfilePicture,
+    uploadCoverPicture,
     progress,
     setFile,
     file,

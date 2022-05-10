@@ -10,6 +10,7 @@ import {
   Box,
   Button,
   VStack,
+  HStack,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { client } from 'src/App'
@@ -105,8 +106,8 @@ export default function NotificationsHOC(): JSX.Element {
       </MenuButton>
 
       <MenuList
-        height="500px"
-        overflow="scroll"
+        maxHeight="500px"
+        overflow="auto"
         css={{
           '&::-webkit-scrollbar': {
             width: '4px',
@@ -146,7 +147,7 @@ export default function NotificationsHOC(): JSX.Element {
           .map((notification) => (
             <MenuItem
               display="flex"
-              flexDirection="column"
+              flexDirection="row"
               justifyContent="flex-start"
               alignItems="start"
               backgroundColor={
@@ -184,19 +185,47 @@ export default function NotificationsHOC(): JSX.Element {
                 h={10}
                 src={notification.sender.avatar}
               />
-              <VStack>
-                <Text color="gray" fontWeight="bold">
+              <VStack w="full" textAlign="left">
+                <Text w="full" textAlign="left" color="gray" fontWeight="bold">
                   {notification.title}
                 </Text>
-                <Text color="gray" fontWeight="bold">
+                <Text w="full" textAlign="left" color="gray" fontWeight="bold">
                   {notification.content}
                 </Text>
                 {notification.type === Type_Notification.Invitation && (
-                  <Button
-                    onClick={() => handleAddUser(notification.reference_id)}
-                  >
-                    ACCEPT
-                  </Button>
+                  <HStack w="full">
+                    <Button
+                      variant="action"
+                      onClick={() => handleAddUser(notification.reference_id)}
+                    >
+                      ACCEPT
+                    </Button>
+                    <Button
+                      variant="info"
+                      onClick={() =>
+                        setNotificationRead({
+                          variables: {
+                            where: {
+                              id: notification.id,
+                            },
+                            data: {
+                              status: {
+                                set: Status_Notification.Read,
+                              },
+                            },
+                          },
+                          optimisticResponse: {
+                            updateNotification: {
+                              ...notification,
+                              status: Status_Notification.Read,
+                            },
+                          },
+                        })
+                      }
+                    >
+                      DECLINE
+                    </Button>
+                  </HStack>
                 )}
               </VStack>
             </MenuItem>

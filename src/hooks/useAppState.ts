@@ -16,7 +16,7 @@ const useAppState = () => {
   const dispatchLogout = () => {
     dispatch(logout())
   }
-  const dispatchUpdateUser = (userPayload: UserFragment) => {
+  const dispatchUpdateUser = (userPayload: Partial<UserFragment>) => {
     dispatch(updateUser(userPayload))
   }
 
