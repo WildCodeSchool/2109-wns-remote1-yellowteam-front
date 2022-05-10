@@ -25,6 +25,7 @@ export default function TaskList({ tasks, name, status }: Props): JSX.Element {
       p={5}
       borderColor="gray.400"
       borderStyle="dashed"
+      minW={['150px', '200px', '200px', '300px']}
       onMouseEnter={handleHover}
       my={[5, 5, 0, 0]}
       mx={[0, 0, 2, 2]}

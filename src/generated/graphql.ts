@@ -1826,6 +1826,7 @@ export type Mutation = {
   updateTask: Maybe<Task>;
   updateTaskStatus: Task;
   updateUser: Maybe<User>;
+  uploadCoverPicture: User;
   uploadFile: File;
   uploadProfilePicture: User;
   upsertComment: Comment;
@@ -2086,6 +2087,11 @@ export type MutationUpdateTaskStatusArgs = {
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
+};
+
+
+export type MutationUploadCoverPictureArgs = {
+  file: Scalars['Upload'];
 };
 
 
@@ -6046,6 +6052,14 @@ export type TaskFragment = { __typename?: 'Task', id: string, title: string, sta
 
 export type UserFragment = { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role>, cover_picture: string };
 
+export type AssignUserToTaskMutationVariables = Exact<{
+  where: TaskWhereUniqueInput;
+  data: TaskUpdateInput;
+}>;
+
+
+export type AssignUserToTaskMutation = { __typename?: 'Mutation', updateTask: { __typename?: 'Task', id: string, user_id: string, user: { __typename?: 'User', avatar: string } } };
+
 export type CreateInvitationMutationVariables = Exact<{
   data: InvitationCreateInput;
 }>;
@@ -6115,6 +6129,14 @@ export type UpdateProjectMutationVariables = Exact<{
 
 
 export type UpdateProjectMutation = { __typename?: 'Mutation', updateProject: { __typename?: 'Project', id: string } };
+
+export type UpdateTaskMutationVariables = Exact<{
+  where: TaskWhereUniqueInput;
+  data: TaskUpdateInput;
+}>;
+
+
+export type UpdateTaskMutation = { __typename?: 'Mutation', updateTask: { __typename?: 'Task', id: string, title: string } };
 
 export type UpdateTaskStatusMutationVariables = Exact<{
   data: TaskStatusInput;
@@ -6249,6 +6271,44 @@ export const UserFragmentDoc = gql`
   cover_picture
 }
     `;
+export const AssignUserToTaskDocument = gql`
+    mutation assignUserToTask($where: TaskWhereUniqueInput!, $data: TaskUpdateInput!) {
+  updateTask(where: $where, data: $data) {
+    id
+    user_id
+    user {
+      avatar
+    }
+  }
+}
+    `;
+export type AssignUserToTaskMutationFn = Apollo.MutationFunction<AssignUserToTaskMutation, AssignUserToTaskMutationVariables>;
+
+/**
+ * __useAssignUserToTaskMutation__
+ *
+ * To run a mutation, you first call `useAssignUserToTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAssignUserToTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [assignUserToTaskMutation, { data, loading, error }] = useAssignUserToTaskMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useAssignUserToTaskMutation(baseOptions?: Apollo.MutationHookOptions<AssignUserToTaskMutation, AssignUserToTaskMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AssignUserToTaskMutation, AssignUserToTaskMutationVariables>(AssignUserToTaskDocument, options);
+      }
+export type AssignUserToTaskMutationHookResult = ReturnType<typeof useAssignUserToTaskMutation>;
+export type AssignUserToTaskMutationResult = Apollo.MutationResult<AssignUserToTaskMutation>;
+export type AssignUserToTaskMutationOptions = Apollo.BaseMutationOptions<AssignUserToTaskMutation, AssignUserToTaskMutationVariables>;
 export const CreateInvitationDocument = gql`
     mutation createInvitation($data: InvitationCreateInput!) {
   customCreateInvitation(data: $data) {
@@ -6583,6 +6643,41 @@ export function useUpdateProjectMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateProjectMutationHookResult = ReturnType<typeof useUpdateProjectMutation>;
 export type UpdateProjectMutationResult = Apollo.MutationResult<UpdateProjectMutation>;
 export type UpdateProjectMutationOptions = Apollo.BaseMutationOptions<UpdateProjectMutation, UpdateProjectMutationVariables>;
+export const UpdateTaskDocument = gql`
+    mutation updateTask($where: TaskWhereUniqueInput!, $data: TaskUpdateInput!) {
+  updateTask(where: $where, data: $data) {
+    id
+    title
+  }
+}
+    `;
+export type UpdateTaskMutationFn = Apollo.MutationFunction<UpdateTaskMutation, UpdateTaskMutationVariables>;
+
+/**
+ * __useUpdateTaskMutation__
+ *
+ * To run a mutation, you first call `useUpdateTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTaskMutation, { data, loading, error }] = useUpdateTaskMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useUpdateTaskMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTaskMutation, UpdateTaskMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTaskMutation, UpdateTaskMutationVariables>(UpdateTaskDocument, options);
+      }
+export type UpdateTaskMutationHookResult = ReturnType<typeof useUpdateTaskMutation>;
+export type UpdateTaskMutationResult = Apollo.MutationResult<UpdateTaskMutation>;
+export type UpdateTaskMutationOptions = Apollo.BaseMutationOptions<UpdateTaskMutation, UpdateTaskMutationVariables>;
 export const UpdateTaskStatusDocument = gql`
     mutation updateTaskStatus($data: TaskStatusInput!) {
   updateTaskStatus(data: $data) {

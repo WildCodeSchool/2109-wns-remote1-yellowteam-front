@@ -1,13 +1,14 @@
-import { Box, Switch, useColorMode } from '@chakra-ui/react'
+import { Box, useColorMode } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import navLinks from 'src/config/navLinks'
 import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
+import DarkModeToggle from 'react-dark-mode-toggle'
 import mainTheme from '../../definitions/chakra/theme/mainTheme'
 import SignOutButton from '../Assets/SignOutButton'
 
 const UserNavBar = (): JSX.Element => {
   const navigate = useNavigate()
-  const { toggleColorMode } = useColorMode()
+  const { toggleColorMode, colorMode } = useColorMode()
 
   const location = useLocation()
 
@@ -38,7 +39,12 @@ const UserNavBar = (): JSX.Element => {
         </Box>
       ))}
       <SignOutButton />
-      <Switch onChange={toggleColorMode} />
+      {/* <Switch onChange={toggleColorMode} /> */}
+      <DarkModeToggle
+        onChange={toggleColorMode}
+        checked={colorMode === 'dark'}
+        size={40}
+      />
     </CustomBox>
   )
 }
