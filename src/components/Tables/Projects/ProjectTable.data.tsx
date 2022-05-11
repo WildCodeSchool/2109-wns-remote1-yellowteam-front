@@ -36,14 +36,14 @@ const useProjectTableData = () => {
         ? data.projects.map((item) => ({
             id: item.id,
             title: (
-              <Link to={`/projects/${item.id}/modify`}>
+              <Link key={item.id} to={`/projects/${item.id}/modify`}>
                 <Text w="150px" textDecor="underline">
                   {item.title}
                 </Text>
               </Link>
             ),
             description: (
-              <Text isTruncated minW="150px" maxW="150px">
+              <Text key={item.id} isTruncated minW="150px" maxW="150px">
                 {item.description}
               </Text>
             ),

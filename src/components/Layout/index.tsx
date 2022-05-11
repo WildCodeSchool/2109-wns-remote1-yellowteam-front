@@ -1,4 +1,4 @@
-import { Box, useToast } from '@chakra-ui/react'
+import { Flex, useToast } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
 import useAppState from 'src/hooks/useAppState'
 import Header from 'src/components/molecules/Header'
@@ -35,7 +35,7 @@ export default function Layout(): JSX.Element {
   })
 
   return (
-    <Box height="100vh" display="flex" position="fixed" w="100vw">
+    <Flex id="layout-id" height="100vh" position="fixed" w="full">
       <UserNavBar />
 
       <CustomBox
@@ -44,11 +44,12 @@ export default function Layout(): JSX.Element {
         p={[2, 4, 8, 10]}
         flexDirection="column"
         w="full"
+        flexGrow={1}
         h="full"
       >
         <Header userName={user?.first_name ?? ''} />
         <Outlet />
       </CustomBox>
-    </Box>
+    </Flex>
   )
 }

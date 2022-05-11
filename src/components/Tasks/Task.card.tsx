@@ -78,7 +78,7 @@ const Card = ({ tag, title, task }: ICard): ReactElement => {
 
   useEffect(() => {
     setValue('title', title)
-  }, [])
+  }, [task])
 
   const handleDrop = () => {
     updateTaskStatus()
@@ -144,7 +144,6 @@ const Card = ({ tag, title, task }: ICard): ReactElement => {
         alignItems="center"
         justifyContent="space-between"
       >
-        {/* <Text noOfLines={1}>{title}</Text> */}
         <Input
           onKeyDown={handlePressEnter}
           border={isEditable ? '1px solid #ccc' : 'none'}
@@ -152,7 +151,12 @@ const Card = ({ tag, title, task }: ICard): ReactElement => {
           onDoubleClick={handleToggleEdit}
           {...register('title')}
           noOfLines={2}
-          onBlur={() => setIsEditable(false)}
+          onBlur={() => {
+            if (buttonRef.current) {
+              buttonRef.current.click()
+              setIsEditable(false)
+            }
+          }}
         />
         <Button
           ref={buttonRef}
