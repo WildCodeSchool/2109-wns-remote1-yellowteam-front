@@ -2,6 +2,7 @@ fragment Task on Task {
   id
   title
   status_task
+  description
   user {
     id
     avatar

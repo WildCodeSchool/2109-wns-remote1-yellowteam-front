@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
 import {
   GetTasksByProjectDocument,
+  GetTasksByProjectQuery,
   Status,
   useCreateTaskMutation,
 } from 'src/generated/graphql'
@@ -56,6 +57,7 @@ export default function NewTaskCard({
           __typename: 'Task',
           id: 'temporary-id',
           title: data.title,
+          description: data.description,
           status_task: status as Status,
           user: {
             __typename: 'User',
@@ -67,7 +69,7 @@ export default function NewTaskCard({
       },
       update: (store, response) => {
         // read data from cache for this query
-        const queryData: any = store.readQuery({
+        const queryData: GetTasksByProjectQuery | null = store.readQuery({
           query: GetTasksByProjectDocument,
           variables: {
             where: {
@@ -77,18 +79,20 @@ export default function NewTaskCard({
             },
           },
         })
+
         // add the new data to the list
-        const newArray = [
-          {
-            ...response.data?.createTask,
-            user: {
-              id: '',
-              avatar: '',
-              first_name: '',
-            },
+
+        const newTask = {
+          ...response.data?.createTask,
+          user: {
+            id: '',
+            avatar: '',
+            first_name: '',
           },
-          ...queryData.tasks,
-        ]
+        }
+
+        const newArray = [newTask, ...(queryData ? queryData.tasks : [])]
+
         // write data back to cache
         store.writeQuery({
           query: GetTasksByProjectDocument,

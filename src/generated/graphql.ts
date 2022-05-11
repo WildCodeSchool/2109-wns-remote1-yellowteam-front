@@ -6048,7 +6048,7 @@ export type UserWhereUniqueInput = {
 
 export type ProjectFragment = { __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, owner: { __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string }, tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }>, users: Array<{ __typename?: 'User', id: string, first_name: string, last_name: string, avatar: string, role: Array<Role> }> };
 
-export type TaskFragment = { __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } };
+export type TaskFragment = { __typename?: 'Task', id: string, title: string, status_task: Status, description: string, user: { __typename?: 'User', id: string, avatar: string, first_name: string } };
 
 export type UserFragment = { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role>, cover_picture: string };
 
@@ -6079,7 +6079,7 @@ export type CreateTaskMutationVariables = Exact<{
 }>;
 
 
-export type CreateTaskMutation = { __typename?: 'Mutation', createTask: { __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } } };
+export type CreateTaskMutation = { __typename?: 'Mutation', createTask: { __typename?: 'Task', id: string, title: string, status_task: Status, description: string, user: { __typename?: 'User', id: string, avatar: string, first_name: string } } };
 
 export type MutateLoginMutationVariables = Exact<{
   data: LoginInput;
@@ -6143,7 +6143,7 @@ export type UpdateTaskMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTaskMutation = { __typename?: 'Mutation', updateTask: { __typename?: 'Task', id: string, title: string } };
+export type UpdateTaskMutation = { __typename?: 'Mutation', updateTask: { __typename?: 'Task', id: string, title: string, status_task: Status, description: string, user: { __typename?: 'User', id: string, avatar: string, first_name: string } } };
 
 export type UpdateTaskStatusMutationVariables = Exact<{
   data: TaskStatusInput;
@@ -6158,6 +6158,13 @@ export type DeleteTaskMutationVariables = Exact<{
 
 
 export type DeleteTaskMutation = { __typename?: 'Mutation', deleteTask: { __typename?: 'Task', id: string } };
+
+export type GetAllFillesFromTaskQueryVariables = Exact<{
+  where: TaskWhereUniqueInput;
+}>;
+
+
+export type GetAllFillesFromTaskQuery = { __typename?: 'Query', task: { __typename?: 'Task', files: Array<{ __typename?: 'File', id: string, name: string, path: string, size: number, type: string }> } };
 
 export type GetManagerProjectsQueryVariables = Exact<{
   where: InputMaybe<ProjectWhereInput>;
@@ -6186,7 +6193,7 @@ export type GetTasksByProjectQueryVariables = Exact<{
 }>;
 
 
-export type GetTasksByProjectQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }> };
+export type GetTasksByProjectQuery = { __typename?: 'Query', tasks: Array<{ __typename?: 'Task', id: string, title: string, status_task: Status, description: string, user: { __typename?: 'User', id: string, avatar: string, first_name: string } }> };
 
 export type GetUserQueryVariables = Exact<{
   where: UserWhereUniqueInput;
@@ -6273,6 +6280,7 @@ export const TaskFragmentDoc = gql`
   id
   title
   status_task
+  description
   user {
     id
     avatar
@@ -6700,11 +6708,10 @@ export type UpdateProjectMutationOptions = Apollo.BaseMutationOptions<UpdateProj
 export const UpdateTaskDocument = gql`
     mutation updateTask($where: TaskWhereUniqueInput!, $data: TaskUpdateInput!) {
   updateTask(where: $where, data: $data) {
-    id
-    title
+    ...Task
   }
 }
-    `;
+    ${TaskFragmentDoc}`;
 export type UpdateTaskMutationFn = Apollo.MutationFunction<UpdateTaskMutation, UpdateTaskMutationVariables>;
 
 /**
@@ -6800,6 +6807,47 @@ export function useDeleteTaskMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeleteTaskMutationHookResult = ReturnType<typeof useDeleteTaskMutation>;
 export type DeleteTaskMutationResult = Apollo.MutationResult<DeleteTaskMutation>;
 export type DeleteTaskMutationOptions = Apollo.BaseMutationOptions<DeleteTaskMutation, DeleteTaskMutationVariables>;
+export const GetAllFillesFromTaskDocument = gql`
+    query getAllFillesFromTask($where: TaskWhereUniqueInput!) {
+  task(where: $where) {
+    files {
+      id
+      name
+      path
+      size
+      type
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllFillesFromTaskQuery__
+ *
+ * To run a query within a React component, call `useGetAllFillesFromTaskQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllFillesFromTaskQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllFillesFromTaskQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetAllFillesFromTaskQuery(baseOptions: Apollo.QueryHookOptions<GetAllFillesFromTaskQuery, GetAllFillesFromTaskQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllFillesFromTaskQuery, GetAllFillesFromTaskQueryVariables>(GetAllFillesFromTaskDocument, options);
+      }
+export function useGetAllFillesFromTaskLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllFillesFromTaskQuery, GetAllFillesFromTaskQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllFillesFromTaskQuery, GetAllFillesFromTaskQueryVariables>(GetAllFillesFromTaskDocument, options);
+        }
+export type GetAllFillesFromTaskQueryHookResult = ReturnType<typeof useGetAllFillesFromTaskQuery>;
+export type GetAllFillesFromTaskLazyQueryHookResult = ReturnType<typeof useGetAllFillesFromTaskLazyQuery>;
+export type GetAllFillesFromTaskQueryResult = Apollo.QueryResult<GetAllFillesFromTaskQuery, GetAllFillesFromTaskQueryVariables>;
 export const GetManagerProjectsDocument = gql`
     query GetManagerProjects($where: ProjectWhereInput) {
   projects(where: $where) {

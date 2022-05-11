@@ -15,7 +15,9 @@ const CustomNavBar = motion(Box)
 const UserNavBar = (): JSX.Element => {
   const { colorMode } = useColorMode()
   const navigate = useNavigate()
-  const [isFold, setIsFold] = useState(true)
+  const [isFold, setIsFold] = useState(
+    localStorage.getItem('isFold') === 'true' && true
+  )
   const { user } = useAppState()
 
   const location = useLocation()
@@ -23,6 +25,16 @@ const UserNavBar = (): JSX.Element => {
   const variants = {
     open: { width: '300px', minWidth: '300px' },
     closed: { width: '66px', minWidth: '66px' },
+  }
+
+  const handleToggleFold = () => {
+    if (isFold === true) {
+      localStorage.setItem('isFold', 'false')
+    }
+    if (!isFold) {
+      localStorage.setItem('isFold', 'true')
+    }
+    setIsFold((c) => !c)
   }
 
   return (
@@ -55,23 +67,24 @@ const UserNavBar = (): JSX.Element => {
           {isFold ? (
             <Icon
               cursor="pointer"
-              onClick={() => setIsFold(false)}
+              onClick={handleToggleFold}
               as={RiMenuFoldFill}
               size={10}
             />
           ) : (
             <Icon
               cursor="pointer"
-              onClick={() => setIsFold(true)}
+              onClick={handleToggleFold}
               as={RiMenuUnfoldLine}
               size={10}
             />
           )}
         </Flex>
-        <Flex w="full" direction="column">
+        <Flex my={10} w="full" direction="column">
           {navLinks.map((link) => (
             <MotionFlex
               my={4}
+              key={link.name}
               py={2}
               rounded={5}
               px={2}
