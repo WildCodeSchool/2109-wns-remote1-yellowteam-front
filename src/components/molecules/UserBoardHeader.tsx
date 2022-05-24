@@ -14,6 +14,7 @@ const UserBoardHeader = ({
   projects,
 }: IProps): ReactElement => (
   <Flex
+    w="full"
     alignItems="center"
     direction={['column', 'column', 'row', 'row']}
     my={10}
@@ -23,7 +24,7 @@ const UserBoardHeader = ({
     <Select
       // fontFamily="Avenir"
       // fontWeight={['normal', 'normal', 'bold']}
-      width={['100%', '100%', '200px']}
+      width={['full', 'full', '200px']}
       value={selectedProjectId}
       onChange={(event) => setSelectedProjectId(event.target.value)}
     >

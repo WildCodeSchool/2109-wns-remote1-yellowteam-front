@@ -16,13 +16,22 @@ const useProjects = (): UseProjectsHook => {
   const { data, loading, error } = useGetUserProjectsQuery({
     variables: {
       where: {
-        users: {
-          some: {
-            id: {
+        OR: [
+          {
+            project_owner_id: {
               equals: userId,
             },
           },
-        },
+          {
+            users: {
+              some: {
+                id: {
+                  equals: userId,
+                },
+              },
+            },
+          },
+        ],
       },
     },
     skip: !userId,

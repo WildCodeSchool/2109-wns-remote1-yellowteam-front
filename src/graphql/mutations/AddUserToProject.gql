@@ -1,0 +1,8 @@
+mutation AddUserToProject(
+  $where: ProjectWhereUniqueInput!
+  $data: AddUserToProjectInput!
+) {
+  addUserToProject(where: $where, data: $data) {
+    id
+  }
+}
