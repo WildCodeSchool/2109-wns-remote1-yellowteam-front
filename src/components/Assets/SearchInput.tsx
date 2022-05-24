@@ -2,7 +2,8 @@
 import { useColorMode } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Search, { StylesConfig } from 'react-select'
+import { StylesConfig } from 'react-select'
+import Search from 'react-select/async'
 import { SearchQuery, useSearchQuery } from 'src/generated/graphql'
 
 export default function SearchInput(): JSX.Element {
@@ -61,11 +62,19 @@ export default function SearchInput(): JSX.Element {
       type: item.type,
     }))
 
+  const loadOptions = (
+    inputValue: string,
+    callback: (options: any) => void
+  ) => {
+    callback(options())
+  }
+
   return (
     <Search
-      options={options()}
+      cacheOptions
+      loadOptions={loadOptions}
       name="theme_id"
-      noOptionsMessage={() => ''}
+      noOptionsMessage={() => 'Type something to search'}
       styles={customStyles}
       isLoading={loading}
       placeholder="Search something here  🔎"

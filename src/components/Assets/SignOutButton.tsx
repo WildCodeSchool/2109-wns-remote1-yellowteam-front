@@ -19,7 +19,7 @@ export default function SignOutButton(): JSX.Element {
       data-testid="sign-out-button"
       onClick={() => mutateLogout()}
     >
-      <SignOutIcon color={customProperties.colors.deactivatedGrey} />
+      <SignOutIcon color={customProperties.colors.orange} />
     </Box>
   )
 }

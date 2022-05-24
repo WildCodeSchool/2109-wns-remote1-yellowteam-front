@@ -7,6 +7,7 @@ import {
   useDisclosure,
   Button,
 } from '@chakra-ui/react'
+import { useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {
   GetTasksByProjectDocument,
@@ -16,6 +17,7 @@ import {
 } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
 import DotsIcon from 'src/static/svg/DotsIcon'
+import EditPannel from '../Edit/EditPannel'
 
 interface IProps {
   task: GetTasksByProjectQuery['tasks'][number]
@@ -26,6 +28,8 @@ export default function TaskMenu({ task }: IProps): JSX.Element {
   const { userId, user } = useAppState()
   const { projectId } = useParams()
   const [deleteTask] = useDeleteTaskMutation()
+  const editRef = useRef<HTMLElement>(null)
+  const [isEditOpen, setIsEditOpen] = useState(false)
 
   const [assignUser] = useAssignUserToTaskMutation({
     variables: {
@@ -103,7 +107,12 @@ export default function TaskMenu({ task }: IProps): JSX.Element {
       </MenuButton>
       {isOpen && (
         <MenuList onMouseLeave={onClose} position="relative" zIndex="overlay">
-          <MenuItem>Edit</MenuItem>
+          <MenuItem onClick={() => setIsEditOpen(true)}>
+            Edit
+            {isEditOpen && (
+              <EditPannel setIsEdit={setIsEditOpen} ref={editRef} task={task} />
+            )}
+          </MenuItem>
           <MenuItem onClick={() => assignUser()}>Assign me</MenuItem>
           <MenuItem
             onClick={handleDelete}

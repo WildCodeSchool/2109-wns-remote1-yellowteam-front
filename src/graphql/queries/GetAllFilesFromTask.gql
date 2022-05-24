@@ -1,0 +1,11 @@
+query getAllFillesFromTask($where: TaskWhereUniqueInput!) {
+  task(where: $where) {
+    files {
+      id
+      name
+      path
+      size
+      type
+    }
+  }
+}
