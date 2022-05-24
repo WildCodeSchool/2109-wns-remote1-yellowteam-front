@@ -8,11 +8,14 @@ import {
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { createClient } from 'graphql-ws'
+import { persistCache, LocalStorageWrapper } from 'apollo3-cache-persist'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null
 
 const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000'
 const wsUrl = process.env.REACT_APP_WS_URL || 'ws://localhost:5000/websocket'
+
+const cache = new InMemoryCache()
 
 const httpLink = createHttpLink({
   uri: serverUrl,
@@ -43,18 +46,25 @@ const splitLink = split(
 export const client = new ApolloClient({
   ssrMode: typeof window === 'undefined',
   uri: process.env.REACT_APP_SERVER_URL,
-  cache: new InMemoryCache(),
+  cache,
   link: splitLink,
 })
+
+const getCache = async () => {
+  await persistCache({
+    cache,
+    storage: new LocalStorageWrapper(window.localStorage),
+  })
+}
 
 export default function initializeApollo(): ApolloClient<NormalizedCacheObject> {
   // For SSG and SSR always create a new Apollo Client
   if (typeof window === 'undefined') {
     return client
   }
-
   // Create the Apollo Client once in the client
   if (!apolloClient) {
+    getCache()
     apolloClient = client
   }
 
