@@ -20,6 +20,7 @@ import {
   SortOrder,
   Status_Notification,
   Type_Notification,
+  useAddUserToProjectMutation,
   useGetAllNotificationsQuery,
   useSetNotificationReadMutation,
   useUpdateProjectMutation,
@@ -66,7 +67,7 @@ export default function NotificationsHOC(): JSX.Element {
     )
   }, [loading, data, notificationsMutationResponse])
 
-  const [updateProject] = useUpdateProjectMutation({
+  const [updateProject] = useAddUserToProjectMutation({
     onCompleted: async () => {
       await client.refetchQueries({
         include: [GetUserProjectsDocument],
@@ -78,11 +79,9 @@ export default function NotificationsHOC(): JSX.Element {
     updateProject({
       variables: {
         data: {
-          users: {
-            connect: [{ id: userId }],
-          },
+          userId,
         },
-        projectId: {
+        where: {
           id: projectId,
         },
       },
