@@ -19,6 +19,10 @@ export type Scalars = {
   Upload: any;
 };
 
+export type AddUserToProjectInput = {
+  userId: Scalars['String'];
+};
+
 export type AffectedRowsOutput = {
   __typename?: 'AffectedRowsOutput';
   count: Scalars['Int'];
@@ -1778,6 +1782,7 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addUserToProject: Task;
   createComment: Comment;
   createFile: File;
   createInvitation: Invitation;
@@ -1836,6 +1841,12 @@ export type Mutation = {
   upsertProject: Project;
   upsertTask: Task;
   upsertUser: User;
+};
+
+
+export type MutationAddUserToProjectArgs = {
+  data: AddUserToProjectInput;
+  where: ProjectWhereUniqueInput;
 };
 
 
@@ -4939,7 +4950,6 @@ export type User = {
   notifications: Array<Notification>;
   notifications_sent: Array<Notification>;
   owned_projects: Array<Project>;
-  password: Scalars['String'];
   phone_number: Maybe<Scalars['String']>;
   project_comments: Array<Comment>;
   projects: Array<Project>;
@@ -6052,6 +6062,14 @@ export type TaskFragment = { __typename?: 'Task', id: string, title: string, sta
 
 export type UserFragment = { __typename?: 'User', id: string, first_name: string, phone_number: string, last_name: string, email: string, avatar: string, role: Array<Role>, cover_picture: string };
 
+export type AddUserToProjectMutationVariables = Exact<{
+  where: ProjectWhereUniqueInput;
+  data: AddUserToProjectInput;
+}>;
+
+
+export type AddUserToProjectMutation = { __typename?: 'Mutation', addUserToProject: { __typename?: 'Task', id: string } };
+
 export type AssignUserToTaskMutationVariables = Exact<{
   where: TaskWhereUniqueInput;
   data: TaskUpdateInput;
@@ -6300,6 +6318,40 @@ export const UserFragmentDoc = gql`
   cover_picture
 }
     `;
+export const AddUserToProjectDocument = gql`
+    mutation AddUserToProject($where: ProjectWhereUniqueInput!, $data: AddUserToProjectInput!) {
+  addUserToProject(where: $where, data: $data) {
+    id
+  }
+}
+    `;
+export type AddUserToProjectMutationFn = Apollo.MutationFunction<AddUserToProjectMutation, AddUserToProjectMutationVariables>;
+
+/**
+ * __useAddUserToProjectMutation__
+ *
+ * To run a mutation, you first call `useAddUserToProjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddUserToProjectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addUserToProjectMutation, { data, loading, error }] = useAddUserToProjectMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useAddUserToProjectMutation(baseOptions?: Apollo.MutationHookOptions<AddUserToProjectMutation, AddUserToProjectMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddUserToProjectMutation, AddUserToProjectMutationVariables>(AddUserToProjectDocument, options);
+      }
+export type AddUserToProjectMutationHookResult = ReturnType<typeof useAddUserToProjectMutation>;
+export type AddUserToProjectMutationResult = Apollo.MutationResult<AddUserToProjectMutation>;
+export type AddUserToProjectMutationOptions = Apollo.BaseMutationOptions<AddUserToProjectMutation, AddUserToProjectMutationVariables>;
 export const AssignUserToTaskDocument = gql`
     mutation assignUserToTask($where: TaskWhereUniqueInput!, $data: TaskUpdateInput!) {
   updateTask(where: $where, data: $data) {
