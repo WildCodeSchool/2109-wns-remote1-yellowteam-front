@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UserFragment } from 'src/generated/graphql'
 import { login, logout, updateUser } from 'src/redux/actions'
 import { RootState } from 'src/redux/reducers'
+import { client } from 'src/services/graphql'
 
 const useAppState = () => {
   const dispatch = useDispatch()
@@ -12,7 +13,8 @@ const useAppState = () => {
   const dispatchLogin = (userPayload: UserFragment) => {
     dispatch(login(userPayload))
   }
-  const dispatchLogout = () => {
+  const dispatchLogout = async () => {
+    await client.clearStore()
     dispatch(logout())
   }
   const dispatchUpdateUser = (userPayload: Partial<UserFragment>) => {

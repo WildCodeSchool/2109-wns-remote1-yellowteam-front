@@ -14,7 +14,7 @@ const appSlice = createSlice({
   name: 'appState',
   initialState,
   reducers: {
-    setHoveredList: (state, action: PayloadAction<Status>) => {
+    setHoveredList: (state: IBoardState, action: PayloadAction<Status>) => {
       state.hoveredList = action.payload
     },
   },
