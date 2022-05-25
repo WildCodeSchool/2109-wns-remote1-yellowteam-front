@@ -18,7 +18,7 @@ import {
   useBoolean,
 } from '@chakra-ui/react'
 import DatePicker from 'react-datepicker'
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import {
   GetManagerProjectsDocument,
@@ -32,6 +32,7 @@ import { Dates } from 'src/pages/Project'
 import { validationsCreateProject } from 'src/formResolvers/yupResolver'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputWithError from '../forms/InputWithError'
+import Label from '../forms/FormLabel'
 
 export interface IProps {
   isOpen: boolean
@@ -105,8 +106,13 @@ const CreateProjectModal = ({ isOpen, onClose }: IProps): ReactElement => {
         },
       },
     })
-    reset()
   }
+
+  useEffect(() => {
+    return function cleanup() {
+      reset()
+    }
+  }, [loading])
 
   const handleRadioChange = (e: string) => {
     if (e === 'true') {
@@ -125,10 +131,9 @@ const CreateProjectModal = ({ isOpen, onClose }: IProps): ReactElement => {
 
         <ModalBody>
           <form onSubmit={handleSubmit(onSubmit)} data-testid="form">
-            <FormLabel htmlFor="title">Project name</FormLabel>
-
+            <Label title="Project title" htmlFor="title" />
             <InputWithError
-              my={2}
+              mb={4}
               errors={errors}
               isEditable
               placeholder="Name of your project"
@@ -138,12 +143,10 @@ const CreateProjectModal = ({ isOpen, onClose }: IProps): ReactElement => {
               name="title"
             />
 
-            <FormLabel my={2} htmlFor="description">
-              Project description
-            </FormLabel>
+            <Label title="Project description" htmlFor="description" />
 
             <InputWithError
-              my={2}
+              mb={4}
               errors={errors}
               name="description"
               aria-label="description"
@@ -152,9 +155,8 @@ const CreateProjectModal = ({ isOpen, onClose }: IProps): ReactElement => {
               type="text"
               placeholder="Short project description"
             />
-            <FormLabel my={2} htmlFor="is_disabled">
-              Project visibility
-            </FormLabel>
+
+            <Label title="Project visibility" htmlFor="is_disabled" />
             <ErrorMessage
               errors={errors}
               name="is_disabled"

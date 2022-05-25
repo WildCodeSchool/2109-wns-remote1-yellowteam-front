@@ -8,7 +8,7 @@ import {
 } from 'src/generated/graphql'
 import { client } from 'src/App'
 import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
-import UserNavBar from './UserNavBar'
+import UserNavBar from './Sidebar'
 
 export default function Layout(): JSX.Element {
   const { user } = useAppState()

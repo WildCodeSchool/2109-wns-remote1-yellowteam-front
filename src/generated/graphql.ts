@@ -6189,7 +6189,7 @@ export type GetManagerProjectsQueryVariables = Exact<{
 }>;
 
 
-export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean }> };
+export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, project_owner_id: string }> };
 
 export type GetAllNotificationsQueryVariables = Exact<{
   where: NotificationWhereInput;
@@ -6913,6 +6913,7 @@ export const GetManagerProjectsDocument = gql`
     end_date
     is_disabled
     due_date
+    project_owner_id
   }
 }
     `;

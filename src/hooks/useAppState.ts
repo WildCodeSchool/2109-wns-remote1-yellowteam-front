@@ -7,7 +7,6 @@ import { RootState } from 'src/redux/reducers'
 
 const useAppState = () => {
   const dispatch = useDispatch()
-
   const { isAuth, user } = useSelector((state: RootState) => state.app)
 
   const dispatchLogin = (userPayload: UserFragment) => {

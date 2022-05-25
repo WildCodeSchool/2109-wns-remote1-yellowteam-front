@@ -10,5 +10,6 @@ query GetManagerProjects($where: ProjectWhereInput) {
     end_date
     is_disabled
     due_date
+    project_owner_id
   }
 }

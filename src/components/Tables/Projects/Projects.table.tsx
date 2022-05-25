@@ -23,8 +23,6 @@ import TableFooter from './Table.footer'
 import useProjectTableData from './ProjectTable.data'
 import IndeterminateCheckbox from '../TableCheckbox'
 
-const sortBy = [{ id: 'title' }, { id: 'description' }, { id: 'status' }]
-
 export const ProjectTable = (): JSX.Element => {
   const { columns, loadingProjects, tableData } = useProjectTableData()
 
@@ -42,11 +40,10 @@ export const ProjectTable = (): JSX.Element => {
     pageCount,
     gotoPage,
     nextPage,
-    setSortBy,
     previousPage,
     setPageSize,
   } = useTable(
-    { columns, data: tableData, initialState: { sortBy } },
+    { columns, data: tableData },
     useSortBy,
     usePagination,
     useRowSelect,
@@ -67,7 +64,6 @@ export const ProjectTable = (): JSX.Element => {
       ])
     }
   )
-
   if (loadingProjects)
     return (
       <Center w="full" h="full">
@@ -106,15 +102,6 @@ export const ProjectTable = (): JSX.Element => {
               <Tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
                   <Th
-                    onClick={() => {
-                      const desc =
-                        column.isSortedDesc === true
-                          ? undefined
-                          : column.isSortedDesc === false
-                          ? true
-                          : false
-                      setSortBy([{ id: column.id, desc }, ...sortBy])
-                    }}
                     py={5}
                     px={4}
                     {...column.getHeaderProps(column.getSortByToggleProps())}
