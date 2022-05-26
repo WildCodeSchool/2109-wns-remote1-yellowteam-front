@@ -1,14 +1,28 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { FormControl, useToast, Button } from '@chakra-ui/react'
+import {
+  FormControl,
+  useToast,
+  Button,
+  FormLabel,
+  Flex,
+  Text,
+  InputGroup,
+  InputRightElement,
+  Icon,
+} from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useState } from 'react'
 import { useForm, FieldValues } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { validationsLogin } from 'src/formResolvers/yupResolver'
 import { useMutateLoginMutation } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
+import { AiFillEye } from 'react-icons/ai'
 import InputWithError from './InputWithError'
 
 export default function LoginForm(): JSX.Element {
+  const [show, setShow] = useState(false)
+
   const navigate = useNavigate()
 
   const toast = useToast()
@@ -16,7 +30,7 @@ export default function LoginForm(): JSX.Element {
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: 'onChange',
     criteriaMode: 'all',
@@ -41,6 +55,8 @@ export default function LoginForm(): JSX.Element {
     },
   })
 
+  const handleClick = () => setShow(!show)
+
   const onSubmit = async ({ email, password }: FieldValues): Promise<void> => {
     login({
       variables: { data: { email, password } },
@@ -55,7 +71,11 @@ export default function LoginForm(): JSX.Element {
       alignItems="center"
       w={['90%', '80%', '60%', '50%']}
     >
+      <FormLabel w="full" textAlign="left">
+        Email
+      </FormLabel>
       <InputWithError
+        w="full"
         type="text"
         isEditable
         name="email"
@@ -63,25 +83,43 @@ export default function LoginForm(): JSX.Element {
         register={register}
       />
 
-      <InputWithError
-        my={10}
-        placeholder="Password"
-        type="password"
-        name="password"
-        errors={errors}
-        isEditable
-        register={register}
-      />
-
+      <Flex mt={10} w="full">
+        <FormLabel w="full" textAlign="left">
+          Password
+        </FormLabel>
+        <Text
+          onClick={() => navigate('/forgot-password')}
+          cursor="pointer"
+          _hover={{ textDecoration: 'underline' }}
+          w="full"
+          whiteSpace="nowrap"
+          textAlign="right"
+        >
+          Forgot your password ?
+        </Text>
+      </Flex>
+      <InputGroup size="md">
+        <InputWithError
+          placeholder="Password"
+          type={show ? 'text' : 'password'}
+          name="password"
+          errors={errors}
+          isEditable
+          register={register}
+        />
+        <InputRightElement width="4.5rem">
+          <Button variant="ghost" h="1.75rem" size="sm" onClick={handleClick}>
+            <Icon onClick={handleClick} as={AiFillEye} />
+          </Button>
+        </InputRightElement>
+      </InputGroup>
       <Button
         my={3}
         w="full"
-        backgroundColor="orange"
+        variant="action"
         px={2}
-        color="#ffffff"
         onClick={handleSubmit(onSubmit)}
         isLoading={loading}
-        isDisabled={(!isValid || loading) && true}
       >
         SIGN IN
       </Button>

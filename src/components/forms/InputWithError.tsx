@@ -27,18 +27,17 @@ export default function InputWithError({
   errors,
   ...rest
 }: Props): JSX.Element {
-  const isError = () => errors[name] !== undefined
+  const isError = errors[name] !== undefined
 
   return (
-    <Box w="full" position="relative">
+    <Box w="full" position="relative" display="flex" flexDirection="column">
       <Input
         {...rest}
         placeholder={placeholder ? placeholder : undefined}
         type={type}
-        border={isError() ? '2px solid red' : ''}
-        borderColor={isError() ? 'red.500' : ''}
+        isInvalid={isError}
+        errorBorderColor="red.500"
         disabled={!isEditable}
-        variant={!isEditable ? 'action' : 'filled'}
         aria-label={name}
         {...register(name)}
       />

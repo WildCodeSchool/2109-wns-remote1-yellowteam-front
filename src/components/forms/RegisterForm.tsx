@@ -1,8 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { FormControl, Button } from '@chakra-ui/react'
+import {
+  FormControl,
+  Icon,
+  Button,
+  FormLabel,
+  InputGroup,
+  InputRightElement,
+} from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { AiFillEye } from 'react-icons/ai'
+
 import { validationsRegister } from 'src/formResolvers/yupResolver'
 import {
   useMutateLoginMutation,
@@ -13,11 +23,12 @@ import InputWithError from './InputWithError'
 
 export default function RegisterForm(): JSX.Element {
   const navigate = useNavigate()
+  const [show, setShow] = useState(false)
 
   const {
     handleSubmit,
     register,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: 'onChange',
     criteriaMode: 'all',
@@ -47,7 +58,11 @@ export default function RegisterForm(): JSX.Element {
     last_name,
     email,
     password,
+    confirmPassword,
   }: FieldValues): Promise<void> => {
+    if (password !== confirmPassword) {
+      return
+    }
     mutateRegister({
       variables: { data: { first_name, last_name, email, password } },
       onCompleted: () => {
@@ -58,6 +73,8 @@ export default function RegisterForm(): JSX.Element {
     })
   }
 
+  const handleClick = () => setShow(!show)
+
   return (
     <FormControl
       display="flex"
@@ -66,55 +83,89 @@ export default function RegisterForm(): JSX.Element {
       alignItems="center"
       w={['90%', '80%', '60%', '50%']}
     >
+      <FormLabel mt={2} htmlFor="firstname" w="full" textAlign="left">
+        First name
+      </FormLabel>
       <InputWithError
+        id="firstname"
         type="text"
         isEditable
-        my={2}
         name="first_name"
-        placeholder="Firstname"
         errors={errors}
         register={register}
       />
 
+      <FormLabel mt={2} htmlFor="lastname" w="full" textAlign="left">
+        Last name
+      </FormLabel>
       <InputWithError
+        id="lastname"
         type="text"
         isEditable
-        my={2}
         name="last_name"
-        placeholder="Lastname"
         errors={errors}
         register={register}
       />
 
+      <FormLabel mt={2} htmlFor="email" w="full" textAlign="left">
+        Email
+      </FormLabel>
       <InputWithError
+        id="email"
         type="text"
         isEditable
         my={2}
         name="email"
-        placeholder="Email"
         errors={errors}
         register={register}
       />
 
-      <InputWithError
-        type="text"
-        isEditable
-        my={2}
-        name="password"
-        placeholder="Password"
-        errors={errors}
-        register={register}
-      />
+      <FormLabel mt={2} htmlFor="password" w="full" textAlign="left">
+        Password
+      </FormLabel>
+      <InputGroup>
+        <InputWithError
+          id="password"
+          type={show ? 'text' : 'password'}
+          isEditable
+          name="password"
+          errors={errors}
+          register={register}
+        />
+        <InputRightElement width="4.5rem">
+          <Button variant="ghost" h="1.75rem" size="sm" onClick={handleClick}>
+            <Icon onClick={handleClick} as={AiFillEye} />
+          </Button>
+        </InputRightElement>
+      </InputGroup>
+
+      <FormLabel mt={2} htmlFor="confirmPassword" w="full" textAlign="left">
+        Confirm password
+      </FormLabel>
+      <InputGroup>
+        <InputWithError
+          id="confirmPassword"
+          type={show ? 'text' : 'password'}
+          isEditable
+          name="confirmPassword"
+          errors={errors}
+          register={register}
+        />
+        <InputRightElement width="4.5rem">
+          <Button variant="ghost" h="1.75rem" size="sm" onClick={handleClick}>
+            <Icon onClick={handleClick} as={AiFillEye} />
+          </Button>
+        </InputRightElement>
+      </InputGroup>
 
       <Button
         my={3}
         w="full"
-        backgroundColor="orange"
         px={2}
-        color="#ffffff"
+        variant="action"
         onClick={handleSubmit(onSubmit)}
         isLoading={loading}
-        isDisabled={(!isValid || loading) && true}
+        isDisabled={loading && true}
       >
         SIGN UP
       </Button>

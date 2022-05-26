@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react/jsx-props-no-spreading */
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Text, VStack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import RegisterForm from 'src/components/forms/RegisterForm'
+import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
 
 export default function Register(): JSX.Element {
   const navigate = useNavigate()
@@ -31,23 +32,45 @@ export default function Register(): JSX.Element {
           to Y-Task Manager
         </Text>
       </Flex>
-      <Flex
-        direction="column"
+      <CustomBox
+        position="relative"
+        flexDirection="column"
+        display="flex"
         justifyContent="center"
         alignItems="center"
         w="full"
+        h="full"
         flexGrow={1}
       >
-        <Text my={5} textStyle="loginText">
+        <Text
+          my={5}
+          w={['90%', '80%', '60%', '50%']}
+          textAlign="left"
+          fontSize={40}
+          fontWeight="bold"
+        >
           Register now
         </Text>
+        <VStack w="full">
+          <RegisterForm />
 
-        <RegisterForm />
-
-        <Text textStyle="subText" onClick={() => navigate(`/login`)}>
-          Already have an account ? Sign in
+          <Flex>
+            <Text>Already have an account ? </Text>
+            <Text
+              cursor="pointer"
+              mx={2}
+              color="orange"
+              fontWeight="bold"
+              onClick={() => navigate(`/login`)}
+            >
+              Sign in
+            </Text>
+          </Flex>
+        </VStack>
+        <Text bottom={5} position="absolute" color="gray">
+          ©YTASK All right reserved
         </Text>
-      </Flex>
+      </CustomBox>
     </Flex>
   )
 }
