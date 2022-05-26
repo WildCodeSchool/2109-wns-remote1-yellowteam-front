@@ -18,13 +18,7 @@ export default function FormError({ errors, name }: Props): ReactElement {
       render={({ messages }) =>
         messages &&
         Object.entries(messages).map(([type, message]) => (
-          <Text
-            position="absolute"
-            bottom={-3}
-            fontSize={12}
-            color="red"
-            key={type}
-          >
+          <Text fontSize={12} color="red" key={type}>
             {message}
           </Text>
         ))
