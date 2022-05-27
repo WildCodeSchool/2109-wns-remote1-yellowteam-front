@@ -2,22 +2,31 @@
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Status } from 'src/generated/graphql'
-import { setHoveredList } from 'src/redux/actions'
+import { setHoveredList, setSelectedProject } from 'src/redux/actions'
 import { RootState } from 'src/redux/reducers'
 
 const useBoardState = () => {
   const dispatch = useDispatch()
 
-  const { hoveredList } = useSelector((state: RootState) => state.board)
+  const { hoveredList, selectedProject } = useSelector(
+    (state: RootState) => state.board
+  )
 
   const dispatchSetHoveredList = useCallback(
     (status: Status) => dispatch(setHoveredList(status)),
     []
   )
 
+  const dispatchsetSelectedProject = useCallback(
+    (projectId: string) => dispatch(setSelectedProject(projectId)),
+    []
+  )
+
   return {
     hoveredList,
     dispatchSetHoveredList,
+    selectedProject,
+    dispatchsetSelectedProject,
   }
 }
 

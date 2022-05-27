@@ -1,18 +1,10 @@
 import { Box } from '@chakra-ui/react'
 import { ReactElement } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import useProjects from 'src/hooks/useProjects'
+import useBoardState from 'src/hooks/useBoardState'
 import TasksBoard from '../components/Tasks/TasksBoard'
-import UserBoardHeader from '../components/molecules/UserBoardHeader'
 
 const Board = (): ReactElement => {
-  const navigate = useNavigate()
-
-  const { projects } = useProjects()
-
-  const { projectId } = useParams()
-
-  const setProjectId = (newId: string) => navigate(`/board/${newId}`)
+  const { selectedProject } = useBoardState()
 
   return (
     <Box
@@ -22,12 +14,7 @@ const Board = (): ReactElement => {
       height="full"
       w="full"
     >
-      <UserBoardHeader
-        selectedProjectId={projectId}
-        setSelectedProjectId={setProjectId}
-        projects={projects}
-      />
-      <TasksBoard projectId={projectId as string} />
+      <TasksBoard projectId={selectedProject} />
     </Box>
   )
 }

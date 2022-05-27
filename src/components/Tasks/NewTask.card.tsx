@@ -2,7 +2,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Button, FormLabel, Input, Textarea } from '@chakra-ui/react'
 import { FieldValues, useForm } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
 import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
 import {
   GetTasksByProjectDocument,
@@ -11,6 +10,7 @@ import {
   useCreateTaskMutation,
 } from 'src/generated/graphql'
 import { DateTime } from 'luxon'
+import useBoardState from 'src/hooks/useBoardState'
 
 interface IProps {
   status: Status
@@ -23,7 +23,7 @@ export default function NewTaskCard({
   isCreatingTask,
   setIsCreatingTask,
 }: IProps): JSX.Element {
-  const { projectId } = useParams()
+  const { selectedProject } = useBoardState()
   const { register, handleSubmit, setValue } = useForm({
     criteriaMode: 'all',
   })
@@ -45,7 +45,7 @@ export default function NewTaskCard({
           end_date: DateTime.fromMillis(Date.now()).plus({ days: 10 }),
           project: {
             connect: {
-              id: projectId,
+              id: selectedProject,
             },
           },
         },
@@ -74,7 +74,7 @@ export default function NewTaskCard({
           variables: {
             where: {
               project_id: {
-                equals: projectId,
+                equals: selectedProject,
               },
             },
           },
@@ -99,7 +99,7 @@ export default function NewTaskCard({
           variables: {
             where: {
               project_id: {
-                equals: projectId,
+                equals: selectedProject,
               },
             },
           },

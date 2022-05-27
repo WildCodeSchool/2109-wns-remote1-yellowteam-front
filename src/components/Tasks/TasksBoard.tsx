@@ -40,7 +40,7 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
 
   return (
     <Flex
-      direction={['column', 'column', 'column', 'column', 'row']}
+      direction={['column', 'column', 'row', 'row']}
       justifyContent="space-between"
       zIndex={0}
       mt={10}
