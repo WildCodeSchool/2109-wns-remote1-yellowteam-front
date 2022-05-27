@@ -67,6 +67,13 @@ export type AggregateProject = {
   _sum: Maybe<ProjectSumAggregate>;
 };
 
+export type AggregateResetPassword = {
+  __typename?: 'AggregateResetPassword';
+  _count: Maybe<ResetPasswordCountAggregate>;
+  _max: Maybe<ResetPasswordMaxAggregate>;
+  _min: Maybe<ResetPasswordMinAggregate>;
+};
+
 export type AggregateTask = {
   __typename?: 'AggregateTask';
   _avg: Maybe<TaskAvgAggregate>;
@@ -1791,10 +1798,12 @@ export type Mutation = {
   createManyInvitation: AffectedRowsOutput;
   createManyNotification: AffectedRowsOutput;
   createManyProject: AffectedRowsOutput;
+  createManyResetPassword: AffectedRowsOutput;
   createManyTask: AffectedRowsOutput;
   createManyUser: AffectedRowsOutput;
   createNotification: Notification;
   createProject: Project;
+  createResetPassword: ResetPassword;
   createTask: Task;
   createUser: User;
   customCreateInvitation: Invitation;
@@ -1806,10 +1815,12 @@ export type Mutation = {
   deleteManyInvitation: AffectedRowsOutput;
   deleteManyNotification: AffectedRowsOutput;
   deleteManyProject: AffectedRowsOutput;
+  deleteManyResetPassword: AffectedRowsOutput;
   deleteManyTask: AffectedRowsOutput;
   deleteManyUser: AffectedRowsOutput;
   deleteNotification: Maybe<Notification>;
   deleteProject: Maybe<Project>;
+  deleteResetPassword: Maybe<ResetPassword>;
   deleteTask: Maybe<Task>;
   deleteUser: Maybe<User>;
   login: User;
@@ -1824,10 +1835,12 @@ export type Mutation = {
   updateManyInvitation: AffectedRowsOutput;
   updateManyNotification: AffectedRowsOutput;
   updateManyProject: AffectedRowsOutput;
+  updateManyResetPassword: AffectedRowsOutput;
   updateManyTask: AffectedRowsOutput;
   updateManyUser: AffectedRowsOutput;
   updateNotification: Maybe<Notification>;
   updateProject: Maybe<Project>;
+  updateResetPassword: Maybe<ResetPassword>;
   updateTask: Maybe<Task>;
   updateTaskStatus: Task;
   updateUser: Maybe<User>;
@@ -1839,6 +1852,7 @@ export type Mutation = {
   upsertInvitation: Invitation;
   upsertNotification: Notification;
   upsertProject: Project;
+  upsertResetPassword: ResetPassword;
   upsertTask: Task;
   upsertUser: User;
 };
@@ -1895,6 +1909,12 @@ export type MutationCreateManyProjectArgs = {
 };
 
 
+export type MutationCreateManyResetPasswordArgs = {
+  data: Array<ResetPasswordCreateManyInput>;
+  skipDuplicates: InputMaybe<Scalars['Boolean']>;
+};
+
+
 export type MutationCreateManyTaskArgs = {
   data: Array<TaskCreateManyInput>;
   skipDuplicates: InputMaybe<Scalars['Boolean']>;
@@ -1914,6 +1934,11 @@ export type MutationCreateNotificationArgs = {
 
 export type MutationCreateProjectArgs = {
   data: ProjectCreateInput;
+};
+
+
+export type MutationCreateResetPasswordArgs = {
+  data: ResetPasswordCreateInput;
 };
 
 
@@ -1972,6 +1997,11 @@ export type MutationDeleteManyProjectArgs = {
 };
 
 
+export type MutationDeleteManyResetPasswordArgs = {
+  where: InputMaybe<ResetPasswordWhereInput>;
+};
+
+
 export type MutationDeleteManyTaskArgs = {
   where: InputMaybe<TaskWhereInput>;
 };
@@ -1989,6 +2019,11 @@ export type MutationDeleteNotificationArgs = {
 
 export type MutationDeleteProjectArgs = {
   where: ProjectWhereUniqueInput;
+};
+
+
+export type MutationDeleteResetPasswordArgs = {
+  where: ResetPasswordWhereUniqueInput;
 };
 
 
@@ -2060,6 +2095,12 @@ export type MutationUpdateManyProjectArgs = {
 };
 
 
+export type MutationUpdateManyResetPasswordArgs = {
+  data: ResetPasswordUpdateManyMutationInput;
+  where: InputMaybe<ResetPasswordWhereInput>;
+};
+
+
 export type MutationUpdateManyTaskArgs = {
   data: TaskUpdateManyMutationInput;
   where: InputMaybe<TaskWhereInput>;
@@ -2081,6 +2122,12 @@ export type MutationUpdateNotificationArgs = {
 export type MutationUpdateProjectArgs = {
   data: ProjectUpdateInput;
   where: ProjectWhereUniqueInput;
+};
+
+
+export type MutationUpdateResetPasswordArgs = {
+  data: ResetPasswordUpdateInput;
+  where: ResetPasswordWhereUniqueInput;
 };
 
 
@@ -2148,6 +2195,13 @@ export type MutationUpsertProjectArgs = {
   create: ProjectCreateInput;
   update: ProjectUpdateInput;
   where: ProjectWhereUniqueInput;
+};
+
+
+export type MutationUpsertResetPasswordArgs = {
+  create: ResetPasswordCreateInput;
+  update: ResetPasswordUpdateInput;
+  where: ResetPasswordWhereUniqueInput;
 };
 
 
@@ -3739,6 +3793,7 @@ export type Query = {
   aggregateInvitation: AggregateInvitation;
   aggregateNotification: AggregateNotification;
   aggregateProject: AggregateProject;
+  aggregateResetPassword: AggregateResetPassword;
   aggregateTask: AggregateTask;
   aggregateUser: AggregateUser;
   comment: Maybe<Comment>;
@@ -3750,6 +3805,7 @@ export type Query = {
   findFirstInvitation: Maybe<Invitation>;
   findFirstNotification: Maybe<Notification>;
   findFirstProject: Maybe<Project>;
+  findFirstResetPassword: Maybe<ResetPassword>;
   findFirstTask: Maybe<Task>;
   findFirstUser: Maybe<User>;
   groupByComment: Array<CommentGroupBy>;
@@ -3757,6 +3813,7 @@ export type Query = {
   groupByInvitation: Array<InvitationGroupBy>;
   groupByNotification: Array<NotificationGroupBy>;
   groupByProject: Array<ProjectGroupBy>;
+  groupByResetPassword: Array<ResetPasswordGroupBy>;
   groupByTask: Array<TaskGroupBy>;
   groupByUser: Array<UserGroupBy>;
   invitation: Maybe<Invitation>;
@@ -3765,6 +3822,8 @@ export type Query = {
   notifications: Array<Notification>;
   project: Maybe<Project>;
   projects: Array<Project>;
+  resetPassword: Maybe<ResetPassword>;
+  resetPasswords: Array<ResetPassword>;
   search: Maybe<Array<SearchResult>>;
   task: Maybe<Task>;
   tasks: Array<Task>;
@@ -3815,6 +3874,15 @@ export type QueryAggregateProjectArgs = {
   skip: InputMaybe<Scalars['Int']>;
   take: InputMaybe<Scalars['Int']>;
   where: InputMaybe<ProjectWhereInput>;
+};
+
+
+export type QueryAggregateResetPasswordArgs = {
+  cursor: InputMaybe<ResetPasswordWhereUniqueInput>;
+  orderBy: InputMaybe<Array<ResetPasswordOrderByWithRelationInput>>;
+  skip: InputMaybe<Scalars['Int']>;
+  take: InputMaybe<Scalars['Int']>;
+  where: InputMaybe<ResetPasswordWhereInput>;
 };
 
 
@@ -3916,6 +3984,16 @@ export type QueryFindFirstProjectArgs = {
 };
 
 
+export type QueryFindFirstResetPasswordArgs = {
+  cursor: InputMaybe<ResetPasswordWhereUniqueInput>;
+  distinct: InputMaybe<Array<ResetPasswordScalarFieldEnum>>;
+  orderBy: InputMaybe<Array<ResetPasswordOrderByWithRelationInput>>;
+  skip: InputMaybe<Scalars['Int']>;
+  take: InputMaybe<Scalars['Int']>;
+  where: InputMaybe<ResetPasswordWhereInput>;
+};
+
+
 export type QueryFindFirstTaskArgs = {
   cursor: InputMaybe<TaskWhereUniqueInput>;
   distinct: InputMaybe<Array<TaskScalarFieldEnum>>;
@@ -3986,6 +4064,16 @@ export type QueryGroupByProjectArgs = {
 };
 
 
+export type QueryGroupByResetPasswordArgs = {
+  by: Array<ResetPasswordScalarFieldEnum>;
+  having: InputMaybe<ResetPasswordScalarWhereWithAggregatesInput>;
+  orderBy: InputMaybe<Array<ResetPasswordOrderByWithAggregationInput>>;
+  skip: InputMaybe<Scalars['Int']>;
+  take: InputMaybe<Scalars['Int']>;
+  where: InputMaybe<ResetPasswordWhereInput>;
+};
+
+
 export type QueryGroupByTaskArgs = {
   by: Array<TaskScalarFieldEnum>;
   having: InputMaybe<TaskScalarWhereWithAggregatesInput>;
@@ -4051,6 +4139,21 @@ export type QueryProjectsArgs = {
 };
 
 
+export type QueryResetPasswordArgs = {
+  where: ResetPasswordWhereUniqueInput;
+};
+
+
+export type QueryResetPasswordsArgs = {
+  cursor: InputMaybe<ResetPasswordWhereUniqueInput>;
+  distinct: InputMaybe<Array<ResetPasswordScalarFieldEnum>>;
+  orderBy: InputMaybe<Array<ResetPasswordOrderByWithRelationInput>>;
+  skip: InputMaybe<Scalars['Int']>;
+  take: InputMaybe<Scalars['Int']>;
+  where: InputMaybe<ResetPasswordWhereInput>;
+};
+
+
 export type QuerySearchArgs = {
   data: SearchInput;
 };
@@ -4095,6 +4198,192 @@ export type RegisterInput = {
   first_name: Scalars['String'];
   last_name: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type ResetPassword = {
+  __typename?: 'ResetPassword';
+  id: Scalars['String'];
+};
+
+export type ResetPasswordCountAggregate = {
+  __typename?: 'ResetPasswordCountAggregate';
+  _all: Scalars['Int'];
+  created_at: Scalars['Int'];
+  id: Scalars['Int'];
+  token: Scalars['Int'];
+  updated_at: Scalars['Int'];
+  user_id: Scalars['Int'];
+};
+
+export type ResetPasswordCountOrderByAggregateInput = {
+  id?: InputMaybe<SortOrder>;
+};
+
+export type ResetPasswordCreateInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type ResetPasswordCreateManyInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type ResetPasswordCreateManyUserInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type ResetPasswordCreateManyUserInputEnvelope = {
+  data: Array<ResetPasswordCreateManyUserInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type ResetPasswordCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<ResetPasswordWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ResetPasswordCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<ResetPasswordCreateWithoutUserInput>>;
+  createMany?: InputMaybe<ResetPasswordCreateManyUserInputEnvelope>;
+};
+
+export type ResetPasswordCreateOrConnectWithoutUserInput = {
+  create: ResetPasswordCreateWithoutUserInput;
+  where: ResetPasswordWhereUniqueInput;
+};
+
+export type ResetPasswordCreateWithoutUserInput = {
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type ResetPasswordGroupBy = {
+  __typename?: 'ResetPasswordGroupBy';
+  _count: Maybe<ResetPasswordCountAggregate>;
+  _max: Maybe<ResetPasswordMaxAggregate>;
+  _min: Maybe<ResetPasswordMinAggregate>;
+  created_at: Scalars['DateTime'];
+  id: Scalars['String'];
+  token: Scalars['String'];
+  updated_at: Scalars['DateTime'];
+  user_id: Scalars['String'];
+};
+
+export type ResetPasswordListRelationFilter = {
+  every?: InputMaybe<ResetPasswordWhereInput>;
+  none?: InputMaybe<ResetPasswordWhereInput>;
+  some?: InputMaybe<ResetPasswordWhereInput>;
+};
+
+export type ResetPasswordMaxAggregate = {
+  __typename?: 'ResetPasswordMaxAggregate';
+  created_at: Maybe<Scalars['DateTime']>;
+  id: Maybe<Scalars['String']>;
+  token: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['DateTime']>;
+  user_id: Maybe<Scalars['String']>;
+};
+
+export type ResetPasswordMaxOrderByAggregateInput = {
+  id?: InputMaybe<SortOrder>;
+};
+
+export type ResetPasswordMinAggregate = {
+  __typename?: 'ResetPasswordMinAggregate';
+  created_at: Maybe<Scalars['DateTime']>;
+  id: Maybe<Scalars['String']>;
+  token: Maybe<Scalars['String']>;
+  updated_at: Maybe<Scalars['DateTime']>;
+  user_id: Maybe<Scalars['String']>;
+};
+
+export type ResetPasswordMinOrderByAggregateInput = {
+  id?: InputMaybe<SortOrder>;
+};
+
+export type ResetPasswordOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type ResetPasswordOrderByWithAggregationInput = {
+  _count?: InputMaybe<ResetPasswordCountOrderByAggregateInput>;
+  _max?: InputMaybe<ResetPasswordMaxOrderByAggregateInput>;
+  _min?: InputMaybe<ResetPasswordMinOrderByAggregateInput>;
+  id?: InputMaybe<SortOrder>;
+};
+
+export type ResetPasswordOrderByWithRelationInput = {
+  id?: InputMaybe<SortOrder>;
+};
+
+export enum ResetPasswordScalarFieldEnum {
+  CreatedAt = 'created_at',
+  Id = 'id',
+  Token = 'token',
+  UpdatedAt = 'updated_at',
+  UserId = 'user_id'
+}
+
+export type ResetPasswordScalarWhereInput = {
+  AND?: InputMaybe<Array<ResetPasswordScalarWhereInput>>;
+  NOT?: InputMaybe<Array<ResetPasswordScalarWhereInput>>;
+  OR?: InputMaybe<Array<ResetPasswordScalarWhereInput>>;
+  id?: InputMaybe<StringFilter>;
+};
+
+export type ResetPasswordScalarWhereWithAggregatesInput = {
+  AND?: InputMaybe<Array<ResetPasswordScalarWhereWithAggregatesInput>>;
+  NOT?: InputMaybe<Array<ResetPasswordScalarWhereWithAggregatesInput>>;
+  OR?: InputMaybe<Array<ResetPasswordScalarWhereWithAggregatesInput>>;
+  id?: InputMaybe<StringWithAggregatesFilter>;
+};
+
+export type ResetPasswordUpdateInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type ResetPasswordUpdateManyMutationInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type ResetPasswordUpdateManyWithWhereWithoutUserInput = {
+  data: ResetPasswordUpdateManyMutationInput;
+  where: ResetPasswordScalarWhereInput;
+};
+
+export type ResetPasswordUpdateManyWithoutUserInput = {
+  connect?: InputMaybe<Array<ResetPasswordWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ResetPasswordCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<ResetPasswordCreateWithoutUserInput>>;
+  createMany?: InputMaybe<ResetPasswordCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<ResetPasswordWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<ResetPasswordScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<ResetPasswordWhereUniqueInput>>;
+  set?: InputMaybe<Array<ResetPasswordWhereUniqueInput>>;
+  update?: InputMaybe<Array<ResetPasswordUpdateWithWhereUniqueWithoutUserInput>>;
+  updateMany?: InputMaybe<Array<ResetPasswordUpdateManyWithWhereWithoutUserInput>>;
+  upsert?: InputMaybe<Array<ResetPasswordUpsertWithWhereUniqueWithoutUserInput>>;
+};
+
+export type ResetPasswordUpdateWithWhereUniqueWithoutUserInput = {
+  data: ResetPasswordUpdateWithoutUserInput;
+  where: ResetPasswordWhereUniqueInput;
+};
+
+export type ResetPasswordUpdateWithoutUserInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type ResetPasswordUpsertWithWhereUniqueWithoutUserInput = {
+  create: ResetPasswordCreateWithoutUserInput;
+  update: ResetPasswordUpdateWithoutUserInput;
+  where: ResetPasswordWhereUniqueInput;
+};
+
+export type ResetPasswordWhereInput = {
+  AND?: InputMaybe<Array<ResetPasswordWhereInput>>;
+  NOT?: InputMaybe<Array<ResetPasswordWhereInput>>;
+  OR?: InputMaybe<Array<ResetPasswordWhereInput>>;
+  id?: InputMaybe<StringFilter>;
+};
+
+export type ResetPasswordWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
 export enum Role {
@@ -4936,6 +5225,7 @@ export enum Type_Notification {
 
 export type User = {
   __typename?: 'User';
+  ResetPassword: Array<ResetPassword>;
   _count: Maybe<UserCount>;
   avatar: Maybe<Scalars['String']>;
   cover_picture: Maybe<Scalars['String']>;
@@ -4957,6 +5247,16 @@ export type User = {
   task_comments: Array<Comment>;
   tasks: Array<Task>;
   updated_at: Scalars['DateTime'];
+};
+
+
+export type UserResetPasswordArgs = {
+  cursor: InputMaybe<ResetPasswordWhereUniqueInput>;
+  distinct: InputMaybe<Array<ResetPasswordScalarFieldEnum>>;
+  orderBy: InputMaybe<Array<ResetPasswordOrderByWithRelationInput>>;
+  skip: InputMaybe<Scalars['Int']>;
+  take: InputMaybe<Scalars['Int']>;
+  where: InputMaybe<ResetPasswordWhereInput>;
 };
 
 
@@ -5051,6 +5351,7 @@ export type UserTasksArgs = {
 
 export type UserCount = {
   __typename?: 'UserCount';
+  ResetPassword: Scalars['Int'];
   files: Scalars['Int'];
   invitations: Scalars['Int'];
   notifications: Scalars['Int'];
@@ -5095,6 +5396,7 @@ export type UserCountOrderByAggregateInput = {
 };
 
 export type UserCreateInput = {
+  ResetPassword?: InputMaybe<ResetPasswordCreateNestedManyWithoutUserInput>;
   avatar?: InputMaybe<Scalars['String']>;
   cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
@@ -5233,6 +5535,7 @@ export type UserCreateOrConnectWithoutTasksInput = {
 };
 
 export type UserCreateWithoutFilesInput = {
+  ResetPassword?: InputMaybe<ResetPasswordCreateNestedManyWithoutUserInput>;
   avatar?: InputMaybe<Scalars['String']>;
   cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
@@ -5256,6 +5559,7 @@ export type UserCreateWithoutFilesInput = {
 };
 
 export type UserCreateWithoutInvitationsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordCreateNestedManyWithoutUserInput>;
   avatar?: InputMaybe<Scalars['String']>;
   cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
@@ -5279,6 +5583,7 @@ export type UserCreateWithoutInvitationsInput = {
 };
 
 export type UserCreateWithoutNotificationsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordCreateNestedManyWithoutUserInput>;
   avatar?: InputMaybe<Scalars['String']>;
   cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
@@ -5302,6 +5607,7 @@ export type UserCreateWithoutNotificationsInput = {
 };
 
 export type UserCreateWithoutNotifications_SentInput = {
+  ResetPassword?: InputMaybe<ResetPasswordCreateNestedManyWithoutUserInput>;
   avatar?: InputMaybe<Scalars['String']>;
   cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
@@ -5325,6 +5631,7 @@ export type UserCreateWithoutNotifications_SentInput = {
 };
 
 export type UserCreateWithoutOwned_ProjectsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordCreateNestedManyWithoutUserInput>;
   avatar?: InputMaybe<Scalars['String']>;
   cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
@@ -5348,6 +5655,7 @@ export type UserCreateWithoutOwned_ProjectsInput = {
 };
 
 export type UserCreateWithoutProject_CommentsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordCreateNestedManyWithoutUserInput>;
   avatar?: InputMaybe<Scalars['String']>;
   cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
@@ -5371,6 +5679,7 @@ export type UserCreateWithoutProject_CommentsInput = {
 };
 
 export type UserCreateWithoutProjectsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordCreateNestedManyWithoutUserInput>;
   avatar?: InputMaybe<Scalars['String']>;
   cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
@@ -5394,6 +5703,7 @@ export type UserCreateWithoutProjectsInput = {
 };
 
 export type UserCreateWithoutTask_CommentsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordCreateNestedManyWithoutUserInput>;
   avatar?: InputMaybe<Scalars['String']>;
   cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
@@ -5417,6 +5727,7 @@ export type UserCreateWithoutTask_CommentsInput = {
 };
 
 export type UserCreateWithoutTasksInput = {
+  ResetPassword?: InputMaybe<ResetPasswordCreateNestedManyWithoutUserInput>;
   avatar?: InputMaybe<Scalars['String']>;
   cover_picture?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['DateTime']>;
@@ -5549,6 +5860,7 @@ export type UserOrderByWithAggregationInput = {
 };
 
 export type UserOrderByWithRelationInput = {
+  ResetPassword?: InputMaybe<ResetPasswordOrderByRelationAggregateInput>;
   avatar?: InputMaybe<SortOrder>;
   cover_picture?: InputMaybe<SortOrder>;
   created_at?: InputMaybe<SortOrder>;
@@ -5629,6 +5941,7 @@ export type UserScalarWhereWithAggregatesInput = {
 };
 
 export type UserUpdateInput = {
+  ResetPassword?: InputMaybe<ResetPasswordUpdateManyWithoutUserInput>;
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -5767,6 +6080,7 @@ export type UserUpdateWithWhereUniqueWithoutProjectsInput = {
 };
 
 export type UserUpdateWithoutFilesInput = {
+  ResetPassword?: InputMaybe<ResetPasswordUpdateManyWithoutUserInput>;
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -5790,6 +6104,7 @@ export type UserUpdateWithoutFilesInput = {
 };
 
 export type UserUpdateWithoutInvitationsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordUpdateManyWithoutUserInput>;
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -5813,6 +6128,7 @@ export type UserUpdateWithoutInvitationsInput = {
 };
 
 export type UserUpdateWithoutNotificationsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordUpdateManyWithoutUserInput>;
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -5836,6 +6152,7 @@ export type UserUpdateWithoutNotificationsInput = {
 };
 
 export type UserUpdateWithoutNotifications_SentInput = {
+  ResetPassword?: InputMaybe<ResetPasswordUpdateManyWithoutUserInput>;
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -5859,6 +6176,7 @@ export type UserUpdateWithoutNotifications_SentInput = {
 };
 
 export type UserUpdateWithoutOwned_ProjectsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordUpdateManyWithoutUserInput>;
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -5882,6 +6200,7 @@ export type UserUpdateWithoutOwned_ProjectsInput = {
 };
 
 export type UserUpdateWithoutProject_CommentsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordUpdateManyWithoutUserInput>;
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -5905,6 +6224,7 @@ export type UserUpdateWithoutProject_CommentsInput = {
 };
 
 export type UserUpdateWithoutProjectsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordUpdateManyWithoutUserInput>;
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -5928,6 +6248,7 @@ export type UserUpdateWithoutProjectsInput = {
 };
 
 export type UserUpdateWithoutTask_CommentsInput = {
+  ResetPassword?: InputMaybe<ResetPasswordUpdateManyWithoutUserInput>;
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -5951,6 +6272,7 @@ export type UserUpdateWithoutTask_CommentsInput = {
 };
 
 export type UserUpdateWithoutTasksInput = {
+  ResetPassword?: InputMaybe<ResetPasswordUpdateManyWithoutUserInput>;
   avatar?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   cover_picture?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -6028,6 +6350,7 @@ export type UserWhereInput = {
   AND?: InputMaybe<Array<UserWhereInput>>;
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
+  ResetPassword?: InputMaybe<ResetPasswordListRelationFilter>;
   avatar?: InputMaybe<StringNullableFilter>;
   cover_picture?: InputMaybe<StringNullableFilter>;
   created_at?: InputMaybe<DateTimeFilter>;
@@ -6189,7 +6512,7 @@ export type GetManagerProjectsQueryVariables = Exact<{
 }>;
 
 
-export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean }> };
+export type GetManagerProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string, title: string, status_project: Status, due_date: any, description: string, total_time_spent: number, start_date: any, end_date: any, is_disabled: boolean, project_owner_id: string }> };
 
 export type GetAllNotificationsQueryVariables = Exact<{
   where: NotificationWhereInput;
@@ -6913,6 +7236,7 @@ export const GetManagerProjectsDocument = gql`
     end_date
     is_disabled
     due_date
+    project_owner_id
   }
 }
     `;

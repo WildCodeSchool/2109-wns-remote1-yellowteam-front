@@ -1,21 +1,22 @@
 /* eslint-disable no-nested-ternary */
-import { Box, Flex, Icon, Image, Text, useColorMode } from '@chakra-ui/react'
+import { Box, Flex, Image, Text, useColorMode } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import navLinks from 'src/config/navLinks'
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { RiMenuFoldFill, RiMenuUnfoldLine } from 'react-icons/ri'
 import useAppState from 'src/hooks/useAppState'
-import mainTheme from '../../definitions/chakra/theme/mainTheme'
-import SignOutButton from '../Assets/SignOutButton'
-import { MotionFlex } from '../Motion'
+import mainTheme from '../../../definitions/chakra/theme/mainTheme'
+import SignOutButton from '../../Assets/SignOutButton'
+import { MotionFlex } from '../../Motion'
+import Title from './Title'
+import SidebarIcon from './Icon'
 
 const CustomNavBar = motion(Box)
 
 const UserNavBar = (): JSX.Element => {
   const { colorMode } = useColorMode()
   const navigate = useNavigate()
-  const [isFold, setIsFold] = useState(
+  const [isFold, setIsFold] = useState<boolean>(
     localStorage.getItem('isFold') === 'true' && true
   )
   const { user } = useAppState()
@@ -27,15 +28,11 @@ const UserNavBar = (): JSX.Element => {
     closed: { width: '66px', minWidth: '66px' },
   }
 
-  const handleToggleFold = () => {
-    if (isFold === true) {
-      localStorage.setItem('isFold', 'false')
-    }
-    if (!isFold) {
-      localStorage.setItem('isFold', 'true')
-    }
-    setIsFold((c) => !c)
-  }
+  useEffect(() => {
+    localStorage.setItem('isFold', isFold ? 'true' : 'false')
+  }, [isFold])
+
+  const handleToggleFold = useCallback(() => setIsFold((c) => !c), [isFold])
 
   return (
     <CustomNavBar
@@ -58,26 +55,8 @@ const UserNavBar = (): JSX.Element => {
           alignItems="center"
           justifyContent={isFold ? 'space-between' : 'center'}
         >
-          {isFold && (
-            <Text fontSize={12} fontWeight="bold" whiteSpace="nowrap">
-              Y TASK MANAGER
-            </Text>
-          )}
-          {isFold ? (
-            <Icon
-              cursor="pointer"
-              onClick={handleToggleFold}
-              as={RiMenuFoldFill}
-              size={10}
-            />
-          ) : (
-            <Icon
-              cursor="pointer"
-              onClick={handleToggleFold}
-              as={RiMenuUnfoldLine}
-              size={10}
-            />
-          )}
+          <Title isFold={isFold} />
+          <SidebarIcon isFold={isFold} handleToggleFold={handleToggleFold} />
         </Flex>
         <Flex my={10} w="full" direction="column">
           {navLinks.map((link) => (

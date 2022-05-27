@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import { ReactElement, useEffect } from 'react'
+import { ReactElement } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import useProjects from 'src/hooks/useProjects'
 import TasksBoard from '../components/Tasks/TasksBoard'
@@ -11,11 +11,6 @@ const Board = (): ReactElement => {
   const { projects } = useProjects()
 
   const { projectId } = useParams()
-
-  useEffect(() => {
-    if (!projectId && projects && projects?.length > 0)
-      navigate(`/board/${projects[0].id}`)
-  }, [projectId, projects])
 
   const setProjectId = (newId: string) => navigate(`/board/${newId}`)
 

@@ -8,7 +8,6 @@ import { client } from 'src/services/graphql'
 
 const useAppState = () => {
   const dispatch = useDispatch()
-
   const { isAuth, user } = useSelector((state: RootState) => state.app)
 
   const dispatchLogin = (userPayload: UserFragment) => {

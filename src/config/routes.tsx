@@ -12,7 +12,7 @@ const routes: RouteObject[] = [
     path: '/',
     element: <Layout />,
     children: [
-      { path: '/board', element: <Board /> },
+      { path: '/board', element: <Board />, index: true },
       { path: '/board/:projectId', element: <Board /> },
       { path: '/projects', element: <Project /> },
       {
@@ -32,4 +32,5 @@ const routes: RouteObject[] = [
     element: <Navigate to="/board" />,
   },
 ]
+
 export default routes
