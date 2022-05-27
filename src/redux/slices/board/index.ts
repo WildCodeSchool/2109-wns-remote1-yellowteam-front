@@ -4,10 +4,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface IBoardState {
   hoveredList: string | null
+  selectedProject: string
 }
 
 const initialState: IBoardState = {
   hoveredList: null,
+  selectedProject: '',
 }
 
 const appSlice = createSlice({
@@ -17,9 +19,12 @@ const appSlice = createSlice({
     setHoveredList: (state: IBoardState, action: PayloadAction<Status>) => {
       state.hoveredList = action.payload
     },
+    setSelectedProject: (state: IBoardState, action: PayloadAction<string>) => {
+      state.selectedProject = action.payload
+    },
   },
 })
 
-export const { setHoveredList } = appSlice.actions
+export const { setHoveredList, setSelectedProject } = appSlice.actions
 
 export default appSlice.reducer
