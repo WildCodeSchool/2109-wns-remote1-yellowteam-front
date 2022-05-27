@@ -43,7 +43,6 @@ const UserNavBar = (): JSX.Element => {
       height="100vh"
       display="flex"
       z-index="1"
-      minW={isFold ? '66px' : '300px'}
       alignItems="center"
       variants={variants}
       justifyContent="space-between"

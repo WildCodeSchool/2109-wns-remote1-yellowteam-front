@@ -51,9 +51,9 @@ export default function ForgotPassword(): JSX.Element {
       <Text fontWeight="bold" zIndex={2} fontSize={60}>
         Y TASK
       </Text>
-      <Flex
-        bg="gray.800"
-        direction="column"
+      <CustomBox
+        flexDirection="column"
+        display="flex"
         p={10}
         w={['90%', '90%', '70%', '50%', '30%']}
         rounded={5}
@@ -92,7 +92,7 @@ export default function ForgotPassword(): JSX.Element {
           </Button>
           to send another mail
         </Text>
-      </Flex>
+      </CustomBox>
 
       <Flex justifyContent="center" zIndex={2} flexDirection="row">
         <Text fontWeight="normal" fontSize={16}>
