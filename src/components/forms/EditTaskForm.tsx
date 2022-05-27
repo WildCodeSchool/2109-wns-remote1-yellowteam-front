@@ -1,10 +1,9 @@
-import { Box, Button, FormLabel, HStack, Text, VStack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import { Box, FormLabel, HStack, VStack } from '@chakra-ui/react'
+import { useState } from 'react'
 import { validationTaskUpdate } from 'src/formResolvers/yupResolver'
 import { FieldValues, useForm } from 'react-hook-form'
 import { GetTaskDetailsQuery } from 'src/generated/graphql'
 import { yupResolver } from '@hookform/resolvers/yup'
-import InputWithError from './InputWithError'
 
 interface IProps {
   task: GetTaskDetailsQuery['task'] | undefined
