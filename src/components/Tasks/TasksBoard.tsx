@@ -15,16 +15,20 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
   const { tasks } = useProjectTasks(projectId)
 
   const taskSwitch = {
-    [Status.Fihished]: tasks.filter(
-      (task) => task.status_task === Status.Fihished
+    [Status.Fihished]: useCallback(
+      () => tasks.filter((task) => task.status_task === Status.Fihished),
+      [tasks]
     ),
-    [Status.InProgress]: tasks.filter(
-      (task) => task.status_task === Status.InProgress
+    [Status.InProgress]: useCallback(
+      () => tasks.filter((task) => task.status_task === Status.InProgress),
+      [tasks]
     ),
-    [Status.NotStarted]: tasks.filter(
-      (task) => task.status_task === Status.NotStarted
+    [Status.NotStarted]: useCallback(
+      () => tasks.filter((task) => task.status_task === Status.NotStarted),
+      [tasks]
     ),
   }
+
   const taskListArray = Object.values(Status)
 
   const taskListName = useCallback((status: Status): string => {
@@ -49,7 +53,7 @@ const TasksBoard = ({ projectId }: IBoardContent): ReactElement => {
           key={status}
           name={taskListName(status)}
           status={status}
-          tasks={taskSwitch[status]}
+          tasks={taskSwitch[status]()}
         />
       ))}
     </Flex>

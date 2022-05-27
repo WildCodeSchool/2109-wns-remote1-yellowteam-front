@@ -4,6 +4,7 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, Input, InputProps } from '@chakra-ui/react'
+import { memo } from 'react'
 import { FieldError, FieldValues, UseFormRegister } from 'react-hook-form'
 import FormError from './InputError'
 
@@ -18,7 +19,7 @@ type Props = {
   placeholder?: string
 } & InputProps
 
-export default function InputWithError({
+function InputWithError({
   isEditable,
   register,
   placeholder,
@@ -45,3 +46,5 @@ export default function InputWithError({
     </Box>
   )
 }
+
+export default memo(InputWithError)

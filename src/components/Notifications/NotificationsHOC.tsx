@@ -23,13 +23,14 @@ import {
   useAddUserToProjectMutation,
   useGetAllNotificationsQuery,
   useSetNotificationReadMutation,
-  useUpdateProjectMutation,
 } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
 import customScrollbar from 'src/styles/customScrollbar'
 
 export default function NotificationsHOC(): JSX.Element {
   const { userId } = useAppState()
+  const [selectedNotification, setSelectedNotification] =
+    useState(`NOTIFICATIONS 🔔`)
 
   const { data, loading } = useGetAllNotificationsQuery({
     notifyOnNetworkStatusChange: true,
@@ -44,9 +45,6 @@ export default function NotificationsHOC(): JSX.Element {
       },
     },
   })
-
-  const [selectedNotification, setSelectedNotification] =
-    useState(`NOTIFICATIONS 🔔`)
 
   const [setNotificationRead, { data: notificationsMutationResponse }] =
     useSetNotificationReadMutation({
