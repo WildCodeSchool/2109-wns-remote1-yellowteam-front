@@ -22,6 +22,7 @@ import React, { ReactElement, useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import {
   GetManagerProjectsDocument,
+  GetUserProjectsDocument,
   Status,
   useCreateProjectMutation,
 } from 'src/generated/graphql'
@@ -62,10 +63,35 @@ const CreateProjectModal = ({ isOpen, onClose }: IProps): ReactElement => {
     notifyOnNetworkStatusChange: true,
     onCompleted: async () => {
       await client.refetchQueries({
-        include: [GetManagerProjectsDocument],
+        include: [GetUserProjectsDocument],
       })
       onClose()
     },
+    refetchQueries: [
+      {
+        query: GetManagerProjectsDocument,
+        variables: {
+          where: {
+            OR: [
+              {
+                project_owner_id: {
+                  equals: userId,
+                },
+              },
+              {
+                users: {
+                  some: {
+                    id: {
+                      equals: userId,
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        },
+      },
+    ],
   })
 
   const onSubmit = (data: FieldValues) => {
