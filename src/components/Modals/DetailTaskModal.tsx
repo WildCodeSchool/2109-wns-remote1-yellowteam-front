@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-props-no-spreading */
 import {
