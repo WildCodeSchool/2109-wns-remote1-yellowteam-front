@@ -1,18 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-param-reassign */
-import {
-  Box,
-  FormLabel,
-  HStack,
-  Radio,
-  RadioGroup,
-  Stack,
-  useBoolean,
-  useToast,
-  VStack,
-  Text,
-  Button,
-} from '@chakra-ui/react'
+import { Box, useBoolean, useToast, Text, Button } from '@chakra-ui/react'
 import { useState } from 'react'
 import useAppState from 'src/hooks/useAppState'
 import { validationTaskUpdate } from 'src/formResolvers/yupResolver'
@@ -41,7 +30,6 @@ export default function EditTaskForm({ task }: ITaskDetail): JSX.Element {
     endDate: new Date(),
     dueDate: new Date(),
   })
-  console.log('task', task, 'user', user)
 
   const {
     handleSubmit,
@@ -72,6 +60,7 @@ export default function EditTaskForm({ task }: ITaskDetail): JSX.Element {
     end_date = JSON.stringify(
       dates.endDate?.toString().replace('(Central European Standard Time)', '')
     )
+
     try {
       await updateTask({
         variables: {
@@ -81,7 +70,7 @@ export default function EditTaskForm({ task }: ITaskDetail): JSX.Element {
               set: !description ? task?.description : description,
             },
             start_date: {
-              set: !start_date ? task?.start_date : start_date,
+              set: dates.startDate,
             },
             end_date: {
               set: !end_date ? task?.end_date : end_date,
@@ -90,7 +79,6 @@ export default function EditTaskForm({ task }: ITaskDetail): JSX.Element {
           where: { id: task?.id },
         },
       })
-      console.log('form task submit', task)
     } catch (error) {
       toast({
         title: 'error changing task',
@@ -166,6 +154,7 @@ export default function EditTaskForm({ task }: ITaskDetail): JSX.Element {
               <Text>{dateFormated(task?.start_date)}</Text>
             ) : (
               <DatePicker
+                // selected={dates.startDate}
                 selected={dates.startDate}
                 onChange={(d) => setDates({ ...dates, startDate: d })}
                 dateFormat="dd/MM/yyyy"

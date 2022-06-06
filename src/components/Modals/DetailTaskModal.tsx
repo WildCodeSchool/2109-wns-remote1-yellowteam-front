@@ -8,7 +8,6 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
 } from '@chakra-ui/react'
 import { ReactElement } from 'react'
 import {
@@ -32,13 +31,6 @@ const DetailTaskModal = ({ isOpen, onClose, taskId }: IProps): ReactElement => {
     },
   })
 
-  // const file = useGetAllFillesFromTaskQuery({
-  //   variables: {
-  //     where: {
-  //       id: taskId,
-  //     },
-  //   },
-  // })
   return (
     <Modal onClose={onClose} isOpen={isOpen} scrollBehavior="inside">
       <ModalOverlay />
