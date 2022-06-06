@@ -27,11 +27,11 @@ import InputWithError from './InputWithError'
 import { Dates } from '../../pages/Project'
 import { dateFormated } from '../../utils/dateFormated'
 
-interface IProps {
+export interface ITaskDetail {
   task: GetTaskDetailsQuery['task'] | undefined
 }
 
-export default function EditTaskForm({ task }: IProps): JSX.Element {
+export default function EditTaskForm({ task }: ITaskDetail): JSX.Element {
   const [isEditable, setIsEditable] = useState(false)
   const [isDisabled, setIsDisabled] = useBoolean()
 
@@ -41,15 +41,7 @@ export default function EditTaskForm({ task }: IProps): JSX.Element {
     endDate: new Date(),
     dueDate: new Date(),
   })
-  console.log('task', task)
-
-  const handleRadioChange = (e: string) => {
-    if (e === 'true') {
-      setIsDisabled.off()
-    } else {
-      setIsDisabled.on()
-    }
-  }
+  console.log('task', task, 'user', user)
 
   const {
     handleSubmit,
@@ -61,7 +53,7 @@ export default function EditTaskForm({ task }: IProps): JSX.Element {
     criteriaMode: 'all',
   })
 
-  // todo create is UserUpdateAccessTask
+  const isAdminRole = user.role.some((r) => r === 'ADMIN')
 
   const [updateTask, { loading: updateTaskLoading }] = useUpdateTaskMutation()
   const toast = useToast()
@@ -98,7 +90,7 @@ export default function EditTaskForm({ task }: IProps): JSX.Element {
           where: { id: task?.id },
         },
       })
-      console.log('test 1')
+      console.log('form task submit', task)
     } catch (error) {
       toast({
         title: 'error changing task',
@@ -112,17 +104,17 @@ export default function EditTaskForm({ task }: IProps): JSX.Element {
 
   return (
     <>
-      <Box
-        display="flex"
-        flexGrow={1}
-        flexDirection="column"
-        justifyContent="space-between"
-        alignItems="start"
-        width="100%"
-      >
-        <HStack spacing={10}>
-          <VStack width="30vw" alignItems="start" spacing={2}>
-            <FormLabel>Title</FormLabel>
+      <Box display="flex" flexDirection="row">
+        <Box display="flex" flexDirection="column" flex="1" marginRight="50px">
+          <Box
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            marginY="3"
+          >
+            <Text marginRight="2" fontWeight="bold">
+              Title:
+            </Text>
             {!isEditable ? (
               <Text>{task?.title}</Text>
             ) : (
@@ -135,8 +127,16 @@ export default function EditTaskForm({ task }: IProps): JSX.Element {
                 defaultValue={task?.title}
               />
             )}
-
-            <FormLabel>Description</FormLabel>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            marginY="3"
+          >
+            <Text marginRight="2" fontWeight="bold">
+              Description:
+            </Text>
             {!isEditable ? (
               <Text>{task?.description}</Text>
             ) : (
@@ -149,10 +149,19 @@ export default function EditTaskForm({ task }: IProps): JSX.Element {
                 defaultValue={task?.description}
               />
             )}
-          </VStack>
+          </Box>
+        </Box>
 
-          <VStack justifyContent="flex-end" alignItems="start" spacing={2}>
-            <FormLabel>Start date</FormLabel>
+        <Box display="flex" flexDirection="column" flex="1">
+          <Box
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            marginY="3"
+          >
+            <Text marginRight="2" fontWeight="bold">
+              Start date:
+            </Text>
             {!isEditable ? (
               <Text>{dateFormated(task?.start_date)}</Text>
             ) : (
@@ -162,8 +171,16 @@ export default function EditTaskForm({ task }: IProps): JSX.Element {
                 dateFormat="dd/MM/yyyy"
               />
             )}
-
-            <FormLabel>End date</FormLabel>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            marginY="3"
+          >
+            <Text marginRight="2" fontWeight="bold">
+              End date:
+            </Text>
             {!isEditable ? (
               <Text>{dateFormated(task?.end_date)}</Text>
             ) : (
@@ -173,27 +190,31 @@ export default function EditTaskForm({ task }: IProps): JSX.Element {
                 dateFormat="dd/MM/yyyy"
               />
             )}
-          </VStack>
-        </HStack>
-        <HStack>
-          <Button
-            my={5}
-            onClick={handleSubmit(onSubmit)}
-            isLoading={updateTaskLoading}
-            variant="action"
-          >
-            Submit
-          </Button>
-          <Button
-            my={5}
-            onClick={() =>
-              !isEditable ? setIsEditable(true) : setIsEditable(false)
-            }
-            variant={!isEditable ? 'info' : 'ghost'}
-          >
-            {!isEditable ? 'Edit' : 'Cancel'}
-          </Button>
-        </HStack>
+          </Box>
+        </Box>
+      </Box>
+      <Box display="flex" flexDirection="row" justifyContent="flex-start">
+        <Button
+          hidden={!isAdminRole}
+          my={5}
+          onClick={handleSubmit(onSubmit)}
+          isLoading={updateTaskLoading}
+          variant="action"
+          marginRight="5"
+        >
+          Submit
+        </Button>
+        <Button
+          hidden={!isAdminRole}
+          disabled={updateTaskLoading}
+          my={5}
+          onClick={() =>
+            !isEditable ? setIsEditable(true) : setIsEditable(false)
+          }
+          variant={!isEditable ? 'info' : 'ghost'}
+        >
+          {!isEditable ? 'Edit' : 'Cancel'}
+        </Button>
       </Box>
     </>
   )

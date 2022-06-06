@@ -48,7 +48,6 @@ const DetailTaskModal = ({ isOpen, onClose, taskId }: IProps): ReactElement => {
         <ModalBody>
           <EditTaskForm task={data?.task} />
         </ModalBody>
-        <ModalFooter />
       </ModalContent>
     </Modal>
   )
