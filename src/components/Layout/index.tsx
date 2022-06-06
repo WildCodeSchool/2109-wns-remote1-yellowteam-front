@@ -1,6 +1,5 @@
 import { Flex, useToast } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
-import useAppState from 'src/hooks/useAppState'
 import Header from 'src/components/molecules/Header'
 import {
   GetAllNotificationsDocument,
@@ -11,7 +10,6 @@ import CustomBox from 'src/definitions/chakra/theme/components/Box/CustomBox'
 import UserNavBar from './Sidebar'
 
 export default function Layout(): JSX.Element {
-  const { user } = useAppState()
   const toast = useToast()
 
   useAllNotificationsSubscription({
@@ -47,7 +45,7 @@ export default function Layout(): JSX.Element {
         flexGrow={1}
         h="full"
       >
-        <Header userName={user?.first_name ?? ''} />
+        <Header />
         <Outlet />
       </CustomBox>
     </Flex>
