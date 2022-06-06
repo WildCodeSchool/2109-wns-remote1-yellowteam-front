@@ -10,6 +10,7 @@ import {
   useBoolean,
   useToast,
   VStack,
+  Text,
   Button,
 } from '@chakra-ui/react'
 import { useState } from 'react'
@@ -24,6 +25,7 @@ import DatePicker from 'react-datepicker'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputWithError from './InputWithError'
 import { Dates } from '../../pages/Project'
+import { dateFormated } from '../../utils/dateFormated'
 
 interface IProps {
   task: GetTaskDetailsQuery['task'] | undefined
@@ -116,44 +118,61 @@ export default function EditTaskForm({ task }: IProps): JSX.Element {
         flexDirection="column"
         justifyContent="space-between"
         alignItems="start"
+        width="100%"
       >
         <HStack spacing={10}>
-          <VStack justifyContent="flex-start" alignItems="start" spacing={2}>
+          <VStack width="30vw" alignItems="start" spacing={2}>
             <FormLabel>Title</FormLabel>
-            <InputWithError
-              type="text"
-              errors={errors}
-              name="title"
-              isEditable={isEditable}
-              register={register}
-              defaultValue={task?.title}
-            />
+            {!isEditable ? (
+              <Text>{task?.title}</Text>
+            ) : (
+              <InputWithError
+                type="text"
+                errors={errors}
+                name="title"
+                isEditable={isEditable}
+                register={register}
+                defaultValue={task?.title}
+              />
+            )}
 
             <FormLabel>Description</FormLabel>
-            <InputWithError
-              type="text"
-              errors={errors}
-              name="description"
-              isEditable={isEditable}
-              register={register}
-              defaultValue={task?.description}
-            />
+            {!isEditable ? (
+              <Text>{task?.description}</Text>
+            ) : (
+              <InputWithError
+                type="text"
+                errors={errors}
+                name="description"
+                isEditable={isEditable}
+                register={register}
+                defaultValue={task?.description}
+              />
+            )}
           </VStack>
 
           <VStack justifyContent="flex-end" alignItems="start" spacing={2}>
             <FormLabel>Start date</FormLabel>
-            <DatePicker
-              selected={dates.startDate}
-              onChange={(d) => setDates({ ...dates, startDate: d })}
-              dateFormat="dd/MM/yyyy"
-            />
+            {!isEditable ? (
+              <Text>{dateFormated(task?.start_date)}</Text>
+            ) : (
+              <DatePicker
+                selected={dates.startDate}
+                onChange={(d) => setDates({ ...dates, startDate: d })}
+                dateFormat="dd/MM/yyyy"
+              />
+            )}
 
             <FormLabel>End date</FormLabel>
-            <DatePicker
-              selected={dates.endDate}
-              onChange={(d) => setDates({ ...dates, endDate: d })}
-              dateFormat="dd/MM/yyyy"
-            />
+            {!isEditable ? (
+              <Text>{dateFormated(task?.end_date)}</Text>
+            ) : (
+              <DatePicker
+                selected={dates.endDate}
+                onChange={(d) => setDates({ ...dates, endDate: d })}
+                dateFormat="dd/MM/yyyy"
+              />
+            )}
           </VStack>
         </HStack>
         <HStack>
@@ -163,15 +182,16 @@ export default function EditTaskForm({ task }: IProps): JSX.Element {
             isLoading={updateTaskLoading}
             variant="action"
           >
-            SAVE
+            Submit
           </Button>
           <Button
-            isDisabled={isEditable}
             my={5}
-            onClick={() => setIsEditable((c) => !c)}
-            variant="info"
+            onClick={() =>
+              !isEditable ? setIsEditable(true) : setIsEditable(false)
+            }
+            variant={!isEditable ? 'info' : 'ghost'}
           >
-            EDIT
+            {!isEditable ? 'Edit' : 'Cancel'}
           </Button>
         </HStack>
       </Box>
