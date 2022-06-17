@@ -1,5 +1,0 @@
-mutation DeleteTask($where: TaskWhereUniqueInput!) {
-  deleteTask(where: $where) {
-    id
-  }
-}

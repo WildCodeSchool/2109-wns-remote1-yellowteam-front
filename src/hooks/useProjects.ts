@@ -1,5 +1,7 @@
 import { ApolloError } from '@apollo/client'
+import { useDispatch } from 'react-redux'
 import useAppState from 'src/hooks/useAppState'
+import { setSelectedProject } from 'src/redux/actions'
 import {
   useGetUserProjectsQuery,
   GetUserProjectsQuery,
@@ -12,6 +14,7 @@ interface UseProjectsHook {
 }
 
 const useProjects = (): UseProjectsHook => {
+  const dispatch = useDispatch()
   const { userId } = useAppState()
   const { data, loading, error } = useGetUserProjectsQuery({
     variables: {
@@ -33,6 +36,9 @@ const useProjects = (): UseProjectsHook => {
           },
         ],
       },
+    },
+    onCompleted: (res) => {
+      dispatch(setSelectedProject(res.projects[0].id))
     },
     skip: !userId,
   })
