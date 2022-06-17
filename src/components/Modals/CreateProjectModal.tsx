@@ -35,7 +35,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import InputWithError from '../forms/InputWithError'
 import Label from '../forms/FormLabel'
 
-export interface IProps {
+interface IProps {
   isOpen: boolean
   onClose: () => void
 }

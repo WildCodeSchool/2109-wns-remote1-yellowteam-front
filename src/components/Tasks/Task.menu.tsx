@@ -25,6 +25,7 @@ interface IProps {
 
 export default function TaskMenu({ task }: IProps): JSX.Element {
   const { isOpen, onClose, onOpen } = useDisclosure()
+
   const { userId, user } = useAppState()
   const { projectId } = useParams()
   const [deleteTask] = useDeleteTaskMutation()
