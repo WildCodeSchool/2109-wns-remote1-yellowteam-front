@@ -8,6 +8,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  Spinner,
 } from '@chakra-ui/react'
 import { ReactElement } from 'react'
 import {
@@ -23,13 +24,17 @@ interface IProps {
 }
 
 const DetailTaskModal = ({ isOpen, onClose, taskId }: IProps): ReactElement => {
-  const { data } = useGetTaskDetailsQuery({
+  const { data, loading } = useGetTaskDetailsQuery({
     variables: {
       where: {
         id: taskId,
       },
     },
   })
+
+  if (loading || taskId === 'temporary-id') {
+    return <Spinner />
+  }
 
   return (
     <Modal onClose={onClose} isOpen={isOpen} scrollBehavior="inside">

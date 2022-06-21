@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-param-reassign */
-import { Box, useBoolean, useToast, Text, Button } from '@chakra-ui/react'
+import { Box, useToast, Text, Button } from '@chakra-ui/react'
 import { useState } from 'react'
 import useAppState from 'src/hooks/useAppState'
 import { validationTaskUpdate } from 'src/formResolvers/yupResolver'
@@ -22,9 +22,8 @@ export interface ITaskDetail {
 
 export default function EditTaskForm({ task }: ITaskDetail): JSX.Element {
   const [isEditable, setIsEditable] = useState(false)
-  const [isDisabled, setIsDisabled] = useBoolean()
 
-  const { userId, user } = useAppState()
+  const { user } = useAppState()
   const [dates, setDates] = useState<Dates>({
     startDate: new Date(),
     endDate: new Date(),
@@ -49,14 +48,13 @@ export default function EditTaskForm({ task }: ITaskDetail): JSX.Element {
   async function onSubmit({
     title,
     description,
-    start_date,
     end_date,
   }: FieldValues): Promise<void | null> {
-    start_date = JSON.stringify(
-      dates.startDate
-        ?.toString()
-        .replace('(Central European Standard Time)', '')
-    )
+    // start_date = JSON.stringify(
+    //   dates.startDate
+    //     ?.toString()
+    //     .replace('(Central European Standard Time)', '')
+    // )
     end_date = JSON.stringify(
       dates.endDate?.toString().replace('(Central European Standard Time)', '')
     )
