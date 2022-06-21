@@ -42,6 +42,13 @@ const splitLink = split(
   wsLink,
   httpLink
 )
+const getCache = async () => {
+  await persistCache({
+    cache,
+    storage: new LocalStorageWrapper(window.localStorage),
+    trigger: 'write',
+  })
+}
 
 export const client = new ApolloClient({
   ssrMode: typeof window === 'undefined',
@@ -49,13 +56,6 @@ export const client = new ApolloClient({
   cache,
   link: splitLink,
 })
-
-const getCache = async () => {
-  await persistCache({
-    cache,
-    storage: new LocalStorageWrapper(window.localStorage),
-  })
-}
 
 export default function initializeApollo(): ApolloClient<NormalizedCacheObject> {
   // For SSG and SSR always create a new Apollo Client

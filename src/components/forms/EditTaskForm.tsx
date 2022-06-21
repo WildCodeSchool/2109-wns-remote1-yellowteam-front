@@ -81,7 +81,6 @@ export default function EditTaskForm({ task }: ITaskDetail): JSX.Element {
       toast({
         title: 'error changing task',
       })
-      console.error(error)
     } finally {
       setIsEditable(false)
       reset()
