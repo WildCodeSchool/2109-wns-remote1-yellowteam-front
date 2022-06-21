@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from 'react'
+import { ChangeEvent } from 'react'
 import { Flex, Select, Text, useColorMode } from '@chakra-ui/react'
 import DarkModeToggle from 'react-dark-mode-toggle'
 import useBoardState from 'src/hooks/useBoardState'
@@ -10,12 +10,6 @@ const Header = (): JSX.Element => {
   const { toggleColorMode, colorMode } = useColorMode()
   const { selectedProject, dispatchsetSelectedProject } = useBoardState()
   const { projects } = useProjects()
-
-  useEffect(() => {
-    if (projects) {
-      dispatchsetSelectedProject(projects[0].id)
-    }
-  }, [projects])
 
   return (
     <Flex

@@ -7,6 +7,7 @@ import {
   Input,
   Button,
   Image,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 import useBoardState from 'src/hooks/useBoardState'
@@ -21,6 +22,7 @@ import { FieldValues, useForm } from 'react-hook-form'
 import PlaceholderIcon from '../../static/svg/PlaceholderIcon'
 import TaskMenu from './Task.menu'
 import { MotionCardBox } from '../Motion'
+import DetailTaskModal from '../Modals/DetailTaskModal'
 
 interface ICard {
   title: string
@@ -117,74 +119,79 @@ const Card = ({ tag, title, task }: ICard): ReactElement => {
       setIsEditable(false)
     }
   }
+  const { isOpen, onClose, onOpen } = useDisclosure()
 
   return (
-    <MotionCardBox
-      pointerEvents={isDragging ? 'none' : 'all'}
-      cursor="pointer"
-      layout
-      drag
-      position="relative"
-      onDragStart={() => setDragging(true)}
-      onDragEnd={handleDrop}
-      whileHover={{
-        scale: 1.03,
-        boxShadow: '0px 3px 3px rgba(0,0,0,0.15)',
-        zIndex: 999,
-      }}
-      backgroundColor={colorMode === 'light' ? 'white' : 'gray.600'}
-      minWidth={['150px', '110px', '120px', '130px', '150px']}
-      borderRadius="10"
-      padding="9px 14px 9px 14px"
-      marginY="10px"
-    >
-      <Flex
+    <>
+      <MotionCardBox
+        pointerEvents={isDragging ? 'none' : 'all'}
+        cursor="pointer"
+        layout
+        drag
         position="relative"
-        w="full"
-        alignItems="center"
-        justifyContent="space-between"
+        onDragStart={() => setDragging(true)}
+        onDragEnd={handleDrop}
+        whileHover={{
+          scale: 1.03,
+          boxShadow: '0px 3px 3px rgba(0,0,0,0.15)',
+          zIndex: 999,
+        }}
+        backgroundColor={colorMode === 'light' ? 'white' : 'gray.600'}
+        minWidth={['150px', '110px', '120px', '130px', '150px']}
+        borderRadius="10"
+        padding="9px 14px 9px 14px"
+        marginY="10px"
       >
-        <Input
-          onKeyDown={handlePressEnter}
-          border={isEditable ? '1px solid #ccc' : 'none'}
-          isReadOnly={!isEditable}
-          onDoubleClick={handleToggleEdit}
-          {...register('title')}
-          noOfLines={2}
-          onBlur={() => {
-            if (buttonRef.current) {
-              buttonRef.current.click()
-              setIsEditable(false)
-            }
-          }}
-        />
-        <Button
-          ref={buttonRef}
-          onClick={handleSubmit(onSubmit)}
-          visibility="hidden"
-        />
-        <TaskMenu task={task} />
-      </Flex>
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        height="24px"
-        mt="12px"
-      >
-        {tag}
-        {task.user && task.user.avatar ? (
-          <Image
-            rounded={100}
-            w={10}
-            h={10}
-            objectFit="cover"
-            src={task.user.avatar}
+        <Flex
+          position="relative"
+          w="full"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Input
+            onKeyDown={handlePressEnter}
+            border={isEditable ? '1px solid #ccc' : 'none'}
+            isReadOnly={!isEditable}
+            onDoubleClick={handleToggleEdit}
+            {...register('title')}
+            noOfLines={2}
+            onBlur={() => {
+              if (buttonRef.current) {
+                buttonRef.current.click()
+                setIsEditable(false)
+              }
+            }}
           />
-        ) : (
-          <PlaceholderIcon />
-        )}
-      </Flex>
-    </MotionCardBox>
+          <Button
+            ref={buttonRef}
+            onClick={handleSubmit(onSubmit)}
+            visibility="hidden"
+          />
+          <TaskMenu task={task} />
+        </Flex>
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          height="24px"
+          mt="12px"
+          onClick={onOpen}
+        >
+          {tag}
+          {task.user && task.user.avatar ? (
+            <Image
+              rounded={100}
+              w={10}
+              h={10}
+              objectFit="cover"
+              src={task.user.avatar}
+            />
+          ) : (
+            <PlaceholderIcon />
+          )}
+        </Flex>
+      </MotionCardBox>
+      <DetailTaskModal isOpen={isOpen} onClose={onClose} taskId={task.id} />
+    </>
   )
 }
 

@@ -8,7 +8,6 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import {
   GetTasksByProjectDocument,
   GetTasksByProjectQuery,
@@ -16,6 +15,7 @@ import {
   useDeleteTaskMutation,
 } from 'src/generated/graphql'
 import useAppState from 'src/hooks/useAppState'
+import useBoardState from 'src/hooks/useBoardState'
 import DotsIcon from 'src/static/svg/DotsIcon'
 import EditPannel from '../Edit/EditPannel'
 
@@ -25,8 +25,9 @@ interface IProps {
 
 export default function TaskMenu({ task }: IProps): JSX.Element {
   const { isOpen, onClose, onOpen } = useDisclosure()
+
   const { userId, user } = useAppState()
-  const { projectId } = useParams()
+  const { selectedProject } = useBoardState()
   const [deleteTask] = useDeleteTaskMutation()
   const editRef = useRef<HTMLElement>(null)
   const [isEditOpen, setIsEditOpen] = useState(false)
@@ -67,7 +68,7 @@ export default function TaskMenu({ task }: IProps): JSX.Element {
       optimisticResponse: {
         __typename: 'Mutation',
         deleteTask: {
-          id: projectId as string,
+          id: selectedProject,
         },
       },
       update: (store) => {
@@ -76,19 +77,18 @@ export default function TaskMenu({ task }: IProps): JSX.Element {
           variables: {
             where: {
               project_id: {
-                equals: projectId,
+                equals: selectedProject,
               },
             },
           },
         })
         const newArray = queryData.tasks.filter((t: any) => t.id !== task.id)
-
         store.writeQuery({
           query: GetTasksByProjectDocument,
           variables: {
             where: {
               project_id: {
-                equals: projectId,
+                equals: selectedProject,
               },
             },
           },

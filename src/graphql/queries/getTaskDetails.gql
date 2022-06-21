@@ -1,0 +1,11 @@
+query getTaskDetails($where: TaskWhereUniqueInput!) {
+  task(where: $where) {
+    id
+    title
+    status_task
+    description
+    total_time_spent
+    start_date
+    end_date
+  }
+}

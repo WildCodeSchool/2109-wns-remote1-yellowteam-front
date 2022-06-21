@@ -6564,6 +6564,13 @@ export type SearchQueryVariables = Exact<{
 
 export type SearchQuery = { __typename?: 'Query', search: Array<{ __typename?: 'SearchResult', title: string, description: string, id: string, type: string }> };
 
+export type GetTaskDetailsQueryVariables = Exact<{
+  where: TaskWhereUniqueInput;
+}>;
+
+
+export type GetTaskDetailsQuery = { __typename?: 'Query', task: { __typename?: 'Task', id: string, title: string, status_task: Status, description: string, total_time_spent: number, start_date: any, end_date: any } };
+
 export type AllNotificationsSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7534,6 +7541,47 @@ export function useSearchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Sea
 export type SearchQueryHookResult = ReturnType<typeof useSearchQuery>;
 export type SearchLazyQueryHookResult = ReturnType<typeof useSearchLazyQuery>;
 export type SearchQueryResult = Apollo.QueryResult<SearchQuery, SearchQueryVariables>;
+export const GetTaskDetailsDocument = gql`
+    query getTaskDetails($where: TaskWhereUniqueInput!) {
+  task(where: $where) {
+    id
+    title
+    status_task
+    description
+    total_time_spent
+    start_date
+    end_date
+  }
+}
+    `;
+
+/**
+ * __useGetTaskDetailsQuery__
+ *
+ * To run a query within a React component, call `useGetTaskDetailsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTaskDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTaskDetailsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetTaskDetailsQuery(baseOptions: Apollo.QueryHookOptions<GetTaskDetailsQuery, GetTaskDetailsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTaskDetailsQuery, GetTaskDetailsQueryVariables>(GetTaskDetailsDocument, options);
+      }
+export function useGetTaskDetailsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTaskDetailsQuery, GetTaskDetailsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTaskDetailsQuery, GetTaskDetailsQueryVariables>(GetTaskDetailsDocument, options);
+        }
+export type GetTaskDetailsQueryHookResult = ReturnType<typeof useGetTaskDetailsQuery>;
+export type GetTaskDetailsLazyQueryHookResult = ReturnType<typeof useGetTaskDetailsLazyQuery>;
+export type GetTaskDetailsQueryResult = Apollo.QueryResult<GetTaskDetailsQuery, GetTaskDetailsQueryVariables>;
 export const AllNotificationsDocument = gql`
     subscription AllNotifications {
   subscriptionWithFilter {

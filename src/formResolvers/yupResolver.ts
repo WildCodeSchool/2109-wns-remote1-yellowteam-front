@@ -28,3 +28,8 @@ export const validationsCreateProject = Yup.object({
   title: Yup.string().required().min(4),
   description: Yup.string().required().min(10),
 })
+
+export const validationTaskUpdate = Yup.object({
+  title: Yup.string().required().min(3),
+  description: Yup.string().required().min(3),
+})
