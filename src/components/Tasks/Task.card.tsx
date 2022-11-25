@@ -33,7 +33,9 @@ interface ICard {
 
 const Card = ({ tag, title, task }: ICard): ReactElement => {
   const toast = useToast()
+
   const [isDragging, setDragging] = useState(false)
+
   const { projectId } = useParams()
   const { hoveredList } = useBoardState()
   const { colorMode } = useColorMode()
